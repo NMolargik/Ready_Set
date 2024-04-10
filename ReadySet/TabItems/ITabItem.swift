@@ -10,9 +10,13 @@ import SwiftUI
 
 protocol ITabItem: Hashable, Equatable {
     var text: String { get }
+    var type: TabItemType { get }
     var selectedIconName: String { get }
     var unselectedIconName: String { get }
     var color: Color { get }
+    
+    func bumpTab(up: Bool) -> any ITabItem
+    func reorderTabs() -> [any ITabItem]
 }
 
 extension ITabItem {

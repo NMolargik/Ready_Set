@@ -11,7 +11,7 @@ struct HeaderView: View {
     @Binding var selectedTab: any ITabItem
     
     var body: some View {
-        VStack {
+        VStack (spacing: 0) {
             Spacer()
             
             ZStack {
@@ -20,20 +20,18 @@ struct HeaderView: View {
                     .padding(.top, 5)
                 
                 HStack {
-                    Text("Hello, Nick")
+                    Text("Hey, Nicholas")
                         .bold()
-                        .foregroundStyle(Color("FontGray"))
-                        .font(.title2)
                     
                     Spacer()
                     
-                    Text("Day 1")
+                    Text("Weather")
                         .bold()
-                        .foregroundStyle(Color("FontGray"))
-                        .font(.title3)
                 }
+                .foregroundStyle(Color("FontGray"))
+                .font(.caption)
             }
-            .padding(.bottom, 5)
+            .padding(.vertical, 15)
             .padding(.horizontal)
             
             HStack (spacing: 0) {

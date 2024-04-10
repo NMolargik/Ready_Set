@@ -8,31 +8,19 @@
 import SwiftUI
 
 struct NavColumnView: View {
-    @State private var tabItems = TabItemType.allItems
+    @Binding var tabItems: [any ITabItem]
     @Binding var selectedTab: any ITabItem
     
     var body: some View {
         VStack (
             alignment: .leading) {
-            ForEach(tabItems, id: \.text) { tabItem in
+            ForEach(tabItems, id: \.type) { tabItem in
                 HStack {
                     Button(action: {
                         withAnimation (.snappy) {
                             
                             selectedTab = tabItem
-                            switch (selectedTab.text) {
-                            case "Exercise":
-                                tabItems = [ExerciseTabItem(), MetricTabItem(), WaterTabItem(), CalorieTabItem()]
-                            case "Metrics":
-                                tabItems = [MetricTabItem(), WaterTabItem(), CalorieTabItem(), ExerciseTabItem()]
-                            case "Water":
-                                tabItems = [WaterTabItem(), CalorieTabItem(), ExerciseTabItem(), MetricTabItem()]
-                            case "Calories":
-                                tabItems = [CalorieTabItem(), ExerciseTabItem(), MetricTabItem(), WaterTabItem()]
-                            default:
-                                tabItems = [ExerciseTabItem(), MetricTabItem(), WaterTabItem(), CalorieTabItem()]
-                                
-                            }
+                            tabItems = selectedTab.reorderTabs()
                         }
                     }, label: {
                         HStack {
@@ -71,7 +59,10 @@ struct NavColumnView: View {
                                 Capsule()
                                     .frame(width: 70, height: 30)
                                     .foregroundStyle(.ultraThickMaterial)
-                                    .shadow(color: .black, radius: 1)
+                                    .overlay( /// apply a rounded border
+                                        RoundedRectangle(cornerRadius: 20)
+                                            .stroke(Color("FontGray"), lineWidth: 1)
+                                    )
                                 
                                 HStack {
                                     Text("Edit")
@@ -81,6 +72,7 @@ struct NavColumnView: View {
                                 }
                                 .font(.system(size: 15))
                                 .foregroundStyle(selectedTab.color)
+                                .id("Edit")
                             }
                         })
                     }
@@ -94,6 +86,6 @@ struct NavColumnView: View {
 }
 
 #Preview {
-    NavColumnView(selectedTab: .constant(ExerciseTabItem()))
+    NavColumnView(tabItems: .constant(TabItemType.allItems), selectedTab: .constant(ExerciseTabItem()))
         .ignoresSafeArea()
 }

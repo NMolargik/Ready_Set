@@ -59,7 +59,7 @@ struct NavColumnView: View {
                                 Capsule()
                                     .frame(width: 70, height: 30)
                                     .foregroundStyle(.ultraThickMaterial)
-                                    .overlay( /// apply a rounded border
+                                    .overlay(
                                         RoundedRectangle(cornerRadius: 20)
                                             .stroke(Color("FontGray"), lineWidth: 1)
                                     )

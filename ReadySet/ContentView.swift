@@ -31,19 +31,21 @@ struct ContentView: View {
     
     
     var body: some View {
-        VStack {
-            switch (appState) {
-            case .onboarding:
-                Text("Onboarding")
-                
-            case .userRegistration:
-                Text("User Registration")
-                
-            case .initalSetCreation:
-                Text("Set Creation")
-                
-            case .normal:
-                HomeView()
+        ZStack {
+            VStack {
+                switch (appState) {
+                case .onboarding:
+                    Text("Onboarding")
+                    
+                case .userRegistration:
+                    Text("User Registration")
+                    
+                case .initalSetCreation:
+                    Text("Set Creation")
+                    
+                case .normal:
+                    HomeView()
+                }
             }
         }
     }

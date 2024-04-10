@@ -11,26 +11,26 @@ struct HomeView: View {
     @State var selectedTab: any ITabItem = ExerciseTabItem()
     @State var tabItems = TabItemType.allItems
     
-    @State private var dragHeight = 0.0
+    @State private var navigationDragHeight = 0.0
+    @State private var topDragHeight = 0.0
     
     var body: some View {
-        VStack {
-            HeaderView(selectedTab: $selectedTab)
-            
+        ZStack {
             VStack {
                 ZStack {
                     HStack {
                         NavColumnView(tabItems: $tabItems, selectedTab: $selectedTab)
-                            .offset(y: abs(dragHeight) > 20.0 ?
-                                    (dragHeight.isLess(than: 0.0) ? max(dragHeight * 0.01, -5.0) : min(dragHeight * 0.01, 5.0)) : 0)
+                            .offset(y: abs(navigationDragHeight) > 20.0 ?
+                                    (navigationDragHeight.isLess(than: 0.0) ? max(navigationDragHeight * 0.01, -5.0) : min(navigationDragHeight * 0.01, 5.0)) : 0)
 
                         Spacer()
                     }
                     
                     getTopContentView(tabType: selectedTab.type)
-                        .blur(radius: abs(dragHeight) > 20.0 ? abs(dragHeight * 0.01) : 0)
+                        .blur(radius: abs(navigationDragHeight) > 20.0 ? abs(navigationDragHeight * 0.01) : 0)
                 }
                 .frame(height: 150)
+                .offset(y: 90)
                 
                 Spacer()
 
@@ -38,23 +38,36 @@ struct HomeView: View {
             .background(Color("BaseColor"))
             .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
                 .onChanged({ value in
-                    dragHeight = value.translation.height
-                    print(dragHeight)
+                    navigationDragHeight = value.translation.height
                 })
                 .onEnded({ value in
                     withAnimation (.bouncy) {
-                        if dragHeight < -100 {
+                        if navigationDragHeight < -100 {
                             selectedTab = selectedTab.bumpTab(up: false)
                         }
                         
-                        if dragHeight > 100 {
+                        if navigationDragHeight > 100 {
                             selectedTab = selectedTab.bumpTab(up: true)
                         }
                         
                         tabItems = selectedTab.reorderTabs()
-                        dragHeight = 0.0
+                        navigationDragHeight = 0.0
                     }
                 }))
+            
+            VStack {
+                HeaderView(selectedTab: $selectedTab)
+                    .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                        .onChanged({ value in
+                            topDragHeight = value.translation.height
+                        })
+                            .onEnded({ value in
+                                topDragHeight = 0.0
+                            }))
+                    .frame(height: 90 + topDragHeight)
+                
+                Spacer()
+            }
         }
     }
     

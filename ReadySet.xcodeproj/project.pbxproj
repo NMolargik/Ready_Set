@@ -22,6 +22,13 @@
 		0E940A8D2BC6FE0400144477 /* ReadySetUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E940A8C2BC6FE0400144477 /* ReadySetUITestsLaunchTests.swift */; };
 		EB3AB33C2BC70CF5008B6F22 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB33A2BC70CF5008B6F22 /* HeaderView.swift */; };
 		EB3AB33D2BC70CF5008B6F22 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB33B2BC70CF5008B6F22 /* HomeView.swift */; };
+		EB3AB33F2BC710D1008B6F22 /* NavColumnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB33E2BC710D1008B6F22 /* NavColumnView.swift */; };
+		EB3AB3412BC71105008B6F22 /* TabItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3402BC71105008B6F22 /* TabItemType.swift */; };
+		EB3AB3442BC711A8008B6F22 /* ITabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3432BC711A8008B6F22 /* ITabItem.swift */; };
+		EB3AB3462BC711FA008B6F22 /* ExerciseTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3452BC711FA008B6F22 /* ExerciseTabItem.swift */; };
+		EB3AB3482BC71204008B6F22 /* WaterTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3472BC71204008B6F22 /* WaterTabItem.swift */; };
+		EB3AB34A2BC7120C008B6F22 /* CalorieTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3492BC7120C008B6F22 /* CalorieTabItem.swift */; };
+		EB3AB34C2BC71214008B6F22 /* MetricTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB34B2BC71214008B6F22 /* MetricTabItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +67,13 @@
 		0E940A8C2BC6FE0400144477 /* ReadySetUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadySetUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		EB3AB33A2BC70CF5008B6F22 /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		EB3AB33B2BC70CF5008B6F22 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		EB3AB33E2BC710D1008B6F22 /* NavColumnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavColumnView.swift; sourceTree = "<group>"; };
+		EB3AB3402BC71105008B6F22 /* TabItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItemType.swift; sourceTree = "<group>"; };
+		EB3AB3432BC711A8008B6F22 /* ITabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ITabItem.swift; sourceTree = "<group>"; };
+		EB3AB3452BC711FA008B6F22 /* ExerciseTabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseTabItem.swift; sourceTree = "<group>"; };
+		EB3AB3472BC71204008B6F22 /* WaterTabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterTabItem.swift; sourceTree = "<group>"; };
+		EB3AB3492BC7120C008B6F22 /* CalorieTabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieTabItem.swift; sourceTree = "<group>"; };
+		EB3AB34B2BC71214008B6F22 /* MetricTabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricTabItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,10 +144,12 @@
 			isa = PBXGroup;
 			children = (
 				0E7DCA5A2BC6FE8000B9403C /* Models */,
+				EB3AB3422BC71191008B6F22 /* TabItems */,
 				0E940A6A2BC6FE0200144477 /* ReadySetApp.swift */,
 				0E940A6C2BC6FE0200144477 /* ContentView.swift */,
-				EB3AB33A2BC70CF5008B6F22 /* HeaderView.swift */,
 				EB3AB33B2BC70CF5008B6F22 /* HomeView.swift */,
+				EB3AB33A2BC70CF5008B6F22 /* HeaderView.swift */,
+				EB3AB33E2BC710D1008B6F22 /* NavColumnView.swift */,
 				0E940A6E2BC6FE0400144477 /* Assets.xcassets */,
 				0E940A732BC6FE0400144477 /* Persistence.swift */,
 				0E940A752BC6FE0400144477 /* ReadySet.xcdatamodeld */,
@@ -165,6 +181,19 @@
 				0E940A8C2BC6FE0400144477 /* ReadySetUITestsLaunchTests.swift */,
 			);
 			path = ReadySetUITests;
+			sourceTree = "<group>";
+		};
+		EB3AB3422BC71191008B6F22 /* TabItems */ = {
+			isa = PBXGroup;
+			children = (
+				EB3AB3432BC711A8008B6F22 /* ITabItem.swift */,
+				EB3AB3402BC71105008B6F22 /* TabItemType.swift */,
+				EB3AB3452BC711FA008B6F22 /* ExerciseTabItem.swift */,
+				EB3AB34B2BC71214008B6F22 /* MetricTabItem.swift */,
+				EB3AB3472BC71204008B6F22 /* WaterTabItem.swift */,
+				EB3AB3492BC7120C008B6F22 /* CalorieTabItem.swift */,
+			);
+			path = TabItems;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -298,15 +327,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB3AB33F2BC710D1008B6F22 /* NavColumnView.swift in Sources */,
 				EB3AB33D2BC70CF5008B6F22 /* HomeView.swift in Sources */,
+				EB3AB3462BC711FA008B6F22 /* ExerciseTabItem.swift in Sources */,
+				EB3AB3412BC71105008B6F22 /* TabItemType.swift in Sources */,
 				0E7DCA602BC6FFF100B9403C /* ExerciseSetEntry.swift in Sources */,
 				0E7DCA5C2BC6FEE500B9403C /* User.swift in Sources */,
 				0E940A742BC6FE0400144477 /* Persistence.swift in Sources */,
 				0E7DCA5E2BC6FF7400B9403C /* Set.swift in Sources */,
+				EB3AB34C2BC71214008B6F22 /* MetricTabItem.swift in Sources */,
 				0E940A6D2BC6FE0200144477 /* ContentView.swift in Sources */,
+				EB3AB3442BC711A8008B6F22 /* ITabItem.swift in Sources */,
 				0E940A772BC6FE0400144477 /* ReadySet.xcdatamodeld in Sources */,
 				0E940A6B2BC6FE0200144477 /* ReadySetApp.swift in Sources */,
+				EB3AB3482BC71204008B6F22 /* WaterTabItem.swift in Sources */,
 				EB3AB33C2BC70CF5008B6F22 /* HeaderView.swift in Sources */,
+				EB3AB34A2BC7120C008B6F22 /* CalorieTabItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,16 +516,19 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ny.ReadySet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -509,16 +548,19 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ny.ReadySet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

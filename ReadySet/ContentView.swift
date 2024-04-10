@@ -32,6 +32,9 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
+            Color("BaseColor")
+                .ignoresSafeArea()
+            
             switch (appState) {
             case .onboarding:
                 Text("Onboarding")
@@ -46,6 +49,7 @@ struct ContentView: View {
                 HomeView()
             }
         }
+        .ignoresSafeArea()
     }
     
     //    private func addItem() {

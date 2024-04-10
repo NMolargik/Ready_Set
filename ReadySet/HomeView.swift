@@ -7,35 +7,25 @@
 
 import SwiftUI
 
-enum Tab {
-    case exercise
-    case water
-    case calories
-    case metrics
-}
-
 struct HomeView: View {
-    @State var selectedTab = Tab.exercise
+    @State var selectedTab: any ITabItem = ExerciseTabItem()
     
     var body: some View {
-        VStack {
+        VStack {            
             HeaderView(selectedTab: $selectedTab)
-            //Header View
-            
-            
-            
             
             HStack {
                 // Nav Column view
+                NavColumnView(selectedTab: $selectedTab)
                 
-                // Content View
-                
-                
+                Spacer()
             }
+            
         }
     }
 }
 
 #Preview {
     HomeView()
+        .ignoresSafeArea()
 }

@@ -11,15 +11,25 @@ struct HomeView: View {
     @State var selectedTab: any ITabItem = ExerciseTabItem()
     
     var body: some View {
-        VStack {            
+        VStack {
             HeaderView(selectedTab: $selectedTab)
             
-            HStack {
+            ZStack {
                 // Nav Column view
-                NavColumnView(selectedTab: $selectedTab)
+                HStack {
+                    NavColumnView(selectedTab: $selectedTab)
+                    
+                    Spacer()
+                }
                 
-                Spacer()
+                Text("Yo")
             }
+            .frame(height: 150)
+            
+            
+            Text("Yo Homie")
+            
+            Spacer()
             
         }
     }

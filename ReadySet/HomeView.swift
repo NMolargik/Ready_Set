@@ -18,7 +18,7 @@ struct HomeView: View {
     var body: some View {
         VStack {
             HeaderView(selectedTab: $selectedTab)
-                .padding(.bottom, 5)
+                .padding(.bottom, 15)
             
             NavColumnView(tabItems: $tabItems, selectedTab: $selectedTab, navigationDragHeight: $navigationDragHeight)
             

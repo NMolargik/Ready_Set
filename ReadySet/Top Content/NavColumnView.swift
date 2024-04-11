@@ -22,11 +22,14 @@ struct NavColumnView: View {
                             tabItems = selectedTab.reorderTabs()
                         }
                     }, label: {
-                        Image(systemName: tabItem.selectedIconName)
-                            .font(.system(size: selectedTab.type == tabItem.type ? 30 : 10))
-                            .frame(width: 30, height: selectedTab.type == tabItem.type ? 30 : 20)
+                        Image(tabItem.icon)
+                            .resizable()
+                            .renderingMode(selectedTab.type == tabItem.type ? .original : .template)
+                            .frame(width: selectedTab.type == tabItem.type ? 30 : 20, height: selectedTab.type == tabItem.type ? 30 : 20)
+                            .foregroundStyle(selectedTab.type == tabItem.type ? .base : tabItem.color)
+                            .transition(.opacity)
+                        
                     })
-                    .foregroundStyle(selectedTab.type == tabItem.type ? tabItem.gradient : LinearGradient(colors: [.gray], startPoint: .center, endPoint: .center), selectedTab.type == tabItem.type ? tabItem.gradient : LinearGradient(colors: [.gray], startPoint: .center, endPoint: .center))
                     .padding(.leading, 5)
                     .disabled(tabItem.type == selectedTab.type)
                 }

@@ -11,10 +11,9 @@ import SwiftUI
 struct WaterTabItem: ITabItem {
     var text = "Water"
     var type = TabItemType.water
-    var selectedIconName = "drop.fill"
-    var unselectedIconName = "drop"
+    var icon = "Droplet"
     var color = Color.blue
-    var gradient = LinearGradient(colors: [.cyan, .blue, .indigo], startPoint: .topLeading, endPoint: .bottomTrailing)
+    var gradient = LinearGradient(colors: [.blueEnd, .blueStart], startPoint: .topLeading, endPoint: .bottomTrailing)
     
     func bumpTab(up: Bool) -> any ITabItem {
         return up ? ExerciseTabItem() : CalorieTabItem()

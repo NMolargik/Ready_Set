@@ -12,11 +12,7 @@ struct CalorieTopContentView: View {
         HStack (spacing: 5) {
             ExerciseStatWidgetView()
             
-            VStack (spacing: 5) {
-                ExerciseStepsWidgetView()
-                
-                ExerciseHealthWidgetView()
-            }
+            ExerciseStatWidgetView()
         }
         .padding(.leading, 8)
         .padding(.top, 5)

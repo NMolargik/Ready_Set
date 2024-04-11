@@ -8,19 +8,20 @@
 import SwiftUI
 
 struct WaterTopContentView: View {
-    @State var progress: CGFloat = 0.5
+    @State var progress: CGFloat
     @State var startAnimation: CGFloat = 0
     
     var body: some View {
         HStack (spacing: 5) {
             ZStack {
-                Capsule()
-                    .frame(width: 300, height: 80)
+                Rectangle()
+                    .frame(height: 80)
+                    .cornerRadius(20)
                     .foregroundStyle(.thinMaterial)
                     .shadow(radius: 1)
                 
-                WaterWave(progress: 0.2, waveHeight: 0.05, offset: startAnimation)
-                    .fill(LinearGradient(colors: [.teal, .blue, .indigo], startPoint: .top, endPoint: .bottom))
+                WaterWave(progress: min(progress, 0.98), waveHeight: 0.05, offset: startAnimation)
+                    .fill(LinearGradient(colors: [.blueStart, .blueEnd], startPoint: .top, endPoint: .bottom))
                     .overlay(content: {
                         ZStack {
                             if (progress > 0.5) {
@@ -41,22 +42,23 @@ struct WaterTopContentView: View {
                             }
                             
                             Rectangle()
-                                .frame(width: 60, height: 40)
-                                .cornerRadius(10)
+                                .frame(width: 80, height: 30)
+                                .cornerRadius(20)
                                 .foregroundStyle(.ultraThinMaterial)
-                                .shadow(radius: 1)
-                                .offset(y: 35)
+                                .shadow(radius: 2)
+                                .offset(y: 20)
                                 
                             
                             Text(String(Int(progress * 100)) + "%")
                                 .bold()
                                 .foregroundStyle(.white)
-                                .offset(y: 30)
+                                .offset(y: 20)
                         }
                     })
                     .mask {
-                        Capsule()
-                            .frame(width: 300, height: 80)
+                        Rectangle()
+                            .frame(height: 80)
+                            .cornerRadius(20)
                             .foregroundStyle(.thinMaterial)
                     }
             }
@@ -88,7 +90,7 @@ struct WaterWave: Shape {
             let progressHeight: CGFloat = (1 - progress) * rect.height
             let height = waveHeight * rect.height
             
-            for value in stride(from: 0, to: rect.width, by: 2) {
+            for value in stride(from: 0, to: rect.width + 20, by: 2) {
                 let x: CGFloat = value
                 let sine: CGFloat = sin(Angle(degrees: value + offset).radians)
                 let y: CGFloat = progressHeight + (height * sine)
@@ -104,5 +106,5 @@ struct WaterWave: Shape {
 }
 
 #Preview {
-    WaterTopContentView()
+    WaterTopContentView(progress: 0.5)
 }

@@ -11,8 +11,7 @@ import SwiftUI
 protocol ITabItem: Hashable, Equatable {
     var text: String { get }
     var type: TabItemType { get }
-    var selectedIconName: String { get }
-    var unselectedIconName: String { get }
+    var icon: String { get }
     var color: Color { get }
     var gradient: LinearGradient { get }
     

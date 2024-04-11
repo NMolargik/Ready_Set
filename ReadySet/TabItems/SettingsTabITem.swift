@@ -11,10 +11,9 @@ import SwiftUI
 struct SettingsTabItem: ITabItem {
     var text = "Settings"
     var type = TabItemType.settings
-    var selectedIconName = "gearshape.2.fill"
-    var unselectedIconName = "gearshape.2"
+    var icon = "Cog"
     var color = Color.purple
-    var gradient = LinearGradient(colors: [.purple, .indigo], startPoint: .topLeading, endPoint: .bottomTrailing)
+    var gradient = LinearGradient(colors: [.purpleEnd, .purpleStart], startPoint: .topLeading, endPoint: .bottomTrailing)
     
     func bumpTab(up: Bool) -> any ITabItem {
         return up ? CalorieTabItem() : ExerciseTabItem()

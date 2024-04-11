@@ -15,7 +15,7 @@ struct TopDetailView: View {
             ExerciseTopContentView()
                 .transition(.opacity)
         case .water:
-            WaterTopContentView()
+            WaterTopContentView(progress: 0.5)
                 .transition(.opacity)
         case .calorie:
             CalorieTopContentView()

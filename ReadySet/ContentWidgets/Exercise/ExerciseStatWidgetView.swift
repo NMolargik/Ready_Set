@@ -29,7 +29,6 @@ struct ExerciseStatWidgetView: View {
             .font(.caption)
             .foregroundStyle(.fontGray)
         }
-        .frame(width: 150)
     }
 }
 

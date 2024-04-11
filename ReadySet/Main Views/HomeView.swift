@@ -46,16 +46,16 @@ struct HomeView: View {
                 navigationDragHeight = value.translation.height
             })
             .onEnded({ value in
-                withAnimation (.bouncy) {
+                withAnimation (.smooth) {
                     if navigationDragHeight < -100 {
                         homeViewModel.selectedTab = homeViewModel.selectedTab.bumpTab(up: false)
+                        homeViewModel.tabItems = homeViewModel.selectedTab.reorderTabs()
                     }
                     
                     if navigationDragHeight > 100 {
                         homeViewModel.selectedTab = homeViewModel.selectedTab.bumpTab(up: true)
+                        homeViewModel.tabItems = homeViewModel.selectedTab.reorderTabs()
                     }
-                    
-                    homeViewModel.tabItems = homeViewModel.selectedTab.reorderTabs()
                     navigationDragHeight = 0.0
                 }
             }))

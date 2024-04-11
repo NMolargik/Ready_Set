@@ -18,6 +18,9 @@ struct NavColumnView: View {
             VStack (alignment: .leading) {
                 ForEach(tabItems, id: \.type) { tabItem in
                     Button(action: {
+                        let impactMed = UIImpactFeedbackGenerator(style: .medium)
+                        impactMed.impactOccurred()
+                        
                         withAnimation (.snappy) {
                             selectedTab = tabItem
                             tabItems = selectedTab.reorderTabs()
@@ -27,15 +30,22 @@ struct NavColumnView: View {
                             .resizable()
                             .renderingMode(selectedTab.type == tabItem.type ? .original : .template)
                             .frame(width: selectedTab.type == tabItem.type ? 30 : 20, height: selectedTab.type == tabItem.type ? 30 : 20)
-                            .foregroundStyle(selectedTab.type == tabItem.type ? .base : tabItem.color)
+                            .foregroundStyle(tabItem.color)
                             .transition(.opacity)
                         
                     })
                     .padding(.leading, 5)
                     .disabled(tabItem.type == selectedTab.type)
                 }
+                
+                Rectangle()
+                    .frame(width: 30, height: 2)
+                    .foregroundStyle(.gray)
+                    .cornerRadius(10)
+                    .shadow(radius: 1, y: 1)
             }
             .frame(height: 120)
+            .padding(.top, 8)
             
             VStack (spacing: 0) {
                 HStack {
@@ -58,27 +68,24 @@ struct NavColumnView: View {
                     
                     if (selectedTab.type != .settings) {
                         Button(action: {
+                            let impactMed = UIImpactFeedbackGenerator(style: .medium)
+                            impactMed.impactOccurred()
+                            
                             withAnimation {
                                 showBottomSheet = true
                             }
                         }, label: {
-                            ZStack {
-                                Capsule()
-                                    .frame(width: 70, height: 30)
-                                    .foregroundStyle(.thinMaterial)
-                                    .shadow(radius: 1)
-                                
-                                HStack {
-                                    Text("Edit")
-                                        .bold()
-                                        
+                            HStack {
+                                Text("Edit")
+                                    .bold()
                                     
-                                    Image(systemName: "pencil")
-                                }
-                                .foregroundStyle(selectedTab.color)
-                                .font(.system(size: 15))
-                                .id("Edit")
+                                
+                                Image(systemName: "pencil")
                             }
+                            .foregroundStyle(selectedTab.color)
+                            .shadow(radius: 1)
+                            .font(.body)
+                            .id("Edit")
                         })
                     }
                 }

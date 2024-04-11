@@ -307,8 +307,8 @@
 		EB7110FF2BC870780078F796 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				EB3AB35D2BC76FDC008B6F22 /* SettingsBottomContentView.swift */,
 				EB3AB3502BC72A30008B6F22 /* SettingsTopContentView.swift */,
+				EB3AB35D2BC76FDC008B6F22 /* SettingsBottomContentView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";

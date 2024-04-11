@@ -2,7 +2,7 @@
 //  ReadySetApp.swift
 //  ReadySet
 //
-//  Created by Nicholas Yoder on 4/10/24.
+//  Created by Nicholas Molargik on 4/10/24.
 //
 
 import SwiftUI

@@ -28,9 +28,11 @@ struct HeaderView: View {
                     .resizable()
                     .renderingMode(.template)
                     .frame(width: 20, height: 20)
-                    .foregroundColor(.fontGray)
+                    .foregroundColor(selectedTab.secondaryColor)
                     .padding(.bottom, -3)
                     .padding(.horizontal, -5)
+                    .shadow(radius: 1, y: 1)
+                    .opacity(0.7)
                 
                 Text("S")
                     .bold()
@@ -42,7 +44,6 @@ struct HeaderView: View {
                         .bold()
                         .font(.caption)
                         .foregroundStyle(.fontGray)
-                        .textCase(.uppercase)
                     
                     Text(currentMonth())
                         .bold()
@@ -64,7 +65,7 @@ struct HeaderView: View {
                 Rectangle()
                     .frame(width: 100, height: 5)
                     .foregroundStyle(selectedTab.gradient)
-                    .shadow(color: selectedTab.color, radius: 5, x: 0, y: 5)
+                    .shadow(color: selectedTab.secondaryColor, radius: 5, x: 0, y: 5)
 
                 Rectangle()
                     .frame(height: 5)

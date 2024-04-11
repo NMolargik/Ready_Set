@@ -10,20 +10,23 @@ import SwiftUI
 struct TopDetailView: View {
     @Binding var selectedTab: any ITabItem
     var body: some View {
-        switch (selectedTab.type) {
-        case .exercise:
-            ExerciseTopContentView()
-                .transition(.opacity)
-        case .water:
-            WaterTopContentView(progress: 0.5)
-                .transition(.opacity)
-        case .calorie:
-            CalorieTopContentView(progress: 0.5)
-                .transition(.opacity)
-        case .settings:
-            SettingsTopContentView()
-                .transition(.opacity)
+        Group {
+            switch (selectedTab.type) {
+            case .exercise:
+                ExerciseTopContentView()
+                    .transition(.opacity)
+            case .water:
+                WaterTopContentView(progress: 0.5)
+                    .transition(.opacity)
+            case .calorie:
+                CalorieTopContentView(progress: 0.5)
+                    .transition(.opacity)
+            case .settings:
+                SettingsTopContentView()
+                    .transition(.opacity)
+            }
         }
+        .frame(height: 85)
     }
 }
     

@@ -12,7 +12,8 @@ struct WaterTabItem: ITabItem {
     var text = "Water"
     var type = TabItemType.water
     var icon = "Droplet"
-    var color = Color.blue
+    var color = Color.blueEnd
+    var secondaryColor = Color.blueStart
     var gradient = LinearGradient(colors: [.blueEnd, .blueStart], startPoint: .topLeading, endPoint: .bottomTrailing)
     var sheetPresentationDetent = PresentationDetent.fraction(0.3)
     
@@ -21,6 +22,8 @@ struct WaterTabItem: ITabItem {
     }
     
     func reorderTabs() -> [any ITabItem] {
+        let impactMed = UIImpactFeedbackGenerator(style: .medium)
+        impactMed.impactOccurred()
         return [WaterTabItem(), CalorieTabItem(), SettingsTabItem(), ExerciseTabItem()]
 
     }

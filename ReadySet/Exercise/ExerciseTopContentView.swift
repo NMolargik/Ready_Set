@@ -22,7 +22,6 @@ struct ExerciseTopContentView: View {
         }
         .padding(.leading, 8)
         .padding(.top, 5)
-        .frame(height: 85)
     }
 }
 

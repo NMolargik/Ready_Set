@@ -13,6 +13,7 @@ protocol ITabItem: Hashable, Equatable {
     var type: TabItemType { get }
     var icon: String { get }
     var color: Color { get }
+    var secondaryColor: Color { get }
     var gradient: LinearGradient { get }
     var sheetPresentationDetent: PresentationDetent { get }
     

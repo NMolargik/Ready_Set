@@ -12,7 +12,8 @@ struct ExerciseTabItem: ITabItem {
     let text = "Exercise"
     var type = TabItemType.exercise
     var icon = "Dumbbell"
-    var color = Color.green
+    var color = Color.greenEnd
+    var secondaryColor = Color.greenStart
     var gradient = LinearGradient(colors: [.greenEnd, .greenStart], startPoint: .topLeading, endPoint: .bottomTrailing)
     var sheetPresentationDetent = PresentationDetent.fraction(0.9)
     
@@ -22,6 +23,8 @@ struct ExerciseTabItem: ITabItem {
     }
     
     func reorderTabs() -> [any ITabItem] {
+        let impactMed = UIImpactFeedbackGenerator(style: .medium)
+        impactMed.impactOccurred()
         return [ExerciseTabItem(), WaterTabItem(), CalorieTabItem(), SettingsTabItem()]
     }
 }

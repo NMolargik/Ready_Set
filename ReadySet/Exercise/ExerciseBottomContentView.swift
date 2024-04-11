@@ -10,9 +10,12 @@ import SwiftUI
 struct ExerciseBottomContentView: View {
     var body: some View {
         VStack {
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-            
-            Spacer()
+            Rectangle()
+                .cornerRadius(35)
+                .padding(.horizontal, 8)
+                .padding(.bottom, 15)
+                .foregroundStyle(.ultraThinMaterial)
+                .shadow(radius: 1)
         }
     }
 }

@@ -9,11 +9,13 @@ import Foundation
 import SwiftUI
 
 struct ExerciseTabItem: ITabItem {
-    var text = "Exercise"
+    let text = "Exercise"
     var type = TabItemType.exercise
     var icon = "Dumbbell"
     var color = Color.green
     var gradient = LinearGradient(colors: [.greenEnd, .greenStart], startPoint: .topLeading, endPoint: .bottomTrailing)
+    var sheetPresentationDetent = PresentationDetent.fraction(0.9)
+    
     
     func bumpTab(up: Bool) -> any ITabItem {
         return up ? SettingsTabItem() : WaterTabItem()

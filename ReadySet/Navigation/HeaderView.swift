@@ -17,32 +17,48 @@ struct HeaderView: View {
             HStack {
                 Text("Hey, Nicholas")
                     .bold()
-                    .frame(width: 100)
+                    .frame(width: 150)
                 
                 Spacer()
                 
-                Button(action: {
-                    
-                }, label: {
-                    Image("TriangleIcon")
-                        .resizable()
-                        .renderingMode(.template)
-                        .frame(width: 20, height: 20)
-                        .shadow(radius: 2, x: 1, y: 1)
-                        .foregroundColor(.fontGray)
-                })
-                .padding(.bottom, -3)
+                Text("R")
+                    .bold()
+                
+                Image("TriangleIcon")
+                    .resizable()
+                    .renderingMode(.template)
+                    .frame(width: 20, height: 20)
+                    .foregroundColor(.fontGray)
+                    .padding(.bottom, -3)
+                    .padding(.horizontal, -5)
+                
+                Text("S")
+                    .bold()
 
                 Spacer()
                 
-                Text("Weather")
-                    .bold()
-                    .frame(width: 100)
+                HStack (spacing: 4) {
+                    Text(currentWeekday())
+                        .bold()
+                        .font(.caption)
+                        .foregroundStyle(.fontGray)
+                        .textCase(.uppercase)
+                    
+                    Text(currentMonth())
+                        .bold()
+                        .font(.caption)
+                        .foregroundStyle(.fontGray)
+
+                    Text(currentDay())
+                        .font(.caption)
+                        .bold()
+                        .foregroundStyle(.fontGray)
+                }
+                .frame(width: 150)
             }
             .foregroundStyle(Color("FontGray"))
             .font(.caption)
-            .padding(.vertical, 15)
-            .padding(.horizontal)
+            .padding(.vertical, 10)
             
             HStack (spacing: 0) {
                 Rectangle()
@@ -52,16 +68,27 @@ struct HeaderView: View {
 
                 Rectangle()
                     .frame(height: 5)
-                    .foregroundStyle(.fontGray)
+                    .foregroundStyle(.gray)
                     .shadow(color: .gray, radius: 5, x: 0, y: 5)
             }
-            
         }
-        .frame(height: 90)
+        .frame(height: 85)
         .background {
             Rectangle()
                 .foregroundStyle(.ultraThinMaterial)
         }
+    }
+    
+    func currentWeekday() -> String {
+        return String(Date().formatted(Date.FormatStyle().weekday(.abbreviated)))
+    }
+    
+    func currentMonth() -> String {
+        return String(Date().formatted(Date.FormatStyle().month(.wide)))
+    }
+
+    func currentDay() -> String {
+        return String(Date().formatted(Date.FormatStyle().day(.twoDigits)))
     }
 }
 

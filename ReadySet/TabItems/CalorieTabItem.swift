@@ -14,6 +14,7 @@ struct CalorieTabItem: ITabItem {
     var icon = "Flame"
     var color = Color.orange
     var gradient = LinearGradient(colors: [.orangeEnd, .orangeStart], startPoint: .topLeading, endPoint: .bottomTrailing)
+    var sheetPresentationDetent = PresentationDetent.fraction(0.3)
     
     func bumpTab(up: Bool) -> any ITabItem {
         return up ? WaterTabItem() : SettingsTabItem()

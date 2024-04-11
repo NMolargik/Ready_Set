@@ -51,7 +51,7 @@ struct WaterTopContentView: View {
                             
                             Text(String(Int(progress * 100)) + "%")
                                 .bold()
-                                .foregroundStyle(.white)
+                                .foregroundStyle(.secondary)
                                 .offset(y: 20)
                         }
                     })

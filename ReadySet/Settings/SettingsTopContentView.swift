@@ -10,13 +10,17 @@ import SwiftUI
 struct SettingsTopContentView: View {
     var body: some View {
         HStack (spacing: 5) {
-            ExerciseStatWidgetView()
+            Rectangle()
+                .frame(height: 75)
+                .cornerRadius(10)
+                .foregroundStyle(.thinMaterial)
+                .shadow(radius: 1)
             
-            VStack (spacing: 5) {
-                ExerciseStepsWidgetView()
-                
-                ExerciseHealthWidgetView()
-            }
+            Rectangle()
+                .frame(height: 75)
+                .cornerRadius(10)
+                .foregroundStyle(.thinMaterial)
+                .shadow(radius: 1)
         }
         .padding(.leading, 8)
         .padding(.top, 5)

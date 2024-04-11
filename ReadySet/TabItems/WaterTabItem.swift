@@ -14,6 +14,7 @@ struct WaterTabItem: ITabItem {
     var icon = "Droplet"
     var color = Color.blue
     var gradient = LinearGradient(colors: [.blueEnd, .blueStart], startPoint: .topLeading, endPoint: .bottomTrailing)
+    var sheetPresentationDetent = PresentationDetent.fraction(0.3)
     
     func bumpTab(up: Bool) -> any ITabItem {
         return up ? ExerciseTabItem() : CalorieTabItem()

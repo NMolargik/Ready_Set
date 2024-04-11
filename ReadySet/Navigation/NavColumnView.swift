@@ -11,6 +11,7 @@ struct NavColumnView: View {
     @Binding var tabItems: [any ITabItem]
     @Binding var selectedTab: any ITabItem
     @Binding var navigationDragHeight: Double
+    @Binding var showBottomSheet: Bool
     
     var body: some View {
         HStack {
@@ -38,25 +39,28 @@ struct NavColumnView: View {
             
             VStack (spacing: 0) {
                 HStack {
-                    if #available(iOS 17.0, *) {
-                        Text(selectedTab.text)
-                            .bold()
-                            .font(.system(size: 30))
-                            .transition(.blurReplace)
-                            .padding(.leading, 8)
-                    } else {
-                        Text(selectedTab.text)
-                            .bold()
-                        font(.system(size: 30))
-                            .transition(.opacity)
-                            .padding(.leading, 8)
+                    Group {
+                        if #available(iOS 17.0, *) {
+                            Text(selectedTab.text)
+                                .transition(.blurReplace)
+                                
+                        } else {
+                            Text(selectedTab.text)
+                                .transition(.opacity)
+                        }
                     }
+                    .bold()
+                    .font(.system(size: 30)).padding(.leading, 8)
+                    .shadow(radius: 2)
+                    .foregroundStyle(selectedTab.gradient)
                     
                     Spacer()
                     
                     if (selectedTab.type != .settings) {
                         Button(action: {
-                            
+                            withAnimation {
+                                showBottomSheet = true
+                            }
                         }, label: {
                             ZStack {
                                 Capsule()
@@ -67,16 +71,17 @@ struct NavColumnView: View {
                                 HStack {
                                     Text("Edit")
                                         .bold()
+                                        
                                     
                                     Image(systemName: "pencil")
                                 }
+                                .foregroundStyle(selectedTab.color)
                                 .font(.system(size: 15))
                                 .id("Edit")
                             }
                         })
                     }
                 }
-                .foregroundStyle(selectedTab.gradient)
                 
                 TopDetailView(selectedTab: $selectedTab)
                     .blur(radius: abs(navigationDragHeight) > 20.0 ? abs(navigationDragHeight * 0.01) : 0)
@@ -88,6 +93,6 @@ struct NavColumnView: View {
 }
 
 #Preview {
-    NavColumnView(tabItems: .constant(TabItemType.allItems), selectedTab: .constant(ExerciseTabItem()), navigationDragHeight: .constant(0))
+    NavColumnView(tabItems: .constant(TabItemType.allItems), selectedTab: .constant(ExerciseTabItem()), navigationDragHeight: .constant(0), showBottomSheet: .constant(false))
         .ignoresSafeArea()
 }

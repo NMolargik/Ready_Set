@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct ExerciseTopContentView: View {
+    @State private var stepCountGoal = 10000 //TODO: extract this
+    
     var body: some View {
-        HStack (spacing: 5) {
+        HStack (spacing: 10) {
             ExerciseStatWidgetView()
             
-            VStack (spacing: 5) {
-                ExerciseStepsWidgetView()
+            VStack (spacing: 10) {
+                ExerciseStepsWidgetView(stepCountGoal: $stepCountGoal)
                 
                 ExerciseHealthWidgetView()
             }

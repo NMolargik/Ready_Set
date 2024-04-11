@@ -14,6 +14,7 @@ protocol ITabItem: Hashable, Equatable {
     var icon: String { get }
     var color: Color { get }
     var gradient: LinearGradient { get }
+    var sheetPresentationDetent: PresentationDetent { get }
     
     func bumpTab(up: Bool) -> any ITabItem
     func reorderTabs() -> [any ITabItem]

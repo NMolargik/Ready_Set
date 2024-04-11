@@ -25,20 +25,17 @@ struct ContentView: View {
     
     
     @State private var showOnboarding = false
-
     @State var appState = AppState.normal
-    
-    
     
     var body: some View {
         ZStack {
             VStack {
                 switch (appState) {
                 case .onboarding:
-                    Text("Onboarding")
+                    OnboardingView()
                     
                 case .userRegistration:
-                    Text("User Registration")
+                    UserRegistrationView()
                     
                 case .initalSetCreation:
                     Text("Set Creation")

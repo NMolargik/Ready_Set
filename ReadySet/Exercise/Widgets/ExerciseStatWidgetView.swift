@@ -11,7 +11,6 @@ struct ExerciseStatWidgetView: View {
     var body: some View {
         ZStack {
             Rectangle()
-                .frame(height: 75)
                 .cornerRadius(10)
                 .foregroundStyle(.thinMaterial)
                 .shadow(radius: 1)

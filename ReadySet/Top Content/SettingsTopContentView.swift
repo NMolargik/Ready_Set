@@ -1,5 +1,5 @@
 //
-//  CalorieTopContentView.swift
+//  SettingsTopContentView.swift
 //  ReadySet
 //
 //  Created by Nick Molargik on 4/10/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CalorieTopContentView: View {
+struct SettingsTopContentView: View {
     var body: some View {
         HStack (spacing: 5) {
             ExerciseStatWidgetView()
@@ -26,5 +26,5 @@ struct CalorieTopContentView: View {
 }
 
 #Preview {
-    CalorieTopContentView()
+    SettingsTopContentView()
 }

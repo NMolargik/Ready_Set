@@ -14,13 +14,14 @@ struct WaterTabItem: ITabItem {
     var selectedIconName = "drop.fill"
     var unselectedIconName = "drop"
     var color = Color.blue
+    var gradient = LinearGradient(colors: [.cyan, .blue, .indigo], startPoint: .topLeading, endPoint: .bottomTrailing)
     
     func bumpTab(up: Bool) -> any ITabItem {
-        return up ? MetricTabItem() : CalorieTabItem()
+        return up ? ExerciseTabItem() : CalorieTabItem()
     }
     
     func reorderTabs() -> [any ITabItem] {
-        return [WaterTabItem(), CalorieTabItem(), ExerciseTabItem(), MetricTabItem()]
+        return [WaterTabItem(), CalorieTabItem(), SettingsTabItem(), ExerciseTabItem()]
 
     }
 }

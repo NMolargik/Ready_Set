@@ -9,7 +9,18 @@ import SwiftUI
 
 struct ExerciseTopContentView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack (spacing: 5) {
+            ExerciseStatWidgetView()
+            
+            VStack (spacing: 5) {
+                ExerciseStepsWidgetView()
+                
+                ExerciseHealthWidgetView()
+            }
+        }
+        .padding(.leading, 8)
+        .padding(.top, 5)
+        .frame(height: 85)
     }
 }
 

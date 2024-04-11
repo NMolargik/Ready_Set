@@ -14,12 +14,13 @@ struct ExerciseTabItem: ITabItem {
     var selectedIconName = "dumbbell.fill"
     var unselectedIconName = "dumbbell"
     var color = Color.green
+    var gradient = LinearGradient(colors: [.mint, .green], startPoint: .topLeading, endPoint: .bottomTrailing)
     
     func bumpTab(up: Bool) -> any ITabItem {
-        return up ? CalorieTabItem() : MetricTabItem()
+        return up ? SettingsTabItem() : WaterTabItem()
     }
     
     func reorderTabs() -> [any ITabItem] {
-        return [ExerciseTabItem(), MetricTabItem(), WaterTabItem(), CalorieTabItem()]
+        return [ExerciseTabItem(), WaterTabItem(), CalorieTabItem(), SettingsTabItem()]
     }
 }

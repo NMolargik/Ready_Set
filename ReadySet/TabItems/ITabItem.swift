@@ -14,6 +14,7 @@ protocol ITabItem: Hashable, Equatable {
     var selectedIconName: String { get }
     var unselectedIconName: String { get }
     var color: Color { get }
+    var gradient: LinearGradient { get }
     
     func bumpTab(up: Bool) -> any ITabItem
     func reorderTabs() -> [any ITabItem]
@@ -25,6 +26,6 @@ extension ITabItem {
     }
     
     static func == (lhs: Self, rhs: Self) -> Bool {
-        return lhs.text == rhs.text
+        return lhs.type == rhs.type
     }
 }

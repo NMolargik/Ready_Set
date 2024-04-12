@@ -26,7 +26,7 @@ struct SettingsTopContentView: View {
             }, label: {
                 ZStack {
                     Rectangle()
-                        .frame(height: 75)
+                        .frame(height: 60)
                         .cornerRadius(10)
                         .foregroundStyle(.thinMaterial)
                         .shadow(radius: 1)
@@ -60,7 +60,7 @@ struct SettingsTopContentView: View {
             }, label: {
                 ZStack {
                     Rectangle()
-                        .frame(height: 75)
+                        .frame(height: 60)
                         .cornerRadius(10)
                         .foregroundStyle(.thinMaterial)
                         .shadow(radius: 1)

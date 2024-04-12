@@ -32,7 +32,6 @@ struct NavColumnView: View {
                             .frame(width: selectedTab.type == tabItem.type ? 30 : 20, height: selectedTab.type == tabItem.type ? 30 : 20)
                             .foregroundStyle(tabItem.color)
                             .transition(.opacity)
-                        
                     })
                     .padding(.leading, 5)
                     .disabled(tabItem.type == selectedTab.type)
@@ -96,6 +95,7 @@ struct NavColumnView: View {
             .frame(height: 120)
         }
         .padding(.horizontal, 8)
+        .padding(.bottom, 10)
     }
 }
 

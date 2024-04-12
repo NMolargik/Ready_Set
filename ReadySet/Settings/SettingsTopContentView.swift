@@ -43,7 +43,7 @@ struct SettingsTopContentView: View {
                         
                         Image(systemName: "hand.raised.slash.fill")
                             .font(.title)
-                            .foregroundStyle(.pink, .purple)
+                            .foregroundStyle(.red, .black)
                         
                         Spacer()
                     }
@@ -70,7 +70,7 @@ struct SettingsTopContentView: View {
                         
                         Image(systemName: "trash.fill")
                             .font(.title)
-                            .foregroundStyle(.purple, .pink)
+                            .foregroundStyle(.fontGray)
                         
                         Spacer()
                         

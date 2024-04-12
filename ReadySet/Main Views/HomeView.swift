@@ -21,8 +21,7 @@ struct HomeView: View {
             
             BottomView(selectedTab: $homeViewModel.selectedTab)
                 .blur(radius: abs(navigationDragHeight) > 20.0 ? abs(navigationDragHeight * 0.01) : 0)
-            
-            Spacer()
+                .padding(.bottom, 15)
         }
         .background(LinearGradient(colors: [Color("BaseColor"), Color("BaseColor"), Color("BaseColor"), Color("BaseColor"), Color("BaseColor"),  homeViewModel.selectedTab.color], startPoint: .top, endPoint: .bottom))
         .sheet(isPresented: $homeViewModel.showBottomSheet) {

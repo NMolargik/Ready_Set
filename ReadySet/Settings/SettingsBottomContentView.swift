@@ -61,7 +61,7 @@ struct SettingsBottomContentView: View {
                                 Capsule()
                                     .frame(width: 100, height: 30)
                                     .foregroundStyle(.ultraThickMaterial)
-                                    .shadow(color: .purpleEnd, radius: 3)
+                                    .shadow(color: .white, radius: 3)
                                 
                                 Text("Share")
                                     .foregroundStyle(.fontGray)

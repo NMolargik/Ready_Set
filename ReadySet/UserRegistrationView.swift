@@ -27,92 +27,9 @@ struct UserRegistrationView: View {
                 }
                 .onChange(of: name) { _ in
                     withAnimation {
-                       // model.validateEmail()
+                        // model.validateEmail()
                     }
                 }
-            
-//            VStack {
-//                Text("Physical Information")
-//                    .bold()
-//                    .font(.title2)
-//                    .padding(.top)
-//                    .foregroundStyle(.neuText)
-//
-//                HStack {
-//                    Text("Height")
-//                        .bold()
-//
-//                    Image(systemName: "checkmark")
-//                        .font(.title2)
-//                        .foregroundStyle(.green, .white)
-//                        .frame(width: 20, height: 10)
-//                }
-//                .padding(.top, 2)
-//
-//                HStack(alignment: .center) {
-//                    VStack {
-//                        Text(String(model.heightFeet) + " ft")
-//                            .font(.title2)
-//                            .padding(.horizontal)
-//                            .foregroundStyle(.neuText)
-//
-//                        Stepper(String(model.heightFeet) + " ft", value: $model.heightFeet)
-//                            .padding(.leading)
-//                            .labelsHidden()
-//                            .onChange(of: model.heightFeet) { value in
-//                                let impactMed = UIImpactFeedbackGenerator(style: .medium)
-//                                impactMed.impactOccurred()
-//                                if value == 9 {
-//                                    model.heightFeet = 8
-//                                }
-//
-//                                if value == 2 {
-//                                    model.heightFeet = 3
-//                                }
-//                            }
-//                            .padding(.trailing)
-//                            .softOuterShadow()
-//                        .labelsHidden()
-//                    }
-//
-//                    VStack {
-//                        Text(String(model.heightInches) + ((model.heightInches == 1) ? " inch" : " inches"))
-//                            .font(.title2)
-//                            .padding(.horizontal)
-//                            .foregroundStyle(.neuText)
-//
-//                        Stepper(String(model.heightInches) + " in", value: $model.heightInches)
-//                            .onChange(of: model.heightInches) { value in
-//                                let impactMed = UIImpactFeedbackGenerator(style: .medium)
-//                                impactMed.impactOccurred()
-//                                if value == 12 {
-//                                    model.heightInches = 0
-//                                }
-//
-//                                if value == -1 {
-//                                    model.heightInches = 0
-//                                }
-//                            }
-//                            .padding(.trailing)
-//                            .softOuterShadow()
-//                        .labelsHidden()
-//                    }
-//                }
-//                .scaledToFit()
-//                .padding(.bottom)
-//
-//                TextField("Weight (lbs)", text: $model.weight)
-//                    .textFieldStyle(OutlinedTextFieldStyle(icon: Image(systemName: "scalemass.fill"), color: .orange, approved: $weightApproved))
-//                    .textInputAutocapitalization(.words)
-//                    .keyboardType(.decimalPad)
-//                    .padding(.horizontal)
-//                    .onChange(of: model.weight) { _ in
-//                        withAnimation {
-//                            weightApproved = (Double(model.weight) ?? 0.0 > 0.0)
-//                        }
-//                    }
-//            }
-//            .padding(.horizontal)
         }
     }
 }

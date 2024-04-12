@@ -48,8 +48,6 @@
 		EB7110FA2BC8574A0078F796 /* CustomTextFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7110F92BC8574A0078F796 /* CustomTextFields.swift */; };
 		EB7111012BC8B3C20078F796 /* WaterAdditionWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7111002BC8B3C20078F796 /* WaterAdditionWidgetView.swift */; };
 		EB7111032BC8B8A80078F796 /* CalorieAdditionWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7111022BC8B8A80078F796 /* CalorieAdditionWidgetView.swift */; };
-		EB7111062BC8BBF90078F796 /* GestureBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7111052BC8BBF90078F796 /* GestureBarView.swift */; };
-		EB7111082BC8D34F0078F796 /* GestureModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7111072BC8D34F0078F796 /* GestureModalView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,8 +113,6 @@
 		EB7110F92BC8574A0078F796 /* CustomTextFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFields.swift; sourceTree = "<group>"; };
 		EB7111002BC8B3C20078F796 /* WaterAdditionWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterAdditionWidgetView.swift; sourceTree = "<group>"; };
 		EB7111022BC8B8A80078F796 /* CalorieAdditionWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieAdditionWidgetView.swift; sourceTree = "<group>"; };
-		EB7111052BC8BBF90078F796 /* GestureBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureBarView.swift; sourceTree = "<group>"; };
-		EB7111072BC8D34F0078F796 /* GestureModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureModalView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -290,8 +286,6 @@
 			children = (
 				EB3AB33A2BC70CF5008B6F22 /* HeaderView.swift */,
 				EB3AB33E2BC710D1008B6F22 /* NavColumnView.swift */,
-				EB7111052BC8BBF90078F796 /* GestureBarView.swift */,
-				EB7111072BC8D34F0078F796 /* GestureModalView.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -490,9 +484,7 @@
 				EB3AB3682BC7798C008B6F22 /* ExerciseStepsWidgetView.swift in Sources */,
 				EB7111032BC8B8A80078F796 /* CalorieAdditionWidgetView.swift in Sources */,
 				EB3AB36C2BC77C3E008B6F22 /* ExerciseStatWidgetView.swift in Sources */,
-				EB7111062BC8BBF90078F796 /* GestureBarView.swift in Sources */,
 				EB7110F42BC847610078F796 /* UserRegistrationView.swift in Sources */,
-				EB7111082BC8D34F0078F796 /* GestureModalView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

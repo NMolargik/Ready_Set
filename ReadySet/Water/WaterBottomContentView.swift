@@ -18,6 +18,7 @@ struct WaterBottomContentView: View {
             VStack {
                 Spacer()
                 
+                WaterAdditionWidgetView()
             }
             
         }

@@ -17,7 +17,8 @@ struct CalorieBottomContentView: View {
             
             VStack {
                 Spacer()
-
+                
+                CalorieAdditionWidgetView()
             }
         }
         .padding(.horizontal, 8)

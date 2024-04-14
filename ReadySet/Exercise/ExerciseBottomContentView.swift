@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ExerciseBottomContentView: View {
+    @State var isEditingPlan = false
+    
     var body: some View {
         ZStack {
             Rectangle()
@@ -15,9 +17,7 @@ struct ExerciseBottomContentView: View {
                 .foregroundStyle(.ultraThinMaterial)
                 .shadow(radius: 1)
             
-            VStack {
-                
-            }
+            ExercisePlanView(isEditing: $isEditingPlan)
         }
         .padding(.horizontal, 8)
         .padding(.bottom, 15)

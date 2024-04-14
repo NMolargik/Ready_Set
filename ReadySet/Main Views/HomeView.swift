@@ -9,7 +9,6 @@ import SwiftUI
 
 struct HomeView: View {
     @ObservedObject var homeViewModel = HomeViewModel()
-    
     @State private var navigationDragHeight = 0.0
     
     var body: some View {
@@ -46,10 +45,10 @@ struct HomeView: View {
             .onEnded({ value in
                 withAnimation (.smooth) {
                     homeViewModel.handleDragEnd(navigationDragHeight: navigationDragHeight)
-
                     navigationDragHeight = 0.0
                 }
-            }))
+            })
+        )
     }
 }
 

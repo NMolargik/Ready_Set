@@ -41,6 +41,9 @@
 		EB3AB3682BC7798C008B6F22 /* ExerciseStepsWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3672BC7798C008B6F22 /* ExerciseStepsWidgetView.swift */; };
 		EB3AB36A2BC77B19008B6F22 /* ExerciseHealthWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3692BC77B19008B6F22 /* ExerciseHealthWidgetView.swift */; };
 		EB3AB36C2BC77C3E008B6F22 /* ExerciseStatWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB36B2BC77C3E008B6F22 /* ExerciseStatWidgetView.swift */; };
+		EB4D9C4E2BCC73E90071BA99 /* ExercisePlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C4D2BCC73E90071BA99 /* ExercisePlanView.swift */; };
+		EB4D9C502BCC73F60071BA99 /* ExercisePlanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C4F2BCC73F60071BA99 /* ExercisePlanViewModel.swift */; };
+		EB4D9C522BCC80A10071BA99 /* ExercisePlanDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C512BCC80A10071BA99 /* ExercisePlanDayView.swift */; };
 		EB7110F22BC847470078F796 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7110F12BC847470078F796 /* OnboardingView.swift */; };
 		EB7110F42BC847610078F796 /* UserRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7110F32BC847610078F796 /* UserRegistrationView.swift */; };
 		EB7110F72BC84B520078F796 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7110F62BC84B520078F796 /* HomeViewModel.swift */; };
@@ -73,7 +76,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0E4A5E202BCC759F003678C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		0E4A5E232BCC7F3D003678C2 /* HKController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKController.swift; sourceTree = "<group>"; };
 		0E4A5E252BCC80E0003678C2 /* Build.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Build.xcconfig; sourceTree = "<group>"; };
 		0E7DCA5D2BC6FF7400B9403C /* ExerciseSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSet.swift; sourceTree = "<group>"; };
@@ -113,6 +115,11 @@
 		EB3AB3692BC77B19008B6F22 /* ExerciseHealthWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseHealthWidgetView.swift; sourceTree = "<group>"; };
 		EB3AB36B2BC77C3E008B6F22 /* ExerciseStatWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseStatWidgetView.swift; sourceTree = "<group>"; };
 		EB3AB36D2BC7957D008B6F22 /* ReadySet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ReadySet.entitlements; sourceTree = "<group>"; };
+		EB4D9C4D2BCC73E90071BA99 /* ExercisePlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisePlanView.swift; sourceTree = "<group>"; };
+		EB4D9C4F2BCC73F60071BA99 /* ExercisePlanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisePlanViewModel.swift; sourceTree = "<group>"; };
+		EB4D9C512BCC80A10071BA99 /* ExercisePlanDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisePlanDayView.swift; sourceTree = "<group>"; };
+		EB4D9C532BCC83C80071BA99 /* CodeSigning.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CodeSigning.xcconfig; sourceTree = "<group>"; };
+		EB4D9C542BCC848D0071BA99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB7110F12BC847470078F796 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		EB7110F32BC847610078F796 /* UserRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegistrationView.swift; sourceTree = "<group>"; };
 		EB7110F62BC84B520078F796 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -156,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				0E4A5E252BCC80E0003678C2 /* Build.xcconfig */,
+				EB4D9C532BCC83C80071BA99 /* CodeSigning.xcconfig */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -196,7 +204,7 @@
 		0E940A692BC6FE0200144477 /* ReadySet */ = {
 			isa = PBXGroup;
 			children = (
-				0E4A5E202BCC759F003678C2 /* Info.plist */,
+				EB4D9C542BCC848D0071BA99 /* Info.plist */,
 				EB3AB36D2BC7957D008B6F22 /* ReadySet.entitlements */,
 				0E7DCA5A2BC6FE8000B9403C /* Models */,
 				EB3AB3422BC71191008B6F22 /* TabItems */,
@@ -265,6 +273,15 @@
 			path = Widgets;
 			sourceTree = "<group>";
 		};
+		EB4D9C4C2BCC73800071BA99 /* Exercise Plan */ = {
+			isa = PBXGroup;
+			children = (
+				EB4D9C4D2BCC73E90071BA99 /* ExercisePlanView.swift */,
+				EB4D9C512BCC80A10071BA99 /* ExercisePlanDayView.swift */,
+			);
+			path = "Exercise Plan";
+			sourceTree = "<group>";
+		};
 		EB7110F52BC84B430078F796 /* Main Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -289,6 +306,8 @@
 			children = (
 				EB3AB34D2BC729DE008B6F22 /* ExerciseTopContentView.swift */,
 				EB3AB35B2BC76FCD008B6F22 /* ExerciseBottomContentView.swift */,
+				EB4D9C4F2BCC73F60071BA99 /* ExercisePlanViewModel.swift */,
+				EB4D9C4C2BCC73800071BA99 /* Exercise Plan */,
 				EB3AB3642BC772D6008B6F22 /* Widgets */,
 			);
 			path = Exercise;
@@ -497,6 +516,7 @@
 				EB3AB3572BC76F07008B6F22 /* TopDetailView.swift in Sources */,
 				0E7DCA602BC6FFF100B9403C /* ExerciseSetEntry.swift in Sources */,
 				EB7111012BC8B3C20078F796 /* WaterAdditionWidgetView.swift in Sources */,
+				EB4D9C522BCC80A10071BA99 /* ExercisePlanDayView.swift in Sources */,
 				0E940A742BC6FE0400144477 /* Persistence.swift in Sources */,
 				EB7111182BC972530078F796 /* ExerciseSetRepo.swift in Sources */,
 				EB3AB3622BC76FED008B6F22 /* CalorieBottomContentView.swift in Sources */,
@@ -518,10 +538,12 @@
 				EB3AB36A2BC77B19008B6F22 /* ExerciseHealthWidgetView.swift in Sources */,
 				EB3AB3482BC71204008B6F22 /* WaterTabItem.swift in Sources */,
 				EB3AB35C2BC76FCD008B6F22 /* ExerciseBottomContentView.swift in Sources */,
+				EB4D9C502BCC73F60071BA99 /* ExercisePlanViewModel.swift in Sources */,
 				EB3AB33C2BC70CF5008B6F22 /* HeaderView.swift in Sources */,
 				EB3AB34A2BC7120C008B6F22 /* CalorieTabItem.swift in Sources */,
 				EB3AB3682BC7798C008B6F22 /* ExerciseStepsWidgetView.swift in Sources */,
 				EB7111032BC8B8A80078F796 /* CalorieAdditionWidgetView.swift in Sources */,
+				EB4D9C4E2BCC73E90071BA99 /* ExercisePlanView.swift in Sources */,
 				EB71111C2BC972FE0078F796 /* IExerciseSetEntryRepo.swift in Sources */,
 				EB3AB36C2BC77C3E008B6F22 /* ExerciseStatWidgetView.swift in Sources */,
 				EB7110F42BC847610078F796 /* UserRegistrationView.swift in Sources */,

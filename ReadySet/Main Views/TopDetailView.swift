@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct TopDetailView: View {
+    @ObservedObject var waterViewModel: WaterViewModel
+    
     @Binding var selectedTab: any ITabItem
     var body: some View {
         Group {
@@ -16,7 +18,7 @@ struct TopDetailView: View {
                 ExerciseTopContentView()
                     .transition(.opacity)
             case .water:
-                WaterTopContentView(progress: 0.5)
+                WaterTopContentView(waterViewModel: waterViewModel, progress: 0.5)
                     .transition(.opacity)
             case .calorie:
                 CalorieTopContentView(progress: 0.5)
@@ -31,5 +33,5 @@ struct TopDetailView: View {
 }
     
 #Preview {
-    TopDetailView(selectedTab: .constant(ExerciseTabItem()))
+    TopDetailView(waterViewModel: WaterViewModel(), selectedTab: .constant(ExerciseTabItem()))
 }

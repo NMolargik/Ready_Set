@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct WaterAdditionWidgetView: View {
+    @ObservedObject var waterViewModel: WaterViewModel
+    
     @State private var expanded = false
     
     @State private var waterToAdd = ""
@@ -76,5 +78,5 @@ struct WaterAdditionWidgetView: View {
 }
 
 #Preview {
-    WaterAdditionWidgetView()
+    WaterAdditionWidgetView(waterViewModel: WaterViewModel())
 }

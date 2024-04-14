@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct WaterBottomContentView: View {
+    @ObservedObject var waterViewModel: WaterViewModel
+    
     var body: some View {
         ZStack {
             Rectangle()
@@ -18,7 +20,7 @@ struct WaterBottomContentView: View {
             VStack {
                 Spacer()
                 
-                WaterAdditionWidgetView()
+                WaterAdditionWidgetView(waterViewModel: waterViewModel)
             }
             
         }
@@ -28,5 +30,5 @@ struct WaterBottomContentView: View {
 }
 
 #Preview {
-    WaterBottomContentView()
+    WaterBottomContentView(waterViewModel: WaterViewModel())
 }

@@ -8,14 +8,17 @@
 import SwiftUI
 
 struct BottomView: View {
+    @ObservedObject var waterViewModel: WaterViewModel
+    
     @Binding var selectedTab: any ITabItem
+    
     var body: some View {
         Group {
             switch (selectedTab.type) {
             case .exercise:
                 ExerciseBottomContentView()
             case .water:
-                WaterBottomContentView()
+                WaterBottomContentView(waterViewModel: waterViewModel)
             case .calorie:
                 CalorieBottomContentView()
             case .settings:
@@ -29,5 +32,5 @@ struct BottomView: View {
 }
 
 #Preview {
-    BottomView(selectedTab: .constant(ExerciseTabItem()))
+    BottomView(waterViewModel: WaterViewModel(), selectedTab: .constant(ExerciseTabItem()))
 }

@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct WaterTopContentView: View {
+    @ObservedObject var waterViewModel: WaterViewModel
+    
     @State var progress: CGFloat
     @State var startAnimation: CGFloat = 0
     
@@ -20,7 +22,7 @@ struct WaterTopContentView: View {
                     .foregroundStyle(.thinMaterial)
                     .shadow(radius: 1)
                 
-                WaterWave(progress: min(progress, 0.98), waveHeight: 0.05, offset: startAnimation)
+                WaterWave(progress: min(CGFloat(waterViewModel.waterConsumed / waterViewModel.waterGoal), 0.98), waveHeight: 0.05, offset: startAnimation)
                     .fill(LinearGradient(colors: [.blueStart, .blueEnd], startPoint: .top, endPoint: .bottom))
                     .overlay(content: {
                         ZStack {
@@ -106,5 +108,5 @@ struct WaterWave: Shape {
 }
 
 #Preview {
-    WaterTopContentView(progress: 0.5)
+    WaterTopContentView(waterViewModel: WaterViewModel(), progress: 0.5)
 }

@@ -11,7 +11,8 @@ struct HomeView: View {
     @ObservedObject var homeViewModel = HomeViewModel()
     
     @StateObject var waterViewModel = WaterViewModel()
-    
+    @StateObject var calorieViewModel = CalorieViewModel()
+
     @State private var navigationDragHeight = 0.0
     
     var body: some View {
@@ -19,7 +20,7 @@ struct HomeView: View {
             HeaderView(selectedTab: $homeViewModel.selectedTab)
                 .padding(.bottom, 15)
             
-            NavColumnView(waterViewModel: waterViewModel, tabItems: $homeViewModel.tabItems, selectedTab: $homeViewModel.selectedTab, navigationDragHeight: $navigationDragHeight, showBottomSheet: $homeViewModel.showBottomSheet)
+            NavColumnView(waterViewModel: waterViewModel, calorieViewModel: calorieViewModel, tabItems: $homeViewModel.tabItems, selectedTab: $homeViewModel.selectedTab, navigationDragHeight: $navigationDragHeight, showBottomSheet: $homeViewModel.showBottomSheet)
             
             BottomView(waterViewModel: waterViewModel, selectedTab: $homeViewModel.selectedTab)
                 .blur(radius: abs(navigationDragHeight) > 20.0 ? abs(navigationDragHeight * 0.01) : 0)

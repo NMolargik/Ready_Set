@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct CalorieTopContentView: View {
+    @ObservedObject var calorieViewModel: CalorieViewModel
+    
     @State var progress: CGFloat
     @State private var opacity = 0.0
     @State private var fahrenheit = 400.0
@@ -82,5 +84,5 @@ struct CalorieTopContentView: View {
 }
 
 #Preview {
-    CalorieTopContentView(progress: 0.5)
+    CalorieTopContentView(calorieViewModel: CalorieViewModel(), progress: 0.5)
 }

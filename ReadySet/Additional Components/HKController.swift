@@ -18,19 +18,23 @@ class HKController {
     var waterConsumedWeek: [Int: Int] = [0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0]
     var energyConsumedToday: Int = 0
     var energyConsumedWeek: [Int: Int] = [0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0]
+    var energyBurnedToday: Int = 0
+    var energyBurnedWeek: [Int: Int] = [0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0]
 
     func requestAuthorization() {
         let toReads = Set([
             HKObjectType.quantityType(forIdentifier: .stepCount)!,
             HKObjectType.quantityType(forIdentifier: .dietaryWater)!,
             HKObjectType.quantityType(forIdentifier: .bodyMass)!,
-            HKObjectType.quantityType(forIdentifier: .dietaryEnergyConsumed)!
+            HKObjectType.quantityType(forIdentifier: .dietaryEnergyConsumed)!,
+            HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!,
         ])
 
         let toShares = Set([
             HKObjectType.quantityType(forIdentifier: .dietaryWater)!,
             HKObjectType.quantityType(forIdentifier: .bodyMass)!,
             HKObjectType.quantityType(forIdentifier: .dietaryEnergyConsumed)!,
+            HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!,
             HKObjectType.workoutType()
         ])
 
@@ -56,6 +60,8 @@ class HKController {
         readWaterConsumedWeek()
         readEnergyConsumedToday()
         readEnergyConsumedWeek()
+        readEnergyBurnedToday()
+        readEnergyBurnedWeek()
         readWeightMonth { _ in }
     }
     func readStepCountToday() {
@@ -351,6 +357,88 @@ class HKController {
 
         healthStore.execute(query)
     }
+    
+    func readEnergyBurnedToday() {
+        guard let energyCountType = HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned) else {
+            return
+        }
+
+        let now = Date()
+        let startDate = Calendar.current.startOfDay(for: now)
+        let predicate = HKQuery.predicateForSamples(
+            withStart: startDate,
+            end: now,
+            options: .strictStartDate
+        )
+
+        let query = HKStatisticsQuery(
+            quantityType: energyCountType,
+            quantitySamplePredicate: predicate,
+            options: .cumulativeSum
+        ) {
+            _, result, error in
+            guard let result = result, let sum = result.sumQuantity() else {
+                print("HealthKit - Error - Failed to read energy consumed today: \(error?.localizedDescription ?? "UNKNOWN ERROR")")
+                return
+            }
+
+            let calories = Int(sum.doubleValue(for: HKUnit.kilocalorie()))
+            self.energyBurnedToday = calories
+        }
+        healthStore.execute(query)
+    }
+
+    func readEnergyBurnedWeek() {
+        guard let energyCountType = HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned) else {
+            return
+        }
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
+
+        guard let startOfWeek = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: today)) else {
+            print("HealthKit - Error - Failed to calculate the start date of the week.")
+            return
+        }
+
+        guard let endOfWeek = calendar.date(byAdding: .day, value: 6, to: startOfWeek) else {
+            print("HealthKit - Error - Failed to calculate the end date of the week.")
+            return
+        }
+
+        let predicate = HKQuery.predicateForSamples(
+            withStart: startOfWeek,
+            end: endOfWeek,
+            options: .strictStartDate
+        )
+
+        let query = HKStatisticsCollectionQuery(
+            quantityType: energyCountType,
+            quantitySamplePredicate: predicate,
+            options: .cumulativeSum,
+            anchorDate: startOfWeek,
+            intervalComponents: DateComponents(day: 1) // interval to make sure the sum is per 1 day
+        )
+
+        query.initialResultsHandler = { _, result, error in
+            guard let result = result else {
+                if let error = error {
+                    print("HealthKit - Error - An error occurred while retrieving energy consumed for the week: \(error.localizedDescription)")
+                }
+                return
+            }
+
+            result.enumerateStatistics(from: startOfWeek, to: endOfWeek) { statistics, _ in
+                if let quantity = statistics.sumQuantity() {
+                    let ounces = Int(quantity.doubleValue(for: HKUnit.kilocalorie()))
+                    let day = calendar.component(.weekday, from: statistics.startDate)
+                    self.energyBurnedWeek[day] = ounces
+                }
+            }
+        }
+
+        healthStore.execute(query)
+    }
+
 
     func addWeightToday(pounds: Double) {
         let weightType = HKQuantityType.quantityType(forIdentifier: .bodyMass)!

@@ -220,7 +220,7 @@ class HKController {
         healthStore.execute(query)
     }
 
-    func addWaterConsumed(ounces: Double, completion: (Bool) -> Void) {
+    func addWaterConsumed(ounces: Double) {
         let waterType = HKQuantityType.quantityType(forIdentifier: .dietaryWater)!
         let waterSample = HKQuantitySample(type: waterType, quantity: HKQuantity(unit: HKUnit.fluidOunceUS(), doubleValue: ounces), start: Date(), end: Date())
         healthStore.save(waterSample, withCompletion: { (success, error) -> Void in
@@ -240,8 +240,6 @@ class HKController {
                 self.readWaterConsumedToday()
             }
         })
-
-        completion(true)
     }
 
     func readWeightMonth(completion: @escaping (Int) -> Void) {

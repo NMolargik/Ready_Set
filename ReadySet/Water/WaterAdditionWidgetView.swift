@@ -50,6 +50,9 @@ struct WaterAdditionWidgetView: View {
                                 
                                 Button(action: {
                                     withAnimation {
+                                        if let water = Double($waterToAdd.wrappedValue) {
+                                            waterViewModel.addWater(waterOunces: water)
+                                        }
                                         // Call for water addtion
                                         waterToAdd = ""
                                         expanded = false

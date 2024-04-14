@@ -21,8 +21,8 @@ class WaterViewModel: ObservableObject {
         waterConsumed = healthController.waterConsumedToday
     }
     
-    func addWater(waterOunces: Int) {
-        self.healthController.addWaterConsumed(ounces: Double(waterOunces), completion: {_ in })
+    func addWater(waterOunces: Double) {
+        self.healthController.addWaterConsumed(ounces: waterOunces)
     }
     
     func getWaterTodayFromHK() {

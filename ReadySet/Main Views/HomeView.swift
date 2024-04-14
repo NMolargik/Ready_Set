@@ -41,7 +41,7 @@ struct HomeView: View {
             }
             .presentationDetents([homeViewModel.selectedTab.sheetPresentationDetent])
         }
-        .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
+        .gesture(DragGesture(minimumDistance: 20, coordinateSpace: .global)
             .onChanged({ value in
                 navigationDragHeight = value.translation.height
             })

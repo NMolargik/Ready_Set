@@ -66,29 +66,6 @@ struct NavColumnView: View {
                     .foregroundStyle(selectedTab.gradient)
                     
                     Spacer()
-                    
-                    if (selectedTab.type != .settings) {
-                        Button(action: {
-                            let impactMed = UIImpactFeedbackGenerator(style: .medium)
-                            impactMed.impactOccurred()
-                            
-                            withAnimation {
-                                showBottomSheet = true
-                            }
-                        }, label: {
-                            HStack {
-                                Text("Edit")
-                                    .bold()
-                                    
-                                
-                                Image(systemName: "pencil")
-                            }
-                            .foregroundStyle(selectedTab.color)
-                            .shadow(radius: 1)
-                            .font(.body)
-                            .id("Edit")
-                        })
-                    }
                 }
                 
                 TopDetailView(waterViewModel: waterViewModel, selectedTab: $selectedTab)

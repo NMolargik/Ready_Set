@@ -12,7 +12,7 @@ class ExerciseViewModel: ObservableObject {
     
     
     @Published var exerciseSetMaster: [ExerciseSet] = [ExerciseSet]()
-    @Published var waterGoal: Int = 0
+    @Published var waterGoal: Int = 8
     @Published var calorieGoal: Int = 0
     
     @Published var formComplete: Bool = false

@@ -18,13 +18,10 @@ struct ExercisePlanDayView: View {
     
     var body: some View {
         VStack {
-            ForEach(exerciseViewModel.exerciseSetsMaster.filter({ $0.day == selectedDay })) { set in
+            ForEach(exerciseViewModel.exerciseSetMaster.filter({ $0.day == selectedDay })) { set in
                 Text(set.order.description)
                 
             }
-        }
-        .onAppear {
-            exerciseSetRepo.save(exerciseSet: ExerciseSet(id: UUID(), exerciseName: "Sit Up", activityType: "Duration", day: 1, order: Int.random(in: 0...16)))
         }
     }
 }

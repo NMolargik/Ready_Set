@@ -9,6 +9,8 @@ import SwiftUI
 
 struct WaterAdditionWidgetView: View {
     @State private var expanded = false
+    
+    @State private var waterToAdd = ""
     var body: some View {
         HStack {
             Spacer(minLength: 0)
@@ -16,7 +18,9 @@ struct WaterAdditionWidgetView: View {
             VStack (alignment: .trailing) {
                 Button(action: {
                     withAnimation {
-                        expanded.toggle()
+                        if (!expanded) {
+                            expanded.toggle()
+                        }
                     }
                 }, label: {
                     ZStack {
@@ -37,11 +41,34 @@ struct WaterAdditionWidgetView: View {
                                         .foregroundStyle(.white)
                                         .offset(y: 3)
                                 }
+                        } else {
+                            HStack {
+                                TextField("Add Water", text: $waterToAdd)
+                                    .tint(.white)
+                                
+                                Button(action: {
+                                    withAnimation {
+                                        // Call for water addtion
+                                        waterToAdd = ""
+                                        expanded = false
+                                    }
+                                }, label: {
+                                    Text("Add")
+                                })
+                                
+                                Button(action: {
+                                    withAnimation {
+                                        waterToAdd = ""
+                                        expanded = false
+                                    }
+                                }, label: {
+                                    Text("Cancel")
+                                })
+                            }
                         }
                     }
                 })
                 .padding(.horizontal, 20)
-                .disabled(expanded)
             }
         }
         .padding(.bottom)

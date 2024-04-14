@@ -182,7 +182,6 @@
 		0E940A5E2BC6FE0200144477 = {
 			isa = PBXGroup;
 			children = (
-				0E4A5E232BCC7F3D003678C2 /* HKController.swift */,
 				0E442FE72BC7020A004F1467 /* Config */,
 				0E940A692BC6FE0200144477 /* ReadySet */,
 				0E940A7F2BC6FE0400144477 /* ReadySetTests */,
@@ -296,6 +295,7 @@
 		EB7110F82BC857330078F796 /* Additional Components */ = {
 			isa = PBXGroup;
 			children = (
+				0E4A5E232BCC7F3D003678C2 /* HKController.swift */,
 				EB7110F92BC8574A0078F796 /* CustomTextFields.swift */,
 			);
 			path = "Additional Components";

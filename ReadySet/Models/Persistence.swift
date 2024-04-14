@@ -21,10 +21,6 @@ class PersistenceController {
         }
     }
 
-    func getUser() -> NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "User", in: container.viewContext) ?? NSEntityDescription()
-    }
-    
     func getExerciseSet() -> NSEntityDescription {
         NSEntityDescription.entity(forEntityName: "ExerciseSet", in: container.viewContext) ?? NSEntityDescription()
     }

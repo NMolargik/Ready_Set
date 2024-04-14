@@ -11,6 +11,6 @@ import Foundation
 
 protocol IExerciseSetRepo {
     func save(exerciseSet: ExerciseSet)
-    func load() -> ExerciseSet
+    func loadAll() -> [ExerciseSet]
     func remove(exerciseSet: ExerciseSet)
 }

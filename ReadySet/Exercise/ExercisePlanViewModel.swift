@@ -11,14 +11,16 @@ class ExerciseViewModel: ObservableObject {
     // Add the repo for getting all sets
     
     
-    @Published var exerciseSetsMaster: [ExerciseSet] = [ExerciseSet]()
+    @Published var exerciseSetMaster: [ExerciseSet] = [ExerciseSet]()
     @Published var waterGoal: Int = 0
     @Published var calorieGoal: Int = 0
     
     @Published var formComplete: Bool = false
     
+    let exerciseSetRepo = ExerciseSetRepo()
+    
     init() {
-        // Read the existing plan
+        exerciseSetMaster = exerciseSetRepo.loadAll()
     }
     
     

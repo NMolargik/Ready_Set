@@ -30,15 +30,15 @@ struct ExerciseSetRepo: IExerciseSetRepo {
     }
     
     // Load the first exerciseSet record from the table
-    func load() -> ExerciseSet {
+    func loadAll() -> [ExerciseSet] {
         let fetchRequest = ExerciseSet.fetchRequest()
         
         do {
-            let user = try viewContext.fetch(fetchRequest)
-            return user.first as? ExerciseSet ?? ExerciseSet()
+            let sets = try viewContext.fetch(fetchRequest)
+            return sets as? [ExerciseSet] ?? [ExerciseSet]()
         } catch {
             print("Error loading exerciseSet: \(error.localizedDescription)")
-            return ExerciseSet()
+            return [ExerciseSet]()
         }
     }
     

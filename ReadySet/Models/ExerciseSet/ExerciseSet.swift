@@ -13,15 +13,15 @@ public class ExerciseSet: NSManagedObject, Identifiable {
     @NSManaged public var id: UUID
     @NSManaged public var exerciseName: String
     @NSManaged public var activityType: String
-    @NSManaged public var day: Int
-    @NSManaged public var order: Int
+    @NSManaged public var day: Int16
+    @NSManaged public var order: Int16
     
     convenience init(
         id: UUID,
         exerciseName: String,
         activityType: String,
-        day: Int,
-        order: Int
+        day: Int16,
+        order: Int16
     ) {
         let entity = PersistenceController.shared.getExerciseSet()
         self.init(entity: entity, insertInto: nil)

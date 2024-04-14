@@ -232,7 +232,7 @@ class HKController {
             }
 
             if success {
-                print("HealthKit - Success - Steps successfully saved in HealthKit")
+                print("HealthKit - Success - Water successfully saved in HealthKit")
                 self.readWaterConsumedToday()
 
             } else {

@@ -66,6 +66,7 @@ struct WaterTopContentView: View {
         .padding(.leading, 8)
         .padding(.top, 5)
         .onAppear {
+            waterViewModel.getWaterTodayFromHK()
             withAnimation(.linear(duration: 1.5).repeatForever(autoreverses: false)) {
                 startAnimation = 350
             }

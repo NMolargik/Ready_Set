@@ -52,6 +52,8 @@ struct WaterAdditionWidgetView: View {
                                     withAnimation {
                                         if let water = Double($waterToAdd.wrappedValue) {
                                             waterViewModel.addWater(waterOunces: water)
+                                        } else {
+                                            print("Couldn't parse \($waterToAdd.wrappedValue)")
                                         }
                                         // Call for water addtion
                                         waterToAdd = ""

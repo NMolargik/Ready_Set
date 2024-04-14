@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 class WaterViewModel: ObservableObject {
-    @AppStorage("waterGoal") var waterGoal: Int = 1
+    @AppStorage("waterGoal") var waterGoal: Int = 16
     
     @Published var waterConsumed = 0
     @Published var waterHistory = [Int]()
@@ -17,18 +17,24 @@ class WaterViewModel: ObservableObject {
     let healthController = HKController()
     
     init() {
+        healthController.requestAuthorization()
         self.getWaterTodayFromHK()
-        waterConsumed = healthController.waterConsumedToday
     }
     
     func addWater(waterOunces: Double) {
         self.healthController.addWaterConsumed(ounces: waterOunces)
+        self.getWaterTodayFromHK()
     }
     
     func getWaterTodayFromHK() {
         self.healthController.readWaterConsumedToday()
+        waterConsumed = self.healthController.waterConsumedToday
     }
-    
+
+    func getWaterWeekFromHK() {
+        self.healthController.readWaterConsumedWeek()
+    }
+
     func setWaterGoal(waterOunces: Int) {
         self.waterGoal = waterOunces
     }

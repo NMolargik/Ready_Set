@@ -9,8 +9,6 @@ import SwiftUI
 
 struct WaterTopContentView: View {
     @ObservedObject var waterViewModel: WaterViewModel
-    
-    @State var progress: CGFloat
     @State var startAnimation: CGFloat = 0
     
     var body: some View {
@@ -26,7 +24,7 @@ struct WaterTopContentView: View {
                     .fill(LinearGradient(colors: [.blueStart, .blueEnd], startPoint: .top, endPoint: .bottom))
                     .overlay(content: {
                         ZStack {
-                            if (progress > 0.5) {
+                            if (waterViewModel.waterConsumed / waterViewModel.waterGoal > Int(0.5)) {
                                 Circle()
                                     .fill(.white.opacity(0.1))
                                     .frame(width: 15, height: 15)
@@ -51,7 +49,7 @@ struct WaterTopContentView: View {
                                 .offset(y: 20)
                                 
                             
-                            Text(String(Int(progress * 100)) + "%")
+                            Text("\(waterViewModel.waterConsumed) of \(waterViewModel.waterGoal) oz")
                                 .bold()
                                 .foregroundStyle(.secondary)
                                 .offset(y: 20)
@@ -72,41 +70,9 @@ struct WaterTopContentView: View {
                 startAnimation = 350
             }
         }
-        
-    }
-}
-
-struct WaterWave: Shape {
-    var progress: CGFloat
-    var waveHeight: CGFloat
-    var offset: CGFloat
-    var animatableData: CGFloat {
-        get {offset}
-        set {offset = newValue}
-    }
-    
-    func path(in rect: CGRect) -> Path {
-        return Path { path in
-            path.move(to: .zero)
-            
-            let progressHeight: CGFloat = (1 - progress) * rect.height
-            let height = waveHeight * rect.height
-            
-            for value in stride(from: 0, to: rect.width + 20, by: 2) {
-                let x: CGFloat = value
-                let sine: CGFloat = sin(Angle(degrees: value + offset).radians)
-                let y: CGFloat = progressHeight + (height * sine)
-                
-                path.addLine(to: CGPoint(x: x, y: y))
-            }
-            
-            path.addLine(to: CGPoint(x: rect.width, y: rect.height))
-            path.addLine(to: CGPoint(x: 0, y: rect.height))
-            
-        }
     }
 }
 
 #Preview {
-    WaterTopContentView(waterViewModel: WaterViewModel(), progress: 0.5)
+    WaterTopContentView(waterViewModel: WaterViewModel())
 }

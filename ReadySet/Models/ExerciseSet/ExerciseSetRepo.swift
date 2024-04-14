@@ -5,11 +5,19 @@
 //  Created by Nick Molargik on 4/12/24.
 //
 
+/*
+ This repository controls CRUD for the ExerciseSet table in CoreData.
+ It should be expanded upon to handle query parameters / predicates
+ by manipulating the fetchRequest variable and following the same pattern
+ as the load() method
+*/
+
 import Foundation
 
 struct ExerciseSetRepo: IExerciseSetRepo {
     let viewContext = PersistenceController.shared.container.viewContext
     
+    // Save a new exerciseSet record to the table
     func save(exerciseSet: ExerciseSet) {
         viewContext.insert(exerciseSet)
         
@@ -21,6 +29,7 @@ struct ExerciseSetRepo: IExerciseSetRepo {
         }
     }
     
+    // Load the first exerciseSet record from the table
     func load() -> ExerciseSet {
         let fetchRequest = ExerciseSet.fetchRequest()
         
@@ -33,6 +42,7 @@ struct ExerciseSetRepo: IExerciseSetRepo {
         }
     }
     
+    // Remove a particular exerciseSet record from the table
     func remove(exerciseSet: ExerciseSet) {
         viewContext.delete(exerciseSet)
         

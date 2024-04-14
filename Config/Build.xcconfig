@@ -1,0 +1,14 @@
+//
+//  Build.xcconfig
+//  ReadySet
+//
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+#include "CodeSigning.xcconfig"
+
+PRODUCT_NAME = ReadySet
+
+MARKETING_VERSION = 1.0.0
+
+CURRENT_PROJECT_VERSION = 0

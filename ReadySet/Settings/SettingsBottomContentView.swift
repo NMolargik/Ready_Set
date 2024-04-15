@@ -44,6 +44,11 @@ struct SettingsBottomContentView: View {
                             .foregroundStyle(.fontGray)
                             .font(.caption)
                         
+                        Text("Contributions from Nicholas Yoder")
+                            .bold()
+                            .foregroundStyle(.fontGray)
+                            .font(.caption)
+                        
                         Text("v1.0.0")
                             .bold()
                             .foregroundStyle(.fontGray)
@@ -69,12 +74,13 @@ struct SettingsBottomContentView: View {
                         }
                         
                     }
-                    .padding(.horizontal, 10)
+                    
+                    .padding(.horizontal, 5)
                     
                     Image("icon")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: 175)
+                        .frame(width: 150)
                         .padding(.top, -10)
                 }
                 .frame(height: 150)

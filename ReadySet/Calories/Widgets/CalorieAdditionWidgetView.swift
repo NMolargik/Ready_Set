@@ -58,7 +58,7 @@ struct CalorieAdditionWidgetView: View {
                                 .shadow(radius: 4, x: 2, y: 2)
                                 .frame(width: 40, height: 40)
                             
-                            Image(systemName: "plus")
+                            Image(systemName: "arrow.right")
                                 .bold()
                                 .foregroundStyle(.white)
                                 .font(.title2)
@@ -104,8 +104,9 @@ struct CalorieAdditionWidgetView: View {
                                             calorieViewModel.addCalories(calories: calorieValue)
                                         }
                                     }
-                                    
-                                    value = 0
+                                    withAnimation (.bouncy) {
+                                        value = 0
+                                    }
                                 }
                         )
                         

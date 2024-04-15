@@ -14,7 +14,6 @@ struct NavColumnView: View {
     @Binding var tabItems: [any ITabItem]
     @Binding var selectedTab: any ITabItem
     @Binding var navigationDragHeight: Double
-    @Binding var showBottomSheet: Bool
     
     var body: some View {
         HStack {
@@ -80,6 +79,6 @@ struct NavColumnView: View {
 }
 
 #Preview {
-    NavColumnView(waterViewModel: WaterViewModel(), calorieViewModel: CalorieViewModel(), tabItems: .constant(TabItemType.allItems), selectedTab: .constant(ExerciseTabItem()), navigationDragHeight: .constant(0), showBottomSheet: .constant(false))
+    NavColumnView(waterViewModel: WaterViewModel(), calorieViewModel: CalorieViewModel(), tabItems: .constant(TabItemType.allItems), selectedTab: .constant(ExerciseTabItem()), navigationDragHeight: .constant(0))
         .ignoresSafeArea()
 }

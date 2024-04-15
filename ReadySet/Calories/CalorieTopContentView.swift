@@ -43,7 +43,14 @@ struct CalorieTopContentView: View {
                     Button(action: {
                         let impactMed = UIImpactFeedbackGenerator(style: .medium)
                         impactMed.impactOccurred()
-                        UIApplication.shared.open(URL(string: "x-fitness://")!)
+                        guard let url = URL(string: "fitnessapp://") else { return }
+
+                                if UIApplication.shared.canOpenURL(url) {
+                                    UIApplication.shared.open(url)
+                                } else {
+                                    // Handle the case where the Fitness app is not installed
+                                    print("Fitness app is not installed.")
+                                }
                     }, label: {
                         ZStack {
                             Circle()

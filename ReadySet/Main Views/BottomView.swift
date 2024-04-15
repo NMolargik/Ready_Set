@@ -9,6 +9,7 @@ import SwiftUI
 
 struct BottomView: View {
     @ObservedObject var waterViewModel: WaterViewModel
+    @ObservedObject var calorieViewModel: CalorieViewModel
     
     @Binding var selectedTab: any ITabItem
     
@@ -20,17 +21,17 @@ struct BottomView: View {
             case .water:
                 WaterBottomContentView(waterViewModel: waterViewModel)
             case .calorie:
-                CalorieBottomContentView()
+                CalorieBottomContentView(calorieViewModel: calorieViewModel)
             case .settings:
                 SettingsBottomContentView()
             }
         }
-        .animation(.smooth(duration: 0.2))
+        .animation(.smooth(duration: 0.2), value: selectedTab.type)
         .transition(.opacity)
         .padding(.top, 8)
     }
 }
 
 #Preview {
-    BottomView(waterViewModel: WaterViewModel(), selectedTab: .constant(ExerciseTabItem()))
+    BottomView(waterViewModel: WaterViewModel(), calorieViewModel: CalorieViewModel(), selectedTab: .constant(ExerciseTabItem()))
 }

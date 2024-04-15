@@ -6,23 +6,23 @@
 //
 
 import SwiftUI
+import Foundation
 
 struct WaterAdditionWidgetView: View {
     @ObservedObject var waterViewModel: WaterViewModel
     
     @State private var expanded = false
     @State var value: Double = 0
-    
+    @State private var waterToAdd : Double = 0
     @State var lastCoordinateValue: CGFloat = 0.0
+    
     var sliderRange: ClosedRange<Double> = 0...100
     
-    @State private var waterToAdd : Double = 0
     var body: some View {
         HStack {
             GeometryReader { gr in
                 let minValue = gr.size.width * 0.01 + 4
                 let maxValue = (gr.size.width * 0.98) - 40
-                
                 let scaleFactor = (maxValue - minValue) / (sliderRange.upperBound - sliderRange.lowerBound)
                 let lower = sliderRange.lowerBound
                 let sliderVal = (self.value - lower) * scaleFactor + minValue
@@ -30,20 +30,24 @@ struct WaterAdditionWidgetView: View {
                 ZStack {
                     Rectangle()
                         .cornerRadius(35)
-                        .foregroundStyle(value > 8 ? WaterTabItem().gradient : LinearGradient(colors: [.gray, .fontGray], startPoint: .leading, endPoint: .trailing))
+                        .foregroundStyle(value > 7 ? WaterTabItem().gradient : LinearGradient(colors: [.clear, .fontGray.opacity(0.5)], startPoint: .leading, endPoint: .trailing))
                     
-                    if (value < 7) {
-                        HStack {
-                            Spacer()
-                            
-                            Text("slide and release to add water")
-                                .bold()
-                                .font(.caption)
-                                .foregroundStyle(.white)
-                                .opacity(0.5)
-                        }
-                        .padding(.trailing)
+                    HStack {
+                        Text("cancel")
+                            .bold()
+                            .font(.caption)
+                            .foregroundStyle(.white)
+                            .opacity(value > 7 ? 0.5 : 0)
+                        
+                        Spacer()
+                        
+                        Text("slide and release to add water")
+                            .bold()
+                            .font(.caption)
+                            .foregroundStyle(.white)
+                            .opacity(value > 7 ? 0 : 0.5)
                     }
+                    .padding(.horizontal)
                     
                     HStack {
                         ZStack {
@@ -59,6 +63,12 @@ struct WaterAdditionWidgetView: View {
                                 .font(.title2)
                                 .shadow(radius: value > 7 ? 0 : 2)
                                 .opacity(value > 7 ? 0 : 1)
+                            
+                            Text("oz")
+                                .bold()
+                                .font(.caption2)
+                                .foregroundStyle(.white)
+                                .opacity(value < 7 ? 0 : 1)
                         }
                         .foregroundColor(Color.yellow)
                         .offset(x: sliderVal)
@@ -86,10 +96,15 @@ struct WaterAdditionWidgetView: View {
                                         self.value = ((nextCoordinateValue - minValue) / scaleFactor) + lower
                                     }
                                     
-                                    withAnimation {
-                                        waterViewModel.addWater(waterOunces: Double(mapSliderValue(value: value)))
-                                        value = 0
+                                    if (value > 4) {
+                                        withAnimation {
+                                            let waterValue = Double(mapSliderValue(value: value))
+                                            print(waterValue)
+                                            waterViewModel.addWater(waterOunces: waterValue)
+                                        }
                                     }
+                                    
+                                    value = 0
                                 }
                         )
                         
@@ -97,22 +112,12 @@ struct WaterAdditionWidgetView: View {
                     }
                     
                     if (value > 7) {
-                        HStack (alignment: .firstTextBaseline, spacing: 0) {
-                            Text(Int(mapSliderValue(value: value)).description)
-                                .bold()
-                                .font(.title)
-                                .foregroundStyle(.primary)
-                                .shadow(radius: 2)
-                                .frame(width: 55)
-                                .padding(.leading)
-                            
-                            Text("oz")
-                                .bold()
-                                .font(.caption2)
-                                .foregroundStyle(.gray)
-                                .padding(.trailing)
-                        }
-                        .offset(x: sliderVal - maxValue / 2, y: -50)
+                        Text(Int(mapSliderValue(value: value)).description)
+                            .bold()
+                            .font(.title)
+                            .foregroundStyle(.primary)
+                            .shadow(radius: 2)
+                            .offset(x: sliderVal - maxValue / 2, y: -50)
                     }
                 }
             }
@@ -122,7 +127,7 @@ struct WaterAdditionWidgetView: View {
     }
     
     func mapSliderValue(value: Double) -> Int {
-        return -5 + (128 + 5) * (Int(value)) / 100
+        return (-5 + (128 + 5) * (Int(value.rounded(.up))) / 100)
     }
 }
 

@@ -20,28 +20,13 @@ struct HomeView: View {
             HeaderView(selectedTab: $homeViewModel.selectedTab)
                 .padding(.bottom, 15)
             
-            NavColumnView(waterViewModel: waterViewModel, calorieViewModel: calorieViewModel, tabItems: $homeViewModel.tabItems, selectedTab: $homeViewModel.selectedTab, navigationDragHeight: $navigationDragHeight, showBottomSheet: $homeViewModel.showBottomSheet)
+            NavColumnView(waterViewModel: waterViewModel, calorieViewModel: calorieViewModel, tabItems: $homeViewModel.tabItems, selectedTab: $homeViewModel.selectedTab, navigationDragHeight: $navigationDragHeight)
             
-            BottomView(waterViewModel: waterViewModel, selectedTab: $homeViewModel.selectedTab)
+            BottomView(waterViewModel: waterViewModel, calorieViewModel: calorieViewModel, selectedTab: $homeViewModel.selectedTab)
                 .blur(radius: abs(navigationDragHeight) > 20.0 ? abs(navigationDragHeight * 0.01) : 0)
                 .padding(.bottom, 15)
         }
         .background(LinearGradient(colors: [Color("BaseColor"), Color("BaseColor"), Color("BaseColor"), Color("BaseColor"), Color("BaseColor"),  homeViewModel.selectedTab.color], startPoint: .top, endPoint: .bottom))
-        .sheet(isPresented: $homeViewModel.showBottomSheet) {
-            VStack {
-                switch (homeViewModel.selectedTab.type) {
-                case .exercise:
-                    Text("Exercise Sheet")
-                case .water:
-                    Text("Water Sheet")
-                case .calorie:
-                    Text("Calorie Sheet")
-                case .settings:
-                    Text("Settings Sheet")
-                }
-            }
-            .presentationDetents([homeViewModel.selectedTab.sheetPresentationDetent])
-        }
         .gesture(DragGesture(minimumDistance: 20, coordinateSpace: .global)
             .onChanged({ value in
                 navigationDragHeight = value.translation.height

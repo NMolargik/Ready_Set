@@ -12,7 +12,6 @@ class HomeViewModel: ObservableObject {
     @Published var selectedTab: any ITabItem = ExerciseTabItem()
     @Published var tabItems = TabItemType.allItems
     @Published var topDrawerOpen = false
-    @Published var showBottomSheet = false
     
     func handleDragEnd(navigationDragHeight: CGFloat) {
         if navigationDragHeight < -100 {

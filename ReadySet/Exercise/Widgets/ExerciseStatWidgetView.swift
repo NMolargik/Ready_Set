@@ -9,6 +9,9 @@ import SwiftUI
 
 struct ExerciseStatWidgetView: View {
     var body: some View {
+        
+        //TODO: REVISE THIS WIDGET
+        
         ZStack {
             Rectangle()
                 .cornerRadius(10)
@@ -18,15 +21,12 @@ struct ExerciseStatWidgetView: View {
             VStack (alignment: .leading) {
                 Text("Sets Recorded: 1000")
                 
-                Text("Sets Recorded: 1000")
-                
-                Text("Sets Recorded: 1000")
-                
-                Text("Sets Recorded: 1000")
+                Text("Weekly Steps: 1000")
                     
             }
             .font(.caption)
             .foregroundStyle(.fontGray)
+            .frame(height: 35)
         }
     }
 }

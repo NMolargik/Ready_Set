@@ -19,9 +19,9 @@ struct CalorieAdditionWidgetView: View {
     
     var body: some View {
         HStack {
-            GeometryReader { gr in
-                let minValue = gr.size.width * 0.01 + 4
-                let maxValue = (gr.size.width * 0.98) - 40
+            GeometryReader { geometry in
+                let minValue = geometry.size.width * 0.01 + 4
+                let maxValue = (geometry.size.width * 0.98) - 40
                 let scaleFactor = (maxValue - minValue) / (sliderRange.upperBound - sliderRange.lowerBound)
                 let lower = sliderRange.lowerBound
                 let sliderVal = (self.value - lower) * scaleFactor + minValue

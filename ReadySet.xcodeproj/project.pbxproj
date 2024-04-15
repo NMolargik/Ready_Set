@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0E4A5E242BCC7F3D003678C2 /* HKController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4A5E232BCC7F3D003678C2 /* HKController.swift */; };
 		0E4A5E2A2BCC9D59003678C2 /* CalorieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4A5E292BCC9D59003678C2 /* CalorieViewModel.swift */; };
 		0E7DCA5E2BC6FF7400B9403C /* ExerciseSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7DCA5D2BC6FF7400B9403C /* ExerciseSet.swift */; };
 		0E7DCA602BC6FFF100B9403C /* ExerciseSetEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7DCA5F2BC6FFF100B9403C /* ExerciseSetEntry.swift */; };
@@ -48,6 +47,9 @@
 		EB4D9C572BCC8B6B0071BA99 /* WaterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C562BCC8B6B0071BA99 /* WaterViewModel.swift */; };
 		EB4D9C592BCC8F420071BA99 /* WaterWave.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C582BCC8F420071BA99 /* WaterWave.swift */; };
 		EB4D9C5B2BCD85E60071BA99 /* CalorieAdditionWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C5A2BCD85E60071BA99 /* CalorieAdditionWidgetView.swift */; };
+		EB4D9C5D2BCDA9D40071BA99 /* ExerciseFitnessWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C5C2BCDA9D40071BA99 /* ExerciseFitnessWidgetView.swift */; };
+		EB4D9C602BCDABAA0071BA99 /* CalorieFitnessWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C5F2BCDABAA0071BA99 /* CalorieFitnessWidgetView.swift */; };
+		EB4D9C622BCDABB20071BA99 /* CalorieHealthWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C612BCDABB20071BA99 /* CalorieHealthWidgetView.swift */; };
 		EB7110F22BC847470078F796 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7110F12BC847470078F796 /* OnboardingView.swift */; };
 		EB7110F42BC847610078F796 /* UserRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7110F32BC847610078F796 /* UserRegistrationView.swift */; };
 		EB7110F72BC84B520078F796 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7110F62BC84B520078F796 /* HomeViewModel.swift */; };
@@ -79,7 +81,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0E4A5E232BCC7F3D003678C2 /* HKController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKController.swift; sourceTree = "<group>"; };
 		0E4A5E252BCC80E0003678C2 /* Build.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Build.xcconfig; sourceTree = "<group>"; };
 		0E4A5E292BCC9D59003678C2 /* CalorieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieViewModel.swift; sourceTree = "<group>"; };
 		0E7DCA5D2BC6FF7400B9403C /* ExerciseSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSet.swift; sourceTree = "<group>"; };
@@ -127,6 +128,9 @@
 		EB4D9C562BCC8B6B0071BA99 /* WaterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterViewModel.swift; sourceTree = "<group>"; };
 		EB4D9C582BCC8F420071BA99 /* WaterWave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterWave.swift; sourceTree = "<group>"; };
 		EB4D9C5A2BCD85E60071BA99 /* CalorieAdditionWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieAdditionWidgetView.swift; sourceTree = "<group>"; };
+		EB4D9C5C2BCDA9D40071BA99 /* ExerciseFitnessWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseFitnessWidgetView.swift; sourceTree = "<group>"; };
+		EB4D9C5F2BCDABAA0071BA99 /* CalorieFitnessWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieFitnessWidgetView.swift; sourceTree = "<group>"; };
+		EB4D9C612BCDABB20071BA99 /* CalorieHealthWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieHealthWidgetView.swift; sourceTree = "<group>"; };
 		EB7110F12BC847470078F796 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		EB7110F32BC847610078F796 /* UserRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegistrationView.swift; sourceTree = "<group>"; };
 		EB7110F62BC84B520078F796 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -283,8 +287,19 @@
 			children = (
 				EB4D9C4D2BCC73E90071BA99 /* ExercisePlanView.swift */,
 				EB4D9C512BCC80A10071BA99 /* ExercisePlanDayView.swift */,
+				EB4D9C5C2BCDA9D40071BA99 /* ExerciseFitnessWidgetView.swift */,
 			);
 			path = "Exercise Plan";
+			sourceTree = "<group>";
+		};
+		EB4D9C5E2BCDAB990071BA99 /* Widgets */ = {
+			isa = PBXGroup;
+			children = (
+				EB4D9C5A2BCD85E60071BA99 /* CalorieAdditionWidgetView.swift */,
+				EB4D9C5F2BCDABAA0071BA99 /* CalorieFitnessWidgetView.swift */,
+				EB4D9C612BCDABB20071BA99 /* CalorieHealthWidgetView.swift */,
+			);
+			path = Widgets;
 			sourceTree = "<group>";
 		};
 		EB7110F52BC84B430078F796 /* Main Views */ = {
@@ -301,7 +316,6 @@
 		EB7110F82BC857330078F796 /* Additional Components */ = {
 			isa = PBXGroup;
 			children = (
-				0E4A5E232BCC7F3D003678C2 /* HKController.swift */,
 				EB7110F92BC8574A0078F796 /* CustomTextFields.swift */,
 			);
 			path = "Additional Components";
@@ -310,9 +324,9 @@
 		EB7110FB2BC86BAB0078F796 /* Exercise */ = {
 			isa = PBXGroup;
 			children = (
+				EB4D9C4F2BCC73F60071BA99 /* ExerciseViewModel.swift */,
 				EB3AB34D2BC729DE008B6F22 /* ExerciseTopContentView.swift */,
 				EB3AB35B2BC76FCD008B6F22 /* ExerciseBottomContentView.swift */,
-				EB4D9C4F2BCC73F60071BA99 /* ExerciseViewModel.swift */,
 				EB4D9C4C2BCC73800071BA99 /* Exercise Plan */,
 				EB3AB3642BC772D6008B6F22 /* Widgets */,
 			);
@@ -346,7 +360,7 @@
 				0E4A5E292BCC9D59003678C2 /* CalorieViewModel.swift */,
 				EB3AB3542BC72A46008B6F22 /* CalorieTopContentView.swift */,
 				EB3AB3612BC76FED008B6F22 /* CalorieBottomContentView.swift */,
-				EB4D9C5A2BCD85E60071BA99 /* CalorieAdditionWidgetView.swift */,
+				EB4D9C5E2BCDAB990071BA99 /* Widgets */,
 			);
 			path = Calories;
 			sourceTree = "<group>";
@@ -515,6 +529,7 @@
 				0E4A5E2A2BCC9D59003678C2 /* CalorieViewModel.swift in Sources */,
 				EB3AB33F2BC710D1008B6F22 /* NavColumnView.swift in Sources */,
 				EB3AB33D2BC70CF5008B6F22 /* HomeView.swift in Sources */,
+				EB4D9C602BCDABAA0071BA99 /* CalorieFitnessWidgetView.swift in Sources */,
 				EB71111A2BC9729A0078F796 /* ExerciseSetEntryController.swift in Sources */,
 				EB3AB3552BC72A46008B6F22 /* CalorieTopContentView.swift in Sources */,
 				EB7110F72BC84B520078F796 /* HomeViewModel.swift in Sources */,
@@ -522,6 +537,7 @@
 				EB4D9C572BCC8B6B0071BA99 /* WaterViewModel.swift in Sources */,
 				EB3AB3512BC72A30008B6F22 /* SettingsTopContentView.swift in Sources */,
 				EB3AB34E2BC729DE008B6F22 /* ExerciseTopContentView.swift in Sources */,
+				EB4D9C5D2BCDA9D40071BA99 /* ExerciseFitnessWidgetView.swift in Sources */,
 				EB3AB3462BC711FA008B6F22 /* ExerciseTabItem.swift in Sources */,
 				EB3AB3412BC71105008B6F22 /* TabItemType.swift in Sources */,
 				EB3AB3572BC76F07008B6F22 /* TopDetailView.swift in Sources */,
@@ -536,7 +552,6 @@
 				0E7DCA5E2BC6FF7400B9403C /* ExerciseSet.swift in Sources */,
 				EB3AB34C2BC71214008B6F22 /* SettingsTabITem.swift in Sources */,
 				0E940A6D2BC6FE0200144477 /* ContentView.swift in Sources */,
-				0E4A5E242BCC7F3D003678C2 /* HKController.swift in Sources */,
 				EB3AB3602BC76FE5008B6F22 /* WaterBottomContentView.swift in Sources */,
 				EB3AB3442BC711A8008B6F22 /* ITabItem.swift in Sources */,
 				EB3AB35E2BC76FDC008B6F22 /* SettingsBottomContentView.swift in Sources */,
@@ -559,6 +574,7 @@
 				EB71111C2BC972FE0078F796 /* IExerciseSetEntryRepo.swift in Sources */,
 				EB3AB36C2BC77C3E008B6F22 /* ExerciseStatWidgetView.swift in Sources */,
 				EB7110F42BC847610078F796 /* UserRegistrationView.swift in Sources */,
+				EB4D9C622BCDABB20071BA99 /* CalorieHealthWidgetView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

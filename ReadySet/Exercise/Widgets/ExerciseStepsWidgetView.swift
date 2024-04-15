@@ -9,9 +9,7 @@ import SwiftUI
 import HealthKit
 
 struct ExerciseStepsWidgetView: View {
-    @Environment(\.scenePhase) var scenePhase
-    @Binding var stepCountGoal: Int
-    @State private var stepCount = 1000
+    @ObservedObject var exerciseViewModel: ExerciseViewModel
     
     var body: some View {
         ZStack {
@@ -23,54 +21,25 @@ struct ExerciseStepsWidgetView: View {
             
             HStack {
                 Image(systemName: "shoeprints.fill")
+                    .foregroundStyle(.green)
+                    .shadow(radius: 1)
                 
-                Text("\(stepCount) / \(stepCountGoal)")
+                
+                Text("\(Int(exerciseViewModel.stepsToday)) / \(Int(exerciseViewModel.stepGoal))")
                     .font(.caption)
                     .bold()
             }
             .foregroundStyle(.fontGray)
-            .onChange(of: scenePhase) { newPhase in
-                if  newPhase == .active {
-                    withAnimation {
-                        //TODO: refresh steps
-                    }
-                }
+
+        }
+        .onAppear {
+            withAnimation {
+                exerciseViewModel.readStepCountToday()
             }
         }
     }
-    
-    func readStepCountToday() {
-        let healthStore = HKHealthStore()
-        guard let stepCountType = HKQuantityType.quantityType(forIdentifier: .stepCount) else {
-          return
-        }
-
-        let now = Date()
-        let startDate = Calendar.current.startOfDay(for: now)
-        let predicate = HKQuery.predicateForSamples(
-          withStart: startDate,
-          end: now,
-          options: .strictStartDate
-        )
-
-        let query = HKStatisticsQuery(
-          quantityType: stepCountType,
-          quantitySamplePredicate: predicate,
-          options: .cumulativeSum
-        ) {
-          _, result, error in
-          guard let result = result, let sum = result.sumQuantity() else {
-            print("failed to read step count: \(error?.localizedDescription ?? "UNKNOWN ERROR")")
-            return
-          }
-
-          let steps = Int(sum.doubleValue(for: HKUnit.count()))
-          self.stepCount = steps
-        }
-        healthStore.execute(query)
-      }
 }
 
 #Preview {
-    ExerciseStepsWidgetView(stepCountGoal: .constant(10000))
+    ExerciseStepsWidgetView(exerciseViewModel: ExerciseViewModel())
 }

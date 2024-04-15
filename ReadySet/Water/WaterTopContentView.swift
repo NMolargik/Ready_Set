@@ -16,13 +16,13 @@ struct WaterTopContentView: View {
     var body: some View {
         HStack (spacing: 5) {
             if (waterViewModel.editingWaterGoal) {
-                HStack (alignment: .firstTextBaseline, spacing: 0) {
+                VStack (alignment: .center, spacing: 0) {
                     Text("\(Int(waterSliderValue))")
                         .bold()
                         .font(.title)
                         .id(waterSliderValue.description)
 
-                    Text(" oz")
+                    Text("oz")
                         .bold()
                         .font(.caption2)
                 }
@@ -133,8 +133,9 @@ struct WaterTopContentView: View {
         .padding(.leading, 8)
         .padding(.top, 5)
         .onAppear {
-            waterViewModel.readWaterConsumedToday()
-            waterViewModel.readWaterConsumedWeek()
+            withAnimation {
+                waterViewModel.readInitial()
+            }
             startAnimationIfNeeded()
         }
         .onChange(of: waterViewModel.editingWaterGoal) { editing in

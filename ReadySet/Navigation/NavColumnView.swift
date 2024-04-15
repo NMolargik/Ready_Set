@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct NavColumnView: View {
+    @ObservedObject var exerciseViewModel: ExerciseViewModel
     @ObservedObject var waterViewModel: WaterViewModel
     @ObservedObject var calorieViewModel: CalorieViewModel
 
@@ -68,7 +69,7 @@ struct NavColumnView: View {
                     Spacer()
                 }
                 
-                TopDetailView(waterViewModel: waterViewModel, calorieViewModel: calorieViewModel, selectedTab: $selectedTab)
+                TopDetailView(exerciseViewModel: exerciseViewModel, waterViewModel: waterViewModel, calorieViewModel: calorieViewModel, selectedTab: $selectedTab)
                     .blur(radius: abs(navigationDragHeight) > 20.0 ? abs(navigationDragHeight * 0.01) : 0)
             }
             .frame(height: 120)
@@ -79,6 +80,6 @@ struct NavColumnView: View {
 }
 
 #Preview {
-    NavColumnView(waterViewModel: WaterViewModel(), calorieViewModel: CalorieViewModel(), tabItems: .constant(TabItemType.allItems), selectedTab: .constant(ExerciseTabItem()), navigationDragHeight: .constant(0))
+    NavColumnView(exerciseViewModel: ExerciseViewModel(), waterViewModel: WaterViewModel(), calorieViewModel: CalorieViewModel(), tabItems: .constant(TabItemType.allItems), selectedTab: .constant(ExerciseTabItem()), navigationDragHeight: .constant(0))
         .ignoresSafeArea()
 }

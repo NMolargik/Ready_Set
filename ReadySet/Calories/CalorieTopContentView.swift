@@ -20,7 +20,7 @@ struct CalorieTopContentView: View {
     var body: some View {
         HStack (spacing: 5) {
             if (calorieViewModel.editingCalorieGoal) {
-                HStack (alignment: .firstTextBaseline, spacing: 0) {
+                VStack (alignment: .center, spacing: 0) {
                     Text("\(Int(calorieSliderValue))")
                         .bold()
                         .font(.title)
@@ -30,7 +30,7 @@ struct CalorieTopContentView: View {
                         .bold()
                         .font(.caption2)
                 }
-                .frame(width: 110)
+                .frame(width: 90)
                 .transition(.opacity)
             }
             
@@ -38,11 +38,19 @@ struct CalorieTopContentView: View {
                 if (calorieViewModel.editingCalorieGoal) {
                     HStack {
                         ZStack {
+                            Rectangle()
+                                .frame(height: 80)
+                                .cornerRadius(20)
+                                .foregroundStyle(.thinMaterial)
+                                .shadow(radius: 1)
+                            
                             CalorieTabItem().gradient
-                            .mask(Slider(value: $calorieSliderValue, in: 1000...5000, step: 100))
+                                .mask(Slider(value: $calorieSliderValue, in: 1000...5000, step: 100))
+                                .padding(.horizontal)
                             
                             Slider(value: $calorieSliderValue, in: 1000...5000, step: 100)
                                 .opacity(0.05)
+                                .padding(.horizontal)
                         }
                         .onAppear {
                             calorieSliderValue = calorieViewModel.calorieGoal
@@ -51,7 +59,6 @@ struct CalorieTopContentView: View {
                             UINotificationFeedbackGenerator().notificationOccurred(.warning) //TODO: make custom haptics and extract them
                             calorieViewModel.proposedCalorieGoal = Int(calorieSliderValue)
                         }
-                        .padding(.horizontal)
                     }
                     .zIndex(1)
                     .id("CalorieGauge")
@@ -76,55 +83,15 @@ struct CalorieTopContentView: View {
                             
                             Spacer()
                             
-                            Button(action: {
-                                let impactMed = UIImpactFeedbackGenerator(style: .medium)
-                                impactMed.impactOccurred()
-                                guard let url = URL(string: "fitnessapp://") else { return }
-                                
-                                if UIApplication.shared.canOpenURL(url) {
-                                    UIApplication.shared.open(url)
-                                } else {
-                                    showAlert = true
-                                }
-                            }, label: {
-                                ZStack {
-                                    Circle()
-                                        .frame(height: 40)
-                                        .cornerRadius(10)
-                                        .foregroundStyle(.thinMaterial)
-                                        .shadow(radius: 1)
-                                    
-                                    Image(systemName: "circle.circle")
-                                        .foregroundStyle(.green, .red, .yellow)
-                                }
-                            })
+                            CalorieFitnessWidgetView()
                             
-                            Button(action: {
-                                let impactMed = UIImpactFeedbackGenerator(style: .medium)
-                                impactMed.impactOccurred()
-                                UIApplication.shared.open(URL(string: "x-apple-health://")!)
-                            }, label: {
-                                ZStack {
-                                    Circle()
-                                        .frame(height: 40)
-                                        .cornerRadius(10)
-                                        .foregroundStyle(.thinMaterial)
-                                        .shadow(radius: 1)
-                                    
-                                    Image(systemName: "heart")
-                                        .foregroundStyle(.pink)
-                                }
-                            })
+                            CalorieHealthWidgetView()
                         }
                         
                         Spacer()
                     }
                     .zIndex(1)
                     .id("CalorieGauge")
-                    .alert("Fitness app not installed", isPresented: $showAlert) {
-                        Button("Install", role: .cancel) { UIApplication.shared.open(URL(string: "https://apps.apple.com/us/app/fitness/id1208224953")!) }
-                        Button("Cancel", role: .destructive) { showAlert.toggle() }
-                    }
                 }
                 
                 HStack {
@@ -151,10 +118,9 @@ struct CalorieTopContentView: View {
         .padding(.leading, 8)
         .padding(.top, 5)
         .onAppear {
-            calorieViewModel.readEnergyConsumedToday()
-            calorieViewModel.readEnergyBurnedToday()
-            calorieViewModel.readEnergyConsumedWeek()
-            calorieViewModel.readEnergyBurnedWeek()
+            withAnimation {
+                calorieViewModel.readInitial()
+            }
         }
     }
 }

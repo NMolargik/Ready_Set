@@ -6,72 +6,80 @@
 //
 
 import SwiftUI
+import Foundation
 
 struct HeaderView: View {
+    @Binding var progress: Double
     @Binding var selectedTab: any ITabItem
     
     var body: some View {
-        VStack (spacing: 0) {
-            Spacer()
+        GeometryReader() { geometry in
             
-            HStack {
-                HStack (spacing: 4) {
-                    Text(currentWeekday())
-                        .bold()
-                        .font(.caption)
-                        .foregroundStyle(.fontGray)
-                    
-                    Text(currentMonth())
-                        .bold()
-                        .font(.caption)
-                        .foregroundStyle(.fontGray)
-
-                    Text(currentDay())
-                        .font(.caption)
-                        .bold()
-                        .foregroundStyle(.fontGray)
-                }
-                .frame(width: 150)
-                
+            VStack (spacing: 0) {
                 Spacer()
                 
-                Image("TriangleIcon")
-                    .resizable()
-                    .renderingMode(.template)
-                    .frame(width: 20, height: 20)
-                    .foregroundColor(.primary)
-                    .padding(.bottom, -3)
-                    .padding(.horizontal, -5)
-                    .shadow(radius: 1, y: 1)
-                    .opacity(0.7)
-
-                Spacer()
-                
-                Text("Hey, Nicholas")
-                    .bold()
+                HStack {
+                    HStack (spacing: 4) {
+                        Text(currentWeekday())
+                            .bold()
+                            .font(.caption)
+                            .foregroundStyle(.fontGray)
+                        
+                        Text(currentMonth())
+                            .bold()
+                            .font(.caption)
+                            .foregroundStyle(.fontGray)
+                        
+                        Text(currentDay())
+                            .font(.caption)
+                            .bold()
+                            .foregroundStyle(.fontGray)
+                    }
                     .frame(width: 150)
+                    
+                    Spacer()
+                    
+                    Image("TriangleIcon")
+                        .resizable()
+                        .renderingMode(.template)
+                        .frame(width: 20, height: 20)
+                        .foregroundColor(.primary)
+                        .padding(.bottom, -3)
+                        .padding(.horizontal, -5)
+                        .shadow(radius: 1, y: 1)
+                        .opacity(0.7)
+                    
+                    Spacer()
+                    
+                    Text("Hey, Nicholas")
+                        .bold()
+                        .frame(width: 150)
+                }
+                .foregroundStyle(Color("FontGray"))
+                .font(.caption)
+                .padding(.vertical, 10)
+                
+                ZStack (alignment: .leading) {
+                    Rectangle()
+                        .frame(height: 5)
+                        .foregroundStyle(.gray)
+                        .shadow(color: .gray, radius: 5, x: 0, y: 5)
+                    
+                    Rectangle()
+                        .frame(width: min(geometry.size.width * max(progress, 0.05), geometry.size.width), height: 5)
+                        .foregroundStyle(selectedTab.gradient)
+                        .shadow(color: selectedTab.secondaryColor, radius: 5, x: 0, y: 5)
+                        .animation(.easeInOut, value: progress)
+                }
+                
             }
-            .foregroundStyle(Color("FontGray"))
-            .font(.caption)
-            .padding(.vertical, 10)
-            
-            HStack (spacing: 0) {
+            .frame(height: 85)
+            .background {
                 Rectangle()
-                    .frame(width: 100, height: 5)
-                    .foregroundStyle(selectedTab.gradient)
-                    .shadow(color: selectedTab.secondaryColor, radius: 5, x: 0, y: 5)
-
-                Rectangle()
-                    .frame(height: 5)
-                    .foregroundStyle(.gray)
-                    .shadow(color: .gray, radius: 5, x: 0, y: 5)
+                    .foregroundStyle(.ultraThinMaterial)
             }
         }
         .frame(height: 85)
-        .background {
-            Rectangle()
-                .foregroundStyle(.ultraThinMaterial)
-        }
     }
     
     func currentWeekday() -> String {
@@ -109,6 +117,6 @@ struct RoundedTriangle: Shape {
 
 
 #Preview {
-    HeaderView(selectedTab: .constant(ExerciseTabItem()))
+    HeaderView(progress: .constant(0.85), selectedTab: .constant(ExerciseTabItem()))
 }
 

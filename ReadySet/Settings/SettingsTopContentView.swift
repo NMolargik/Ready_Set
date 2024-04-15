@@ -34,7 +34,7 @@ struct SettingsTopContentView: View {
                     HStack {
                         Spacer()
                         
-                        Text("Privacy\nSettings")
+                        Text("Health\nSettings")
                             .bold()
                             .multilineTextAlignment(.center)
                             .foregroundStyle(.fontGray)
@@ -74,7 +74,7 @@ struct SettingsTopContentView: View {
                         
                         Spacer()
                         
-                        Text("Delete\nData")
+                        Text("Delete\nSet Data")
                             .bold()
                             .multilineTextAlignment(.center)
                             .foregroundStyle(.fontGray)

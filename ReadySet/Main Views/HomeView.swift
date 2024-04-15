@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct HomeView: View {
-    @ObservedObject var homeViewModel = HomeViewModel()
+    @Environment(\.scenePhase) var scenePhase
     
+    @StateObject var homeViewModel = HomeViewModel()
+    @StateObject var exerciseViewModel = ExerciseViewModel()
     @StateObject var waterViewModel = WaterViewModel()
     @StateObject var calorieViewModel = CalorieViewModel()
 
@@ -17,10 +19,26 @@ struct HomeView: View {
     
     var body: some View {
         VStack {
-            HeaderView(selectedTab: $homeViewModel.selectedTab)
+            HeaderView(
+                progress: {
+                    switch (homeViewModel.selectedTab.type) {
+                    case .exercise:
+                            .constant(Double(exerciseViewModel.stepsToday) / exerciseViewModel.stepGoal)
+                    case .water:
+                            .constant(Double(waterViewModel.waterConsumedToday) / waterViewModel.waterGoal)
+                    case .calorie:
+                            .constant(Double(calorieViewModel.caloriesConsumed) / calorieViewModel.calorieGoal)
+                    case .settings:
+                            .constant(1.0)
+                    }
+                }(),
+                selectedTab: $homeViewModel.selectedTab
+            
+            )
                 .padding(.bottom, 15)
             
-            NavColumnView(waterViewModel: waterViewModel, calorieViewModel: calorieViewModel, tabItems: $homeViewModel.tabItems, selectedTab: $homeViewModel.selectedTab, navigationDragHeight: $navigationDragHeight)
+            NavColumnView(exerciseViewModel: exerciseViewModel,
+                waterViewModel: waterViewModel, calorieViewModel: calorieViewModel, tabItems: $homeViewModel.tabItems, selectedTab: $homeViewModel.selectedTab, navigationDragHeight: $navigationDragHeight)
             
             BottomView(waterViewModel: waterViewModel, calorieViewModel: calorieViewModel, selectedTab: $homeViewModel.selectedTab)
                 .blur(radius: abs(navigationDragHeight) > 20.0 ? abs(navigationDragHeight * 0.01) : 0)
@@ -38,6 +56,13 @@ struct HomeView: View {
                 }
             })
         )
+        .onChange(of: scenePhase) { newPhase in
+            if  newPhase == .active {
+                withAnimation {
+                    //TODO: refresh everything!
+                }
+            }
+        }
     }
 }
 

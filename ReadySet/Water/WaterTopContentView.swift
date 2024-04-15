@@ -10,12 +10,25 @@ import SwiftUI
 struct WaterTopContentView: View {
     @ObservedObject var waterViewModel: WaterViewModel
     @State var startAnimation: CGFloat = 0
-
-    @State var waterText = "" // TODO: REMOVE
     @State var waterSliderValue: Double = 1
     
     var body: some View {
         HStack (spacing: 5) {
+            if (waterViewModel.editingWaterGoal) {
+                HStack (alignment: .firstTextBaseline, spacing: 0) {
+                    Text("\(Int(waterSliderValue))")
+                        .bold()
+                        .font(.title)
+                        .id(waterSliderValue.description)
+
+                    Text(" oz")
+                        .bold()
+                        .font(.caption2)
+                }
+                .frame(width: 80)
+                .transition(.move(edge: .trailing))
+            }
+
             ZStack {
                 Rectangle()
                     .frame(height: 80)
@@ -24,12 +37,24 @@ struct WaterTopContentView: View {
                     .shadow(radius: 1)
                 
                 if (waterViewModel.editingWaterGoal) {
-                    VStack {
-                        Slider(value: $waterSliderValue, in: 8...160, step: 8, onEditingChanged: { _ in
-                            waterViewModel.proposedWaterGoal = Int(waterSliderValue)
-                        })
+                    HStack {
+                        ZStack {
+                              LinearGradient(
+                                  gradient: Gradient(colors: [.blueStart, .blueEnd]),
+                                  startPoint: .leading,
+                                  endPoint: .trailing
+                              )
+                              .mask(Slider(value: $waterSliderValue, in: 8...160, step: 8))
+
+                              Slider(value: $waterSliderValue, in: 8...160, step: 8)
+                                .opacity(0.05)
+                        }
                         .onAppear {
                             waterSliderValue = waterViewModel.waterGoal
+                        }
+                        .onChange(of: waterSliderValue) { _ in
+                            UINotificationFeedbackGenerator().notificationOccurred(.warning) //TODO: make custom haptics and extract them
+                            waterViewModel.proposedWaterGoal = Int(waterSliderValue)
                         }
                         .padding(.horizontal)
                     }
@@ -57,7 +82,7 @@ struct WaterTopContentView: View {
                                 }
                                 
                                 Rectangle()
-                                    .frame(width: 80, height: 30)
+                                    .frame(width: 120, height: 30)
                                     .cornerRadius(20)
                                     .foregroundStyle(.ultraThinMaterial)
                                     .shadow(radius: 2)

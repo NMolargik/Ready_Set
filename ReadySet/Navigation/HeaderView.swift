@@ -21,21 +21,15 @@ struct HeaderView: View {
                 
                 Spacer()
                 
-                Text("R")
-                    .bold()
-                
                 Image("TriangleIcon")
                     .resizable()
                     .renderingMode(.template)
                     .frame(width: 20, height: 20)
-                    .foregroundColor(selectedTab.secondaryColor)
+                    .foregroundColor(.primary)
                     .padding(.bottom, -3)
                     .padding(.horizontal, -5)
                     .shadow(radius: 1, y: 1)
                     .opacity(0.7)
-                
-                Text("S")
-                    .bold()
 
                 Spacer()
                 

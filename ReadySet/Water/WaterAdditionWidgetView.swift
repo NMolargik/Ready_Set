@@ -11,74 +11,118 @@ struct WaterAdditionWidgetView: View {
     @ObservedObject var waterViewModel: WaterViewModel
     
     @State private var expanded = false
+    @State var value: Double = 0
     
-    @State private var waterToAdd = ""
+    @State var lastCoordinateValue: CGFloat = 0.0
+    var sliderRange: ClosedRange<Double> = 0...100
+    
+    @State private var waterToAdd : Double = 0
     var body: some View {
         HStack {
-            Spacer(minLength: 0)
-            
-            VStack (alignment: .trailing) {
-                Button(action: {
-                    withAnimation {
-                        if (!expanded) {
-                            expanded.toggle()
+            GeometryReader { gr in
+                let minValue = gr.size.width * 0.01 + 4
+                let maxValue = (gr.size.width * 0.98) - 40
+                
+                let scaleFactor = (maxValue - minValue) / (sliderRange.upperBound - sliderRange.lowerBound)
+                let lower = sliderRange.lowerBound
+                let sliderVal = (self.value - lower) * scaleFactor + minValue
+                
+                ZStack {
+                    Rectangle()
+                        .cornerRadius(35)
+                        .foregroundStyle(value > 8 ? WaterTabItem().gradient : LinearGradient(colors: [.gray, .fontGray], startPoint: .leading, endPoint: .trailing))
+                    
+                    if (value < 7) {
+                        HStack {
+                            Spacer()
+                            
+                            Text("slide and release to add water")
+                                .bold()
+                                .font(.caption)
+                                .foregroundStyle(.white)
+                                .opacity(0.5)
                         }
+                        .padding(.trailing)
                     }
-                }, label: {
-                    ZStack {
-                        Rectangle()
-                            .frame(width: expanded ? .infinity : 50, height: expanded ? 80 : 50)
-                            .cornerRadius(expanded ? 20 : 50)
-                            .foregroundStyle(WaterTabItem().gradient)
-                            .shadow(radius: 4, x: 2, y: 2)
-                        
-                        if (!expanded) {
-                            Image("Droplet")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 40)
-                                .overlay {
-                                    Image(systemName: "plus")
-                                        .font(.title3)
-                                        .foregroundStyle(.white)
-                                        .offset(y: 3)
+                    
+                    HStack {
+                        ZStack {
+                            Rectangle()
+                                .cornerRadius(35)
+                                .foregroundStyle(value < 7 ? WaterTabItem().gradient : LinearGradient(colors: [.fontGray, .fontGray], startPoint: .leading, endPoint: .trailing))
+                                .shadow(radius: 4, x: 2, y: 2)
+                                .frame(width: 40, height: 40)
+                            
+                            Image(systemName: "plus")
+                                .bold()
+                                .foregroundStyle(.white)
+                                .font(.title2)
+                                .shadow(radius: value > 7 ? 0 : 2)
+                                .opacity(value > 7 ? 0 : 1)
+                        }
+                        .foregroundColor(Color.yellow)
+                        .offset(x: sliderVal)
+                        .gesture(
+                            DragGesture(minimumDistance: 0)
+                                .onChanged { dragValue in
+                                    if (abs(dragValue.translation.width) < 0.1) {
+                                    }
+                                    if dragValue.translation.width > 0 {
+                                        let nextCoordinateValue = min(maxValue, self.lastCoordinateValue + dragValue.translation.width)
+                                        self.value = ((nextCoordinateValue - minValue) / scaleFactor)  + lower
+                                    } else {
+                                        let nextCoordinateValue = max(minValue, self.lastCoordinateValue + dragValue.translation.width)
+                                        self.value = ((nextCoordinateValue - minValue) / scaleFactor) + lower
+                                    }
                                 }
-                        } else {
-                            HStack {
-                                TextField("Add Water", text: $waterToAdd)
-                                    .tint(.white)
-                                
-                                Button(action: {
-                                    withAnimation {
-                                        if let water = Double($waterToAdd.wrappedValue) {
-                                            waterViewModel.addWater(waterOunces: water)
-                                        } else {
-                                            print("Couldn't parse \($waterToAdd.wrappedValue)")
-                                        }
-                                        // Call for water addtion
-                                        waterToAdd = ""
-                                        expanded = false
+                                .onEnded { dragValue in
+                                    if (abs(dragValue.translation.width) < 0.1) {
                                     }
-                                }, label: {
-                                    Text("Add")
-                                })
-                                
-                                Button(action: {
-                                    withAnimation {
-                                        waterToAdd = ""
-                                        expanded = false
+                                    if dragValue.translation.width > 0 {
+                                        let nextCoordinateValue = min(maxValue, self.lastCoordinateValue + dragValue.translation.width)
+                                        self.value = ((nextCoordinateValue - minValue) / scaleFactor)  + lower
+                                    } else {
+                                        let nextCoordinateValue = max(minValue, self.lastCoordinateValue + dragValue.translation.width)
+                                        self.value = ((nextCoordinateValue - minValue) / scaleFactor) + lower
                                     }
-                                }, label: {
-                                    Text("Cancel")
-                                })
-                            }
-                        }
+                                    
+                                    withAnimation {
+                                        waterViewModel.addWater(waterOunces: Double(mapSliderValue(value: value)))
+                                        value = 0
+                                    }
+                                }
+                        )
+                        
+                        Spacer()
                     }
-                })
-                .padding(.horizontal, 20)
+                    
+                    if (value > 7) {
+                        HStack (alignment: .firstTextBaseline, spacing: 0) {
+                            Text(Int(mapSliderValue(value: value)).description)
+                                .bold()
+                                .font(.title)
+                                .foregroundStyle(.primary)
+                                .shadow(radius: 2)
+                                .frame(width: 55)
+                                .padding(.leading)
+                            
+                            Text("oz")
+                                .bold()
+                                .font(.caption2)
+                                .foregroundStyle(.gray)
+                                .padding(.trailing)
+                        }
+                        .offset(x: sliderVal - maxValue / 2, y: -50)
+                    }
+                }
             }
         }
-        .padding(.bottom)
+        .frame(height: 50)
+        .padding(10)
+    }
+    
+    func mapSliderValue(value: Double) -> Int {
+        return -5 + (128 + 5) * (Int(value)) / 100
     }
 }
 

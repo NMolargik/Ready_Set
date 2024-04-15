@@ -9,8 +9,9 @@ import SwiftUI
 
 struct WaterTopContentView: View {
     @ObservedObject var waterViewModel: WaterViewModel
-    @State var startAnimation: CGFloat = 0
-    @State var waterSliderValue: Double = 1
+    
+    @State private var startAnimation: CGFloat = 0
+    @State private var waterSliderValue: Double = 1
     
     var body: some View {
         HStack (spacing: 5) {
@@ -41,11 +42,7 @@ struct WaterTopContentView: View {
                     if (waterViewModel.editingWaterGoal) {
                         HStack {
                             ZStack {
-                                LinearGradient(
-                                    gradient: Gradient(colors: [.blueStart, .blueEnd]),
-                                    startPoint: .leading,
-                                    endPoint: .trailing
-                                )
+                                WaterTabItem().gradient
                                 .mask(Slider(value: $waterSliderValue, in: 8...160, step: 8))
                                 
                                 Slider(value: $waterSliderValue, in: 8...160, step: 8)
@@ -119,7 +116,6 @@ struct WaterTopContentView: View {
                         withAnimation {
                             if (waterViewModel.editingWaterGoal) {
                                 waterViewModel.saveWaterGoal()
-                                waterViewModel.editingWaterGoal = false
                             } else {
                                 waterViewModel.editingWaterGoal = true
                             }

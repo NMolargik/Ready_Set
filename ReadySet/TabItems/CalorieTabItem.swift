@@ -27,4 +27,3 @@ struct CalorieTabItem: ITabItem {
         return [CalorieTabItem(), SettingsTabItem(), ExerciseTabItem(), WaterTabItem()]
     }
 }
-

@@ -15,24 +15,6 @@ struct HeaderView: View {
             Spacer()
             
             HStack {
-                Text("Hey, Nicholas")
-                    .bold()
-                    .frame(width: 150)
-                
-                Spacer()
-                
-                Image("TriangleIcon")
-                    .resizable()
-                    .renderingMode(.template)
-                    .frame(width: 20, height: 20)
-                    .foregroundColor(.primary)
-                    .padding(.bottom, -3)
-                    .padding(.horizontal, -5)
-                    .shadow(radius: 1, y: 1)
-                    .opacity(0.7)
-
-                Spacer()
-                
                 HStack (spacing: 4) {
                     Text(currentWeekday())
                         .bold()
@@ -50,6 +32,24 @@ struct HeaderView: View {
                         .foregroundStyle(.fontGray)
                 }
                 .frame(width: 150)
+                
+                Spacer()
+                
+                Image("TriangleIcon")
+                    .resizable()
+                    .renderingMode(.template)
+                    .frame(width: 20, height: 20)
+                    .foregroundColor(.primary)
+                    .padding(.bottom, -3)
+                    .padding(.horizontal, -5)
+                    .shadow(radius: 1, y: 1)
+                    .opacity(0.7)
+
+                Spacer()
+                
+                Text("Hey, Nicholas")
+                    .bold()
+                    .frame(width: 150)
             }
             .foregroundStyle(Color("FontGray"))
             .font(.caption)

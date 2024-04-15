@@ -29,7 +29,9 @@ class WaterViewModel: ObservableObject {
     func addWater(waterOunces: Double) {
         DispatchQueue.main.async {
             self.addWaterConsumed(ounces: waterOunces) {
-                self.readWaterConsumedToday()
+                withAnimation (.easeInOut) {
+                    self.readWaterConsumedToday()
+                }
             }
         }
     }
@@ -138,5 +140,6 @@ class WaterViewModel: ObservableObject {
     
     func saveWaterGoal() {
         self.waterGoal = Double(self.proposedWaterGoal)
+        self.editingWaterGoal = false
     }
 }

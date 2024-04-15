@@ -25,6 +25,7 @@ class CalorieViewModel: ObservableObject {
 
     init() {
         healthController.requestAuthorization()
+        self.readEnergyConsumedToday()
         self.readEnergyBurnedToday()
         self.proposedCalorieGoal = Int(self.calorieGoal)
     }
@@ -32,7 +33,9 @@ class CalorieViewModel: ObservableObject {
     func addCalories(calories: Double) {
         DispatchQueue.main.async {
             self.addCaloriesConsumed(calories: calories) {
-                self.readEnergyBurnedToday()
+                withAnimation (.easeInOut) {
+                    self.readEnergyConsumedToday()
+                }
             }
         }
     }
@@ -223,5 +226,6 @@ class CalorieViewModel: ObservableObject {
 
     func saveCalorieGoal() {
         self.calorieGoal = Double(self.proposedCalorieGoal)
+        self.editingCalorieGoal = false
     }
 }

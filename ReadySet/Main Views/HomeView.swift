@@ -9,14 +9,15 @@ import SwiftUI
 
 struct HomeView: View {
     @Environment(\.scenePhase) var scenePhase
-    
+
+    @StateObject var healthController = HealthBaseController()
     @StateObject var homeViewModel = HomeViewModel()
-    @StateObject var exerciseViewModel = ExerciseViewModel()
+    @StateObject var exerciseViewModel = ExerciseViewModel(healthStore: self.healthStore)
     @StateObject var waterViewModel = WaterViewModel()
     @StateObject var calorieViewModel = CalorieViewModel()
 
     @State private var navigationDragHeight = 0.0
-    
+  
     var body: some View {
         VStack {
             HeaderView(
@@ -56,10 +57,27 @@ struct HomeView: View {
                 }
             })
         )
+        .onAppear {
+            self.healthController.requestAuthorization()
+        }
+        .onChange(of: homeViewModel.selectedTab.type) { type in
+            switch(type) {
+            case .exercise:
+                exerciseViewModel.requestAuthorization()
+            case .water:
+                waterViewModel.requestAuthorization()
+            case.calorie:
+                calorieViewModel.requestAuthorization()
+            default:
+                print()
+            }
+        }
         .onChange(of: scenePhase) { newPhase in
             if  newPhase == .active {
                 withAnimation {
-                    //TODO: refresh everything!
+                    exerciseViewModel.readInitial()
+                    waterViewModel.readInitial()
+                    calorieViewModel.readInitial()
                 }
             }
         }

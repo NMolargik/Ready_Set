@@ -9,21 +9,22 @@ import SwiftUI
 import Foundation
 
 struct HeaderView: View {
+    @AppStorage("userName") var username: String = ""
     @Binding var progress: Double
     @Binding var selectedTab: any ITabItem
     
     var body: some View {
         GeometryReader() { geometry in
-            
             VStack (spacing: 0) {
                 Spacer()
                 
-                HStack {
+                ZStack {
                     HStack (spacing: 4) {
                         Text(currentWeekday())
                             .bold()
                             .font(.caption)
                             .foregroundStyle(.fontGray)
+                            .padding(.leading, 30)
                         
                         Text(currentMonth())
                             .bold()
@@ -34,10 +35,14 @@ struct HeaderView: View {
                             .font(.caption)
                             .bold()
                             .foregroundStyle(.fontGray)
+                        
+                        Spacer()
+                        
+                        Text("Hey, \(username)")
+                            .bold()
+                            .truncationMode(.tail)
+                            .padding(.trailing, 30)
                     }
-                    .frame(width: 150)
-                    
-                    Spacer()
                     
                     Image("TriangleIcon")
                         .resizable()
@@ -50,10 +55,6 @@ struct HeaderView: View {
                         .opacity(0.7)
                     
                     Spacer()
-                    
-                    Text("Hey, Nicholas")
-                        .bold()
-                        .frame(width: 150)
                 }
                 .foregroundStyle(Color("FontGray"))
                 .font(.caption)

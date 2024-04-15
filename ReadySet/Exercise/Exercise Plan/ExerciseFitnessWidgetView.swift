@@ -36,7 +36,7 @@ struct ExerciseFitnessWidgetView: View {
                         .frame(width: 20)
 
                     Text("Fitness")
-                        .foregroundStyle(.black)
+                        .foregroundStyle(.base).colorInvert()
                 }
             }
         })

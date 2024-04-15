@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  MainView.swift
 //  Ready Set
 //
 //  Created by Nick Molargik on 4/10/24.
@@ -8,14 +8,7 @@
 import SwiftUI
 import CoreData
 
-enum AppState {
-    case onboarding
-    case userRegistration
-    case initalSetCreation
-    case normal
-}
-
-struct ContentView: View {
+struct MainView: View {
     //    @Environment(\.managedObjectContext) private var viewContext
     //
     //    @FetchRequest(
@@ -23,29 +16,48 @@ struct ContentView: View {
     //        animation: .default)
     //    private var items: FetchedResults<Item>
     
+    @AppStorage("appState") var appState: String = "splash"
     
-    @State private var showOnboarding = false
-    @State var appState = AppState.normal
+    @State var color: Color = .clear
     
     var body: some View {
         ZStack {
-            VStack {
-                switch (appState) {
-                case .onboarding:
-                    OnboardingView()
+            switch (appState) {
+            case "splash":
+                SplashView(color: $color)
+                
+            case "register":
+                UserRegistrationView(color: $color)
+                
+            case "goalSetting":
+                GoalSetView(color: $color)
+                
+            case "navigationTutorial":
+                NavigationTutorialView(color: $color)
+                
+            default:
+                HomeView()
+            }
+            
+            if (appState != "running") {
+                VStack {
+                    Rectangle()
+                        .foregroundStyle(LinearGradient(colors: [color, .clear, .clear], startPoint: .top, endPoint: .bottom))
+                        .frame(height: 200)
+                        .id("OnboardingHeader")
                     
-                case .userRegistration:
-                    UserRegistrationView()
-                    
-                case .initalSetCreation:
-                    Text("Set Creation")
-                    
-                case .normal:
-                    HomeView()
+                    Spacer()
                 }
             }
         }
+        .transition(.opacity)
+        .onAppear {
+            if (appState != "running") {
+                appState = "splash"
+            }
+        }
         .ignoresSafeArea()
+        
     }
     
     //    private func addItem() {
@@ -86,8 +98,21 @@ struct ContentView: View {
     //    formatter.timeStyle = .medium
     //    return formatter
     //}()
+        
+        
+    func currentWeekday() -> String {
+        return String(Date().formatted(Date.FormatStyle().weekday(.abbreviated)))
+    }
+    
+    func currentMonth() -> String {
+        return String(Date().formatted(Date.FormatStyle().month(.wide)))
+    }
+
+    func currentDay() -> String {
+        return String(Date().formatted(Date.FormatStyle().day(.twoDigits)))
+    }
 }
 
 #Preview {
-    ContentView()
+    MainView()
 }

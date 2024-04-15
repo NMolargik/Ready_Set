@@ -19,10 +19,11 @@ class ExerciseViewModel: ObservableObject {
     @Published var stepsToday = 0
     @Published var formComplete: Bool = false
     
-    private let healthStore = HKHealthStore()
+    @Published var healthStore: HKHealthStore
     let exerciseSetRepo = ExerciseSetRepo()
     
-    init() {
+    init(healthStore: HKHealthStore) {
+        self.healthStore = healthStore
         exerciseSetMaster = exerciseSetRepo.loadAll()
         self.requestAuthorization()
         self.readInitial()
@@ -33,16 +34,12 @@ class ExerciseViewModel: ObservableObject {
             HKObjectType.quantityType(forIdentifier: .stepCount)!,
         ])
 
-        let toShares = Set([
-            HKObjectType.workoutType()
-        ])
-
         guard HKHealthStore.isHealthDataAvailable() else {
             print("HealthKit - Error - Health Data Not Available")
             return
         }
 
-        healthStore.requestAuthorization(toShare: toShares, read: toReads) {
+        healthStore.requestAuthorization(toShare: [], read: toReads) {
             success, error in
             if success {
                 self.readInitial()

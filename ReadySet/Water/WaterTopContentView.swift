@@ -82,18 +82,19 @@ struct WaterTopContentView: View {
                                             .offset(x: -80, y: 2)
                                     }
                                     
-                                    Rectangle()
-                                        .frame(width: 120, height: 30)
-                                        .cornerRadius(20)
-                                        .foregroundStyle(.ultraThinMaterial)
-                                        .shadow(radius: 2)
-                                        .offset(y: 20)
-                                    
-                                    
                                     Text("\(waterViewModel.waterConsumedToday) of \(Int(waterViewModel.waterGoal)) oz")
                                         .bold()
                                         .foregroundStyle(.secondary)
                                         .offset(y: 20)
+                                        .padding(.horizontal, 5)
+                                        .background {
+                                            Rectangle()
+                                                .frame(height: 30)
+                                                .cornerRadius(20)
+                                                .foregroundStyle(.ultraThinMaterial)
+                                                .shadow(radius: 2)
+                                                .offset(y: 20)
+                                        }
                                 }
                             })
                             .mask {

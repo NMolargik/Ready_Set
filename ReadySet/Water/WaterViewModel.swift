@@ -12,7 +12,7 @@ class WaterViewModel: ObservableObject {
     @AppStorage("waterGoal") var waterGoal: Double = 8
     
     @Published var waterConsumed = 0
-    @Published var waterHistory = [Int]()
+    @Published var waterHistory: [Int: Int] = [:]
     @Published var proposedWaterGoal = 8
     @Published var editingWaterGoal = false
     
@@ -35,6 +35,7 @@ class WaterViewModel: ObservableObject {
 
     func getWaterWeekFromHK() {
         self.healthController.readWaterConsumedWeek()
+        self.waterHistory = self.healthController.waterConsumedWeek
     }
     
     func saveWaterGoal() {

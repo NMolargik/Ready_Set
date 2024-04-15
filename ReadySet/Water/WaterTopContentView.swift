@@ -64,7 +64,7 @@ struct WaterTopContentView: View {
                                     .offset(y: 20)
                                 
                                 
-                                Text("\(waterViewModel.waterConsumed) of \(waterViewModel.waterGoal) oz")
+                                Text("\(waterViewModel.waterConsumed) of \(Int(waterViewModel.waterGoal)) oz")
                                     .bold()
                                     .foregroundStyle(.secondary)
                                     .offset(y: 20)
@@ -105,6 +105,8 @@ struct WaterTopContentView: View {
         .padding(.top, 5)
         .onAppear {
             waterViewModel.getWaterTodayFromHK()
+            waterViewModel.getWaterWeekFromHK()
+            print(waterViewModel.waterHistory)
             withAnimation(.linear(duration: 1.5).repeatForever(autoreverses: false)) {
                 startAnimation = 350
             }

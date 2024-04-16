@@ -30,7 +30,7 @@ struct CalorieAdditionWidgetView: View {
                     Rectangle()
                         .cornerRadius(35)
                         .foregroundStyle(
-                            value > 7 ? CalorieTabItem().gradient : LinearGradient(colors: [.clear, .fontGray.opacity(0.5)], startPoint: .leading, endPoint: .trailing))
+                            value > 7 ? CalorieTabItem().gradient : LinearGradient(colors: [.clear, Color.base.opacity(0.6)], startPoint: .leading, endPoint: .trailing))
                     
 
                     HStack {
@@ -45,8 +45,9 @@ struct CalorieAdditionWidgetView: View {
                         Text("slide and release to consume calories")
                             .bold()
                             .font(.caption)
-                            .foregroundStyle(.white)
-                            .opacity(value > 7 ? 0 : 0.5)
+                            .foregroundStyle(.base)
+                            .colorInvert()
+                            .opacity(value > 7 ? 0 : 0.3)
                     }
                     .padding(.horizontal)
                     

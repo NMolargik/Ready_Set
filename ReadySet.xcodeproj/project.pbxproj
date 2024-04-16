@@ -783,8 +783,8 @@
 				INFOPLIST_FILE = ReadySet/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Ready, Set";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "Look man I need this";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Look man I need this";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Ready, Set requires access to the listed health metrics to serve trends and tools to you. Without all of these, the app will nto work.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Ready, Set requires access to the listed health metrics to serve trends and tools to you. Without all of these, the app will nto work.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -823,8 +823,8 @@
 				INFOPLIST_FILE = ReadySet/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Ready, Set";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "Look man I need this";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Look man I need this";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Ready, Set requires access to the listed health metrics to serve trends and tools to you. Without all of these, the app will nto work.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Ready, Set requires access to the listed health metrics to serve trends and tools to you. Without all of these, the app will nto work.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

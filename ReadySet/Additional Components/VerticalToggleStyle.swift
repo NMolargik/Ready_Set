@@ -9,7 +9,6 @@ import Foundation
 import SwiftUI
 
 struct VerticalToggleStyle: ToggleStyle {
-    var width: CGFloat
     var height: CGFloat
     
     func makeBody(configuration: Configuration) -> some View {
@@ -28,10 +27,10 @@ struct VerticalToggleStyle: ToggleStyle {
                 Toggle(configuration).labelsHidden()
             }
         }
-        .frame(width: width, height: height)
+        .frame(height: height)
         .padding()
         .overlay(
-            RoundedRectangle(cornerRadius: 10)
+            RoundedRectangle(cornerRadius: 20)
                 .stroke(configuration.isOn ? Color.green: Color.purple, lineWidth: 2)
                 .shadow(radius: 2)
         )

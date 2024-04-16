@@ -9,6 +9,7 @@ import SwiftUI
 
 struct EnergyTopContentView: View {
     @AppStorage("useMetric") var useMetric: Bool = false
+    @AppStorage("decreaseHaptics") var decreaseHaptics: Bool = false
     
     @ObservedObject var energyViewModel: EnergyViewModel
     @State private var energysliderValue: Double = 0
@@ -22,6 +23,9 @@ struct EnergyTopContentView: View {
                             energysliderValue = energyViewModel.energyGoal
                         }
                         .onChange(of: energysliderValue) { _ in
+                            if (!decreaseHaptics) {
+                                UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+                            }
                             energyViewModel.proposedEnergyGoal = Int(energysliderValue)
                         }
                         
@@ -84,6 +88,7 @@ struct EnergyTopContentView: View {
                     } else {
                         energyViewModel.editingEnergyGoal = true
                     }
+                    UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
                 }
             }) {
                 Text(energyViewModel.editingEnergyGoal ? "Save Goal" : "Edit Goal")

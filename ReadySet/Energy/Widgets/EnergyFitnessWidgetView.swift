@@ -12,8 +12,7 @@ struct EnergyFitnessWidgetView: View {
     
     var body: some View {
         Button(action: {
-            let impactMed = UIImpactFeedbackGenerator(style: .medium)
-            impactMed.impactOccurred()
+            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
             guard let url = URL(string: "fitnessapp://") else { return }
             
             if UIApplication.shared.canOpenURL(url) {

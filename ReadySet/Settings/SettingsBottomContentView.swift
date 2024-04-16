@@ -17,33 +17,39 @@ struct SettingsBottomContentView: View {
     
     var body: some View {
         VStack (spacing: 0) {
-            HStack (spacing: 20) {
-                Toggle(isOn: $useMetric, label: {
-                    Text("Use Metric Units")
-                })
-                .toggleStyle(VerticalToggleStyle(width: 120, height: 90))
-                
-                Toggle(isOn: $decreaseHaptics, label: {
-                    Text("Decrease Haptics")
-                })
-                .toggleStyle(VerticalToggleStyle(width: 120, height: 90))
-            }
-            
-            Toggle(isOn: $disableWave, label: {
-                Text("Disable Water Animation")
-            })
-            .toggleStyle(VerticalToggleStyle(width: 290, height: 50))
-            .padding(.vertical, 20)
-            
             Text("Set Your Name")
                 .font(.system(size: 18, weight: .semibold))
                 .lineLimit(1)
-                .padding(.vertical, 5)
+                .padding(.bottom, 5)
             
             TextField("Name", text: $username)
                 .textFieldStyle(OutlinedTextFieldStyle())
                 .padding(.horizontal)
-        
+                .padding(.bottom, 10)
+            
+            HStack (spacing: 0) {
+                Toggle(isOn: $useMetric, label: {
+                    Text("Use Metric Units")
+                })
+                .toggleStyle(VerticalToggleStyle(height: 90))
+                
+                Spacer()
+                
+                Toggle(isOn: $decreaseHaptics, label: {
+                    Text("Decrease Haptics")
+                })
+                .toggleStyle(VerticalToggleStyle(height: 90))
+            }
+            .padding(.horizontal)
+            
+            Toggle(isOn: $disableWave, label: {
+                Text("Disable Water Animation")
+            })
+            .toggleStyle(VerticalToggleStyle(height: 50))
+            .padding(.top, 10)
+            .padding(.bottom, 20)
+            .padding(.horizontal)
+            
             Spacer()
             
             Divider()
@@ -78,7 +84,6 @@ struct SettingsBottomContentView: View {
                             Capsule()
                                 .frame(width: 130, height: 30)
                                 .foregroundStyle(.ultraThickMaterial)
-                                .shadow(color: .white, radius: 3)
                             
                             Text("Share App")
                                 .bold()

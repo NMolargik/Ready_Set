@@ -9,6 +9,8 @@ import SwiftUI
 
 struct EnergyAdditionWidgetView: View {
     @AppStorage("useMetric") var useMetric: Bool = false
+    @AppStorage("decreaseHaptics") var decreaseHaptics: Bool = false
+    
     var addEnergy: (Double) -> Void
     
     @State private var expanded = false
@@ -68,8 +70,15 @@ struct EnergyAdditionWidgetView: View {
                                         let nextCoordinateValue = max(minValue, self.lastCoordinateValue + dragValue.translation.width)
                                         self.value = ((nextCoordinateValue - minValue) / scaleFactor) + lower
                                     }
+                                    
+                                    if (value > 7 && !decreaseHaptics) {
+                                        UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+                                    }
                                 }
                                 .onEnded { dragValue in
+                                    let notificationFeedback = UINotificationFeedbackGenerator()
+                                    notificationFeedback.prepare()
+                                    
                                     if (abs(dragValue.translation.width) < 0.1) {
                                     }
                                     if dragValue.translation.width > 0 {
@@ -80,10 +89,11 @@ struct EnergyAdditionWidgetView: View {
                                         self.value = ((nextCoordinateValue - minValue) / scaleFactor) + lower
                                     }
                                     
-                                    if (value > 4) {
+                                    if (value > 7) {
+                                        notificationFeedback.notificationOccurred(.success)
+                                        
                                         withAnimation {
                                             let energyValue = Double(mapSliderValue(value: value))
-                                            print(energyValue)
                                             addEnergy(energyValue)
                                         }
                                     }
@@ -94,15 +104,25 @@ struct EnergyAdditionWidgetView: View {
                         )
                         
                         Spacer()
+                        
                     }
                     
                     if (value > 7) {
-                        Text(Int(mapSliderValue(value: value)).description)
-                            .bold()
-                            .font(.title)
-                            .foregroundStyle(.primary)
-                            .shadow(radius: 2)
-                            .offset(x: sliderVal - maxValue / 2, y: -50)
+                        ZStack {
+                            Image(systemName: "bubble.middle.bottom.fill")
+                                .font(.system(size: 50))
+                                .shadow(radius: 2)
+                                .scaleEffect(x: 1.5)
+                                .foregroundStyle(.ultraThinMaterial)
+                            
+                            Text(Int(mapSliderValue(value: value)).description)
+                                .bold()
+                                .foregroundStyle(.orangeEnd)
+                                .font(.title)
+                                .offset(y: -5)
+                        }
+                        
+                        .offset(x: sliderVal - maxValue / 2 - 3, y: -50)
                     }
                 }
             }

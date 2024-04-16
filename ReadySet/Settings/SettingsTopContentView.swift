@@ -6,16 +6,19 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct SettingsTopContentView: View {
+    @AppStorage("appState") var appState: String = "splash"
+    
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         HStack(spacing: 10) {
-            settingButton(action: openAppSettings,
-                          labelText: "Health\nSettings",
-                          imageName: "heart.slash.fill",
-                          imageColors: [.black, .red])
+            settingButton(action: returnToOnboarding,
+                          labelText: "Go To\nIntro",
+                          imageName: "arrowshape.turn.up.backward.2.fill",
+                          imageColors: [.red, .red])
 
             settingButton(action: performDeleteAction,
                           labelText: "Delete\nSet Data",
@@ -28,8 +31,7 @@ struct SettingsTopContentView: View {
 
     private func settingButton(action: @escaping () -> Void, labelText: String, imageName: String, imageColors: [Color]) -> some View {
         Button(action: {
-            let impactMed = UIImpactFeedbackGenerator(style: .medium)
-            impactMed.impactOccurred()
+            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
             withAnimation {
                 action()
             }
@@ -54,18 +56,15 @@ struct SettingsTopContentView: View {
 
     private var defaultRectangle: some View {
         Rectangle()
-            .frame(height: 60)
+            .frame(height: 80)
             .cornerRadius(10)
             .foregroundStyle(.thinMaterial)
             .shadow(radius: 1)
     }
 
-    private func openAppSettings() {
-        if let appSettings = URL(string: UIApplication.openSettingsURLString),
-           UIApplication.shared.canOpenURL(appSettings) {
-            DispatchQueue.main.async {
-                UIApplication.shared.open(appSettings)
-            }
+    private func returnToOnboarding() {
+        withAnimation {
+            appState = "splash"
         }
     }
 

@@ -68,6 +68,7 @@ struct ExerciseTopContentView: View {
                     exerciseViewModel.saveStepGoal()
                 }
             }
+            UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
         }) {
             Text(exerciseViewModel.editingStepGoal ? "Save Goal" : "Edit Goal")
                 .bold()

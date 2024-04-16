@@ -26,17 +26,16 @@ struct OutlinedTextFieldStyle: TextFieldStyle {
         }
         .padding()
         .background(
-            RoundedRectangle(cornerRadius: 30)
-                .stroke(Color(UIColor.separator), lineWidth: 1)
-                .shadow(radius: 3, x: 1, y: 1)
+            RoundedRectangle(cornerRadius: 25)
+                .stroke(.purple, lineWidth: 2)
+                .shadow(radius: 2)
                 .opacity(0.9)
             
 
         )
         .focused($isFocused)
         .onTapGesture {
-            let impactMed = UIImpactFeedbackGenerator(style: .medium)
-            impactMed.impactOccurred()
+            UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
             isFocused = true
         }
         .padding(.bottom, 3)

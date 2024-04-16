@@ -46,9 +46,6 @@ struct SliderView: View {
                     .padding(.horizontal)
             }
         }
-        
-        
-        
     }
 }
 

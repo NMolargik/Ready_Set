@@ -77,9 +77,7 @@ struct NavColumnView: View {
     }
 
     private func selectTab(_ tabItem: any ITabItem) {
-        let impactMed = UIImpactFeedbackGenerator(style: .medium)
-        impactMed.impactOccurred()
-        
+        UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
         withAnimation(.snappy) {
             selectedTab = tabItem
             tabItems = selectedTab.reorderTabs()

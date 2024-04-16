@@ -10,6 +10,7 @@ import SwiftUI
 struct WaterTopContentView: View {
     @AppStorage("useMetric") var useMetric: Bool = false
     @AppStorage("disableWave") var disableWave: Bool = false
+    @AppStorage("decreaseHaptics") var decreaseHaptics: Bool = false
     
     @ObservedObject var waterViewModel: WaterViewModel
     
@@ -24,6 +25,9 @@ struct WaterTopContentView: View {
                             waterSliderValue = waterViewModel.waterGoal
                         }
                         .onChange(of: waterSliderValue) { _ in
+                            if (!decreaseHaptics) {
+                                UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+                            }
                             waterViewModel.proposedWaterGoal = Int(waterSliderValue)
                         }
                     .zIndex(2)
@@ -67,6 +71,7 @@ struct WaterTopContentView: View {
                             } else {
                                 waterViewModel.editingWaterGoal = true
                             }
+                            UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
                         }
                     }, label: {
                         Text(waterViewModel.editingWaterGoal ? "Save Goal" : "Edit Goal")

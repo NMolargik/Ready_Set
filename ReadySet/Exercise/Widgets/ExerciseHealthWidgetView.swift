@@ -11,8 +11,7 @@ struct ExerciseHealthWidgetView: View {
     var body: some View {
         
         Button(action: {
-            let impactMed = UIImpactFeedbackGenerator(style: .medium)
-            impactMed.impactOccurred()
+            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
             
             UIApplication.shared.open(URL(string: "x-apple-health://")!)
         }, label: {

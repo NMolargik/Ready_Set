@@ -10,6 +10,7 @@ import Foundation
 
 struct WaterAdditionWidgetView: View {
     @AppStorage("useMetric") var useMetric: Bool = false
+    @AppStorage("decreaseHaptics") var decreaseHaptics: Bool = false
     
     var addWater: (Double) -> Void
     
@@ -65,8 +66,15 @@ struct WaterAdditionWidgetView: View {
                                         let nextCoordinateValue = max(minValue, self.lastCoordinateValue + dragValue.translation.width)
                                         self.value = ((nextCoordinateValue - minValue) / scaleFactor) + lower
                                     }
+                                    
+                                    if (value > 7 && !decreaseHaptics) {
+                                        UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+                                    }
                                 }
                                 .onEnded { dragValue in
+                                    let notificationFeedback = UINotificationFeedbackGenerator()
+                                    notificationFeedback.prepare()
+                                    
                                     if dragValue.translation.width > 0 {
                                         let nextCoordinateValue = min(maxValue, self.lastCoordinateValue + dragValue.translation.width)
                                         self.value = ((nextCoordinateValue - minValue) / scaleFactor)  + lower
@@ -75,10 +83,11 @@ struct WaterAdditionWidgetView: View {
                                         self.value = ((nextCoordinateValue - minValue) / scaleFactor) + lower
                                     }
                                     
-                                    if (value > 4) {
+                                    if (value > 7) {
+                                        notificationFeedback.notificationOccurred(.success)
+                                        
                                         withAnimation {
                                             let waterValue = Double(mapSliderValue(value: value))
-                                            print(waterValue)
                                             addWater(waterValue)
                                         }
                                     }
@@ -90,15 +99,25 @@ struct WaterAdditionWidgetView: View {
                         )
                         
                         Spacer()
+                        
                     }
                     
                     if (value > 7) {
-                        Text(Int(mapSliderValue(value: value)).description)
-                            .bold()
-                            .font(.title)
-                            .foregroundStyle(.primary)
-                            .shadow(radius: 2)
-                            .offset(x: sliderVal - maxValue / 2, y: -50)
+                        ZStack {
+                            Image(systemName: "bubble.middle.bottom.fill")
+                                .font(.system(size: 50))
+                                .shadow(radius: 2)
+                                .scaleEffect(x: 1.5)
+                                .foregroundStyle(.ultraThinMaterial)
+                            
+                            Text(Int(mapSliderValue(value: value)).description)
+                                .bold()
+                                .foregroundStyle(.blueEnd)
+                                .font(.title)
+                                .offset(y: -5)
+                        }
+                        
+                        .offset(x: sliderVal - maxValue / 2 - 3, y: -50)
                     }
                 }
             }

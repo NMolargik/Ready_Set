@@ -10,7 +10,7 @@ import SwiftUI
 struct TopDetailView: View {
     @ObservedObject var exerciseViewModel: ExerciseViewModel
     @ObservedObject var waterViewModel: WaterViewModel
-    @ObservedObject var calorieViewModel: CalorieViewModel
+    @ObservedObject var energyViewModel: EnergyViewModel
 
     @Binding var selectedTab: any ITabItem
     var body: some View {
@@ -22,8 +22,8 @@ struct TopDetailView: View {
             case .water:
                 WaterTopContentView(waterViewModel: waterViewModel)
                     .transition(.opacity)
-            case .calorie:
-                CalorieTopContentView(calorieViewModel: calorieViewModel)
+            case .Energy:
+                EnergyTopContentView(energyViewModel: energyViewModel)
                     .transition(.opacity)
             case .settings:
                 SettingsTopContentView()
@@ -35,5 +35,5 @@ struct TopDetailView: View {
 }
     
 #Preview {
-    TopDetailView(exerciseViewModel: ExerciseViewModel(), waterViewModel: WaterViewModel(), calorieViewModel: CalorieViewModel(), selectedTab: .constant(ExerciseTabItem()))
+    TopDetailView(exerciseViewModel: ExerciseViewModel(), waterViewModel: WaterViewModel(), energyViewModel: EnergyViewModel(), selectedTab: .constant(ExerciseTabItem()))
 }

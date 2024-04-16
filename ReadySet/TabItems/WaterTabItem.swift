@@ -18,13 +18,13 @@ struct WaterTabItem: ITabItem {
     var sheetPresentationDetent = PresentationDetent.fraction(0.3)
     
     func bumpTab(up: Bool) -> any ITabItem {
-        return up ? ExerciseTabItem() : CalorieTabItem()
+        return up ? ExerciseTabItem() : EnergyTabItem()
     }
     
     func reorderTabs() -> [any ITabItem] {
         let impactMed = UIImpactFeedbackGenerator(style: .medium)
         impactMed.impactOccurred()
-        return [WaterTabItem(), CalorieTabItem(), SettingsTabItem(), ExerciseTabItem()]
+        return [WaterTabItem(), EnergyTabItem(), SettingsTabItem(), ExerciseTabItem()]
 
     }
 }

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0E4A5E2A2BCC9D59003678C2 /* CalorieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4A5E292BCC9D59003678C2 /* CalorieViewModel.swift */; };
+		0E4A5E2A2BCC9D59003678C2 /* EnergyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4A5E292BCC9D59003678C2 /* EnergyViewModel.swift */; };
 		0E7DCA5E2BC6FF7400B9403C /* ExerciseSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7DCA5D2BC6FF7400B9403C /* ExerciseSet.swift */; };
 		0E7DCA602BC6FFF100B9403C /* ExerciseSetEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7DCA5F2BC6FFF100B9403C /* ExerciseSetEntry.swift */; };
 		0E940A6B2BC6FE0200144477 /* ReadySetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E940A6A2BC6FE0200144477 /* ReadySetApp.swift */; };
@@ -27,18 +27,18 @@
 		EB3AB3442BC711A8008B6F22 /* ITabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3432BC711A8008B6F22 /* ITabItem.swift */; };
 		EB3AB3462BC711FA008B6F22 /* ExerciseTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3452BC711FA008B6F22 /* ExerciseTabItem.swift */; };
 		EB3AB3482BC71204008B6F22 /* WaterTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3472BC71204008B6F22 /* WaterTabItem.swift */; };
-		EB3AB34A2BC7120C008B6F22 /* CalorieTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3492BC7120C008B6F22 /* CalorieTabItem.swift */; };
+		EB3AB34A2BC7120C008B6F22 /* EnergyTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3492BC7120C008B6F22 /* EnergyTabItem.swift */; };
 		EB3AB34C2BC71214008B6F22 /* SettingsTabITem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB34B2BC71214008B6F22 /* SettingsTabITem.swift */; };
 		EB3AB34E2BC729DE008B6F22 /* ExerciseTopContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB34D2BC729DE008B6F22 /* ExerciseTopContentView.swift */; };
 		EB3AB3512BC72A30008B6F22 /* SettingsTopContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3502BC72A30008B6F22 /* SettingsTopContentView.swift */; };
 		EB3AB3532BC72A3A008B6F22 /* WaterTopContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3522BC72A3A008B6F22 /* WaterTopContentView.swift */; };
-		EB3AB3552BC72A46008B6F22 /* CalorieTopContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3542BC72A46008B6F22 /* CalorieTopContentView.swift */; };
+		EB3AB3552BC72A46008B6F22 /* EnergyTopContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3542BC72A46008B6F22 /* EnergyTopContentView.swift */; };
 		EB3AB3572BC76F07008B6F22 /* TopDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3562BC76F07008B6F22 /* TopDetailView.swift */; };
 		EB3AB35A2BC76F8C008B6F22 /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3592BC76F8C008B6F22 /* BottomView.swift */; };
 		EB3AB35C2BC76FCD008B6F22 /* ExerciseBottomContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB35B2BC76FCD008B6F22 /* ExerciseBottomContentView.swift */; };
 		EB3AB35E2BC76FDC008B6F22 /* SettingsBottomContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB35D2BC76FDC008B6F22 /* SettingsBottomContentView.swift */; };
 		EB3AB3602BC76FE5008B6F22 /* WaterBottomContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB35F2BC76FE5008B6F22 /* WaterBottomContentView.swift */; };
-		EB3AB3622BC76FED008B6F22 /* CalorieBottomContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3612BC76FED008B6F22 /* CalorieBottomContentView.swift */; };
+		EB3AB3622BC76FED008B6F22 /* EnergyBottomContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3612BC76FED008B6F22 /* EnergyBottomContentView.swift */; };
 		EB3AB3682BC7798C008B6F22 /* ExerciseStepsWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3672BC7798C008B6F22 /* ExerciseStepsWidgetView.swift */; };
 		EB3AB36A2BC77B19008B6F22 /* ExerciseHealthWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3692BC77B19008B6F22 /* ExerciseHealthWidgetView.swift */; };
 		EB3AB36C2BC77C3E008B6F22 /* ExerciseStatWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB36B2BC77C3E008B6F22 /* ExerciseStatWidgetView.swift */; };
@@ -47,10 +47,10 @@
 		EB4D9C522BCC80A10071BA99 /* ExercisePlanDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C512BCC80A10071BA99 /* ExercisePlanDayView.swift */; };
 		EB4D9C572BCC8B6B0071BA99 /* WaterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C562BCC8B6B0071BA99 /* WaterViewModel.swift */; };
 		EB4D9C592BCC8F420071BA99 /* WaterWave.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C582BCC8F420071BA99 /* WaterWave.swift */; };
-		EB4D9C5B2BCD85E60071BA99 /* CalorieAdditionWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C5A2BCD85E60071BA99 /* CalorieAdditionWidgetView.swift */; };
+		EB4D9C5B2BCD85E60071BA99 /* EnergyAdditionWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C5A2BCD85E60071BA99 /* EnergyAdditionWidgetView.swift */; };
 		EB4D9C5D2BCDA9D40071BA99 /* ExerciseFitnessWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C5C2BCDA9D40071BA99 /* ExerciseFitnessWidgetView.swift */; };
-		EB4D9C602BCDABAA0071BA99 /* CalorieFitnessWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C5F2BCDABAA0071BA99 /* CalorieFitnessWidgetView.swift */; };
-		EB4D9C622BCDABB20071BA99 /* CalorieHealthWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C612BCDABB20071BA99 /* CalorieHealthWidgetView.swift */; };
+		EB4D9C602BCDABAA0071BA99 /* EnergyFitnessWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C5F2BCDABAA0071BA99 /* EnergyFitnessWidgetView.swift */; };
+		EB4D9C622BCDABB20071BA99 /* EnergyHealthWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C612BCDABB20071BA99 /* EnergyHealthWidgetView.swift */; };
 		EB4D9C652BCDBDF60071BA99 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C642BCDBDF60071BA99 /* SplashView.swift */; };
 		EB4D9C672BCDBE890071BA99 /* GoalSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C662BCDBE890071BA99 /* GoalSetView.swift */; };
 		EB4D9C692BCDBE940071BA99 /* NavigationTutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C682BCDBE940071BA99 /* NavigationTutorialView.swift */; };
@@ -59,7 +59,7 @@
 		EB4D9C712BCDF7970071BA99 /* RoundedTriangleShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C702BCDF7970071BA99 /* RoundedTriangleShape.swift */; };
 		EB4D9C732BCDFE540071BA99 /* SliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C722BCDFE540071BA99 /* SliderView.swift */; };
 		EB4D9C752BCE00020071BA99 /* FitnessAlertButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C742BCE00020071BA99 /* FitnessAlertButtonsView.swift */; };
-		EB4D9C772BCEE0F60071BA99 /* CalorieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C762BCEE0F60071BA99 /* CalorieChartView.swift */; };
+		EB4D9C772BCEE0F60071BA99 /* EnergyChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C762BCEE0F60071BA99 /* EnergyChartView.swift */; };
 		EB4D9C792BCEF2390071BA99 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C782BCEF2390071BA99 /* ChartView.swift */; };
 		EB7110F42BC847610078F796 /* UserRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7110F32BC847610078F796 /* UserRegistrationView.swift */; };
 		EB7110F72BC84B520078F796 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7110F62BC84B520078F796 /* HomeViewModel.swift */; };
@@ -92,7 +92,7 @@
 
 /* Begin PBXFileReference section */
 		0E4A5E252BCC80E0003678C2 /* Build.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Build.xcconfig; sourceTree = "<group>"; };
-		0E4A5E292BCC9D59003678C2 /* CalorieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieViewModel.swift; sourceTree = "<group>"; };
+		0E4A5E292BCC9D59003678C2 /* EnergyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnergyViewModel.swift; sourceTree = "<group>"; };
 		0E7DCA5D2BC6FF7400B9403C /* ExerciseSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSet.swift; sourceTree = "<group>"; };
 		0E7DCA5F2BC6FFF100B9403C /* ExerciseSetEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSetEntry.swift; sourceTree = "<group>"; };
 		0E940A672BC6FE0200144477 /* ReadySet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReadySet.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -115,18 +115,18 @@
 		EB3AB3432BC711A8008B6F22 /* ITabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ITabItem.swift; sourceTree = "<group>"; };
 		EB3AB3452BC711FA008B6F22 /* ExerciseTabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseTabItem.swift; sourceTree = "<group>"; };
 		EB3AB3472BC71204008B6F22 /* WaterTabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterTabItem.swift; sourceTree = "<group>"; };
-		EB3AB3492BC7120C008B6F22 /* CalorieTabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieTabItem.swift; sourceTree = "<group>"; };
+		EB3AB3492BC7120C008B6F22 /* EnergyTabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnergyTabItem.swift; sourceTree = "<group>"; };
 		EB3AB34B2BC71214008B6F22 /* SettingsTabITem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTabITem.swift; sourceTree = "<group>"; };
 		EB3AB34D2BC729DE008B6F22 /* ExerciseTopContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseTopContentView.swift; sourceTree = "<group>"; };
 		EB3AB3502BC72A30008B6F22 /* SettingsTopContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTopContentView.swift; sourceTree = "<group>"; };
 		EB3AB3522BC72A3A008B6F22 /* WaterTopContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterTopContentView.swift; sourceTree = "<group>"; };
-		EB3AB3542BC72A46008B6F22 /* CalorieTopContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieTopContentView.swift; sourceTree = "<group>"; };
+		EB3AB3542BC72A46008B6F22 /* EnergyTopContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnergyTopContentView.swift; sourceTree = "<group>"; };
 		EB3AB3562BC76F07008B6F22 /* TopDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopDetailView.swift; sourceTree = "<group>"; };
 		EB3AB3592BC76F8C008B6F22 /* BottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
 		EB3AB35B2BC76FCD008B6F22 /* ExerciseBottomContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseBottomContentView.swift; sourceTree = "<group>"; };
 		EB3AB35D2BC76FDC008B6F22 /* SettingsBottomContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBottomContentView.swift; sourceTree = "<group>"; };
 		EB3AB35F2BC76FE5008B6F22 /* WaterBottomContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterBottomContentView.swift; sourceTree = "<group>"; };
-		EB3AB3612BC76FED008B6F22 /* CalorieBottomContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieBottomContentView.swift; sourceTree = "<group>"; };
+		EB3AB3612BC76FED008B6F22 /* EnergyBottomContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnergyBottomContentView.swift; sourceTree = "<group>"; };
 		EB3AB3672BC7798C008B6F22 /* ExerciseStepsWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseStepsWidgetView.swift; sourceTree = "<group>"; };
 		EB3AB3692BC77B19008B6F22 /* ExerciseHealthWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseHealthWidgetView.swift; sourceTree = "<group>"; };
 		EB3AB36B2BC77C3E008B6F22 /* ExerciseStatWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseStatWidgetView.swift; sourceTree = "<group>"; };
@@ -138,10 +138,10 @@
 		EB4D9C542BCC848D0071BA99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB4D9C562BCC8B6B0071BA99 /* WaterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterViewModel.swift; sourceTree = "<group>"; };
 		EB4D9C582BCC8F420071BA99 /* WaterWave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterWave.swift; sourceTree = "<group>"; };
-		EB4D9C5A2BCD85E60071BA99 /* CalorieAdditionWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieAdditionWidgetView.swift; sourceTree = "<group>"; };
+		EB4D9C5A2BCD85E60071BA99 /* EnergyAdditionWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnergyAdditionWidgetView.swift; sourceTree = "<group>"; };
 		EB4D9C5C2BCDA9D40071BA99 /* ExerciseFitnessWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseFitnessWidgetView.swift; sourceTree = "<group>"; };
-		EB4D9C5F2BCDABAA0071BA99 /* CalorieFitnessWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieFitnessWidgetView.swift; sourceTree = "<group>"; };
-		EB4D9C612BCDABB20071BA99 /* CalorieHealthWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieHealthWidgetView.swift; sourceTree = "<group>"; };
+		EB4D9C5F2BCDABAA0071BA99 /* EnergyFitnessWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnergyFitnessWidgetView.swift; sourceTree = "<group>"; };
+		EB4D9C612BCDABB20071BA99 /* EnergyHealthWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnergyHealthWidgetView.swift; sourceTree = "<group>"; };
 		EB4D9C642BCDBDF60071BA99 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		EB4D9C662BCDBE890071BA99 /* GoalSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalSetView.swift; sourceTree = "<group>"; };
 		EB4D9C682BCDBE940071BA99 /* NavigationTutorialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTutorialView.swift; sourceTree = "<group>"; };
@@ -150,7 +150,7 @@
 		EB4D9C702BCDF7970071BA99 /* RoundedTriangleShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTriangleShape.swift; sourceTree = "<group>"; };
 		EB4D9C722BCDFE540071BA99 /* SliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderView.swift; sourceTree = "<group>"; };
 		EB4D9C742BCE00020071BA99 /* FitnessAlertButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessAlertButtonsView.swift; sourceTree = "<group>"; };
-		EB4D9C762BCEE0F60071BA99 /* CalorieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieChartView.swift; sourceTree = "<group>"; };
+		EB4D9C762BCEE0F60071BA99 /* EnergyChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnergyChartView.swift; sourceTree = "<group>"; };
 		EB4D9C782BCEF2390071BA99 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		EB7110F32BC847610078F796 /* UserRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegistrationView.swift; sourceTree = "<group>"; };
 		EB7110F62BC84B520078F796 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -244,7 +244,7 @@
 				EB7110FC2BC86BBD0078F796 /* Navigation */,
 				EB7110FB2BC86BAB0078F796 /* Exercise */,
 				EB7110FD2BC870440078F796 /* Water */,
-				EB7110FE2BC870550078F796 /* Calories */,
+				EB7110FE2BC870550078F796 /* Energy */,
 				EB7110FF2BC870780078F796 /* Settings */,
 				EB7110F82BC857330078F796 /* Additional Components */,
 				0E940A6E2BC6FE0400144477 /* Assets.xcassets */,
@@ -285,7 +285,7 @@
 				EB3AB3402BC71105008B6F22 /* TabItemType.swift */,
 				EB3AB3452BC711FA008B6F22 /* ExerciseTabItem.swift */,
 				EB3AB3472BC71204008B6F22 /* WaterTabItem.swift */,
-				EB3AB3492BC7120C008B6F22 /* CalorieTabItem.swift */,
+				EB3AB3492BC7120C008B6F22 /* EnergyTabItem.swift */,
 				EB3AB34B2BC71214008B6F22 /* SettingsTabITem.swift */,
 			);
 			path = TabItems;
@@ -314,9 +314,9 @@
 		EB4D9C5E2BCDAB990071BA99 /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
-				EB4D9C5A2BCD85E60071BA99 /* CalorieAdditionWidgetView.swift */,
-				EB4D9C5F2BCDABAA0071BA99 /* CalorieFitnessWidgetView.swift */,
-				EB4D9C612BCDABB20071BA99 /* CalorieHealthWidgetView.swift */,
+				EB4D9C5A2BCD85E60071BA99 /* EnergyAdditionWidgetView.swift */,
+				EB4D9C5F2BCDABAA0071BA99 /* EnergyFitnessWidgetView.swift */,
+				EB4D9C612BCDABB20071BA99 /* EnergyHealthWidgetView.swift */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -391,16 +391,16 @@
 			path = Water;
 			sourceTree = "<group>";
 		};
-		EB7110FE2BC870550078F796 /* Calories */ = {
+		EB7110FE2BC870550078F796 /* Energy */ = {
 			isa = PBXGroup;
 			children = (
-				0E4A5E292BCC9D59003678C2 /* CalorieViewModel.swift */,
-				EB3AB3542BC72A46008B6F22 /* CalorieTopContentView.swift */,
-				EB3AB3612BC76FED008B6F22 /* CalorieBottomContentView.swift */,
-				EB4D9C762BCEE0F60071BA99 /* CalorieChartView.swift */,
+				0E4A5E292BCC9D59003678C2 /* EnergyViewModel.swift */,
+				EB3AB3542BC72A46008B6F22 /* EnergyTopContentView.swift */,
+				EB3AB3612BC76FED008B6F22 /* EnergyBottomContentView.swift */,
+				EB4D9C762BCEE0F60071BA99 /* EnergyChartView.swift */,
 				EB4D9C5E2BCDAB990071BA99 /* Widgets */,
 			);
-			path = Calories;
+			path = Energy;
 			sourceTree = "<group>";
 		};
 		EB7110FF2BC870780078F796 /* Settings */ = {
@@ -564,14 +564,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E4A5E2A2BCC9D59003678C2 /* CalorieViewModel.swift in Sources */,
+				0E4A5E2A2BCC9D59003678C2 /* EnergyViewModel.swift in Sources */,
 				EB3AB33F2BC710D1008B6F22 /* NavColumnView.swift in Sources */,
 				EB4D9C692BCDBE940071BA99 /* NavigationTutorialView.swift in Sources */,
 				EB3AB33D2BC70CF5008B6F22 /* HomeView.swift in Sources */,
 				EB4D9C732BCDFE540071BA99 /* SliderView.swift in Sources */,
-				EB4D9C602BCDABAA0071BA99 /* CalorieFitnessWidgetView.swift in Sources */,
+				EB4D9C602BCDABAA0071BA99 /* EnergyFitnessWidgetView.swift in Sources */,
 				EB71111A2BC9729A0078F796 /* ExerciseSetEntryController.swift in Sources */,
-				EB3AB3552BC72A46008B6F22 /* CalorieTopContentView.swift in Sources */,
+				EB3AB3552BC72A46008B6F22 /* EnergyTopContentView.swift in Sources */,
 				EB7110F72BC84B520078F796 /* HomeViewModel.swift in Sources */,
 				EB4D9C572BCC8B6B0071BA99 /* WaterViewModel.swift in Sources */,
 				EB3AB3512BC72A30008B6F22 /* SettingsTopContentView.swift in Sources */,
@@ -589,12 +589,12 @@
 				EB4D9C522BCC80A10071BA99 /* ExercisePlanDayView.swift in Sources */,
 				0E940A742BC6FE0400144477 /* Persistence.swift in Sources */,
 				EB7111182BC972530078F796 /* ExerciseSetRepo.swift in Sources */,
-				EB3AB3622BC76FED008B6F22 /* CalorieBottomContentView.swift in Sources */,
+				EB3AB3622BC76FED008B6F22 /* EnergyBottomContentView.swift in Sources */,
 				EB4D9C672BCDBE890071BA99 /* GoalSetView.swift in Sources */,
 				EB71111E2BC973280078F796 /* ExerciseSetEntryRepo.swift in Sources */,
 				EB7111142BC971AE0078F796 /* ExerciseSetController.swift in Sources */,
 				0E7DCA5E2BC6FF7400B9403C /* ExerciseSet.swift in Sources */,
-				EB4D9C772BCEE0F60071BA99 /* CalorieChartView.swift in Sources */,
+				EB4D9C772BCEE0F60071BA99 /* EnergyChartView.swift in Sources */,
 				EB3AB34C2BC71214008B6F22 /* SettingsTabITem.swift in Sources */,
 				0E940A6D2BC6FE0200144477 /* MainView.swift in Sources */,
 				EB3AB3602BC76FE5008B6F22 /* WaterBottomContentView.swift in Sources */,
@@ -611,18 +611,18 @@
 				EB3AB3482BC71204008B6F22 /* WaterTabItem.swift in Sources */,
 				0E98616A2BCE971F00488D9E /* WaterChartView.swift in Sources */,
 				EB3AB35C2BC76FCD008B6F22 /* ExerciseBottomContentView.swift in Sources */,
-				EB4D9C5B2BCD85E60071BA99 /* CalorieAdditionWidgetView.swift in Sources */,
+				EB4D9C5B2BCD85E60071BA99 /* EnergyAdditionWidgetView.swift in Sources */,
 				EB4D9C592BCC8F420071BA99 /* WaterWave.swift in Sources */,
 				EB4D9C502BCC73F60071BA99 /* ExerciseViewModel.swift in Sources */,
 				EB4D9C752BCE00020071BA99 /* FitnessAlertButtonsView.swift in Sources */,
 				EB3AB33C2BC70CF5008B6F22 /* HeaderView.swift in Sources */,
-				EB3AB34A2BC7120C008B6F22 /* CalorieTabItem.swift in Sources */,
+				EB3AB34A2BC7120C008B6F22 /* EnergyTabItem.swift in Sources */,
 				EB3AB3682BC7798C008B6F22 /* ExerciseStepsWidgetView.swift in Sources */,
 				EB4D9C4E2BCC73E90071BA99 /* ExercisePlanView.swift in Sources */,
 				EB71111C2BC972FE0078F796 /* IExerciseSetEntryRepo.swift in Sources */,
 				EB3AB36C2BC77C3E008B6F22 /* ExerciseStatWidgetView.swift in Sources */,
 				EB7110F42BC847610078F796 /* UserRegistrationView.swift in Sources */,
-				EB4D9C622BCDABB20071BA99 /* CalorieHealthWidgetView.swift in Sources */,
+				EB4D9C622BCDABB20071BA99 /* EnergyHealthWidgetView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

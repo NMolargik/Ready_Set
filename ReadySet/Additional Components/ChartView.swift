@@ -59,7 +59,7 @@ struct ChartView: View {
             }
             .animation(.easeInOut, value: data)
             .chartXAxisLabel("Date")
-            .chartYAxisLabel("Calories")
+            .chartYAxisLabel("Energy")
             .chartXAxis {
                 AxisMarks(values: .stride(by: .day)) { value in
                     AxisGridLine()

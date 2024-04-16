@@ -9,7 +9,7 @@ import SwiftUI
 import Foundation
 
 struct WaterAdditionWidgetView: View {
-    @ObservedObject var waterViewModel: WaterViewModel
+    var addWater: (Double) -> Void
     
     @State private var expanded = false
     @State var value: Double = 0
@@ -77,7 +77,7 @@ struct WaterAdditionWidgetView: View {
                                         withAnimation {
                                             let waterValue = Double(mapSliderValue(value: value))
                                             print(waterValue)
-                                            waterViewModel.addWater(waterOunces: waterValue)
+                                            addWater(waterValue)
                                         }
                                     }
                                     
@@ -133,5 +133,7 @@ struct WaterAdditionWidgetView: View {
 }
 
 #Preview {
-    WaterAdditionWidgetView(waterViewModel: WaterViewModel())
+    WaterAdditionWidgetView(
+        addWater: { _ in }
+    )
 }

@@ -10,11 +10,11 @@ import Foundation
 enum TabItemType {
     case exercise
     case water
-    case calorie
+    case Energy
     case settings
 
     static var allItems: [any ITabItem] {
-        [ExerciseTabItem(), WaterTabItem(), CalorieTabItem(), SettingsTabItem()]
+        [ExerciseTabItem(), WaterTabItem(), EnergyTabItem(), SettingsTabItem()]
     }
     
     static func shiftItems(forward: Bool) -> [any ITabItem] {

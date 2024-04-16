@@ -14,7 +14,7 @@ struct HomeView: View {
     @StateObject var homeViewModel = HomeViewModel()
     @StateObject var exerciseViewModel = ExerciseViewModel()
     @StateObject var waterViewModel = WaterViewModel()
-    @StateObject var calorieViewModel = CalorieViewModel()
+    @StateObject var energyViewModel = EnergyViewModel()
 
     @State private var navigationDragHeight = 0.0
     @State var healthStore: HKHealthStore
@@ -28,11 +28,11 @@ struct HomeView: View {
             .padding(.bottom, 15)
             
             NavColumnView(exerciseViewModel: exerciseViewModel,
-                          waterViewModel: waterViewModel, calorieViewModel: calorieViewModel,
+                          waterViewModel: waterViewModel, energyViewModel: energyViewModel,
                           tabItems: $homeViewModel.tabItems, selectedTab: $homeViewModel.selectedTab,
                           navigationDragHeight: $navigationDragHeight)
             
-            BottomView(waterViewModel: waterViewModel, calorieViewModel: calorieViewModel,
+            BottomView(waterViewModel: waterViewModel, energyViewModel: energyViewModel,
                        selectedTab: $homeViewModel.selectedTab)
                 .blur(radius: effectiveBlurRadius)
                 .padding(.bottom, 15)
@@ -49,8 +49,8 @@ struct HomeView: View {
             return .constant(Double(exerciseViewModel.stepsToday) / exerciseViewModel.stepGoal)
         case .water:
             return .constant(Double(waterViewModel.waterConsumedToday) / waterViewModel.waterGoal)
-        case .calorie:
-            return .constant(Double(calorieViewModel.caloriesConsumedToday) / calorieViewModel.calorieGoal)
+        case .Energy:
+            return .constant(Double(energyViewModel.energyConsumedToday) / energyViewModel.energyGoal)
         case .settings:
             return .constant(1.0)
         }
@@ -79,10 +79,10 @@ struct HomeView: View {
     private func setupViewModels() {
         exerciseViewModel.healthStore = healthStore
         waterViewModel.healthStore = healthStore
-        calorieViewModel.healthStore = healthStore
+        energyViewModel.healthStore = healthStore
         exerciseViewModel.readInitial()
         waterViewModel.readInitial()
-        calorieViewModel.readInitial()
+        energyViewModel.readInitial()
     }
 
     private func handleScenePhase(newPhase: ScenePhase) {
@@ -90,7 +90,7 @@ struct HomeView: View {
             withAnimation {
                 exerciseViewModel.readInitial()
                 waterViewModel.readInitial()
-                calorieViewModel.readInitial()
+                energyViewModel.readInitial()
             }
         }
     }

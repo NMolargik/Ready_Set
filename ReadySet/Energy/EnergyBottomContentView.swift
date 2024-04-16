@@ -1,5 +1,5 @@
 //
-//  CalorieBottomContentView.swift
+//  EnergyBottomContentView.swift
 //  ReadySet
 //
 //  Created by Nick Molargik on 4/10/24.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct CalorieBottomContentView: View {
-    @ObservedObject var calorieViewModel: CalorieViewModel
+struct EnergyBottomContentView: View {
+    @ObservedObject var energyViewModel: EnergyViewModel
     var body: some View {
         ZStack {
             Rectangle()
@@ -17,11 +17,15 @@ struct CalorieBottomContentView: View {
                 .shadow(radius: 1)
             
             VStack {
-                CalorieChartView(calorieViewModel: calorieViewModel)
+                EnergyChartView(energyViewModel: energyViewModel)
                 
                 Spacer()
                 
-                CalorieAdditionWidgetView(calorieViewModel: calorieViewModel)
+                EnergyAdditionWidgetView(
+                    addEnergy: { energy in
+                        energyViewModel.addEnergy(energy: energy)
+                    }
+                )
             }
             .padding(.top, 20)
             
@@ -30,13 +34,13 @@ struct CalorieBottomContentView: View {
         .padding(.bottom, 15)
         .onAppear {
             withAnimation {
-                calorieViewModel.readEnergyBurnedWeek()
-                calorieViewModel.readEnergyConsumedWeek()
+                energyViewModel.readEnergyBurnedWeek()
+                energyViewModel.readEnergyConsumedWeek()
             }
         }
     }
 }
 
 #Preview {
-    CalorieBottomContentView(calorieViewModel: CalorieViewModel())
+    EnergyBottomContentView(energyViewModel: EnergyViewModel())
 }

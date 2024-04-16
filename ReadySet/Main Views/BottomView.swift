@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BottomView: View {
     @ObservedObject var waterViewModel: WaterViewModel
-    @ObservedObject var calorieViewModel: CalorieViewModel
+    @ObservedObject var energyViewModel: EnergyViewModel
     
     @Binding var selectedTab: any ITabItem
     
@@ -20,8 +20,8 @@ struct BottomView: View {
                 ExerciseBottomContentView()
             case .water:
                 WaterBottomContentView(waterViewModel: waterViewModel)
-            case .calorie:
-                CalorieBottomContentView(calorieViewModel: calorieViewModel)
+            case .Energy:
+                EnergyBottomContentView(energyViewModel: energyViewModel)
             case .settings:
                 SettingsBottomContentView()
             }
@@ -33,5 +33,5 @@ struct BottomView: View {
 }
 
 #Preview {
-    BottomView(waterViewModel: WaterViewModel(), calorieViewModel: CalorieViewModel(), selectedTab: .constant(ExerciseTabItem()))
+    BottomView(waterViewModel: WaterViewModel(), energyViewModel: EnergyViewModel(), selectedTab: .constant(ExerciseTabItem()))
 }

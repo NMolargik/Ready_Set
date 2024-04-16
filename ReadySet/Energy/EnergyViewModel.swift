@@ -1,5 +1,5 @@
 //
-//  CalorieViewModel.swift
+//  EnergyViewModel.swift
 //  ReadySet
 //
 //  Created by Nicholas Yoder on 4/14/24.
@@ -9,20 +9,20 @@ import Foundation
 import SwiftUI
 import HealthKit
 
-class CalorieViewModel: ObservableObject {
-    @AppStorage("calorieGoal") var calorieGoal: Double = 2000
+class EnergyViewModel: ObservableObject {
+    @AppStorage("EnergyGoal") var energyGoal: Double = 2000
 
-    @Published var proposedCalorieGoal = 0
-    @Published var editingCalorieGoal = false
+    @Published var proposedEnergyGoal = 0
+    @Published var editingEnergyGoal = false
     
-    @Published var caloriesConsumedToday: Int = 0
-    @Published var caloriesConsumedWeek: [Date : Int] = [:]
-    @Published var caloriesBurnedToday: Int = 0
-    @Published var caloriesBurnedWeek: [Date : Int] = [:]
+    @Published var energyConsumedToday: Int = 0
+    @Published var energyConsumedWeek: [Date : Int] = [:]
+    @Published var energyBurnedToday: Int = 0
+    @Published var energyBurnedWeek: [Date : Int] = [:]
     @Published var healthStore: HKHealthStore = HKHealthStore()
 
     init() {
-        self.proposedCalorieGoal = Int(self.calorieGoal)
+        self.proposedEnergyGoal = Int(self.energyGoal)
     }
     
     func readInitial() {
@@ -32,9 +32,9 @@ class CalorieViewModel: ObservableObject {
         self.readEnergyConsumedWeek()
     }
 
-    func addCalories(calories: Double) {
+    func addEnergy(energy: Double) {
         DispatchQueue.main.async {
-            self.addCaloriesConsumed(calories: calories) {
+            self.addEnergyConsumed(energy: energy) {
                 withAnimation (.easeInOut) {
                     self.readEnergyConsumedToday()
                     self.readEnergyConsumedWeek()
@@ -69,9 +69,9 @@ class CalorieViewModel: ObservableObject {
                 return
             }
 
-            let calories = Int(sum.doubleValue(for: HKUnit.kilocalorie()))
+            let Energy = Int(sum.doubleValue(for: HKUnit.kilocalorie()))
             DispatchQueue.main.async {
-                self.caloriesConsumedToday = calories
+                self.energyConsumedToday = Energy
             }
         }
         healthStore.execute(query)
@@ -118,11 +118,11 @@ class CalorieViewModel: ObservableObject {
 
             result.enumerateStatistics(from: startOfWeek, to: endOfWeek) { statistics, _ in
                 if let quantity = statistics.sumQuantity() {
-                    let kilocalorie = Int(quantity.doubleValue(for: HKUnit.kilocalorie()))
+                    let kiloEnergy = Int(quantity.doubleValue(for: HKUnit.kilocalorie()))
                     
                     let day = statistics.startDate
                     DispatchQueue.main.async {
-                        self.caloriesConsumedWeek[day] = kilocalorie
+                        self.energyConsumedWeek[day] = kiloEnergy
                     }
                 }
             }
@@ -155,9 +155,9 @@ class CalorieViewModel: ObservableObject {
                 return
             }
 
-            let calories = Int(sum.doubleValue(for: HKUnit.kilocalorie()))
+            let energy = Int(sum.doubleValue(for: HKUnit.kilocalorie()))
             DispatchQueue.main.async {
-                self.caloriesBurnedToday = calories
+                self.energyBurnedToday = energy
             }
         }
         healthStore.execute(query)
@@ -204,11 +204,11 @@ class CalorieViewModel: ObservableObject {
 
             result.enumerateStatistics(from: startOfWeek, to: endOfWeek) { statistics, _ in
                 if let quantity = statistics.sumQuantity() {
-                    let kilocalorie = Int(quantity.doubleValue(for: HKUnit.kilocalorie()))
+                    let kiloEnergy = Int(quantity.doubleValue(for: HKUnit.kilocalorie()))
                     
                     let day = statistics.startDate
                     DispatchQueue.main.async {
-                        self.caloriesBurnedWeek[day] = kilocalorie
+                        self.energyBurnedWeek[day] = kiloEnergy
                     }
                 }
             }
@@ -217,16 +217,16 @@ class CalorieViewModel: ObservableObject {
         healthStore.execute(query)
     }
     
-    func addCaloriesConsumed(calories: Double, completion: @escaping () -> Void) {
-        let calorieType = HKQuantityType.quantityType(forIdentifier: .dietaryEnergyConsumed)!
-        let calorieSample = HKQuantitySample(type: calorieType, quantity: HKQuantity(unit: HKUnit.kilocalorie(), doubleValue: calories), start: Date(), end: Date())
-        self.healthStore.save(calorieSample, withCompletion: { (success, error) -> Void in
+    func addEnergyConsumed(energy: Double, completion: @escaping () -> Void) {
+        let energyType = HKQuantityType.quantityType(forIdentifier: .dietaryEnergyConsumed)!
+        let energyample = HKQuantitySample(type: energyType, quantity: HKQuantity(unit: HKUnit.kilocalorie(), doubleValue: energy), start: Date(), end: Date())
+        self.healthStore.save(energyample, withCompletion: { (success, error) -> Void in
             if error != nil {
                 print("HealthKit - Error - \(String(describing: error))")
             }
 
             if success {
-                print("HealthKit - Success - Calories successfully saved in HealthKit")
+                print("HealthKit - Success - Energy successfully saved in HealthKit")
 
 
             } else {
@@ -239,8 +239,8 @@ class CalorieViewModel: ObservableObject {
         })
     }
 
-    func saveCalorieGoal() {
-        self.calorieGoal = Double(self.proposedCalorieGoal)
-        self.editingCalorieGoal = false
+    func saveEnergyGoal() {
+        self.energyGoal = Double(self.proposedEnergyGoal)
+        self.editingEnergyGoal = false
     }
 }

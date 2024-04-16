@@ -1,5 +1,5 @@
 //
-//  CalorieAdditionWidgetView.swift
+//  EnergyAdditionWidgetView.swift
 //  ReadySet
 //
 //  Created by Nick Molargik on 4/15/24.
@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct CalorieAdditionWidgetView: View {
-    @ObservedObject var calorieViewModel: CalorieViewModel
+struct EnergyAdditionWidgetView: View {
+    var addEnergy: (Double) -> Void
     
     @State private var expanded = false
     @State var value: Double = 0
-    @State private var caloriesToAdd : Double = 0
+    @State private var EnergyToAdd : Double = 0
     @State var lastCoordinateValue: CGFloat = 0.0
     
     var sliderRange: ClosedRange<Double> = 0...100
@@ -30,7 +30,7 @@ struct CalorieAdditionWidgetView: View {
                     Rectangle()
                         .cornerRadius(35)
                         .foregroundStyle(
-                            value > 7 ? CalorieTabItem().gradient : LinearGradient(colors: [.clear, Color.base.opacity(0.6)], startPoint: .leading, endPoint: .trailing))
+                            value > 7 ? EnergyTabItem().gradient : LinearGradient(colors: [.clear, Color.base.opacity(0.6)], startPoint: .leading, endPoint: .trailing))
                     
 
                     HStack {
@@ -42,7 +42,7 @@ struct CalorieAdditionWidgetView: View {
                         
                         Spacer()
                         
-                        Text("slide and release to consume calories")
+                        Text("slide and release to consume Energy")
                             .bold()
                             .font(.caption)
                             .foregroundStyle(.base)
@@ -81,9 +81,9 @@ struct CalorieAdditionWidgetView: View {
                                     
                                     if (value > 4) {
                                         withAnimation {
-                                            let calorieValue = Double(mapSliderValue(value: value))
-                                            print(calorieValue)
-                                            calorieViewModel.addCalories(calories: calorieValue)
+                                            let energyValue = Double(mapSliderValue(value: value))
+                                            print(energyValue)
+                                            addEnergy(energyValue)
                                         }
                                     }
                                     withAnimation (.bouncy) {
@@ -113,7 +113,7 @@ struct CalorieAdditionWidgetView: View {
     private var sliderHandle: some View {
         ZStack {
            Circle()
-                .foregroundStyle(value < 7 ? CalorieTabItem().gradient : LinearGradient(colors: [.fontGray, .fontGray], startPoint: .leading, endPoint: .trailing))
+                .foregroundStyle(value < 7 ? EnergyTabItem().gradient : LinearGradient(colors: [.fontGray, .fontGray], startPoint: .leading, endPoint: .trailing))
                 .shadow(radius: 4, x: 2, y: 2)
                 .frame(width: 40, height: 40)
             
@@ -138,5 +138,7 @@ struct CalorieAdditionWidgetView: View {
 }
 
 #Preview {
-    CalorieAdditionWidgetView(calorieViewModel: CalorieViewModel())
+    EnergyAdditionWidgetView(
+        addEnergy: {_ in}
+    )
 }

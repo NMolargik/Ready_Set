@@ -1,5 +1,5 @@
 //
-//  CalorieTabItem.swift
+//  EnergyTabItem.swift
 //  ReadySet
 //
 //  Created by Nick Molargik on 4/10/24.
@@ -8,9 +8,9 @@
 import Foundation
 import SwiftUI
 
-struct CalorieTabItem: ITabItem {
-    var text = "Calories"
-    var type = TabItemType.calorie
+struct EnergyTabItem: ITabItem {
+    var text = "Energy"
+    var type = TabItemType.Energy
     var icon = "Flame"
     var color = Color.orangeStart
     var secondaryColor = Color.orangeEnd
@@ -24,6 +24,6 @@ struct CalorieTabItem: ITabItem {
     func reorderTabs() -> [any ITabItem] {
         let impactMed = UIImpactFeedbackGenerator(style: .medium)
         impactMed.impactOccurred()
-        return [CalorieTabItem(), SettingsTabItem(), ExerciseTabItem(), WaterTabItem()]
+        return [EnergyTabItem(), SettingsTabItem(), ExerciseTabItem(), WaterTabItem()]
     }
 }

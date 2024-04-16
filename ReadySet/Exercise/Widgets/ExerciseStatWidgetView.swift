@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import Foundation
 
 struct ExerciseStatWidgetView: View {
+    @Binding var totalSets: Int
+    @Binding var weeklySteps: Int
+    
     var body: some View {
-        
-        //TODO: REVISE THIS WIDGET
-        
+        // TODO: fix sets recorded total
         ZStack {
             Rectangle()
                 .cornerRadius(10)
@@ -19,9 +21,9 @@ struct ExerciseStatWidgetView: View {
                 .shadow(radius: 1)
         
             VStack (alignment: .leading) {
-                Text("Sets Recorded: 1000")
+                Text("Sets Recorded: \(totalSets)")
                 
-                Text("Weekly Steps: 1000")
+                Text("Weekly Steps: \(weeklySteps)")
                     
             }
             .font(.caption)
@@ -32,5 +34,5 @@ struct ExerciseStatWidgetView: View {
 }
 
 #Preview {
-    ExerciseStatWidgetView()
+    ExerciseStatWidgetView(totalSets: .constant(10), weeklySteps: .constant(5000))
 }

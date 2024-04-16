@@ -23,7 +23,11 @@ struct WaterBottomContentView: View {
                 
                 Spacer()
                 
-                WaterAdditionWidgetView(waterViewModel: waterViewModel)
+                WaterAdditionWidgetView(
+                    addWater: { water in
+                        waterViewModel.addWater(waterToAdd: water)
+                    }
+                )
             }
             .padding(.top, 20)
             

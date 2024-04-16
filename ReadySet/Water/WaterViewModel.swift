@@ -28,9 +28,9 @@ class WaterViewModel: ObservableObject {
         self.readWaterConsumedWeek()
     }
     
-    func addWater(waterOunces: Double) {
+    func addWater(waterToAdd: Double) {
         DispatchQueue.main.async {
-            self.addWaterConsumed(ounces: waterOunces) {
+            self.addWaterConsumed(waterAmount: waterToAdd) {
                 withAnimation (.easeInOut) {
                     self.readWaterConsumedToday()
                     self.readWaterConsumedWeek()
@@ -125,9 +125,9 @@ class WaterViewModel: ObservableObject {
         healthStore.execute(query)
     }
 
-    func addWaterConsumed(ounces: Double, completion: @escaping () -> Void) {
+    func addWaterConsumed(waterAmount: Double, completion: @escaping () -> Void) {
         let waterType = HKQuantityType.quantityType(forIdentifier: .dietaryWater)!
-        let waterSample = HKQuantitySample(type: waterType, quantity: HKQuantity(unit: HKUnit.fluidOunceUS(), doubleValue: ounces), start: Date(), end: Date())
+        let waterSample = HKQuantitySample(type: waterType, quantity: HKQuantity(unit: HKUnit.fluidOunceUS(), doubleValue: waterAmount), start: Date(), end: Date())
         healthStore.save(waterSample, withCompletion: { (success, error) -> Void in
 
             if error != nil {

@@ -16,9 +16,13 @@ struct CalorieTopContentView: View {
             ZStack {
                 if calorieViewModel.editingCalorieGoal {
                     SliderView(range: 1000...5000, gradient: CalorieTabItem().gradient, step: 100, label: "cal", sliderValue: $calorieSliderValue)
+                        .onAppear {
+                            calorieSliderValue = calorieViewModel.calorieGoal
+                        }
                         .onChange(of: calorieSliderValue) { _ in
                             calorieViewModel.proposedCalorieGoal = Int(calorieSliderValue)
                         }
+                        
                 } else {
                     calorieDisplay
                 }
@@ -73,7 +77,11 @@ struct CalorieTopContentView: View {
             
             Button(action: {
                 withAnimation {
-                    calorieViewModel.editingCalorieGoal.toggle()
+                    if (calorieViewModel.editingCalorieGoal) {
+                        calorieViewModel.saveCalorieGoal()
+                    } else {
+                        calorieViewModel.editingCalorieGoal = true
+                    }
                 }
             }) {
                 Text(calorieViewModel.editingCalorieGoal ? "Save Goal" : "Edit Goal")

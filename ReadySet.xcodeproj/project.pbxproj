@@ -60,6 +60,7 @@
 		EB4D9C732BCDFE540071BA99 /* SliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C722BCDFE540071BA99 /* SliderView.swift */; };
 		EB4D9C752BCE00020071BA99 /* FitnessAlertButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C742BCE00020071BA99 /* FitnessAlertButtonsView.swift */; };
 		EB4D9C772BCEE0F60071BA99 /* CalorieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C762BCEE0F60071BA99 /* CalorieChartView.swift */; };
+		EB4D9C792BCEF2390071BA99 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C782BCEF2390071BA99 /* ChartView.swift */; };
 		EB7110F42BC847610078F796 /* UserRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7110F32BC847610078F796 /* UserRegistrationView.swift */; };
 		EB7110F72BC84B520078F796 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7110F62BC84B520078F796 /* HomeViewModel.swift */; };
 		EB7110FA2BC8574A0078F796 /* CustomTextFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7110F92BC8574A0078F796 /* CustomTextFields.swift */; };
@@ -150,6 +151,7 @@
 		EB4D9C722BCDFE540071BA99 /* SliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderView.swift; sourceTree = "<group>"; };
 		EB4D9C742BCE00020071BA99 /* FitnessAlertButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessAlertButtonsView.swift; sourceTree = "<group>"; };
 		EB4D9C762BCEE0F60071BA99 /* CalorieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieChartView.swift; sourceTree = "<group>"; };
+		EB4D9C782BCEF2390071BA99 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		EB7110F32BC847610078F796 /* UserRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegistrationView.swift; sourceTree = "<group>"; };
 		EB7110F62BC84B520078F796 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		EB7110F92BC8574A0078F796 /* CustomTextFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFields.swift; sourceTree = "<group>"; };
@@ -345,6 +347,7 @@
 			isa = PBXGroup;
 			children = (
 				EB7110F92BC8574A0078F796 /* CustomTextFields.swift */,
+				EB4D9C782BCEF2390071BA99 /* ChartView.swift */,
 				EB4D9C722BCDFE540071BA99 /* SliderView.swift */,
 				EB4D9C6A2BCDCB1B0071BA99 /* BouncingChevronView.swift */,
 				EB4D9C6E2BCDE8310071BA99 /* HealthBaseController.swift */,
@@ -581,6 +584,7 @@
 				EB4D9C712BCDF7970071BA99 /* RoundedTriangleShape.swift in Sources */,
 				0E7DCA602BC6FFF100B9403C /* ExerciseSetEntry.swift in Sources */,
 				EB4D9C6F2BCDE8310071BA99 /* HealthBaseController.swift in Sources */,
+				EB4D9C792BCEF2390071BA99 /* ChartView.swift in Sources */,
 				EB7111012BC8B3C20078F796 /* WaterAdditionWidgetView.swift in Sources */,
 				EB4D9C522BCC80A10071BA99 /* ExercisePlanDayView.swift in Sources */,
 				0E940A742BC6FE0400144477 /* Persistence.swift in Sources */,

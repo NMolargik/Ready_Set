@@ -48,6 +48,8 @@ struct UserRegistrationView: View {
             
             if showTextField {
                 VStack(spacing: 3) {
+                    Spacer()
+                    
                     Text("Who are you?")
                         .font(.title3)
                         .foregroundStyle(.fontGray)
@@ -59,7 +61,13 @@ struct UserRegistrationView: View {
                         .padding(.horizontal, 30)
                         .autocorrectionDisabled()
                     
-                    instructionsText
+                    Spacer()
+                    
+                    if (showText && name.count > 1) {
+                        BouncingChevronView().padding(.bottom, 15)
+                        instructionText
+                    }
+                    
                 }
             }
         }
@@ -74,7 +82,7 @@ struct UserRegistrationView: View {
             .padding(.bottom, showTextField ? 0 : 50)  // Adjust padding based on textField visibility
     }
     
-    private var instructionsText: some View {
+    private var instructionText: some View {
         Text(name.count > 1 ? "Swipe Upwards\nOn The Canvas When Finished" : " ")
             .frame(height: 100)
             .font(.body)

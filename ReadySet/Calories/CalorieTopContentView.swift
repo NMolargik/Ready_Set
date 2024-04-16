@@ -57,7 +57,7 @@ struct CalorieTopContentView: View {
                     .bold()
                     .foregroundColor(.fontGray)
                 
-                Text("\(Int(calorieViewModel.caloriesBurned)) Burned")
+                Text("~\(Int(calorieViewModel.caloriesBurned)) Burned")
                     .bold()
                     .foregroundColor(.fontGray)
             }

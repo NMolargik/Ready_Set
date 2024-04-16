@@ -12,28 +12,18 @@ struct WaterBottomContentView: View {
     @ObservedObject var waterViewModel: WaterViewModel
     
     var body: some View {
-        ZStack {
-            Rectangle()
-                .cornerRadius(35)
-                .foregroundStyle(.ultraThinMaterial)
-                .shadow(radius: 1)
+        VStack {
+            WaterChartView(waterViewModel: waterViewModel)
             
-            VStack {
-                WaterChartView(waterViewModel: waterViewModel)
-                
-                Spacer()
-                
-                WaterAdditionWidgetView(
-                    addWater: { water in
-                        waterViewModel.addWater(waterToAdd: water)
-                    }
-                )
-            }
-            .padding(.top, 20)
+            Spacer()
             
+            WaterAdditionWidgetView(
+                addWater: { water in
+                    waterViewModel.addWater(waterToAdd: water)
+                }
+            )
         }
-        .padding(.horizontal, 8)
-        .padding(.bottom, 15)
+        .padding(.top, 20)
         .onAppear {
             withAnimation {
                 waterViewModel.readWaterConsumedWeek()

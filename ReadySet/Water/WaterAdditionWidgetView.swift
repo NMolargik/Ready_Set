@@ -9,6 +9,8 @@ import SwiftUI
 import Foundation
 
 struct WaterAdditionWidgetView: View {
+    @AppStorage("useMetric") var useMetric: Bool = false
+    
     var addWater: (Double) -> Void
     
     @State private var expanded = false
@@ -119,7 +121,7 @@ struct WaterAdditionWidgetView: View {
                 .shadow(radius: value > 7 ? 0 : 2)
                 .opacity(value > 7 ? 0 : 1)
             
-            Text("oz")
+            Text(useMetric ? "ml" : "oz")
                 .bold()
                 .font(.caption2)
                 .foregroundStyle(.white)
@@ -128,7 +130,7 @@ struct WaterAdditionWidgetView: View {
     }
     
     func mapSliderValue(value: Double) -> Int {
-        return (-5 + (128 + 5) * (Int(value.rounded(.up))) / 100)
+        return (-5 + ((useMetric ? 4000 : 128) + 5) * (Int(value.rounded(.up))) / 100)
     }
 }
 

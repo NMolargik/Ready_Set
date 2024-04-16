@@ -94,7 +94,7 @@ struct UserRegistrationView: View {
     }
     
     private func effectiveBlurRadius() -> CGFloat {
-        abs(navigationDragHeight) > 20.0 ? abs(navigationDragHeight * 0.01) : 0
+        abs(navigationDragHeight) > 20.0 ? abs(navigationDragHeight * 0.03) : 0
     }
     
     private var dragGesture: some Gesture {

@@ -10,28 +10,18 @@ import SwiftUI
 struct EnergyBottomContentView: View {
     @ObservedObject var energyViewModel: EnergyViewModel
     var body: some View {
-        ZStack {
-            Rectangle()
-                .cornerRadius(35)
-                .foregroundStyle(.ultraThinMaterial)
-                .shadow(radius: 1)
+        VStack {
+            EnergyChartView(energyViewModel: energyViewModel)
             
-            VStack {
-                EnergyChartView(energyViewModel: energyViewModel)
-                
-                Spacer()
-                
-                EnergyAdditionWidgetView(
-                    addEnergy: { energy in
-                        energyViewModel.addEnergy(energy: energy)
-                    }
-                )
-            }
-            .padding(.top, 20)
+            Spacer()
             
+            EnergyAdditionWidgetView(
+                addEnergy: { energy in
+                    energyViewModel.addEnergy(energy: energy)
+                }
+            )
         }
-        .padding(.horizontal, 8)
-        .padding(.bottom, 15)
+        .padding(.top, 20)
         .onAppear {
             withAnimation {
                 energyViewModel.readEnergyBurnedWeek()

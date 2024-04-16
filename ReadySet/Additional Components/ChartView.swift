@@ -10,6 +10,8 @@ import Charts
 
 struct ChartView: View {
     var title: String
+    var yLabel: String
+    var unitLabel: String
     var color: Color
     @Binding var data: [Date: Int]
     @Binding var average: Double
@@ -27,16 +29,22 @@ struct ChartView: View {
             Chart {
                 ForEach(Array(data).sorted(by: { $0.key < $1.key }), id: \.key) { (date, value) in
                     LineMark(x: .value("Date", date), y: .value(title, value))
+                }
+                .interpolationMethod(.cardinal)
+                .foregroundStyle(color)
+                .symbol(.circle)
+                
+                ForEach(Array(data).sorted(by: { $0.key < $1.key }), id: \.key) { (date, value) in
                     AreaMark(x: .value("Date", date), y: .value(title, value))
                 }
                 .interpolationMethod(.cardinal)
                 .foregroundStyle(LinearGradient(colors: [color, .clear], startPoint: .top, endPoint: .bottom))
-                .symbol(.circle)
-
+                .foregroundStyle(color)
+                
                 RuleMark(y: .value("Average \(title)", average))
                 .foregroundStyle(LinearGradient(colors: [color, .base], startPoint: .leading, endPoint: .trailing))
                 .annotation(position: .top, alignment: .leading) {
-                    Text("Avg: \(Int(average))cal")
+                    Text("Avg: \(Int(average))\(unitLabel)")
                         .bold()
                         .font(.caption)
                         .foregroundColor(.primary)
@@ -48,7 +56,7 @@ struct ChartView: View {
                     RuleMark(y: .value("Goal \(title)", goal))
                     .foregroundStyle(LinearGradient(colors: [color, .base], startPoint: .leading, endPoint: .trailing))
                     .annotation(position: .top, alignment: .leading) {
-                        Text("Goal: \(Int(goal))cal")
+                        Text("Goal: \(Int(goal))\(unitLabel)")
                             .bold()
                             .font(.caption)
                             .foregroundColor(.primary)
@@ -59,7 +67,7 @@ struct ChartView: View {
             }
             .animation(.easeInOut, value: data)
             .chartXAxisLabel("Date")
-            .chartYAxisLabel("Energy")
+            .chartYAxisLabel(yLabel)
             .chartXAxis {
                 AxisMarks(values: .stride(by: .day)) { value in
                     AxisGridLine()
@@ -80,5 +88,5 @@ struct ChartView: View {
 }
 
 #Preview {
-    ChartView(title: "Chart", color: Color.white, data: .constant([:]), average: .constant(0), goal: .constant(0), showGoal: true)
+    ChartView(title: "Chart", yLabel: "Ounces", unitLabel: "oz", color: Color.white, data: .constant([:]), average: .constant(0), goal: .constant(0), showGoal: true)
 }

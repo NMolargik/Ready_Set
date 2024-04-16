@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct EnergyAdditionWidgetView: View {
+    @AppStorage("useMetric") var useMetric: Bool = false
     var addEnergy: (Double) -> Void
     
     @State private var expanded = false
@@ -42,7 +43,7 @@ struct EnergyAdditionWidgetView: View {
                         
                         Spacer()
                         
-                        Text("slide and release to consume Energy")
+                        Text("slide and release to consume energy")
                             .bold()
                             .font(.caption)
                             .foregroundStyle(.base)
@@ -124,7 +125,7 @@ struct EnergyAdditionWidgetView: View {
                 .shadow(radius: value > 7 ? 0 : 2)
                 .opacity(value > 7 ? 0 : 1)
             
-            Text("cal")
+            Text(useMetric ? "kJ" : "cal")
                 .bold()
                 .font(.caption2)
                 .foregroundStyle(.white)

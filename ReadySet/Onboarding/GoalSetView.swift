@@ -78,7 +78,7 @@ struct GoalSetView: View {
     }
     
     private func blurRadiusForDrag() -> CGFloat {
-        abs(navigationDragHeight) > 20.0 ? abs(navigationDragHeight * 0.01) : 0
+        abs(navigationDragHeight) > 20.0 ? abs(navigationDragHeight * 0.03) : 0
     }
     
     private func handleDragEnd(navigationDragHeight: CGFloat) {

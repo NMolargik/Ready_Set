@@ -10,6 +10,7 @@ import SwiftUI
 import HealthKit
 
 class WaterViewModel: ObservableObject {
+    @AppStorage("useMetric") var useMetric: Bool = false
     @AppStorage("waterGoal") var waterGoal: Double = 8
     
     @Published var proposedWaterGoal = 8
@@ -63,9 +64,10 @@ class WaterViewModel: ObservableObject {
                 return
             }
 
-            let ounces = Int(sum.doubleValue(for: HKUnit.fluidOunceUS()))
+            let amount = Int(sum.doubleValue(for: self.useMetric ? HKUnit.literUnit(with: .milli) : HKUnit.fluidOunceUS()))
+            
             DispatchQueue.main.async {
-                self.waterConsumedToday = ounces
+                self.waterConsumedToday = amount
             }
         }
         healthStore.execute(query)
@@ -112,11 +114,11 @@ class WaterViewModel: ObservableObject {
 
             result.enumerateStatistics(from: startOfWeek, to: endOfWeek) { statistics, _ in
                 if let quantity = statistics.sumQuantity() {
-                    let ounces = Int(quantity.doubleValue(for: HKUnit.fluidOunceUS()))
+                    let amount = Int(quantity.doubleValue(for: self.useMetric ? HKUnit.literUnit(with: .milli) : HKUnit.fluidOunceUS()))
 
                     let day = statistics.startDate
                     DispatchQueue.main.async {
-                        self.waterConsumedWeek[day] = ounces
+                        self.waterConsumedWeek[day] = amount
                     }
                 }
             }
@@ -127,7 +129,10 @@ class WaterViewModel: ObservableObject {
 
     func addWaterConsumed(waterAmount: Double, completion: @escaping () -> Void) {
         let waterType = HKQuantityType.quantityType(forIdentifier: .dietaryWater)!
-        let waterSample = HKQuantitySample(type: waterType, quantity: HKQuantity(unit: HKUnit.fluidOunceUS(), doubleValue: waterAmount), start: Date(), end: Date())
+        
+        
+        let waterSample = HKQuantitySample(type: waterType, quantity: HKQuantity(unit: self.useMetric ? HKUnit.literUnit(with: .milli) : HKUnit.fluidOunceUS(), doubleValue: waterAmount), start: Date(), end: Date())
+        
         healthStore.save(waterSample, withCompletion: { (success, error) -> Void in
 
             if error != nil {

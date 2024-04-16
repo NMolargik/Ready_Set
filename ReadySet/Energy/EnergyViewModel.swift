@@ -10,11 +10,11 @@ import SwiftUI
 import HealthKit
 
 class EnergyViewModel: ObservableObject {
-    @AppStorage("EnergyGoal") var energyGoal: Double = 2000
+    @AppStorage("useMetric") var useMetric: Bool = false
+    @AppStorage("energyGoal") var energyGoal: Double = 2000
 
     @Published var proposedEnergyGoal = 0
     @Published var editingEnergyGoal = false
-    
     @Published var energyConsumedToday: Int = 0
     @Published var energyConsumedWeek: [Date : Int] = [:]
     @Published var energyBurnedToday: Int = 0
@@ -69,7 +69,7 @@ class EnergyViewModel: ObservableObject {
                 return
             }
 
-            let Energy = Int(sum.doubleValue(for: HKUnit.kilocalorie()))
+            let Energy = Int(sum.doubleValue(for: self.useMetric ? HKUnit.jouleUnit(with: .kilo) : HKUnit.kilocalorie()))
             DispatchQueue.main.async {
                 self.energyConsumedToday = Energy
             }
@@ -118,7 +118,7 @@ class EnergyViewModel: ObservableObject {
 
             result.enumerateStatistics(from: startOfWeek, to: endOfWeek) { statistics, _ in
                 if let quantity = statistics.sumQuantity() {
-                    let kiloEnergy = Int(quantity.doubleValue(for: HKUnit.kilocalorie()))
+                    let kiloEnergy = Int(quantity.doubleValue(for: self.useMetric ? HKUnit.jouleUnit(with: .kilo) : HKUnit.kilocalorie()))
                     
                     let day = statistics.startDate
                     DispatchQueue.main.async {
@@ -155,7 +155,7 @@ class EnergyViewModel: ObservableObject {
                 return
             }
 
-            let energy = Int(sum.doubleValue(for: HKUnit.kilocalorie()))
+            let energy = Int(sum.doubleValue(for: self.useMetric ? HKUnit.jouleUnit(with: .kilo) : HKUnit.kilocalorie()))
             DispatchQueue.main.async {
                 self.energyBurnedToday = energy
             }
@@ -204,7 +204,7 @@ class EnergyViewModel: ObservableObject {
 
             result.enumerateStatistics(from: startOfWeek, to: endOfWeek) { statistics, _ in
                 if let quantity = statistics.sumQuantity() {
-                    let kiloEnergy = Int(quantity.doubleValue(for: HKUnit.kilocalorie()))
+                    let kiloEnergy = Int(quantity.doubleValue(for: self.useMetric ? HKUnit.jouleUnit(with: .kilo) : HKUnit.kilocalorie()))
                     
                     let day = statistics.startDate
                     DispatchQueue.main.async {
@@ -219,8 +219,8 @@ class EnergyViewModel: ObservableObject {
     
     func addEnergyConsumed(energy: Double, completion: @escaping () -> Void) {
         let energyType = HKQuantityType.quantityType(forIdentifier: .dietaryEnergyConsumed)!
-        let energyample = HKQuantitySample(type: energyType, quantity: HKQuantity(unit: HKUnit.kilocalorie(), doubleValue: energy), start: Date(), end: Date())
-        self.healthStore.save(energyample, withCompletion: { (success, error) -> Void in
+        let energysample = HKQuantitySample(type: energyType, quantity: HKQuantity(unit: self.useMetric ? HKUnit.jouleUnit(with: .kilo) : HKUnit.kilocalorie(), doubleValue: energy), start: Date(), end: Date())
+        self.healthStore.save(energysample, withCompletion: { (success, error) -> Void in
             if error != nil {
                 print("HealthKit - Error - \(String(describing: error))")
             }

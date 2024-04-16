@@ -14,19 +14,27 @@ struct BottomView: View {
     @Binding var selectedTab: any ITabItem
     
     var body: some View {
-        Group {
-            switch (selectedTab.type) {
-            case .exercise:
-                ExerciseBottomContentView()
-            case .water:
-                WaterBottomContentView(waterViewModel: waterViewModel)
-            case .Energy:
-                EnergyBottomContentView(energyViewModel: energyViewModel)
-            case .settings:
-                SettingsBottomContentView()
+        ZStack {
+            Rectangle()
+                .cornerRadius(35)
+                .foregroundStyle(.ultraThinMaterial)
+                .shadow(radius: 1)
+                .animation(.smooth(duration: 0.5), value: selectedTab.type)
+            
+            Group {
+                switch (selectedTab.type) {
+                case .exercise:
+                    ExerciseBottomContentView()
+                case .water:
+                    WaterBottomContentView(waterViewModel: waterViewModel)
+                case .Energy:
+                    EnergyBottomContentView(energyViewModel: energyViewModel)
+                case .settings:
+                    SettingsBottomContentView()
+                }
             }
+            .animation(.smooth(duration: 0.2), value: selectedTab.type)
         }
-        .animation(.smooth(duration: 0.2), value: selectedTab.type)
         .transition(.opacity)
         .padding(.top, 8)
     }

@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct EnergyTopContentView: View {
+    @AppStorage("useMetric") var useMetric: Bool = false
+    
     @ObservedObject var energyViewModel: EnergyViewModel
     @State private var energysliderValue: Double = 0
     
@@ -15,7 +17,7 @@ struct EnergyTopContentView: View {
         HStack(spacing: 5) {
             ZStack {
                 if energyViewModel.editingEnergyGoal {
-                    SliderView(range: 1000...5000, gradient: EnergyTabItem().gradient, step: 100, label: "cal", sliderValue: $energysliderValue)
+                    SliderView(range: (useMetric ? 4184 : 1000)...(useMetric ? 20920 : 5000), gradient: EnergyTabItem().gradient, step: 100, label: useMetric ? "kJ" : "cal", sliderValue: $energysliderValue)
                         .onAppear {
                             energysliderValue = energyViewModel.energyGoal
                         }

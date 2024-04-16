@@ -10,6 +10,7 @@ import HealthKit
 
 struct HomeView: View {
     @Environment(\.scenePhase) var scenePhase
+    @AppStorage("useMetric") var useMetric: Bool = false
 
     @StateObject var homeViewModel = HomeViewModel()
     @StateObject var exerciseViewModel = ExerciseViewModel()
@@ -35,12 +36,17 @@ struct HomeView: View {
             BottomView(waterViewModel: waterViewModel, energyViewModel: energyViewModel,
                        selectedTab: $homeViewModel.selectedTab)
                 .blur(radius: effectiveBlurRadius)
-                .padding(.bottom, 15)
+                .padding(.bottom, 30)
+                .padding(.horizontal, 8)
+                
         }
         .background(backgroundGradient)
         .gesture(dragGesture)
         .onAppear(perform: setupViewModels)
         .onChange(of: scenePhase, perform: handleScenePhase)
+        .onChange(of: useMetric) { _ in
+            setGoalsAfterUnitChange()
+        }
     }
 
     private var progressForSelectedTab: Binding<Double> {
@@ -62,7 +68,7 @@ struct HomeView: View {
     }
 
     private var effectiveBlurRadius: CGFloat {
-        abs(navigationDragHeight) > 20.0 ? abs(navigationDragHeight * 0.01) : 0
+        abs(navigationDragHeight) > 20.0 ? abs(navigationDragHeight * 0.03) : 0
     }
 
     private var dragGesture: some Gesture {
@@ -84,8 +90,21 @@ struct HomeView: View {
         waterViewModel.readInitial()
         energyViewModel.readInitial()
     }
+    
+    private func setGoalsAfterUnitChange() {
+        withAnimation {
+            if useMetric {
+                waterViewModel.waterGoal = Double(Float(waterViewModel.waterGoal) * 29.5735).rounded()
+                energyViewModel.energyGoal = Double(Float(energyViewModel.energyGoal) * 4.184).rounded()
+            } else {
+                waterViewModel.waterGoal = Double(Float(waterViewModel.waterGoal) / 29.5735).rounded()
+                energyViewModel.energyGoal = Double(Float(energyViewModel.energyGoal) / 4.184).rounded()
+            }
+        }
+    }
 
     private func handleScenePhase(newPhase: ScenePhase) {
+        navigationDragHeight = 0
         if newPhase == .active {
             withAnimation {
                 exerciseViewModel.readInitial()

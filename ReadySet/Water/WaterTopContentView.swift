@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct WaterTopContentView: View {
+    @AppStorage("useMetric") var useMetric: Bool = false
+    @AppStorage("disableWave") var disableWave: Bool = false
+    
     @ObservedObject var waterViewModel: WaterViewModel
     
     @State private var startAnimation: CGFloat = 0
@@ -16,7 +19,7 @@ struct WaterTopContentView: View {
     var body: some View {
             ZStack {
                 if (waterViewModel.editingWaterGoal) {
-                    SliderView(range: 8...169, gradient: WaterTabItem().gradient, step: 8, label: "ounces", sliderValue: $waterSliderValue)
+                    SliderView(range: (useMetric ? 150 : 8)...(useMetric ? 4000 : 168), gradient: WaterTabItem().gradient, step: useMetric ? 50 : 8, label: useMetric ? "mL" : "ounces", sliderValue: $waterSliderValue)
                         .onAppear {
                             waterSliderValue = waterViewModel.waterGoal
                         }
@@ -35,7 +38,7 @@ struct WaterTopContentView: View {
                             .shadow(radius: 1)
                             .zIndex(1)
                         
-                        WaterWave(progress: min(CGFloat(Double(waterViewModel.waterConsumedToday) / waterViewModel.waterGoal), 0.98), waveHeight: 0.07, offset: startAnimation)
+                        WaterWave(progress: CGFloat(Double(waterViewModel.waterConsumedToday) / waterViewModel.waterGoal), waveHeight: disableWave ? 0.0 : 0.1, offset: startAnimation)
                             .fill(LinearGradient(colors: [.blueStart, .blueEnd], startPoint: .top, endPoint: .bottom))
                             .overlay(content: {
                                 waterWaveOverlay
@@ -80,7 +83,10 @@ struct WaterTopContentView: View {
             withAnimation {
                 waterViewModel.readInitial()
             }
-            startAnimationIfNeeded()
+            
+            if (!disableWave) {
+                startAnimationIfNeeded()
+            }
         }
         .onChange(of: waterViewModel.editingWaterGoal) { editing in
             if !editing {
@@ -95,7 +101,7 @@ struct WaterTopContentView: View {
     }
     
     private var waterWaveOverlay: some View {
-        Text("\(waterViewModel.waterConsumedToday) of \(Int(waterViewModel.waterGoal)) oz")
+        Text("\(waterViewModel.waterConsumedToday) of \(Int(waterViewModel.waterGoal)) \(useMetric ? "ml" : "oz")")
             .bold()
             .foregroundStyle(.secondary)
             .offset(y: 20)

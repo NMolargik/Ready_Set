@@ -71,7 +71,7 @@ struct NavColumnView: View {
             }
             
             TopDetailView(exerciseViewModel: exerciseViewModel, waterViewModel: waterViewModel, energyViewModel: energyViewModel, selectedTab: $selectedTab)
-                .blur(radius: abs(navigationDragHeight) > 20.0 ? abs(navigationDragHeight * 0.01) : 0)
+                .blur(radius: abs(navigationDragHeight) > 20.0 ? abs(navigationDragHeight * 0.03) : 0)
         }
         .frame(height: 120)
     }

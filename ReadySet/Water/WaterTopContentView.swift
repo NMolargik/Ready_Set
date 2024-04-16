@@ -95,37 +95,18 @@ struct WaterTopContentView: View {
     }
     
     private var waterWaveOverlay: some View {
-        ZStack {
-            if (waterViewModel.waterConsumedToday / Int(waterViewModel.waterGoal) > Int(0.5)) {
-                Circle()
-                    .fill(.white.opacity(0.1))
-                    .frame(width: 15, height: 15)
-                    .offset(x: -20)
-                
-                Circle()
-                    .fill(.white.opacity(0.1))
-                    .frame(width: 15, height: 15)
-                    .offset(x: 70, y: 10)
-                
-                Circle()
-                    .fill(.white.opacity(0.1))
-                    .frame(width: 25, height: 25)
-                    .offset(x: -80, y: 2)
-            }
-            
-            Text("\(waterViewModel.waterConsumedToday) of \(Int(waterViewModel.waterGoal)) oz")
-                .bold()
-                .foregroundStyle(.secondary)
-                .offset(y: 20)
-                .padding(.horizontal, 5)
-                .background {
-                    Rectangle()
-                        .frame(height: 30)
-                        .cornerRadius(20)
-                        .foregroundStyle(.ultraThinMaterial)
-                        .shadow(radius: 2)
-                        .offset(y: 20)
-                }
+        Text("\(waterViewModel.waterConsumedToday) of \(Int(waterViewModel.waterGoal)) oz")
+            .bold()
+            .foregroundStyle(.secondary)
+            .offset(y: 20)
+            .padding(.horizontal, 5)
+            .background {
+                Rectangle()
+                    .frame(height: 30)
+                    .cornerRadius(20)
+                    .foregroundStyle(.ultraThinMaterial)
+                    .shadow(radius: 2)
+                    .offset(y: 20)
         }
     }
     

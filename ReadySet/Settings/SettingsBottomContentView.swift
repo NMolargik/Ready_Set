@@ -12,6 +12,7 @@ struct SettingsBottomContentView: View {
     @AppStorage("decreaseHaptics") var decreaseHaptics: Bool = false
     @AppStorage("disableWave") var disableWave: Bool = false
     @AppStorage("userName") var username: String = ""
+    @State var name : String = ""
     
     let link = URL(string: "www.google.com")! //TODO: change this to our App listing
     
@@ -22,10 +23,18 @@ struct SettingsBottomContentView: View {
                 .lineLimit(1)
                 .padding(.bottom, 5)
             
-            TextField("Name", text: $username)
+            TextField("First Name", text: $name)
                 .textFieldStyle(OutlinedTextFieldStyle())
                 .padding(.horizontal)
                 .padding(.bottom, 10)
+                .onChange(of: name) { value in
+                    withAnimation {
+                        username = value
+                    }
+                }
+                .onAppear {
+                    name = username
+                }
             
             HStack (spacing: 0) {
                 Toggle(isOn: $useMetric, label: {
@@ -43,7 +52,7 @@ struct SettingsBottomContentView: View {
             .padding(.horizontal)
             
             Toggle(isOn: $disableWave, label: {
-                Text("Disable Water Animation")
+                Text("Disable Water Wave Animation")
             })
             .toggleStyle(VerticalToggleStyle(height: 50))
             .padding(.top, 10)

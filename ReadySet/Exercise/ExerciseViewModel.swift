@@ -60,7 +60,9 @@ class ExerciseViewModel: ObservableObject {
             }
             
             let steps = Int(sum.doubleValue(for: HKUnit.count()))
-            self.stepsToday = steps
+            DispatchQueue.main.async {
+                self.stepsToday = steps
+            }
         }
         healthStore.execute(query)
     }

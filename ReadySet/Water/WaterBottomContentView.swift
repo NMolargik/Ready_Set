@@ -60,6 +60,11 @@ struct WaterBottomContentView: View {
         }
         .padding(.horizontal, 8)
         .padding(.bottom, 15)
+        .onAppear {
+            waterViewModel.readWaterConsumedWeek()
+            print("Buh")
+            print(waterViewModel.waterConsumedWeek)
+        }
     }
 }
 

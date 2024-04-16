@@ -15,7 +15,7 @@ class WaterViewModel: ObservableObject {
     @Published var proposedWaterGoal = 8
     @Published var editingWaterGoal = false
     @Published var waterConsumedToday: Int = 0
-    @Published var waterConsumedWeek: [Int: Int] = [0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0]
+    @Published var waterConsumedWeek: [Date: Int] = [:]
     @Published var healthStore: HKHealthStore = HKHealthStore()
     
     init() {
@@ -63,7 +63,9 @@ class WaterViewModel: ObservableObject {
             }
 
             let ounces = Int(sum.doubleValue(for: HKUnit.fluidOunceUS()))
-            self.waterConsumedToday = ounces
+            DispatchQueue.main.async {
+                self.waterConsumedToday = ounces
+            }
         }
         healthStore.execute(query)
     }
@@ -110,8 +112,11 @@ class WaterViewModel: ObservableObject {
             result.enumerateStatistics(from: startOfWeek, to: endOfWeek) { statistics, _ in
                 if let quantity = statistics.sumQuantity() {
                     let ounces = Int(quantity.doubleValue(for: HKUnit.fluidOunceUS()))
-                    let day = calendar.component(.weekday, from: statistics.startDate)
-                    self.waterConsumedWeek[day] = ounces
+
+                    let day = statistics.startDate
+                    DispatchQueue.main.async {
+                        self.waterConsumedWeek[day] = ounces
+                    }
                 }
             }
         }

@@ -9,91 +9,71 @@ import SwiftUI
 
 struct ExerciseTopContentView: View {
     @ObservedObject var exerciseViewModel: ExerciseViewModel
-    
     @State private var stepSliderValue: Double = 0
     
     var body: some View {
         ZStack {
-            HStack (spacing: 10) {
-                if (exerciseViewModel.editingStepGoal) {
-                    VStack (alignment: .center, spacing: 0) {
-                        Text("\(Int(stepSliderValue))")
-                            .bold()
-                            .font(.title)
-                            .id(stepSliderValue.description)
-
-                        Text("steps")
-                            .bold()
-                            .font(.caption2)
-                    }
-                    .frame(width: 110)
-                    .transition(.opacity)
-                    
-                    ZStack {
-                        Rectangle()
-                            .frame(height: 80)
-                            .cornerRadius(20)
-                            .foregroundStyle(.thinMaterial)
-                            .shadow(radius: 1)
-                        
-                        ExerciseTabItem().gradient
-                        .mask(Slider(value: $stepSliderValue, in: 1000...15000, step: 1000))
-                        .padding(.horizontal)
-                        
-                        Slider(value: $stepSliderValue, in: 1000...15000, step: 1000)
-                            .opacity(0.05)
-                            .padding(.horizontal)
-                    }
-                    .onAppear {
-                        stepSliderValue = exerciseViewModel.stepGoal
-                    }
-                    .onChange(of: stepSliderValue) { _ in
-                        UINotificationFeedbackGenerator().notificationOccurred(.warning) //TODO: make custom haptics and extract them
-                        exerciseViewModel.proposedStepGoal = Int(stepSliderValue)
-                    }
-                } else {
-                    VStack (spacing: 10) {
-                        ExerciseStatWidgetView()
-                        
-                        ExerciseFitnessWidgetView()
-                    }
-                    
-                    VStack (spacing: 10) {
-                        ExerciseStepsWidgetView(exerciseViewModel: exerciseViewModel)
-                        
-                        ExerciseHealthWidgetView()
-                    }
-                }
-            }
+            contentView
             
             HStack {
                 Spacer()
                 
-                Button(action: {
-                    withAnimation {
-                        if (exerciseViewModel.editingStepGoal) {
-                            exerciseViewModel.saveStepGoal()
-                        } else {
-                            exerciseViewModel.editingStepGoal = true
-                        }
-                    }
-                }, label: {
-                    Text(exerciseViewModel.editingStepGoal ? "Save Goal" : "Edit Goal")
-                        .bold()
-                        .foregroundStyle(.greenEnd)
-                        .transition(.opacity)
-                })
+                editGoalButton
             }
-            .offset(y: -62)
         }
-        
         .padding(.leading, 8)
         .padding(.top, 5)
         .onAppear {
-            withAnimation {
-                exerciseViewModel.readInitial()
+            exerciseViewModel.readInitial()
+            stepSliderValue = exerciseViewModel.stepGoal // Initialize slider
+        }
+    }
+
+    private var contentView: some View {
+        HStack(spacing: 10) {
+            if exerciseViewModel.editingStepGoal {
+                stepGoalEditor
+            } else {
+                defaultView
             }
         }
+    }
+
+    private var stepGoalEditor: some View {
+        SliderView(range: 1000...15000, gradient: ExerciseTabItem().gradient, step: 1000, label: "steps", sliderValue: $stepSliderValue)
+            .onChange(of: stepSliderValue) { _ in
+                exerciseViewModel.proposedStepGoal = Int(stepSliderValue)
+            }
+    }
+
+    private var defaultView: some View {
+        HStack {
+            VStack(spacing: 10) {
+                ExerciseStatWidgetView()
+                ExerciseFitnessWidgetView()
+            }
+            VStack(spacing: 10) {
+                ExerciseStepsWidgetView(exerciseViewModel: exerciseViewModel)
+                ExerciseHealthWidgetView()
+            }
+        }
+    }
+
+    private var editGoalButton: some View {
+        Button(action: {
+            withAnimation {
+                exerciseViewModel.editingStepGoal.toggle()
+                if !exerciseViewModel.editingStepGoal {
+                    exerciseViewModel.saveStepGoal()
+                }
+            }
+        }) {
+            Text(exerciseViewModel.editingStepGoal ? "Save Goal" : "Edit Goal")
+                .bold()
+                .foregroundStyle(.greenEnd)
+                .transition(.opacity)
+        }
+        .offset(y: -62)
     }
 }
 

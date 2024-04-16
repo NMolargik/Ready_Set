@@ -17,105 +17,117 @@ struct NavigationTutorialView: View {
     @State private var navigationDragHeight = 0.0
     
     let tabItems = TabItemType.allItems
-    
+
     var body: some View {
         ZStack {
             Color.base
-            
-            VStack {
+            VStack(spacing: 15) {
                 Spacer()
-                
-                HStack {
-                    if (showText) {
-                        VStack (alignment: .leading) {
-                            ForEach(tabItems, id: \.type) { tabItem in
-                                Image(tabItem.icon)
-                                    .resizable()
-                                    .frame(width: 20, height: 20)
-                                    .foregroundStyle(tabItem.color)
-                                    .transition(.opacity)
-                            }
-                        }
-                        .padding(.leading, 5)
-                        .frame(height: 120)
-                    
-                        Spacer()
-                        
-                        Text("You can navigate Ready, Set by swiping vertically, just as you have been!\n\nOr by tapping any of these icons wherever they appear.")
-                            .multilineTextAlignment(.leading)
-                            .font(.body)
-                            .foregroundStyle(.fontGray)
-                            .padding(.trailing)
-                    }
+
+                if showText {
+                    HStack {
+                        iconStack
+                        instructionText
+                    }     .transition(.opacity)
                     
                 }
-                .padding(.top, 50)
-                .padding(.horizontal, 8)
-                .onAppear {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                        withAnimation (.easeInOut(duration: 2)) {
-                            showText = true
-                        }
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                            withAnimation (.easeInOut(duration: 2)) {
-                                showMoreText = true
-                            }
-                        }
-                    }
-                }
-                .transition(.opacity)
                 
                 Spacer()
+           
                 
-                if (showMoreText) {
-                    Text("If you did not enter them previously, we recommend filling our your sets on the Exercise page for the full experience.")
-                        .multilineTextAlignment(.center)
-                        .font(.body)
-                        .foregroundStyle(.fontGray)
-                        .padding(.horizontal)
-                    
-                    Spacer()
-                    
-                    BouncingChevronView()
-                        .padding(.bottom, 15)
-                    
-                    Text("Swipe Upwards\nTo Enter Ready, Set")
-                        .font(.body)
-                        .multilineTextAlignment(.center)
-                        .foregroundStyle(.fontGray)
-                        .id("SplashText")
-                        .zIndex(1)
+                if showMoreText {
+                    moreInstructions
                 }
             }
             .padding(.bottom, 15)
-            .blur(radius: abs(navigationDragHeight) > 20.0 ? abs(navigationDragHeight * 0.01) : 0)
+            .onAppear(perform: animateText)
+            .blur(radius: blurRadiusForDrag())
         }
-        
-        .gesture(DragGesture(minimumDistance: 20, coordinateSpace: .global)
-            .onChanged({ value in
-                navigationDragHeight = value.translation.height
-            })
-            .onEnded({ value in
-                if (showMoreText) {
-                    withAnimation (.smooth) {
-                        handleDragEnd(navigationDragHeight: navigationDragHeight)
-                    }
-                }
-                
-                withAnimation {
-                    navigationDragHeight = 0.0
-                }
-            })
-        )
+        .gesture(dragGesture)
     }
     
-    func handleDragEnd(navigationDragHeight: CGFloat) {
-        print(navigationDragHeight)
-        if navigationDragHeight < 50 {
-            withAnimation (.easeInOut) {
-                color = .clear
-                appState = "running"
+    private var iconStack: some View {
+        VStack(alignment: .leading) {
+            ForEach(tabItems, id: \.type) { tabItem in
+                Image(tabItem.icon)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 20, height: 20)
+                    .foregroundStyle(tabItem.color)
             }
+        }
+        .frame(height: 120)
+        .padding(.leading, 5)
+    }
+    
+    private var instructionText: some View {
+        Text("You can navigate Ready, Set by swiping vertically, just as you have been!\n\nOr by tapping any of these icons wherever they appear.")
+            .multilineTextAlignment(.leading)
+            .font(.body)
+            .foregroundStyle(.fontGray)
+            .padding(.trailing)
+    }
+    
+    private var moreInstructions: some View {
+        VStack {
+            Text("If you did not enter them previously, we recommend filling out your sets on the Exercise page for the full experience.")
+                .multilineTextAlignment(.center)
+                .font(.body)
+                .foregroundStyle(.fontGray)
+                .padding(.horizontal)
+                .padding(.bottom, 50)
+            
+            BouncingChevronView().padding(.bottom, 15)
+            finalSwipeInstruction
+                .padding(.bottom, 10)
+        }
+    }
+    
+    private var finalSwipeInstruction: some View {
+        Text("Swipe Upwards\nTo Enter Ready, Set")
+            .font(.body)
+            .multilineTextAlignment(.center)
+            .foregroundStyle(.fontGray)
+            .id("FinalInstruction")
+            .zIndex(1)
+    }
+    
+    private func animateText() {
+        withAnimation(.easeInOut(duration: 2)) {
+            showText = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                withAnimation(.easeInOut(duration: 1.5)) {
+                    showMoreText = true
+                }
+            }
+        }
+    }
+    
+    private var dragGesture: some Gesture {
+        DragGesture(minimumDistance: 20, coordinateSpace: .global)
+            .onChanged { value in navigationDragHeight = value.translation.height }
+            .onEnded { value in
+                handleDrag(value: value)
+            }
+    }
+    
+    private func handleDrag(value: DragGesture.Value) {
+        withAnimation {
+            if showMoreText && value.translation.height < 50 {
+                handleDragEnd(navigationDragHeight: value.translation.height)
+            }
+            navigationDragHeight = 0.0
+        }
+    }
+    
+    private func blurRadiusForDrag() -> CGFloat {
+        abs(navigationDragHeight) > 20 ? abs(navigationDragHeight * 0.01) : 0
+    }
+    
+    private func handleDragEnd(navigationDragHeight: CGFloat) {
+        withAnimation(.easeInOut(duration: 2)) {
+            color = .clear
+            appState = "running"
         }
     }
 }

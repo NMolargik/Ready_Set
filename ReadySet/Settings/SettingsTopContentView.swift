@@ -11,81 +11,66 @@ struct SettingsTopContentView: View {
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
-        HStack (spacing: 10) {
-            Button(action: {
-                let impactMed = UIImpactFeedbackGenerator(style: .medium)
-                impactMed.impactOccurred()
-                
-                withAnimation {
-                    if let appSettings = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(appSettings) {
-                        DispatchQueue.main.async {
-                            UIApplication.shared.open(appSettings)
-                        }
-                    }
-                }
-            }, label: {
-                ZStack {
-                    Rectangle()
-                        .frame(height: 60)
-                        .cornerRadius(10)
-                        .foregroundStyle(.thinMaterial)
-                        .shadow(radius: 1)
-                    
-                    HStack {
-                        Spacer()
-                        
-                        Text("Health\nSettings")
-                            .bold()
-                            .multilineTextAlignment(.center)
-                            .foregroundStyle(.fontGray)
-                        
-                        Spacer()
-                        
-                        Image(systemName: "hand.raised.slash.fill")
-                            .font(.title)
-                            .foregroundStyle(.red, .black)
-                        
-                        Spacer()
-                    }
-                }
-            })
-            
-            Button(action: {
-                let impactMed = UIImpactFeedbackGenerator(style: .medium)
-                impactMed.impactOccurred()
-                
-                withAnimation {
-                    //TODO:
-                }
-            }, label: {
-                ZStack {
-                    Rectangle()
-                        .frame(height: 60)
-                        .cornerRadius(10)
-                        .foregroundStyle(.thinMaterial)
-                        .shadow(radius: 1)
-                    
-                    HStack {
-                        Spacer()
-                        
-                        Image(systemName: "trash.fill")
-                            .font(.title)
-                            .foregroundStyle(.fontGray)
-                        
-                        Spacer()
-                        
-                        Text("Delete\nSet Data")
-                            .bold()
-                            .multilineTextAlignment(.center)
-                            .foregroundStyle(.fontGray)
-                        Spacer()
-                    }
-                    
-                }
-            })
+        HStack(spacing: 10) {
+            settingButton(action: openAppSettings,
+                          labelText: "Health\nSettings",
+                          imageName: "heart.slash.fill",
+                          imageColors: [.black, .red])
+
+            settingButton(action: performDeleteAction,
+                          labelText: "Delete\nSet Data",
+                          imageName: "trash.fill",
+                          imageColors: [.fontGray, .fontGray])
         }
         .padding(.leading, 8)
         .padding(.top, 5)
+    }
+
+    private func settingButton(action: @escaping () -> Void, labelText: String, imageName: String, imageColors: [Color]) -> some View {
+        Button(action: {
+            let impactMed = UIImpactFeedbackGenerator(style: .medium)
+            impactMed.impactOccurred()
+            withAnimation {
+                action()
+            }
+        }, label: {
+            ZStack {
+                defaultRectangle
+                HStack {
+                    Spacer()
+                    Text(labelText)
+                        .bold()
+                        .multilineTextAlignment(.center)
+                        .foregroundStyle(.fontGray)
+                    Spacer()
+                    Image(systemName: imageName)
+                        .font(.title)
+                        .foregroundStyle(imageColors[0], imageColors[1])
+                    Spacer()
+                }
+            }
+        })
+    }
+
+    private var defaultRectangle: some View {
+        Rectangle()
+            .frame(height: 60)
+            .cornerRadius(10)
+            .foregroundStyle(.thinMaterial)
+            .shadow(radius: 1)
+    }
+
+    private func openAppSettings() {
+        if let appSettings = URL(string: UIApplication.openSettingsURLString),
+           UIApplication.shared.canOpenURL(appSettings) {
+            DispatchQueue.main.async {
+                UIApplication.shared.open(appSettings)
+            }
+        }
+    }
+
+    private func performDeleteAction() {
+        // TODO: Placeholder for the delete action
     }
 }
 

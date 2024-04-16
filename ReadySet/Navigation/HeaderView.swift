@@ -12,109 +12,93 @@ struct HeaderView: View {
     @AppStorage("userName") var username: String = ""
     @Binding var progress: Double
     @Binding var selectedTab: any ITabItem
-    
+
     var body: some View {
-        GeometryReader() { geometry in
-            VStack (spacing: 0) {
+        GeometryReader { geometry in
+            VStack(alignment: .leading, spacing: 0) {
                 Spacer()
                 
                 ZStack {
-                    HStack (spacing: 4) {
-                        Text(currentWeekday())
-                            .bold()
-                            .font(.caption)
-                            .foregroundStyle(.fontGray)
-                            .padding(.leading, 30)
-                        
-                        Text(currentMonth())
-                            .bold()
-                            .font(.caption)
-                            .foregroundStyle(.fontGray)
-                        
-                        Text(currentDay())
-                            .font(.caption)
-                            .bold()
-                            .foregroundStyle(.fontGray)
-                        
-                        Spacer()
-                        
-                        Text("Hey, \(username)")
-                            .bold()
-                            .truncationMode(.tail)
-                            .padding(.trailing, 30)
-                    }
-                    
-                    Image("TriangleIcon")
-                        .resizable()
-                        .renderingMode(.template)
-                        .frame(width: 20, height: 20)
-                        .foregroundColor(.primary)
-                        .padding(.bottom, -3)
-                        .padding(.horizontal, -5)
-                        .shadow(radius: 1, y: 1)
-                        .opacity(0.7)
-                    
-                    Spacer()
-                }
-                .foregroundStyle(Color("FontGray"))
-                .font(.caption)
-                .padding(.vertical, 10)
-                
-                ZStack (alignment: .leading) {
-                    Rectangle()
-                        .frame(height: 5)
-                        .foregroundStyle(.gray)
-                        .shadow(color: .gray, radius: 5, x: 0, y: 5)
-                    
-                    Rectangle()
-                        .frame(width: min(geometry.size.width * max(progress, 0.05), geometry.size.width), height: 5)
-                        .foregroundStyle(selectedTab.gradient)
-                        .shadow(color: selectedTab.secondaryColor, radius: 5, x: 0, y: 5)
-                        .animation(.easeInOut, value: progress)
+                    dateAndGreetingView
+                        .padding(.horizontal, 30)
+                    triangleIcon
                 }
                 
+                .padding(.vertical, 5)
+                
+                progressBar(geometry: geometry)
             }
-            .frame(height: 85)
-            .background {
-                Rectangle()
-                    .foregroundStyle(.ultraThinMaterial)
-            }
+            .foregroundStyle(.fontGray)
+            .background(Material.ultraThinMaterial)
         }
         .frame(height: 85)
     }
     
-    func currentWeekday() -> String {
-        return String(Date().formatted(Date.FormatStyle().weekday(.abbreviated)))
+    private var dateAndGreetingView: some View {
+        HStack(spacing: 4) {
+            Text(currentWeekday())
+                .bold()
+                .font(.caption)
+            
+            Text(currentMonth())
+                .bold()
+                .font(.caption)
+            
+            Text(currentDay())
+                .bold()
+                .font(.caption)
+            
+            Spacer()
+            
+            Text("Hey, \(username)")
+                .bold()
+                .font(.caption)
+                .truncationMode(.tail)
+            
+        }
+    }
+
+    private var triangleIcon: some View {
+        Image("TriangleIcon")
+            .resizable()
+            .renderingMode(.template)
+            .frame(width: 20, height: 20)
+            .opacity(0.7)
+    }
+
+    private func progressBar(geometry: GeometryProxy) -> some View {
+        ZStack(alignment: .leading) {
+            Rectangle()
+                .frame(height: 5)
+                .foregroundColor(.gray)
+            
+            Rectangle()
+                .frame(width: max(geometry.size.width * max(progress, 0.05), 0), height: 5)
+                .foregroundStyle(selectedTab.gradient)
+                .shadow(color: selectedTab.secondaryColor, radius: 8, x: 0, y: 8)
+                .animation(.easeInOut, value: progress)
+        }
     }
     
-    func currentMonth() -> String {
-        return String(Date().formatted(Date.FormatStyle().month(.wide)))
+    private func currentWeekday() -> String {
+        Date().formatted(Date.FormatStyle().weekday(.abbreviated))
+    }
+    
+    private func currentMonth() -> String {
+        Date().formatted(Date.FormatStyle().month(.wide))
     }
 
-    func currentDay() -> String {
-        return String(Date().formatted(Date.FormatStyle().day(.twoDigits)))
+    private func currentDay() -> String {
+        Date().formatted(Date.FormatStyle().day(.twoDigits))
+    }
+}
+// Preview
+struct HeaderView_Previews: PreviewProvider {
+    static var previews: some View {
+        HeaderView(progress: .constant(2), selectedTab: .constant(ExerciseTabItem()))
     }
 }
 
-struct RoundedTriangle: Shape {
-    func path(in rect: CGRect) -> Path {
-        var path = Path()
-
-        let length = min(rect.size.width, rect.size.height)
-        let triangleHeight = length * sqrt(3.0) / 2.0
-        let xOffset = (rect.size.width - length) / 2
-        let yOffset = (rect.size.height - triangleHeight) / 2
-        
-        let startPoint = CGPoint(x: rect.midX, y: rect.minY + yOffset)
-        
-        path.move(to: startPoint)
-        path.addLine(to: CGPoint(x: rect.minX + xOffset, y: rect.maxY - yOffset))
-        path.addLine(to: CGPoint(x: rect.maxX - xOffset, y: rect.maxY - yOffset))
-        path.addLine(to: startPoint)
-        
-        return path
-    }
-}
 
 
 #Preview {

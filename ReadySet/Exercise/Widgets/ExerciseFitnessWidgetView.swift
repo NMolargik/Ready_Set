@@ -11,17 +11,7 @@ struct ExerciseFitnessWidgetView: View {
     @State private var showAlert = false
     
     var body: some View {
-        Button(action: {
-            let impactMed = UIImpactFeedbackGenerator(style: .medium)
-            impactMed.impactOccurred()
-            guard let url = URL(string: "fitnessapp://") else { return }
-            
-            if UIApplication.shared.canOpenURL(url) {
-                UIApplication.shared.open(url)
-            } else {
-                showAlert = true
-            }
-        }, label: {
+        Button(action: openFitnessApp) {
             ZStack {
                 Rectangle()
                     .frame(height: 35)
@@ -39,10 +29,22 @@ struct ExerciseFitnessWidgetView: View {
                         .foregroundStyle(.base).colorInvert()
                 }
             }
-        })
+        }
         .alert("Fitness app not installed", isPresented: $showAlert) {
-            Button("Install", role: .cancel) { UIApplication.shared.open(URL(string: "https://apps.apple.com/us/app/fitness/id1208224953")!) }
-            Button("Cancel", role: .destructive) { showAlert.toggle() }
+            FitnessAlertButtonsView(showAlert: $showAlert)
+        }
+    }
+
+    private func openFitnessApp() {
+        let impactMed = UIImpactFeedbackGenerator(style: .medium)
+        impactMed.impactOccurred()
+        
+        guard let url = URL(string: "fitnessapp://") else { return }
+        
+        if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url)
+        } else {
+            showAlert = true
         }
     }
 }

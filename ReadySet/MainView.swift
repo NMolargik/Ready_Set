@@ -17,48 +17,63 @@ struct MainView: View {
     //    private var items: FetchedResults<Item>
     
     @AppStorage("appState") var appState: String = "splash"
-    
-    @State var color: Color = .clear
-    
-    var body: some View {
-        ZStack {
-            switch (appState) {
+        var healthController = HealthBaseController()
+        
+        @State var color: Color = .clear
+        
+        var body: some View {
+            ZStack {
+                contentView(for: appState)
+                    .animation(.easeInOut, value: appState)
+                    .transition(.opacity)
+                
+                onboardingOverlay()
+            }
+            .transition(.opacity)
+            .onAppear(perform: handleAppear)
+            .ignoresSafeArea()
+        }
+        
+        @ViewBuilder
+        private func contentView(for appState: String) -> some View {
+            switch appState {
             case "splash":
                 SplashView(color: $color)
-                
+                    .transition(.opacity)
             case "register":
                 UserRegistrationView(color: $color)
-                
+                    .transition(.opacity)
             case "goalSetting":
                 GoalSetView(color: $color)
-                
+                    .onAppear(perform: healthController.requestAuthorization)
+                    .transition(.opacity)
             case "navigationTutorial":
                 NavigationTutorialView(color: $color)
-                
+                    .transition(.opacity)
             default:
-                HomeView()
+                HomeView(healthStore: healthController.healthStore)
+                    .transition(.push(from: .bottom))
             }
-            
-            if (appState != "running") {
+        }
+        
+        @ViewBuilder
+        private func onboardingOverlay() -> some View {
+            if appState != "running" {
                 VStack {
                     Rectangle()
                         .foregroundStyle(LinearGradient(colors: [color, .clear, .clear], startPoint: .top, endPoint: .bottom))
                         .frame(height: 200)
                         .id("OnboardingHeader")
-                    
                     Spacer()
                 }
             }
         }
-        .transition(.opacity)
-        .onAppear {
-            if (appState != "running") {
+        
+        private func handleAppear() {
+            if appState != "running" {
                 appState = "splash"
             }
         }
-        .ignoresSafeArea()
-        
-    }
     
     //    private func addItem() {
     //        withAnimation {
@@ -98,19 +113,6 @@ struct MainView: View {
     //    formatter.timeStyle = .medium
     //    return formatter
     //}()
-        
-        
-    func currentWeekday() -> String {
-        return String(Date().formatted(Date.FormatStyle().weekday(.abbreviated)))
-    }
-    
-    func currentMonth() -> String {
-        return String(Date().formatted(Date.FormatStyle().month(.wide)))
-    }
-
-    func currentDay() -> String {
-        return String(Date().formatted(Date.FormatStyle().day(.twoDigits)))
-    }
 }
 
 #Preview {

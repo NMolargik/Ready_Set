@@ -11,91 +11,34 @@ struct WaterTopContentView: View {
     @ObservedObject var waterViewModel: WaterViewModel
     
     @State private var startAnimation: CGFloat = 0
-    @State private var waterSliderValue: Double = 1
+    @State private var waterSliderValue: Double = 8
     
     var body: some View {
-        HStack (spacing: 5) {
-            if (waterViewModel.editingWaterGoal) {
-                VStack (alignment: .center, spacing: 0) {
-                    Text("\(Int(waterSliderValue))")
-                        .bold()
-                        .font(.title)
-                        .id(waterSliderValue.description)
-
-                    Text("oz")
-                        .bold()
-                        .font(.caption2)
-                }
-                .frame(width: 80)
-                .transition(.move(edge: .trailing))
-            }
-
             ZStack {
-                Group {
-                    Rectangle()
-                        .frame(height: 80)
-                        .cornerRadius(20)
-                        .foregroundStyle(.thinMaterial)
-                        .shadow(radius: 1)
-                        .zIndex(1)
-                    
-                    if (waterViewModel.editingWaterGoal) {
-                        HStack {
-                            ZStack {
-                                WaterTabItem().gradient
-                                .mask(Slider(value: $waterSliderValue, in: 8...160, step: 8))
-                                
-                                Slider(value: $waterSliderValue, in: 8...160, step: 8)
-                                    .opacity(0.05)
-                            }
-                            .onAppear {
-                                waterSliderValue = waterViewModel.waterGoal
-                            }
-                            .onChange(of: waterSliderValue) { _ in
-                                UINotificationFeedbackGenerator().notificationOccurred(.warning) //TODO: make custom haptics and extract them
-                                waterViewModel.proposedWaterGoal = Int(waterSliderValue)
-                            }
-                            .padding(.horizontal)
+                if (waterViewModel.editingWaterGoal) {
+                    SliderView(range: 8...169, gradient: WaterTabItem().gradient, step: 8, label: "ounces", sliderValue: $waterSliderValue)
+                        .onAppear {
+                            waterSliderValue = waterViewModel.waterGoal
                         }
-                        .zIndex(2)
-                        .id("WaterBottle")
+                        .onChange(of: waterSliderValue) { _ in
+                            waterViewModel.proposedWaterGoal = Int(waterSliderValue)
+                        }
+                    .zIndex(2)
+                    .id("WaterBottle")
+                    
+                } else {
+                    Group {
+                        Rectangle()
+                            .frame(height: 80)
+                            .cornerRadius(20)
+                            .foregroundStyle(.thinMaterial)
+                            .shadow(radius: 1)
+                            .zIndex(1)
                         
-                    } else {
                         WaterWave(progress: min(CGFloat(Double(waterViewModel.waterConsumedToday) / waterViewModel.waterGoal), 0.98), waveHeight: 0.07, offset: startAnimation)
                             .fill(LinearGradient(colors: [.blueStart, .blueEnd], startPoint: .top, endPoint: .bottom))
                             .overlay(content: {
-                                ZStack {
-                                    if (waterViewModel.waterConsumedToday / Int(waterViewModel.waterGoal) > Int(0.5)) {
-                                        Circle()
-                                            .fill(.white.opacity(0.1))
-                                            .frame(width: 15, height: 15)
-                                            .offset(x: -20)
-                                        
-                                        Circle()
-                                            .fill(.white.opacity(0.1))
-                                            .frame(width: 15, height: 15)
-                                            .offset(x: 70, y: 10)
-                                        
-                                        Circle()
-                                            .fill(.white.opacity(0.1))
-                                            .frame(width: 25, height: 25)
-                                            .offset(x: -80, y: 2)
-                                    }
-                                    
-                                    Text("\(waterViewModel.waterConsumedToday) of \(Int(waterViewModel.waterGoal)) oz")
-                                        .bold()
-                                        .foregroundStyle(.secondary)
-                                        .offset(y: 20)
-                                        .padding(.horizontal, 5)
-                                        .background {
-                                            Rectangle()
-                                                .frame(height: 30)
-                                                .cornerRadius(20)
-                                                .foregroundStyle(.ultraThinMaterial)
-                                                .shadow(radius: 2)
-                                                .offset(y: 20)
-                                        }
-                                }
+                                waterWaveOverlay
                             })
                             .mask {
                                 Rectangle()
@@ -105,11 +48,12 @@ struct WaterTopContentView: View {
                             }
                             .zIndex(2)
                             .id("WaterBottle")
-                            .transition(.identity)
+                            .animation(.easeInOut(duration: 0.2), value: waterViewModel.editingWaterGoal)
+                            .transition(.opacity)
                     }
+                    .transition(.opacity)
                 }
 
-                
                 HStack {
                     Spacer()
                     
@@ -129,7 +73,6 @@ struct WaterTopContentView: View {
                     })
                 }
                 .offset(y: -62)
-            }
         }
         .padding(.leading, 8)
         .padding(.top, 5)
@@ -148,6 +91,41 @@ struct WaterTopContentView: View {
                     startAnimationIfNeeded()
                 }
             }
+        }
+    }
+    
+    private var waterWaveOverlay: some View {
+        ZStack {
+            if (waterViewModel.waterConsumedToday / Int(waterViewModel.waterGoal) > Int(0.5)) {
+                Circle()
+                    .fill(.white.opacity(0.1))
+                    .frame(width: 15, height: 15)
+                    .offset(x: -20)
+                
+                Circle()
+                    .fill(.white.opacity(0.1))
+                    .frame(width: 15, height: 15)
+                    .offset(x: 70, y: 10)
+                
+                Circle()
+                    .fill(.white.opacity(0.1))
+                    .frame(width: 25, height: 25)
+                    .offset(x: -80, y: 2)
+            }
+            
+            Text("\(waterViewModel.waterConsumedToday) of \(Int(waterViewModel.waterGoal)) oz")
+                .bold()
+                .foregroundStyle(.secondary)
+                .offset(y: 20)
+                .padding(.horizontal, 5)
+                .background {
+                    Rectangle()
+                        .frame(height: 30)
+                        .cornerRadius(20)
+                        .foregroundStyle(.ultraThinMaterial)
+                        .shadow(radius: 2)
+                        .offset(y: 20)
+                }
         }
     }
     

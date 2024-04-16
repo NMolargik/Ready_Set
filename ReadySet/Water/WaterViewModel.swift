@@ -16,39 +16,13 @@ class WaterViewModel: ObservableObject {
     @Published var editingWaterGoal = false
     @Published var waterConsumedToday: Int = 0
     @Published var waterConsumedWeek: [Int: Int] = [0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0]
-
-    private let healthStore = HKHealthStore()
+    @Published var healthStore: HKHealthStore = HKHealthStore()
     
     init() {
-        self.requestAuthorization()
-        self.readInitial()
         self.proposedWaterGoal = Int(self.waterGoal)
     }
     
-    func requestAuthorization() {
-        let toReads = Set([
-            HKObjectType.quantityType(forIdentifier: .dietaryWater)!,
-        ])
 
-        let toShares = Set([
-            HKObjectType.quantityType(forIdentifier: .dietaryWater)!,
-        ])
-
-        guard HKHealthStore.isHealthDataAvailable() else {
-            print("HealthKit - Error - Health Data Not Available")
-            return
-        }
-
-        healthStore.requestAuthorization(toShare: toShares, read: toReads) {
-            success, error in
-            if success {
-                self.readInitial()
-            } else {
-                print("HealthKit - Error - \(String(describing: error))")
-            }
-        }
-    }
-    
     func readInitial() {
         self.readWaterConsumedToday()
         self.readWaterConsumedWeek()

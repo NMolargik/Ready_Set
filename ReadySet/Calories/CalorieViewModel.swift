@@ -19,39 +19,10 @@ class CalorieViewModel: ObservableObject {
     @Published var caloriesConsumedWeek: [Int: Int] = [0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0]
     @Published var caloriesBurned = 0
     @Published var caloriesBurnedWeek: [Int: Int] = [0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0]
-
-    private let healthStore = HKHealthStore()
+    @Published var healthStore: HKHealthStore = HKHealthStore()
 
     init() {
-        self.requestAuthorization()
-        self.readInitial()
         self.proposedCalorieGoal = Int(self.calorieGoal)
-    }
-    
-    func requestAuthorization() {
-        let toReads = Set([
-            HKObjectType.quantityType(forIdentifier: .dietaryEnergyConsumed)!,
-            HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!,
-        ])
-
-        let toShares = Set([
-            HKObjectType.quantityType(forIdentifier: .dietaryEnergyConsumed)!,
-            HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!
-        ])
-
-        guard HKHealthStore.isHealthDataAvailable() else {
-            print("HealthKit - Error - Health Data Not Available")
-            return
-        }
-
-        healthStore.requestAuthorization(toShare: toShares, read: toReads) {
-            success, error in
-            if success {
-                self.readInitial()
-            } else {
-                print("HealthKit - Error - \(String(describing: error))")
-            }
-        }
     }
     
     func readInitial() {

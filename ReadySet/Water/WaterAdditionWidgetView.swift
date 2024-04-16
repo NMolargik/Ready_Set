@@ -50,33 +50,11 @@ struct WaterAdditionWidgetView: View {
                     .padding(.horizontal)
                     
                     HStack {
-                        ZStack {
-                            Rectangle()
-                                .cornerRadius(35)
-                                .foregroundStyle(value < 7 ? WaterTabItem().gradient : LinearGradient(colors: [.fontGray, .fontGray], startPoint: .leading, endPoint: .trailing))
-                                .shadow(radius: 4, x: 2, y: 2)
-                                .frame(width: 40, height: 40)
-                            
-                            Image(systemName: "arrow.right")
-                                .bold()
-                                .foregroundStyle(.white)
-                                .font(.title2)
-                                .shadow(radius: value > 7 ? 0 : 2)
-                                .opacity(value > 7 ? 0 : 1)
-                            
-                            Text("oz")
-                                .bold()
-                                .font(.caption2)
-                                .foregroundStyle(.white)
-                                .opacity(value < 7 ? 0 : 1)
-                        }
-                        .foregroundColor(Color.yellow)
+                        sliderHandle
                         .offset(x: sliderVal)
                         .gesture(
                             DragGesture(minimumDistance: 0)
                                 .onChanged { dragValue in
-                                    if (abs(dragValue.translation.width) < 0.1) {
-                                    }
                                     if dragValue.translation.width > 0 {
                                         let nextCoordinateValue = min(maxValue, self.lastCoordinateValue + dragValue.translation.width)
                                         self.value = ((nextCoordinateValue - minValue) / scaleFactor)  + lower
@@ -86,8 +64,6 @@ struct WaterAdditionWidgetView: View {
                                     }
                                 }
                                 .onEnded { dragValue in
-                                    if (abs(dragValue.translation.width) < 0.1) {
-                                    }
                                     if dragValue.translation.width > 0 {
                                         let nextCoordinateValue = min(maxValue, self.lastCoordinateValue + dragValue.translation.width)
                                         self.value = ((nextCoordinateValue - minValue) / scaleFactor)  + lower
@@ -126,6 +102,28 @@ struct WaterAdditionWidgetView: View {
         }
         .frame(height: 50)
         .padding(10)
+    }
+    
+    private var sliderHandle: some View {
+        ZStack {
+            Circle()
+                .foregroundStyle(value < 7 ? WaterTabItem().gradient : LinearGradient(colors: [.fontGray, .fontGray], startPoint: .leading, endPoint: .trailing))
+                .shadow(radius: 4, x: 2, y: 2)
+                .frame(width: 40, height: 40)
+            
+            Image(systemName: "arrow.right")
+                .bold()
+                .foregroundStyle(.white)
+                .font(.title2)
+                .shadow(radius: value > 7 ? 0 : 2)
+                .opacity(value > 7 ? 0 : 1)
+            
+            Text("oz")
+                .bold()
+                .font(.caption2)
+                .foregroundStyle(.white)
+                .opacity(value < 7 ? 0 : 1)
+        }
     }
     
     func mapSliderValue(value: Double) -> Int {

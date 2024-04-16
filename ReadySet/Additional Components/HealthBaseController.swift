@@ -30,7 +30,7 @@ struct HealthBaseController {
             return
         }
 
-        healthStore.requestAuthorization(toShare: [], read: toReads) {
+        healthStore.requestAuthorization(toShare: toShares, read: toReads) {
             success, error in
             if success {
             } else {

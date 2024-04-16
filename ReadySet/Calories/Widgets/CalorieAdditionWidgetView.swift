@@ -51,26 +51,7 @@ struct CalorieAdditionWidgetView: View {
                     .padding(.horizontal)
                     
                     HStack {
-                        ZStack {
-                            Rectangle()
-                                .cornerRadius(35)
-                                .foregroundStyle(value < 7 ? CalorieTabItem().gradient : LinearGradient(colors: [.fontGray, .fontGray], startPoint: .leading, endPoint: .trailing))
-                                .shadow(radius: 4, x: 2, y: 2)
-                                .frame(width: 40, height: 40)
-                            
-                            Image(systemName: "arrow.right")
-                                .bold()
-                                .foregroundStyle(.white)
-                                .font(.title2)
-                                .shadow(radius: value > 7 ? 0 : 2)
-                                .opacity(value > 7 ? 0 : 1)
-                            
-                            Text("cal")
-                                .bold()
-                                .font(.caption2)
-                                .foregroundStyle(.white)
-                                .opacity(value < 7 ? 0 : 1)
-                        }
+                        sliderHandle
                         .foregroundColor(Color.yellow)
                         .offset(x: sliderVal)
                         .gesture(
@@ -126,6 +107,28 @@ struct CalorieAdditionWidgetView: View {
         }
         .frame(height: 50)
         .padding(10)
+    }
+    
+    private var sliderHandle: some View {
+        ZStack {
+           Circle()
+                .foregroundStyle(value < 7 ? CalorieTabItem().gradient : LinearGradient(colors: [.fontGray, .fontGray], startPoint: .leading, endPoint: .trailing))
+                .shadow(radius: 4, x: 2, y: 2)
+                .frame(width: 40, height: 40)
+            
+            Image(systemName: "arrow.right")
+                .bold()
+                .foregroundStyle(.white)
+                .font(.title2)
+                .shadow(radius: value > 7 ? 0 : 2)
+                .opacity(value > 7 ? 0 : 1)
+            
+            Text("cal")
+                .bold()
+                .font(.caption2)
+                .foregroundStyle(.white)
+                .opacity(value < 7 ? 0 : 1)
+        }
     }
     
     func mapSliderValue(value: Double) -> Int {

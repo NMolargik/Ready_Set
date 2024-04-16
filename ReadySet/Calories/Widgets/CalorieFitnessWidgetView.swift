@@ -36,8 +36,7 @@ struct CalorieFitnessWidgetView: View {
             }
         })
         .alert("Fitness app not installed", isPresented: $showAlert) {
-            Button("Install", role: .cancel) { UIApplication.shared.open(URL(string: "https://apps.apple.com/us/app/fitness/id1208224953")!) }
-            Button("Cancel", role: .destructive) { showAlert.toggle() }
+            FitnessAlertButtonsView(showAlert: $showAlert)
         }
     }
 }

@@ -21,6 +21,7 @@ struct WaterBottomContentView: View {
             VStack {
                 Spacer()
                 
+                WaterChartView(data: waterViewModel.waterConsumedWeek)
                 WaterAdditionWidgetView(waterViewModel: waterViewModel)
                 
                 //TODO: Add water chart

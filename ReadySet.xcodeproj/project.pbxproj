@@ -19,6 +19,7 @@
 		0E940A812BC6FE0400144477 /* ReadySetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E940A802BC6FE0400144477 /* ReadySetTests.swift */; };
 		0E940A8B2BC6FE0400144477 /* ReadySetUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E940A8A2BC6FE0400144477 /* ReadySetUITests.swift */; };
 		0E940A8D2BC6FE0400144477 /* ReadySetUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E940A8C2BC6FE0400144477 /* ReadySetUITestsLaunchTests.swift */; };
+		0E98616A2BCE971F00488D9E /* WaterChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9861692BCE971F00488D9E /* WaterChartView.swift */; };
 		EB3AB33C2BC70CF5008B6F22 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB33A2BC70CF5008B6F22 /* HeaderView.swift */; };
 		EB3AB33D2BC70CF5008B6F22 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB33B2BC70CF5008B6F22 /* HomeView.swift */; };
 		EB3AB33F2BC710D1008B6F22 /* NavColumnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB33E2BC710D1008B6F22 /* NavColumnView.swift */; };
@@ -104,6 +105,7 @@
 		0E940A862BC6FE0400144477 /* ReadySetUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReadySetUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E940A8A2BC6FE0400144477 /* ReadySetUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadySetUITests.swift; sourceTree = "<group>"; };
 		0E940A8C2BC6FE0400144477 /* ReadySetUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadySetUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		0E9861692BCE971F00488D9E /* WaterChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterChartView.swift; sourceTree = "<group>"; };
 		EB3AB33A2BC70CF5008B6F22 /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		EB3AB33B2BC70CF5008B6F22 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		EB3AB33E2BC710D1008B6F22 /* NavColumnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavColumnView.swift; sourceTree = "<group>"; };
@@ -377,6 +379,7 @@
 				EB4D9C562BCC8B6B0071BA99 /* WaterViewModel.swift */,
 				EB3AB3522BC72A3A008B6F22 /* WaterTopContentView.swift */,
 				EB3AB35F2BC76FE5008B6F22 /* WaterBottomContentView.swift */,
+				0E9861692BCE971F00488D9E /* WaterChartView.swift */,
 				EB7111002BC8B3C20078F796 /* WaterAdditionWidgetView.swift */,
 				EB4D9C582BCC8F420071BA99 /* WaterWave.swift */,
 			);
@@ -598,6 +601,7 @@
 				0E940A6B2BC6FE0200144477 /* ReadySetApp.swift in Sources */,
 				EB3AB36A2BC77B19008B6F22 /* ExerciseHealthWidgetView.swift in Sources */,
 				EB3AB3482BC71204008B6F22 /* WaterTabItem.swift in Sources */,
+				0E98616A2BCE971F00488D9E /* WaterChartView.swift in Sources */,
 				EB3AB35C2BC76FCD008B6F22 /* ExerciseBottomContentView.swift in Sources */,
 				EB4D9C5B2BCD85E60071BA99 /* CalorieAdditionWidgetView.swift in Sources */,
 				EB4D9C592BCC8F420071BA99 /* WaterWave.swift in Sources */,

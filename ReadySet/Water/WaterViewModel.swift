@@ -33,6 +33,7 @@ class WaterViewModel: ObservableObject {
             self.addWaterConsumed(ounces: waterOunces) {
                 withAnimation (.easeInOut) {
                     self.readWaterConsumedToday()
+                    self.readWaterConsumedWeek()
                 }
             }
         }

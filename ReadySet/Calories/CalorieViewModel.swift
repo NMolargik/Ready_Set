@@ -15,10 +15,10 @@ class CalorieViewModel: ObservableObject {
     @Published var proposedCalorieGoal = 0
     @Published var editingCalorieGoal = false
     
-    @Published var caloriesConsumed = 0
-    @Published var caloriesConsumedWeek: [Int: Int] = [0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0]
-    @Published var caloriesBurned = 0
-    @Published var caloriesBurnedWeek: [Int: Int] = [0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0]
+    @Published var caloriesConsumedToday: Int = 0
+    @Published var caloriesConsumedWeek: [Date : Int] = [:]
+    @Published var caloriesBurnedToday: Int = 0
+    @Published var caloriesBurnedWeek: [Date : Int] = [:]
     @Published var healthStore: HKHealthStore = HKHealthStore()
 
     init() {
@@ -37,6 +37,9 @@ class CalorieViewModel: ObservableObject {
             self.addCaloriesConsumed(calories: calories) {
                 withAnimation (.easeInOut) {
                     self.readEnergyConsumedToday()
+                    self.readEnergyConsumedWeek()
+                    self.readEnergyBurnedWeek()
+                    self.readEnergyBurnedToday()
                 }
             }
         }
@@ -68,7 +71,7 @@ class CalorieViewModel: ObservableObject {
 
             let calories = Int(sum.doubleValue(for: HKUnit.kilocalorie()))
             DispatchQueue.main.async {
-                self.caloriesConsumed = calories
+                self.caloriesConsumedToday = calories
             }
         }
         healthStore.execute(query)
@@ -116,7 +119,8 @@ class CalorieViewModel: ObservableObject {
             result.enumerateStatistics(from: startOfWeek, to: endOfWeek) { statistics, _ in
                 if let quantity = statistics.sumQuantity() {
                     let kilocalorie = Int(quantity.doubleValue(for: HKUnit.kilocalorie()))
-                    let day = calendar.component(.weekday, from: statistics.startDate)
+                    
+                    let day = statistics.startDate
                     DispatchQueue.main.async {
                         self.caloriesConsumedWeek[day] = kilocalorie
                     }
@@ -153,7 +157,7 @@ class CalorieViewModel: ObservableObject {
 
             let calories = Int(sum.doubleValue(for: HKUnit.kilocalorie()))
             DispatchQueue.main.async {
-                self.caloriesBurned = calories
+                self.caloriesBurnedToday = calories
             }
         }
         healthStore.execute(query)
@@ -201,7 +205,8 @@ class CalorieViewModel: ObservableObject {
             result.enumerateStatistics(from: startOfWeek, to: endOfWeek) { statistics, _ in
                 if let quantity = statistics.sumQuantity() {
                     let kilocalorie = Int(quantity.doubleValue(for: HKUnit.kilocalorie()))
-                    let day = calendar.component(.weekday, from: statistics.startDate)
+                    
+                    let day = statistics.startDate
                     DispatchQueue.main.async {
                         self.caloriesBurnedWeek[day] = kilocalorie
                     }

@@ -41,7 +41,7 @@ struct WaterAdditionWidgetView: View {
                         
                         Spacer()
                         
-                        Text("slide and release to add water")
+                        Text("slide and release to consume water")
                             .bold()
                             .font(.caption)
                             .foregroundStyle(.white)

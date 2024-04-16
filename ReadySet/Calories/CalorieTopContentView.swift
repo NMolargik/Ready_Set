@@ -37,11 +37,11 @@ struct CalorieTopContentView: View {
 
     private var calorieDisplay: some View {
         VStack {
-            Gauge(value: min(calorieViewModel.calorieGoal, Double(calorieViewModel.caloriesConsumed)), in: 0...calorieViewModel.calorieGoal) {
+            Gauge(value: min(calorieViewModel.calorieGoal, Double(calorieViewModel.caloriesConsumedToday)), in: 0...calorieViewModel.calorieGoal) {
                 EmptyView()
             }
             .tint(CalorieTabItem().gradient)
-            .animation(.easeInOut, value: calorieViewModel.caloriesConsumed)
+            .animation(.easeInOut, value: calorieViewModel.caloriesConsumedToday)
             
             calorieConsumptionDetails
             Spacer()
@@ -53,11 +53,11 @@ struct CalorieTopContentView: View {
     private var calorieConsumptionDetails: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text("\(Int(calorieViewModel.caloriesConsumed)) / \(Int(calorieViewModel.calorieGoal)) Consumed")
+                Text("\(Int(calorieViewModel.caloriesConsumedToday)) / \(Int(calorieViewModel.calorieGoal)) Consumed")
                     .bold()
                     .foregroundColor(.fontGray)
                 
-                Text("~\(Int(calorieViewModel.caloriesBurned)) Burned")
+                Text("~\(Int(calorieViewModel.caloriesBurnedToday)) Burned")
                     .bold()
                     .foregroundColor(.fontGray)
             }

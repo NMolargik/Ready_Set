@@ -50,7 +50,7 @@ struct HomeView: View {
         case .water:
             return .constant(Double(waterViewModel.waterConsumedToday) / waterViewModel.waterGoal)
         case .calorie:
-            return .constant(Double(calorieViewModel.caloriesConsumed) / calorieViewModel.calorieGoal)
+            return .constant(Double(calorieViewModel.caloriesConsumedToday) / calorieViewModel.calorieGoal)
         case .settings:
             return .constant(1.0)
         }

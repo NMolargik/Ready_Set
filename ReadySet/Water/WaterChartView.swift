@@ -5,32 +5,85 @@
 //  Created by Nicholas Yoder on 4/16/24.
 //
 
-import Foundation
 import SwiftUI
+import Charts
 
 struct WaterChartView: View {
-    let data: [Date: Int]
+    @ObservedObject var waterViewModel: WaterViewModel
+    
+    var averageOunces: Double {
+        let totalOunces = waterViewModel.waterConsumedWeek.values.reduce(0, +)
+        return totalOunces > 0 ? Double(totalOunces) / Double(waterViewModel.waterConsumedWeek.count) : 0
+    }
 
     var body: some View {
-        VStack {
-            Text("Water Consumption Chart")
-                .font(.title)
-                .padding()
-
-            // Chart View
-            ScrollView(.horizontal) {
-                HStack(spacing: 10) {
-                    ForEach(Array(data.keys.sorted()), id: \.self) { date in
-                        VStack {
-                            Text("\(formattedDate(date))")
-                            Rectangle()
-                                .fill(Color.blue)
-                                .frame(width: 50, height: CGFloat(data[date]!))
-                        }
+        VStack (spacing: 0) {
+            Text("Water Consumption")
+                .bold()
+                .font(.title3)
+                .foregroundStyle(.fontGray)
+            
+            Chart {
+                ForEach(Array(waterViewModel.waterConsumedWeek).sorted(by: { $0.key < $1.key }), id: \.key) { (date, ounces) in
+                    LineMark(
+                        x: .value("Date", date),
+                        y: .value("Ounces", ounces)
+                    )
+                }
+                .foregroundStyle(.blue)
+                .interpolationMethod(.cardinal)
+                .symbol(.circle)
+                
+                ForEach(Array(waterViewModel.waterConsumedWeek).sorted(by: { $0.key < $1.key }), id: \.key) { (date, ounces) in
+                    AreaMark(
+                        x: .value("Date", date),
+                        y: .value("Ounces", ounces)
+                    )
+                }
+                .interpolationMethod(.cardinal)
+                .foregroundStyle(LinearGradient(colors: [.blueEnd, .clear], startPoint: .top, endPoint: .bottom))
+                
+                RuleMark(
+                    y: .value("Average Ounces", averageOunces)
+                )
+                .foregroundStyle(LinearGradient(colors: [.blueEnd, .base], startPoint: .leading, endPoint: .trailing))
+                .annotation(position: .top, alignment: .leading) {
+                    Text("Avg: \(Int(averageOunces))oz")
+                        .bold()
+                        .font(.caption)
+                        .foregroundColor(.primary)
+                        .opacity(0.7)
+                        .padding(.leading, 4)
+                }
+                
+                RuleMark(
+                    y: .value("Goal", waterViewModel.waterGoal)
+                )
+                .opacity(0.7)
+                .foregroundStyle(LinearGradient(colors: [.blueEnd, .base], startPoint: .leading, endPoint: .trailing))
+                .annotation(position: .top, alignment: .leading) {
+                    Text("Goal: \(Int(waterViewModel.waterGoal))oz")
+                        .bold()
+                        .font(.caption)
+                        .foregroundColor(.primary)
+                        .opacity(0.7)
+                        .padding(.leading, 4)
+                }
+            }
+            .animation(.easeInOut, value: waterViewModel.waterConsumedWeek)
+            .chartXAxisLabel("Date")
+            .chartYAxisLabel("Ounces")
+            .chartXAxis {
+                AxisMarks(values: .stride(by: .day)) { value in
+                    AxisGridLine()
+                    AxisTick()
+                    if let date = value.as(Date.self) {
+                        AxisValueLabel(formattedDate(date))
                     }
                 }
-                .padding()
             }
+            .aspectRatio(1, contentMode: .fit)
+            .padding()
         }
     }
 
@@ -43,9 +96,6 @@ struct WaterChartView: View {
 }
 
 #Preview {
-    WaterChartView(data: [
-        Calendar.current.date(from: DateComponents(year: 2024, month: 4, day: 15))!: 16,
-        Calendar.current.date(from: DateComponents(year: 2024, month: 4, day: 16))!: 44
-    ])
+    WaterChartView(waterViewModel: WaterViewModel())
 }
 

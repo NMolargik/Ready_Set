@@ -42,7 +42,7 @@ struct CalorieAdditionWidgetView: View {
                         
                         Spacer()
                         
-                        Text("slide and release to add calories")
+                        Text("slide and release to consume calories")
                             .bold()
                             .font(.caption)
                             .foregroundStyle(.white)

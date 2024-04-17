@@ -101,7 +101,7 @@ class WaterViewModel: ObservableObject {
             quantitySamplePredicate: predicate,
             options: .cumulativeSum,
             anchorDate: startOfWeek,
-            intervalComponents: DateComponents(day: 1) // interval to make sure the sum is per 1 day
+            intervalComponents: DateComponents(day: 1)
         )
 
         query.initialResultsHandler = { _, result, error in

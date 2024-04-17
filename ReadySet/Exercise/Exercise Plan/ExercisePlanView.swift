@@ -8,51 +8,63 @@
 import SwiftUI
 
 struct ExercisePlanView: View {
-    @ObservedObject var exerciseViewModel = ExerciseViewModel()
-    @Binding var isEditing: Bool
+    @ObservedObject var exerciseViewModel: ExerciseViewModel
     @Binding var actualDay: Int
-    @State var selectedDay: Int = 1
+    @State private var selectedDay: Int = 1
     
-    let weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    private let weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     
     var body: some View {
         VStack {
+            HStack(spacing: 6) {
+                ForEach(weekDays.indices, id: \.self) { index in
+                    Text(selectedDay == index ? weekDays[index] : String(weekDays[index].prefix(1)))
+                        .font(.system(size: selectedDay == index ? 18 : 10))
+                        .bold()
+                        .foregroundStyle(selectedDay == index ? LinearGradient(colors: [.greenEnd, .green, .greenEnd], startPoint: .leading, endPoint: .trailing) : LinearGradient(colors: [.secondary], startPoint: .leading, endPoint: .trailing))
+                        .padding(4)
+                        .onTapGesture {
+                            withAnimation(.easeInOut) {
+                                selectedDay = index
+                            }
+                        }
+                        .animation(.bouncy, value: selectedDay)
+                        .zIndex(selectedDay == index ? 2 : 1)
+                        .transition(.opacity)
+                }
+                Spacer()
+                editButton
+            }
+            .padding(.horizontal, 10)
+            .padding(.top, 5)
+            
             TabView(selection: $selectedDay) {
-                ForEach(0..<weekDays.count, id: \.self) { index in
-                    ExercisePlanDayView(exerciseViewModel: exerciseViewModel, isEditing: isEditing, selectedDay: $selectedDay)
+                ForEach(weekDays.indices, id: \.self) { index in
+                    ExercisePlanDayView(exerciseViewModel: exerciseViewModel, selectedDay: $selectedDay)
                         .tag(index)
                 }
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
-            
-            HStack(spacing: 0) {
-                ForEach(weekDays.indices, id: \.self) { index in
-                    Text(String(weekDays[index].prefix(1)))
-                        .font(.system(size: selectedDay == index ? 18 : 10))
-                        .bold()
-                        .frame(width: 25)
-                        //.background(selectedDay == index ? Color.blue : Color.clear)
-                        .foregroundColor(selectedDay == index ? .primary : .secondary)
-                        .clipShape(Circle())
-                        .onTapGesture {
-                            withAnimation {
-                                selectedDay = index
-                            }
-                        }
-                        .animation(.easeInOut, value: selectedDay)
-                }
-            }
-            .padding(.horizontal)
-            .clipShape(Capsule())
-            .padding(.horizontal, 10)
         }
         .padding(5)
     }
+
+    private var editButton: some View {
+        Button(exerciseViewModel.editingSets ? "Save" : "Edit") {
+            withAnimation {
+                exerciseViewModel.editingSets.toggle()
+                //TODO: save stuff
+            }
+        }
+        .buttonStyle(.plain)
+        .bold()
+        .foregroundStyle(.greenEnd)
+    }
 }
 
-// Preview your view
+// Preview
 struct ExercisePlanView_Previews: PreviewProvider {
     static var previews: some View {
-        ExercisePlanView(exerciseViewModel: ExerciseViewModel(), isEditing: .constant(false), actualDay: .constant(2))
+        ExercisePlanView(exerciseViewModel: ExerciseViewModel(), actualDay: .constant(2))
     }
 }

@@ -9,7 +9,7 @@ import SwiftUI
 import Foundation
 
 struct ExercisePlanDayView: View {
-    @State var isEditing: Bool
+    @ObservedObject var exerciseViewModel: ExerciseViewModel
     @Binding var selectedDay: Int
     
     @State var exerciseEntries: [ExerciseEntry] = []
@@ -19,25 +19,8 @@ struct ExercisePlanDayView: View {
     
     var body: some View {
         VStack {
-            HStack {
-                Text(weekDays[selectedDay])
-                
-                Spacer()
-                
-                Button(action: {
-                    withAnimation {
-                        isEditing.toggle()
-                    }
-                    
-                    //TODO: save stuff
-                }, label: {
-                    Text(isEditing ? "Save" : "Edit")
-                })
-                .buttonStyle(.plain)
-            }
-            
             ForEach($exerciseEntries) { $exerciseEntry in
-                ExerciseEntryView(exerciseEntry: $exerciseEntry, exerciseSetEntries: $exerciseSetEntries, selectedDay: $selectedDay, isEditing: $isEditing)
+                ExerciseEntryView(exerciseEntry: $exerciseEntry, exerciseSetEntries: $exerciseSetEntries, selectedDay: $selectedDay, isEditing: $exerciseViewModel.editingSets)
             }
             
             Button(action: {
@@ -223,68 +206,6 @@ struct ExercisePlanDayView_Previews: PreviewProvider {
             ExerciseSetEntry(id: UUID(), exerciseID: uuid3.uuidString, activityType: "weight", setOrder: 1, repetitions: 10, duration: 0, weightLifted: 210),
         ]
         
-        return ExercisePlanDayView(exerciseViewModel: ExerciseViewModel(), isEditing: true, selectedDay: .constant(1), exerciseEntries: exerciseEntries, exerciseSetEntries: exerciseSetEntries)
-    }
-}
-
-import Foundation
-import CoreData
-
-@objc(ExerciseEntry)
-public class ExerciseEntry: NSManagedObject, Identifiable {
-    @NSManaged public var id: UUID
-    @NSManaged public var day: Int16
-    @NSManaged public var exerciseOrder: Int16
-    @NSManaged public var exerciseName: String
-    
-    convenience init(
-        id: UUID,
-        day: Int16,
-        exerciseOrder: Int16,
-        exerciseName: String
-    ) {
-        let entityName = "ExerciseEntry" // Set the entity name here
-        guard let entity = NSEntityDescription.entity(forEntityName: entityName, in: PersistenceController.shared.container.viewContext) else {
-            fatalError("Failed to initialize ExerciseEntry entity")
-        }
-        
-        self.init(entity: entity, insertInto: PersistenceController.shared.container.viewContext)
-        
-        self.id = id
-        self.day = day
-        self.exerciseOrder = exerciseOrder
-        self.exerciseName = exerciseName
-    }
-}
-
-@objc(ExerciseSetEntry)
-public class ExerciseSetEntry: NSManagedObject, Identifiable {
-    @NSManaged public var id: UUID
-    @NSManaged public var exerciseID: String
-    @NSManaged public var activityType: String
-    @NSManaged public var setOrder: Int16
-    @NSManaged public var repetitions: Int16
-    @NSManaged public var duration: Int16
-    @NSManaged public var weightLifted: Int16
-
-    convenience init(
-        id: UUID,
-        exerciseID: String,
-        activityType: String,
-        setOrder: Int16,
-        repetitions: Int16,
-        duration: Int16,
-        weightLifted: Int16
-    ) {
-        let entity = PersistenceController.shared.getExerciseSetEntry()
-        self.init(entity: entity, insertInto: nil)
-        
-        self.id = id
-        self.exerciseID = exerciseID
-        self.activityType = activityType
-        self.setOrder = setOrder
-        self.repetitions = repetitions
-        self.duration = duration
-        self.weightLifted = weightLifted
+        return ExercisePlanDayView(exerciseViewModel: ExerciseViewModel(), selectedDay: .constant(1), exerciseEntries: exerciseEntries, exerciseSetEntries: exerciseSetEntries)
     }
 }

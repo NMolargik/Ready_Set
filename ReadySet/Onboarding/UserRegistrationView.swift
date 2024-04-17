@@ -24,7 +24,7 @@ struct UserRegistrationView: View {
         }
         .gesture(dragGesture)
         .onAppear {
-            username = ""  // Reset username on view appear
+            username = ""
         }
     }
     
@@ -79,7 +79,7 @@ struct UserRegistrationView: View {
             .font(.title)
             .foregroundStyle(.fontGray)
             .id("WelcomeText")
-            .padding(.bottom, showTextField ? 0 : 50)  // Adjust padding based on textField visibility
+            .padding(.bottom, showTextField ? 0 : 50)
     }
     
     private var instructionText: some View {

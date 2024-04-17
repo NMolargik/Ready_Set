@@ -30,9 +30,8 @@ class HomeViewModel: ObservableObject {
     func needRefreshFromDate() -> Bool {
         let currentDate = Date()
         let calendar = Calendar.current
-
-        // Strip time components to get only the date
         let dateComponents = calendar.dateComponents([.year, .month, .day], from: currentDate)
+        
         if let dateOnly = calendar.date(from: dateComponents) {
             if dateOnly.description != lastUseDate {
                 lastUseDate = dateOnly.description

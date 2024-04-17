@@ -39,3 +39,4 @@ public class ExerciseSetEntry: NSManagedObject, Identifiable {
         self.weightLifted = weightLifted
     }
 }
+

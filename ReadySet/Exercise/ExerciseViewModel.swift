@@ -15,6 +15,7 @@ class ExerciseViewModel: ObservableObject {
     @Published var exerciseEntryMaster : [ExerciseEntry] = [ExerciseEntry]()
     @Published var exerciseSetEntryMaster: [ExerciseSetEntry] = [ExerciseSetEntry]()
     @Published var exerciseSetRecordEntryMaster: [ExerciseSetRecordEntry] = [ExerciseSetRecordEntry]()
+    @Published var editingSets = false
     @Published var editingStepGoal = false
     @Published var proposedStepGoal = 1000
     @Published var stepsToday = 0
@@ -30,9 +31,9 @@ class ExerciseViewModel: ObservableObject {
     
     init() {
         self.refreshDate()
-//        exerciseEntryMaster = exerciseEntryRepo.loadAll() ?? [ExerciseEntry]()
-//        exerciseSetEntryMaster = exerciseSetEntryRepo.loadAll() ?? [ExerciseSetEntry]()
-////        exerciseSetRecordEntryMaster = exerciseSetRecordEntryRepo.loadAll() ?? [ExerciseSetRecordEntry]()
+        exerciseEntryMaster = exerciseEntryRepo.loadAll() ?? [ExerciseEntry]()
+        exerciseSetEntryMaster = exerciseSetEntryRepo.loadAll() ?? [ExerciseSetEntry]()
+        exerciseSetRecordEntryMaster = exerciseSetRecordEntryRepo.loadAll() ?? [ExerciseSetRecordEntry]()
     }
     
     func readInitial() {
@@ -125,7 +126,7 @@ class ExerciseViewModel: ObservableObject {
             quantitySamplePredicate: predicate,
             options: .cumulativeSum,
             anchorDate: startOfWeek,
-            intervalComponents: DateComponents(day: 1) // interval to make sure the sum is per 1 day
+            intervalComponents: DateComponents(day: 1)
         )
 
         query.initialResultsHandler = { _, result, error in

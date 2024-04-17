@@ -22,17 +22,20 @@ struct HomeView: View {
 
     var body: some View {
         VStack {
+            
             HeaderView(
                 progress: progressForSelectedTab,
                 selectedTab: $homeViewModel.selectedTab
             )
             .padding(.bottom, 15)
             
-            NavColumnView(exerciseViewModel: exerciseViewModel,
-                          waterViewModel: waterViewModel, energyViewModel: energyViewModel,
-                          tabItems: $homeViewModel.tabItems, selectedTab: $homeViewModel.selectedTab,
-                          navigationDragHeight: $navigationDragHeight)
-            
+            if (!exerciseViewModel.editingSets || homeViewModel.selectedTab.type != .exercise) {
+                NavColumnView(exerciseViewModel: exerciseViewModel,
+                              waterViewModel: waterViewModel, energyViewModel: energyViewModel,
+                              tabItems: $homeViewModel.tabItems, selectedTab: $homeViewModel.selectedTab,
+                              navigationDragHeight: $navigationDragHeight)
+            }
+                
             BottomView(exerciseViewModel: exerciseViewModel, waterViewModel: waterViewModel, energyViewModel: energyViewModel,
                        selectedTab: $homeViewModel.selectedTab)
                 .blur(radius: effectiveBlurRadius)
@@ -73,11 +76,17 @@ struct HomeView: View {
 
     private var dragGesture: some Gesture {
         DragGesture(minimumDistance: 20, coordinateSpace: .global)
-            .onChanged { value in navigationDragHeight = value.translation.height }
+            .onChanged { value in
+                if (!exerciseViewModel.editingSets || homeViewModel.selectedTab.type != .exercise) {
+                    navigationDragHeight = value.translation.height
+                }
+            }
             .onEnded { value in
-                withAnimation(.smooth) {
-                    homeViewModel.handleDragEnd(navigationDragHeight: navigationDragHeight)
-                    navigationDragHeight = 0.0
+                if (!exerciseViewModel.editingSets || homeViewModel.selectedTab.type != .exercise) {
+                    withAnimation(.smooth) {
+                        homeViewModel.handleDragEnd(navigationDragHeight: navigationDragHeight)
+                        navigationDragHeight = 0.0
+                    }
                 }
             }
     }

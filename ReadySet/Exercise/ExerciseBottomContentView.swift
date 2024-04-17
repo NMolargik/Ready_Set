@@ -14,7 +14,7 @@ struct ExerciseBottomContentView: View {
     
     var body: some View {
         //TODO: add a few more things
-        ExercisePlanView(isEditing: $isEditingPlan, actualDay: $exerciseViewModel.currentDay)
+        ExercisePlanView(exerciseViewModel: exerciseViewModel, actualDay: $exerciseViewModel.currentDay)
     }
 }
 

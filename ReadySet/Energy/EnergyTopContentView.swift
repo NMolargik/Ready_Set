@@ -38,11 +38,6 @@ struct EnergyTopContentView: View {
         }
         .padding(.leading, 8)
         .padding(.top, 5)
-        .onAppear {
-            withAnimation {
-                energyViewModel.readInitial()
-            }
-        }
     }
 
     private var EnergyDisplay: some View {
@@ -63,7 +58,7 @@ struct EnergyTopContentView: View {
     private var EnergyConsumptionDetails: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text("\(Int(energyViewModel.energyConsumedToday)) / \(Int(energyViewModel.energyGoal)) Consumed")
+                Text("~\(Int(energyViewModel.energyConsumedToday)) \(useMetric ? "kJ" : "cal") Consumed")
                     .bold()
                     .foregroundColor(.fontGray)
                 
@@ -96,7 +91,8 @@ struct EnergyTopContentView: View {
                     .foregroundStyle(.orangeEnd)
                     .transition(.opacity)
             }
-        .offset(y: -62)
+            .buttonStyle(.plain)
+            .offset(y: -62)
         }
     }
 

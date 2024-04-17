@@ -23,6 +23,11 @@ struct SettingsBottomContentView: View {
                 .lineLimit(1)
                 .padding(.bottom, 5)
             
+            Text("(This will update when you leave Settings)")
+                .font(.system(size: 8, weight: .regular))
+                .lineLimit(1)
+                .padding(.bottom, 5)
+            
             TextField("First Name", text: $name)
                 .textFieldStyle(OutlinedTextFieldStyle())
                 .padding(.horizontal)

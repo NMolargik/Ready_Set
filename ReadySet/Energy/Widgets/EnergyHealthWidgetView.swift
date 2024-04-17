@@ -24,6 +24,7 @@ struct EnergyHealthWidgetView: View {
                     .foregroundStyle(.pink)
             }
         })
+        .buttonStyle(.plain)
     }
 }
 

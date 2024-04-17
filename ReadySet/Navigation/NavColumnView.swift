@@ -26,7 +26,7 @@ struct NavColumnView: View {
                         tabImage(tabItem)
                     }
                     .padding(.leading, 5)
-                    .disabled(tabItem.type == selectedTab.type)
+                    .buttonStyle(.plain)
                 }
                 
                 dividerView
@@ -45,6 +45,7 @@ struct NavColumnView: View {
             .renderingMode(selectedTab.type == tabItem.type ? .original : .template)
             .frame(width: selectedTab.type == tabItem.type ? 30 : 20, height: selectedTab.type == tabItem.type ? 30 : 20)
             .foregroundStyle(tabItem.color)
+            .colorMultiply(.white)
             .transition(.opacity)
     }
 

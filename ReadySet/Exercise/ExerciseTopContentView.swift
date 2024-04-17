@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ExerciseTopContentView: View {
+    @AppStorage("decreaseHaptics") var decreaseHaptics: Bool = false
+    
     @ObservedObject var exerciseViewModel: ExerciseViewModel
     @State private var stepSliderValue: Double = 0
     
@@ -23,10 +25,6 @@ struct ExerciseTopContentView: View {
         }
         .padding(.leading, 8)
         .padding(.top, 5)
-        .onAppear {
-            exerciseViewModel.readInitial()
-            stepSliderValue = exerciseViewModel.stepGoal // Initialize slider
-        }
     }
 
     private var contentView: some View {
@@ -42,7 +40,13 @@ struct ExerciseTopContentView: View {
     private var stepGoalEditor: some View {
         SliderView(range: 1000...15000, gradient: ExerciseTabItem().gradient, step: 1000, label: "steps", sliderValue: $stepSliderValue)
             .onChange(of: stepSliderValue) { _ in
+                if (!decreaseHaptics) {
+                    UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+                }
                 exerciseViewModel.proposedStepGoal = Int(stepSliderValue)
+            }
+            .onAppear {
+                stepSliderValue = exerciseViewModel.stepGoal
             }
     }
 
@@ -76,6 +80,7 @@ struct ExerciseTopContentView: View {
                 .transition(.opacity)
         }
         .offset(y: -62)
+        .buttonStyle(.plain)
     }
 }
 

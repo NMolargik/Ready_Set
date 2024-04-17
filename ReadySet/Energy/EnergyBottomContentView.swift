@@ -22,12 +22,6 @@ struct EnergyBottomContentView: View {
             )
         }
         .padding(.top, 20)
-        .onAppear {
-            withAnimation {
-                energyViewModel.readEnergyBurnedWeek()
-                energyViewModel.readEnergyConsumedWeek()
-            }
-        }
     }
 }
 

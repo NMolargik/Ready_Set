@@ -34,6 +34,8 @@ struct WaterAdditionWidgetView: View {
                     Rectangle()
                         .cornerRadius(35)
                         .foregroundStyle(value > 7 ? WaterTabItem().gradient : LinearGradient(colors: [.clear, Color.base.opacity(0.6)], startPoint: .leading, endPoint: .trailing))
+                        .animation(.easeInOut, value: value)
+                        .frame(height: 50)
                     
                     HStack {
                         Text("cancel")
@@ -52,6 +54,7 @@ struct WaterAdditionWidgetView: View {
                             .opacity(value > 7 ? 0 : 0.3)
                     }
                     .padding(.horizontal)
+                    .frame(height: 50)
                     
                     HStack {
                         sliderHandle
@@ -101,6 +104,7 @@ struct WaterAdditionWidgetView: View {
                         Spacer()
                         
                     }
+                    .frame(height: 50)
                     
                     if (value > 7) {
                         ZStack {
@@ -118,7 +122,9 @@ struct WaterAdditionWidgetView: View {
                         }
                         
                         .offset(x: sliderVal - maxValue / 2 - 3, y: -50)
+                        .frame(height: 50)
                     }
+                        
                 }
             }
         }

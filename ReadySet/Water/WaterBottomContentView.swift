@@ -24,11 +24,6 @@ struct WaterBottomContentView: View {
             )
         }
         .padding(.top, 20)
-        .onAppear {
-            withAnimation {
-                waterViewModel.readWaterConsumedWeek()
-            }
-        }
     }
 }
 

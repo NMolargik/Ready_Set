@@ -34,6 +34,7 @@ struct EnergyFitnessWidgetView: View {
                     .frame(width: 20)
             }
         })
+        .buttonStyle(.plain)
         .alert("Fitness app not installed", isPresented: $showAlert) {
             FitnessAlertButtonsView(showAlert: $showAlert)
         }

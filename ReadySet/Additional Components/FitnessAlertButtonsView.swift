@@ -16,10 +16,13 @@ struct FitnessAlertButtonsView: View {
             UIApplication.shared.open(URL(string: installURL)!)
             UIImpactFeedbackGenerator(style: .medium).impactOccurred()
         }
+        .buttonStyle(.plain)
+        
         Button("Cancel", role: .destructive) {
             UIImpactFeedbackGenerator(style: .medium).impactOccurred()
             showAlert = false
         }
+        .buttonStyle(.plain)
     }
 }
 

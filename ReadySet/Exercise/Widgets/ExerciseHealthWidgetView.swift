@@ -30,6 +30,7 @@ struct ExerciseHealthWidgetView: View {
                 .foregroundStyle(.pink)
             }
         })
+        .buttonStyle(.plain)
     }
 }
 

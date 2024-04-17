@@ -32,11 +32,6 @@ struct ExerciseStepsWidgetView: View {
             .foregroundStyle(.fontGray)
 
         }
-        .onAppear {
-            withAnimation {
-                exerciseViewModel.readStepCountToday()
-            }
-        }
     }
 }
 

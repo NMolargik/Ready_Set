@@ -79,16 +79,13 @@ struct WaterTopContentView: View {
                             .foregroundStyle(.blueEnd)
                             .transition(.opacity)
                     })
+                    .buttonStyle(.plain)
                 }
                 .offset(y: -62)
         }
         .padding(.leading, 8)
         .padding(.top, 5)
         .onAppear {
-            withAnimation {
-                waterViewModel.readInitial()
-            }
-            
             if (!disableWave) {
                 startAnimationIfNeeded()
             }

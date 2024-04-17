@@ -33,6 +33,7 @@ struct HealthBaseController {
         healthStore.requestAuthorization(toShare: toShares, read: toReads) {
             success, error in
             if success {
+                print("HealthKit Approved")
             } else {
                 print("HealthKit - Error - \(String(describing: error))")
             }

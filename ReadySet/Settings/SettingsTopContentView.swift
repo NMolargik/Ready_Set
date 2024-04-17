@@ -15,8 +15,8 @@ struct SettingsTopContentView: View {
     
     var body: some View {
         HStack(spacing: 10) {
-            settingButton(action: returnToOnboarding,
-                          labelText: "Go To\nIntro",
+            settingButton(action: returnToGuide,
+                          labelText: "Go To\nGuide",
                           imageName: "arrowshape.turn.up.backward.2.fill",
                           imageColors: [.red, .red])
 
@@ -52,6 +52,7 @@ struct SettingsTopContentView: View {
                 }
             }
         })
+        .buttonStyle(.plain)
     }
 
     private var defaultRectangle: some View {
@@ -62,9 +63,9 @@ struct SettingsTopContentView: View {
             .shadow(radius: 1)
     }
 
-    private func returnToOnboarding() {
+    private func returnToGuide() {
         withAnimation {
-            appState = "splash"
+            appState = "navigationTutorial"
         }
     }
 

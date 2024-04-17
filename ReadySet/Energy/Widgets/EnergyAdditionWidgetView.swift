@@ -34,8 +34,9 @@ struct EnergyAdditionWidgetView: View {
                         .cornerRadius(35)
                         .foregroundStyle(
                             value > 7 ? EnergyTabItem().gradient : LinearGradient(colors: [.clear, Color.base.opacity(0.6)], startPoint: .leading, endPoint: .trailing))
+                        .animation(.easeInOut, value: value)
+                        .frame(height: 50)
                     
-
                     HStack {
                         Text("cancel")
                             .bold()
@@ -45,7 +46,7 @@ struct EnergyAdditionWidgetView: View {
                         
                         Spacer()
                         
-                        Text("slide and release to consume energy")
+                        Text("slide and release to consume \(useMetric ? "kiloJoules" : "calories")")
                             .bold()
                             .font(.caption)
                             .foregroundStyle(.base)
@@ -53,6 +54,7 @@ struct EnergyAdditionWidgetView: View {
                             .opacity(value > 7 ? 0 : 0.3)
                     }
                     .padding(.horizontal)
+                    .frame(height: 50)
                     
                     HStack {
                         sliderHandle
@@ -123,6 +125,7 @@ struct EnergyAdditionWidgetView: View {
                         }
                         
                         .offset(x: sliderVal - maxValue / 2 - 3, y: -50)
+                        .frame(height: 50)
                     }
                 }
             }

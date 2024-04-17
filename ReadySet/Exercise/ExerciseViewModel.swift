@@ -14,6 +14,8 @@ class ExerciseViewModel: ObservableObject {
     // Add the repo for getting all sets
 
     @Published var exerciseSetMaster: [ExerciseSet] = [ExerciseSet]()
+    @Published var exerciseSetToday: [ExerciseSet] = [ExerciseSet]()
+    @Published var exerciseSet: ExerciseSet?
     @Published var editingStepGoal = false
     @Published var proposedStepGoal = 1000
     @Published var stepsToday = 0
@@ -25,7 +27,9 @@ class ExerciseViewModel: ObservableObject {
     let exerciseSetRepo = ExerciseSetRepo()
     
     init() {
-        exerciseSetMaster = exerciseSetRepo.loadAll()
+        exerciseSetMaster = exerciseSetRepo.loadAll() ?? [ExerciseSet]()
+        exerciseSetToday = exerciseSetRepo.loadAllFromDay(date: Date()) ?? [ExerciseSet]()
+        exerciseSet = exerciseSetRepo.loadByID(uuid: UUID())
     }
     
     func readInitial() {

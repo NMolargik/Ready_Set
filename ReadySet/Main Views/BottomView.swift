@@ -37,7 +37,6 @@ struct BottomView: View {
             .animation(.smooth(duration: 0.2), value: selectedTab.type)
         }
         .transition(.opacity)
-        .padding(.top, 8)
     }
 }
 

@@ -20,8 +20,10 @@ class EnergyViewModel: ObservableObject {
     @Published var energyBurnedToday: Int = 0
     @Published var energyBurnedWeek: [Date : Int] = [:]
     @Published var healthStore: HKHealthStore?
+    
     init() {
         self.proposedEnergyGoal = Int(self.energyGoal)
+        self.readInitial()
     }
     
     func readInitial() {

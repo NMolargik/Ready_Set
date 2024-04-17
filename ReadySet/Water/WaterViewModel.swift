@@ -21,6 +21,7 @@ class WaterViewModel: ObservableObject {
     
     init() {
         self.proposedWaterGoal = Int(self.waterGoal)
+        self.readInitial()
     }
     
 

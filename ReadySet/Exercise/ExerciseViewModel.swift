@@ -15,6 +15,8 @@ class ExerciseViewModel: ObservableObject {
     @Published var exerciseEntryMaster : [ExerciseEntry] = [ExerciseEntry]()
     @Published var exerciseSetEntryMaster: [ExerciseSetEntry] = [ExerciseSetEntry]()
     @Published var exerciseSetRecordEntryMaster: [ExerciseSetRecordEntry] = [ExerciseSetRecordEntry]()
+    
+    @Published var expandedSets = false
     @Published var editingSets = false
     @Published var editingStepGoal = false
     @Published var proposedStepGoal = 1000
@@ -30,24 +32,23 @@ class ExerciseViewModel: ObservableObject {
     let exerciseSetRecordEntryRepo = ExerciseSetRecordEntryRepo()
     
     init() {
-        self.refreshDate()
+        self.getCurrentWeekday()
+        self.readInitial()
         exerciseEntryMaster = exerciseEntryRepo.loadAll() ?? [ExerciseEntry]()
         exerciseSetEntryMaster = exerciseSetEntryRepo.loadAll() ?? [ExerciseSetEntry]()
         exerciseSetRecordEntryMaster = exerciseSetRecordEntryRepo.loadAll() ?? [ExerciseSetRecordEntry]()
     }
     
     func readInitial() {
-        self.refreshDate()
+        self.getCurrentWeekday()
         self.readStepCountToday()
         self.readStepCountWeek()
         self.readTotalSetRecordEntryCount()
     }
     
-    func refreshDate() {
+    func getCurrentWeekday() {
         let currentDate = Date()
         let calendar = Calendar.current
-        
-        // Sunday = 1
         if let dayOfWeek = calendar.dateComponents([.weekday], from: currentDate).weekday {
             self.currentDay = dayOfWeek
         } else {

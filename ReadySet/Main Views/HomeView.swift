@@ -28,19 +28,24 @@ struct HomeView: View {
                 selectedTab: $homeViewModel.selectedTab
             )
             .padding(.bottom, 15)
+            .zIndex(2)
             
-            if (!exerciseViewModel.editingSets || homeViewModel.selectedTab.type != .exercise) {
+            if ((!exerciseViewModel.editingSets && !exerciseViewModel.expandedSets) || homeViewModel.selectedTab.type != .exercise) {
                 NavColumnView(exerciseViewModel: exerciseViewModel,
                               waterViewModel: waterViewModel, energyViewModel: energyViewModel,
                               tabItems: $homeViewModel.tabItems, selectedTab: $homeViewModel.selectedTab,
                               navigationDragHeight: $navigationDragHeight)
+                .transition(.move(edge: .top).combined(with: .opacity))
+                .zIndex(1)
             }
                 
             BottomView(exerciseViewModel: exerciseViewModel, waterViewModel: waterViewModel, energyViewModel: energyViewModel,
                        selectedTab: $homeViewModel.selectedTab)
                 .blur(radius: effectiveBlurRadius)
+                .padding(.top, (exerciseViewModel.expandedSets || exerciseViewModel.editingSets) ? 0 : 8)
                 .padding(.bottom, 30)
                 .padding(.horizontal, 8)
+                .zIndex(3)
                 
         }
         .background(backgroundGradient)

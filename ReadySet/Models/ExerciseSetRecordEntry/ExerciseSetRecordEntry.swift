@@ -13,17 +13,13 @@ public class ExerciseSetRecordEntry: NSManagedObject, Identifiable {
     @NSManaged public var id: UUID
     @NSManaged public var setID: String
     @NSManaged public var timestamp: Date
-    @NSManaged public var repetitions: Int
-    @NSManaged public var durationSeconds: Int
-    @NSManaged public var weightLifted: Int
+    @NSManaged public var amountRecorded: Int16
     
     convenience init(
         id: UUID,
         setID: String,
         timestamp: Date,
-        repetitions: Int?,
-        durationSeconds: Int?,
-        weightLifted: Int?
+        amountRecorded: Int16
     ) {
         let entity = PersistenceController.shared.getExerciseSetEntry()
         self.init(entity: entity, insertInto: nil)
@@ -31,8 +27,6 @@ public class ExerciseSetRecordEntry: NSManagedObject, Identifiable {
         self.id = id
         self.setID = setID
         self.timestamp = timestamp
-        self.repetitions = repetitions ?? 0
-        self.durationSeconds = durationSeconds ?? 0
-        self.weightLifted = weightLifted ?? 0
+        self.amountRecorded = amountRecorded
     }
 }

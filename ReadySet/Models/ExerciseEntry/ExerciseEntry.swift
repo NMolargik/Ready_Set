@@ -21,8 +21,12 @@ public class ExerciseEntry: NSManagedObject, Identifiable {
         exerciseOrder: Int16,
         exerciseName: String
     ) {
-        let entity = PersistenceController.shared.getExerciseSet()
-        self.init(entity: entity, insertInto: nil)
+        let entityName = "ExerciseEntry" // Set the entity name here
+        guard let entity = NSEntityDescription.entity(forEntityName: entityName, in: PersistenceController.shared.container.viewContext) else {
+            fatalError("Failed to initialize ExerciseEntry entity")
+        }
+        
+        self.init(entity: entity, insertInto: PersistenceController.shared.container.viewContext)
         
         self.id = id
         self.day = day

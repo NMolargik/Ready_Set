@@ -30,9 +30,9 @@ class ExerciseViewModel: ObservableObject {
     
     init() {
         self.refreshDate()
-        exerciseEntryMaster = exerciseEntryRepo.loadAll() ?? [ExerciseEntry]()
-        exerciseSetEntryMaster = exerciseSetEntryRepo.loadAll() ?? [ExerciseSetEntry]()
-        exerciseSetRecordEntryMaster = exerciseSetRecordEntryRepo.loadAll() ?? [ExerciseSetRecordEntry]()
+//        exerciseEntryMaster = exerciseEntryRepo.loadAll() ?? [ExerciseEntry]()
+//        exerciseSetEntryMaster = exerciseSetEntryRepo.loadAll() ?? [ExerciseSetEntry]()
+////        exerciseSetRecordEntryMaster = exerciseSetRecordEntryRepo.loadAll() ?? [ExerciseSetRecordEntry]()
     }
     
     func readInitial() {

@@ -97,15 +97,15 @@ struct HomeView: View {
     }
 
     private func setupViewModels() {
-        if exerciseViewModel.healthStore != nil {
+        if exerciseViewModel.healthStore == nil {
             exerciseViewModel.healthStore = healthStore
         }
         
-        if waterViewModel.healthStore != nil {
+        if waterViewModel.healthStore == nil {
             waterViewModel.healthStore = healthStore
         }
         
-        if energyViewModel.healthStore != nil {
+        if energyViewModel.healthStore == nil {
             energyViewModel.healthStore = healthStore
         }
         

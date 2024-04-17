@@ -60,27 +60,24 @@ struct SettingsBottomContentView: View {
             })
             .toggleStyle(VerticalToggleStyle(height: 50))
             .padding(.top, 10)
-            .padding(.bottom, 20)
             .padding(.horizontal)
             
             HStack {
                 VStack {
                     Text("Ready, Set")
                         .bold()
-                        .font(.title3)
+                        .font(.caption)
                     
                     Text("2024, Nicholas Molargik")
                         .bold()
                         .font(.caption)
                     
-                    Text("Contributions from Nicholas Yoder and Dante Maslin")
+                    Text("Contributions from Nicholas Yoder and Dante Maslin, v1.0.0")
                         .bold()
                         .font(.caption)
+                        .lineLimit(3)
+                        .frame(height: 35)
                         .multilineTextAlignment(.center)
-                    
-                    Text("v1.0.0")
-                        .bold()
-                        .font(.caption)
                     
                     ShareLink(
                         item: URL(string: "https://apps.apple.com/app/id6484503374")!,
@@ -103,8 +100,11 @@ struct SettingsBottomContentView: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(height: 100)
             }
+            .padding(.horizontal, 5)
+            .padding(.bottom, 10)
             
             Spacer()
+
         }
     }
 }

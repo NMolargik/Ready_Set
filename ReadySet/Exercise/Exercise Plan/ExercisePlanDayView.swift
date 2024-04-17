@@ -11,21 +11,14 @@ import Foundation
 struct ExercisePlanDayView: View {
     @ObservedObject var exerciseViewModel: ExerciseViewModel
     @State var isEditing: Bool
+    @Binding var selectedDay: Int
     
-    @State var selectedDay: Int = 0
+    @State var exercises: [ExerciseEntry] = []
+    @State var sets: [ExerciseSetEntry] = []
     
-    let exerciseSetRepo = ExerciseSetRepo()
+    let weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     
     var body: some View {
-        VStack {
-            ForEach(exerciseViewModel.exerciseSetMaster.filter({ $0.day == selectedDay })) { set in
-                Text(set.order.description)
-                
-            }
-        }
+        Text("Woops")
     }
-}
-
-#Preview {
-    ExercisePlanDayView(exerciseViewModel: ExerciseViewModel(), isEditing: false)
 }

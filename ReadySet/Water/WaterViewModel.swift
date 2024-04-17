@@ -17,7 +17,7 @@ class WaterViewModel: ObservableObject {
     @Published var editingWaterGoal = false
     @Published var waterConsumedToday: Int = 0
     @Published var waterConsumedWeek: [Date: Int] = [:]
-    @Published var healthStore: HKHealthStore = HKHealthStore()
+    @Published var healthStore: HKHealthStore?
     
     init() {
         self.proposedWaterGoal = Int(self.waterGoal)
@@ -70,7 +70,7 @@ class WaterViewModel: ObservableObject {
                 self.waterConsumedToday = amount
             }
         }
-        healthStore.execute(query)
+        healthStore?.execute(query)
     }
 
     func readWaterConsumedWeek() {
@@ -124,7 +124,7 @@ class WaterViewModel: ObservableObject {
             }
         }
 
-        healthStore.execute(query)
+        healthStore?.execute(query)
     }
 
     func addWaterConsumed(waterAmount: Double, completion: @escaping () -> Void) {
@@ -133,7 +133,7 @@ class WaterViewModel: ObservableObject {
         
         let waterSample = HKQuantitySample(type: waterType, quantity: HKQuantity(unit: self.useMetric ? HKUnit.literUnit(with: .milli) : HKUnit.fluidOunceUS(), doubleValue: waterAmount), start: Date(), end: Date())
         
-        healthStore.save(waterSample, withCompletion: { (success, error) -> Void in
+        healthStore?.save(waterSample, withCompletion: { (success, error) -> Void in
 
             if error != nil {
                 print("HealthKit - Error - \(String(describing: error))")

@@ -11,30 +11,53 @@ import HealthKit
 
 class ExerciseViewModel: ObservableObject {
     @AppStorage("stepGoal") var stepGoal: Double = 1000
-    // Add the repo for getting all sets
 
-    @Published var exerciseSetMaster: [ExerciseSet] = [ExerciseSet]()
-    @Published var exerciseSetToday: [ExerciseSet] = [ExerciseSet]()
-    @Published var exerciseSet: ExerciseSet?
+    @Published var exerciseEntryMaster : [ExerciseEntry] = [ExerciseEntry]()
+    @Published var exerciseSetEntryMaster: [ExerciseSetEntry] = [ExerciseSetEntry]()
+    @Published var exerciseSetRecordEntryMaster: [ExerciseSetRecordEntry] = [ExerciseSetRecordEntry]()
     @Published var editingStepGoal = false
     @Published var proposedStepGoal = 1000
     @Published var stepsToday = 0
     @Published var stepCountWeek: [Date : Int] = [:]
     @Published var formComplete: Bool = false
-    @Published var healthStore = HKHealthStore()
-    @Published var totalSetCount: Int = 0 //TODO: assign this!
+    @Published var healthStore: HKHealthStore?
+    @Published var totalSetCount: Int = 0
+    @Published var currentDay: Int = 1
     
-    let exerciseSetRepo = ExerciseSetRepo()
+    let exerciseEntryRepo = ExerciseEntryRepo()
+    let exerciseSetEntryRepo = ExerciseSetEntryRepo()
+    let exerciseSetRecordEntryRepo = ExerciseSetRecordEntryRepo()
     
     init() {
-        exerciseSetMaster = exerciseSetRepo.loadAll() ?? [ExerciseSet]()
-        exerciseSetToday = exerciseSetRepo.loadAllFromDay(date: Date()) ?? [ExerciseSet]()
-        exerciseSet = exerciseSetRepo.loadByID(uuid: UUID())
+        self.refreshDate()
+        exerciseEntryMaster = exerciseEntryRepo.loadAll() ?? [ExerciseEntry]()
+        exerciseSetEntryMaster = exerciseSetEntryRepo.loadAll() ?? [ExerciseSetEntry]()
+        exerciseSetRecordEntryMaster = exerciseSetRecordEntryRepo.loadAll() ?? [ExerciseSetRecordEntry]()
     }
     
     func readInitial() {
+        self.refreshDate()
         self.readStepCountToday()
         self.readStepCountWeek()
+        self.readTotalSetRecordEntryCount()
+    }
+    
+    func refreshDate() {
+        let currentDate = Date()
+        let calendar = Calendar.current
+        
+        // Sunday = 1
+        if let dayOfWeek = calendar.dateComponents([.weekday], from: currentDate).weekday {
+            self.currentDay = dayOfWeek
+        } else {
+            self.currentDay = 1
+        }
+    }
+    
+    func readTotalSetRecordEntryCount() {
+        withAnimation {
+            self.totalSetCount = self.exerciseSetRecordEntryRepo.count()
+        }
     }
     
     func saveStepGoal() {
@@ -71,7 +94,7 @@ class ExerciseViewModel: ObservableObject {
                 self.stepsToday = steps
             }
         }
-        healthStore.execute(query)
+        healthStore?.execute(query)
     }
     
     func readStepCountWeek() {
@@ -125,6 +148,6 @@ class ExerciseViewModel: ObservableObject {
             }
         }
 
-        healthStore.execute(query)
+        healthStore?.execute(query)
     }
 }

@@ -63,10 +63,11 @@ struct SettingsBottomContentView: View {
             .padding(.horizontal)
             
             HStack {
-                VStack {
+                VStack (spacing: 0) {
                     Text("Ready, Set")
                         .bold()
                         .font(.caption)
+                        .padding(.top, 5)
                     
                     Text("2024, Nicholas Molargik")
                         .bold()
@@ -93,12 +94,12 @@ struct SettingsBottomContentView: View {
                         }
                     }
                     .frame(width: 100, height: 30)
+                    .padding(.top, 5)
                 }
                 
                 Image("icon")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(height: 100)
             }
             .padding(.horizontal, 5)
             .padding(.bottom, 10)

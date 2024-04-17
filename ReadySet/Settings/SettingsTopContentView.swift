@@ -13,20 +13,34 @@ struct SettingsTopContentView: View {
     
     @Environment(\.colorScheme) var colorScheme
     
+    @ObservedObject var exerciseViewModel: ExerciseViewModel
+    
+    @State private var showingDeleteAlert = false
+    
     var body: some View {
         HStack(spacing: 10) {
             settingButton(action: returnToGuide,
                           labelText: "Go To\nGuide",
                           imageName: "arrowshape.turn.up.backward.2.fill",
-                          imageColors: [.red, .red])
+                          imageColors: [.purple, .pink])
 
-            settingButton(action: performDeleteAction,
+            settingButton(action: { showingDeleteAlert = true },
                           labelText: "Delete\nSet Data",
                           imageName: "trash.fill",
                           imageColors: [.fontGray, .fontGray])
         }
         .padding(.leading, 8)
         .padding(.top, 5)
+        .alert(isPresented: $showingDeleteAlert) {
+            Alert(
+                title: Text("Confirm Deletion"),
+                message: Text("Are you sure you want to delete all of your set data records? This will remove all set completion history but leave your list of sets in place. This action cannot be undone."),
+                primaryButton: .destructive(Text("Delete")) {
+                    performDeleteAction()
+                },
+                secondaryButton: .cancel()
+            )
+        }
     }
 
     private func settingButton(action: @escaping () -> Void, labelText: String, imageName: String, imageColors: [Color]) -> some View {
@@ -70,10 +84,13 @@ struct SettingsTopContentView: View {
     }
 
     private func performDeleteAction() {
-        // TODO: Placeholder for the delete action
+        withAnimation {
+            exerciseViewModel.exerciseSetRecordEntryRepo.removeAll()
+            exerciseViewModel.readInitial()
+        }
     }
 }
 
 #Preview {
-    SettingsTopContentView()
+    SettingsTopContentView(exerciseViewModel: ExerciseViewModel())
 }

@@ -13,7 +13,6 @@ struct ExerciseStatWidgetView: View {
     @Binding var weeklySteps: Int
     
     var body: some View {
-        // TODO: fix sets recorded total
         ZStack {
             Rectangle()
                 .cornerRadius(10)

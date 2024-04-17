@@ -5,19 +5,12 @@
 //  Created by Nick Molargik on 4/12/24.
 //
 
-/*
- This repository controls CRUD for the ExerciseSetEntry table in CoreData.
- It should be expanded upon to handle query parameters / predicates
- by manipulating the fetchRequest variable and following the same pattern
- as the load() method
-*/
-
 import Foundation
 
 struct ExerciseSetEntryRepo: IExerciseSetEntryRepo {
     let viewContext = PersistenceController.shared.container.viewContext
     
-    // Insert a new exerciseSetEntry record
+    // Save a new exerciseSetEntry record to the table
     func save(exerciseSetEntry: ExerciseSetEntry) {
         viewContext.insert(exerciseSetEntry)
         
@@ -30,19 +23,52 @@ struct ExerciseSetEntryRepo: IExerciseSetEntryRepo {
     }
     
     // Load the first exerciseSetEntry record from the table
-    func load() -> ExerciseSetEntry {
+    func loadAll() -> [ExerciseSetEntry]? {
         let fetchRequest = ExerciseSetEntry.fetchRequest()
-        
+        print("Load all!")
+
         do {
-            let setEntries = try viewContext.fetch(fetchRequest)
-            return setEntries.first as? ExerciseSetEntry ?? ExerciseSetEntry()
+            let sets = try viewContext.fetch(fetchRequest)
+            return sets as? [ExerciseSetEntry]
         } catch {
-            print("Error loading exercise set entry: \(error.localizedDescription)")
-            return ExerciseSetEntry()
+            print("Error loading exerciseSetEntry: \(error.localizedDescription)")
+            return nil
+        }
+    }
+
+    func loadAllFromDay(date: Date) -> [ExerciseSetEntry]? {
+        let fetchRequest = ExerciseSetEntry.fetchRequest()
+        let day = Calendar.current.component(.weekday, from: date)
+        print(day)
+        fetchRequest.predicate = NSPredicate(format: "day == %ld", day)
+
+        do {
+            let sets = try viewContext.fetch(fetchRequest)
+            return sets as? [ExerciseSetEntry]
+        } catch {
+            print("Error loading exerciseSetEntry by \(date): \(error.localizedDescription)")
+            return nil
         }
     }
     
-    // Remove a specific exerciseSetEntry record from the table
+    func loadByID(uuid: UUID) -> ExerciseSetEntry? {
+        let fetchRequest = ExerciseSetEntry.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "%K == %@", (\ExerciseSetEntry.id)._kvcKeyPathString!, uuid.uuidString)
+
+        do {
+            let sets = try viewContext.fetch(fetchRequest)
+            if sets.count == 1 {
+                return sets.first as? ExerciseSetEntry
+            }
+        } catch {
+            print("Error loading exerciseSetEntry by \(uuid): \(error.localizedDescription)")
+        }
+        print("Couldn't find \(uuid.uuidString)")
+        return nil
+
+    }
+
+    // Remove a particular exerciseSetEntry record from the table
     func remove(exerciseSetEntry: ExerciseSetEntry) {
         viewContext.delete(exerciseSetEntry)
         

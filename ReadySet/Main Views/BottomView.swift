@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct BottomView: View {
+    @ObservedObject var exerciseViewModel: ExerciseViewModel
     @ObservedObject var waterViewModel: WaterViewModel
     @ObservedObject var energyViewModel: EnergyViewModel
     
@@ -24,7 +25,7 @@ struct BottomView: View {
             Group {
                 switch (selectedTab.type) {
                 case .exercise:
-                    ExerciseBottomContentView()
+                    ExerciseBottomContentView(exerciseViewModel: exerciseViewModel)
                 case .water:
                     WaterBottomContentView(waterViewModel: waterViewModel)
                 case .Energy:
@@ -41,5 +42,5 @@ struct BottomView: View {
 }
 
 #Preview {
-    BottomView(waterViewModel: WaterViewModel(), energyViewModel: EnergyViewModel(), selectedTab: .constant(ExerciseTabItem()))
+    BottomView(exerciseViewModel: ExerciseViewModel(), waterViewModel: WaterViewModel(), energyViewModel: EnergyViewModel(), selectedTab: .constant(ExerciseTabItem()))
 }

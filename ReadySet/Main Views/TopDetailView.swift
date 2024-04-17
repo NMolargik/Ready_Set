@@ -26,7 +26,7 @@ struct TopDetailView: View {
                 EnergyTopContentView(energyViewModel: energyViewModel)
                     .transition(.opacity)
             case .settings:
-                SettingsTopContentView()
+                SettingsTopContentView(exerciseViewModel: exerciseViewModel)
                     .transition(.opacity)
             }
         }

@@ -33,7 +33,7 @@ struct HomeView: View {
                           tabItems: $homeViewModel.tabItems, selectedTab: $homeViewModel.selectedTab,
                           navigationDragHeight: $navigationDragHeight)
             
-            BottomView(waterViewModel: waterViewModel, energyViewModel: energyViewModel,
+            BottomView(exerciseViewModel: exerciseViewModel, waterViewModel: waterViewModel, energyViewModel: energyViewModel,
                        selectedTab: $homeViewModel.selectedTab)
                 .blur(radius: effectiveBlurRadius)
                 .padding(.bottom, 30)
@@ -83,9 +83,18 @@ struct HomeView: View {
     }
 
     private func setupViewModels() {
-        exerciseViewModel.healthStore = healthStore
-        waterViewModel.healthStore = healthStore
-        energyViewModel.healthStore = healthStore
+        if exerciseViewModel.healthStore != nil {
+            exerciseViewModel.healthStore = healthStore
+        }
+        
+        if waterViewModel.healthStore != nil {
+            waterViewModel.healthStore = healthStore
+        }
+        
+        if energyViewModel.healthStore != nil {
+            energyViewModel.healthStore = healthStore
+        }
+        
         exerciseViewModel.readInitial()
         waterViewModel.readInitial()
         energyViewModel.readInitial()
@@ -106,6 +115,14 @@ struct HomeView: View {
     private func handleScenePhase(newPhase: ScenePhase) {
         navigationDragHeight = 0
         if newPhase == .active {
+            withAnimation {
+                exerciseViewModel.readInitial()
+                waterViewModel.readInitial()
+                energyViewModel.readInitial()
+            }
+        }
+        
+        if homeViewModel.needRefreshFromDate() {
             withAnimation {
                 exerciseViewModel.readInitial()
                 waterViewModel.readInitial()

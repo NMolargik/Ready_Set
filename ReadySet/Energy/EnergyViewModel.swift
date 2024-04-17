@@ -19,8 +19,7 @@ class EnergyViewModel: ObservableObject {
     @Published var energyConsumedWeek: [Date : Int] = [:]
     @Published var energyBurnedToday: Int = 0
     @Published var energyBurnedWeek: [Date : Int] = [:]
-    @Published var healthStore: HKHealthStore = HKHealthStore()
-
+    @Published var healthStore: HKHealthStore?
     init() {
         self.proposedEnergyGoal = Int(self.energyGoal)
     }
@@ -74,7 +73,7 @@ class EnergyViewModel: ObservableObject {
                 self.energyConsumedToday = Energy
             }
         }
-        healthStore.execute(query)
+        healthStore?.execute(query)
     }
 
     func readEnergyConsumedWeek() {
@@ -128,7 +127,7 @@ class EnergyViewModel: ObservableObject {
             }
         }
 
-        healthStore.execute(query)
+        healthStore?.execute(query)
     }
     
     func readEnergyBurnedToday() {
@@ -160,7 +159,7 @@ class EnergyViewModel: ObservableObject {
                 self.energyBurnedToday = energy
             }
         }
-        healthStore.execute(query)
+        healthStore?.execute(query)
     }
 
     func readEnergyBurnedWeek() {
@@ -214,13 +213,13 @@ class EnergyViewModel: ObservableObject {
             }
         }
 
-        healthStore.execute(query)
+        healthStore?.execute(query)
     }
     
     func addEnergyConsumed(energy: Double, completion: @escaping () -> Void) {
         let energyType = HKQuantityType.quantityType(forIdentifier: .dietaryEnergyConsumed)!
         let energysample = HKQuantitySample(type: energyType, quantity: HKQuantity(unit: self.useMetric ? HKUnit.jouleUnit(with: .kilo) : HKUnit.kilocalorie(), doubleValue: energy), start: Date(), end: Date())
-        self.healthStore.save(energysample, withCompletion: { (success, error) -> Void in
+        self.healthStore?.save(energysample, withCompletion: { (success, error) -> Void in
             if error != nil {
                 print("HealthKit - Error - \(String(describing: error))")
             }

@@ -51,7 +51,7 @@ struct ExerciseBottomContentView: View {
             
             TabView(selection: $selectedDay) {
                 ForEach(weekDays.indices, id: \.self) { index in
-                    ExercisePlanDayView(selectedDay: $selectedDay, isEditing: $exerciseViewModel.editingSets)
+                    ExercisePlanDayView(selectedDay: $selectedDay.wrappedValue, isEditing: $exerciseViewModel.editingSets)
                         .tag(index)
                 }
             }

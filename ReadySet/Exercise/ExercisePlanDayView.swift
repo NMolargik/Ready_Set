@@ -13,10 +13,20 @@ struct ExercisePlanDayView: View {
     @AppStorage("useMetric") var useMetric: Bool = false
     @Environment(\.modelContext) var modelContext
     @Query(sort: [SortDescriptor(\Exercise.orderIndex)]) var exercises: [Exercise]
-    
-    @Binding var selectedDay: Int
+
     @Binding var isEditing: Bool
     @State private var sortOrder = SortDescriptor(\Exercise.orderIndex)
+
+    var selectedDay: Int
+
+    init(selectedDay: Int, isEditing: Binding<Bool>) {
+        self.selectedDay = selectedDay
+        _exercises = Query(filter: #Predicate {
+            return $0.weekday == selectedDay
+        }, sort: [SortDescriptor(\Exercise.orderIndex)])
+        
+        _isEditing = isEditing
+    }
     
     let weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     
@@ -39,6 +49,7 @@ struct ExercisePlanDayView: View {
                         
                         if (isEditing) {
                             Button(action: {
+                                print("Hello!")
                                 withAnimation {
                                     // TODO: remove the sets for this exercise
                                     // TODO: remove Exercise
@@ -175,3 +186,37 @@ struct ExercisePlanDayView: View {
 //                            }
 //                        }
 //                    }
+                }
+            }
+            .onAppear {
+                print("Exercises: \(exercises.count)")
+            }
+
+            Button(action: {
+                print("Hello! \(selectedDay)")
+                print("Exercises: \(exercises.count)")
+                withAnimation {
+                    let es = ExerciseSet(goalType: .duration, repetitionsToDo: 0, durationToDo: 30, weightToLift: 30)
+                    let e = Exercise(id: UUID(), weekday: selectedDay, orderIndex: 0, name: "Hello World!")
+                    e.exerciseSets = [es]
+                    print(e.persistentBackingData)
+                    modelContext.insert(es)
+                    modelContext.insert(e)
+                    do {
+                        try modelContext.save()
+                        
+                    } catch {
+                        print("\(error.localizedDescription)")
+                    }
+                    //TODO: add a new exerciseEntry
+                }
+            }, label: {
+                Text("Add Exercise")
+            })
+        }
+        .padding(.horizontal, 5)
+    }
+
+}
+
+>>>>>>> be91fd8 (Mess of saving test Exercise model lmao):ReadySet/Exercise/Exercise Plan/ExercisePlanDayView.swift

@@ -85,8 +85,7 @@ struct SettingsTopContentView: View {
 
     private func performDeleteAction() {
         withAnimation {
-            exerciseViewModel.exerciseSetRecordEntryRepo.removeAll()
-            exerciseViewModel.readInitial()
+            //TODO: rewrite
         }
     }
 }

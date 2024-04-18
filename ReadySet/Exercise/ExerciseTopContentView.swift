@@ -53,7 +53,7 @@ struct ExerciseTopContentView: View {
     private var defaultView: some View {
         HStack {
             VStack(spacing: 10) {
-                ExerciseStatWidgetView(totalSets: $exerciseViewModel.totalSetCount, weeklySteps: .constant(exerciseViewModel.stepCountWeek.values.reduce(0, +)))
+                ExerciseStatWidgetView(totalSets: .constant(10), weeklySteps: .constant(exerciseViewModel.stepCountWeek.values.reduce(0, +))) //TODO: adjust this widget
                 
                 ExerciseFitnessWidgetView()
             }

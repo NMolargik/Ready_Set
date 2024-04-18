@@ -11,39 +11,27 @@ import HealthKit
 
 class ExerciseViewModel: ObservableObject {
     @AppStorage("stepGoal") var stepGoal: Double = 1000
-
-    @Published var exerciseEntryMaster : [ExerciseEntry] = [ExerciseEntry]()
-    @Published var exerciseSetEntryMaster: [ExerciseSetEntry] = [ExerciseSetEntry]()
-    @Published var exerciseSetRecordEntryMaster: [ExerciseSetRecordEntry] = [ExerciseSetRecordEntry]()
     
     @Published var expandedSets = false
     @Published var editingSets = false
     @Published var editingStepGoal = false
+    @Published var formComplete: Bool = false
     @Published var proposedStepGoal = 1000
     @Published var stepsToday = 0
-    @Published var stepCountWeek: [Date : Int] = [:]
-    @Published var formComplete: Bool = false
-    @Published var healthStore: HKHealthStore?
-    @Published var totalSetCount: Int = 0
     @Published var currentDay: Int = 1
+    @Published var stepCountWeek: [Date : Int] = [:]
+    @Published var healthStore: HKHealthStore?
     
-    let exerciseEntryRepo = ExerciseEntryRepo()
-    let exerciseSetEntryRepo = ExerciseSetEntryRepo()
-    let exerciseSetRecordEntryRepo = ExerciseSetRecordEntryRepo()
-    
+
     init() {
         self.getCurrentWeekday()
         self.readInitial()
-        exerciseEntryMaster = exerciseEntryRepo.loadAll() ?? [ExerciseEntry]()
-        exerciseSetEntryMaster = exerciseSetEntryRepo.loadAll() ?? [ExerciseSetEntry]()
-        exerciseSetRecordEntryMaster = exerciseSetRecordEntryRepo.loadAll() ?? [ExerciseSetRecordEntry]()
     }
     
     func readInitial() {
         self.getCurrentWeekday()
         self.readStepCountToday()
         self.readStepCountWeek()
-        self.readTotalSetRecordEntryCount()
     }
     
     func getCurrentWeekday() {
@@ -53,12 +41,6 @@ class ExerciseViewModel: ObservableObject {
             self.currentDay = dayOfWeek
         } else {
             self.currentDay = 1
-        }
-    }
-    
-    func readTotalSetRecordEntryCount() {
-        withAnimation {
-            self.totalSetCount = self.exerciseSetRecordEntryRepo.count()
         }
     }
     

@@ -6,10 +6,14 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ExerciseBottomContentView: View {
+    @Environment(\.modelContext) var modelContext
+    
     @ObservedObject var exerciseViewModel: ExerciseViewModel
     @State private var selectedDay: Int = 1
+    @State private var sortOrder = SortDescriptor(\Exercise.orderIndex)
     
     private let weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     
@@ -18,7 +22,7 @@ struct ExerciseBottomContentView: View {
             HStack(spacing: 6) {
                 ForEach(weekDays.indices, id: \.self) { index in
                     Text(selectedDay == index ? weekDays[index] : String(weekDays[index].prefix(1)))
-                        .font(.system(size: selectedDay == index ? 18 : 10))
+                        .font(.system(size: selectedDay == index ? 15 : 10))
                         .bold()
                         .foregroundStyle(selectedDay == index ? LinearGradient(colors: [.greenEnd, .green, .greenEnd], startPoint: .leading, endPoint: .trailing) : LinearGradient(colors: [.secondary], startPoint: .leading, endPoint: .trailing))
                         .padding(4)
@@ -47,7 +51,7 @@ struct ExerciseBottomContentView: View {
             
             TabView(selection: $selectedDay) {
                 ForEach(weekDays.indices, id: \.self) { index in
-                    ExercisePlanDayView(exerciseViewModel: exerciseViewModel, selectedDay: $selectedDay)
+                    ExercisePlanDayView(selectedDay: selectedDay, isEditing: $exerciseViewModel.editingSets)
                         .tag(index)
                 }
             }
@@ -72,13 +76,13 @@ struct ExerciseBottomContentView: View {
             Image(systemName: exerciseViewModel.expandedSets ? "chevron.down" : "chevron.up")
                 .foregroundStyle(.greenEnd)
         })
+        .frame(width: 30, height: 30)
     }
 
     private var editButton: some View {
         Button(exerciseViewModel.editingSets ? "Save" : "Edit") {
             withAnimation {
                 exerciseViewModel.editingSets.toggle()
-                //TODO: save stuff
             }
         }
         .buttonStyle(.plain)

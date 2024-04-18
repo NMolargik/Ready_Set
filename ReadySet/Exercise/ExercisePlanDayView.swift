@@ -96,8 +96,13 @@ struct ExercisePlanDayView: View {
                     }
                     ForEach(exercise.exerciseSets, id: \.self) { set in
                         HStack {
-                            Text("\(set.durationToDo) - \(set.repetitionsToDo) - \(set.weightToLift)")
-                                .frame(height: 20)
+                            if (set.goalType == .duration) {
+                                Text("\(set.durationToDo)")
+                                    .frame(height: 20)
+                            } else {
+                                Text("\(set.repetitionsToDo) - \(set.weightToLift)")
+                                    .frame(height: 20)
+                            }
                             if (isEditing) {
                                 ExerciseSetEditor(set: set)
                                 VStack {

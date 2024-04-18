@@ -14,13 +14,18 @@ class ExerciseSet: Identifiable {
     var repetitionsToDo: Int
     var durationToDo: Int
     var weightToLift: Int
-    @Relationship(deleteRule: .cascade) var exerciseCompletions = [ExerciseCompletion]()
+    var lastRepetitionsRecorded: Int
+    var lastDurationRecorded: Int
+    var lastWeightRecorded: Int
 
-    init(goalType: GoalType = .weight, repetitionsToDo: Int = 0, durationToDo: Int = 0, weightToLift: Int = 0) {
+    init(goalType: GoalType = .weight, repetitionsToDo: Int = 0, durationToDo: Int = 0, weightToLift: Int = 0, lastRepetitionsRecorded: Int = 0, lastDurationRecorded: Int = 0, lastWeightRecorded: Int = 0) {
         self.goalType = goalType
         self.repetitionsToDo = repetitionsToDo
         self.durationToDo = durationToDo
         self.weightToLift = weightToLift
+        self.lastRepetitionsRecorded = lastRepetitionsRecorded
+        self.lastDurationRecorded = lastDurationRecorded
+        self.lastWeightRecorded = lastWeightRecorded
     }
 }
 

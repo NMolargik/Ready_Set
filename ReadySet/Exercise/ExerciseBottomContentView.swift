@@ -55,7 +55,7 @@ struct ExerciseBottomContentView: View {
                         .tag(index)
                 }
             }
-            .tabViewStyle(.page(indexDisplayMode: .never))
+            .tabViewStyle(.automatic)
         }
         .padding(5)
         .onAppear {

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		0E4A5E2A2BCC9D59003678C2 /* EnergyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4A5E292BCC9D59003678C2 /* EnergyViewModel.swift */; };
 		0E7DCA5E2BC6FF7400B9403C /* ExerciseSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7DCA5D2BC6FF7400B9403C /* ExerciseSet.swift */; };
-		0E7DCA602BC6FFF100B9403C /* ExerciseCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7DCA5F2BC6FFF100B9403C /* ExerciseCompletion.swift */; };
 		0E940A6B2BC6FE0200144477 /* ReadySetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E940A6A2BC6FE0200144477 /* ReadySetApp.swift */; };
 		0E940A6D2BC6FE0200144477 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E940A6C2BC6FE0200144477 /* MainView.swift */; };
 		0E940A6F2BC6FE0400144477 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E940A6E2BC6FE0400144477 /* Assets.xcassets */; };
@@ -89,7 +88,6 @@
 		0E4A5E252BCC80E0003678C2 /* Build.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Build.xcconfig; sourceTree = "<group>"; };
 		0E4A5E292BCC9D59003678C2 /* EnergyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnergyViewModel.swift; sourceTree = "<group>"; };
 		0E7DCA5D2BC6FF7400B9403C /* ExerciseSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSet.swift; sourceTree = "<group>"; };
-		0E7DCA5F2BC6FFF100B9403C /* ExerciseCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCompletion.swift; sourceTree = "<group>"; };
 		0E940A672BC6FE0200144477 /* ReadySet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReadySet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E940A6A2BC6FE0200144477 /* ReadySetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadySetApp.swift; sourceTree = "<group>"; };
 		0E940A6C2BC6FE0200144477 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -194,7 +192,6 @@
 				EBEEC7A62BD184160058BDFD /* GoalType.swift */,
 				EBEEC77A2BD0251F0058BDFD /* Exercise.swift */,
 				0E7DCA5D2BC6FF7400B9403C /* ExerciseSet.swift */,
-				0E7DCA5F2BC6FFF100B9403C /* ExerciseCompletion.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -535,7 +532,6 @@
 				EB3AB3412BC71105008B6F22 /* TabItemType.swift in Sources */,
 				EB3AB3572BC76F07008B6F22 /* TopDetailView.swift in Sources */,
 				EB4D9C712BCDF7970071BA99 /* RoundedTriangleShape.swift in Sources */,
-				0E7DCA602BC6FFF100B9403C /* ExerciseCompletion.swift in Sources */,
 				EB4D9C6F2BCDE8310071BA99 /* HealthBaseController.swift in Sources */,
 				EB4D9C792BCEF2390071BA99 /* ChartView.swift in Sources */,
 				EB7111012BC8B3C20078F796 /* WaterAdditionWidgetView.swift in Sources */,

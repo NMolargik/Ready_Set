@@ -11,35 +11,9 @@ struct SettingsBottomContentView: View {
     @AppStorage("useMetric") var useMetric: Bool = false
     @AppStorage("decreaseHaptics") var decreaseHaptics: Bool = false
     @AppStorage("disableWave") var disableWave: Bool = false
-    @AppStorage("userName") var username: String = ""
-    @State var name : String = ""
-    
+
     var body: some View {
         VStack {
-            Spacer()
-            
-            Text("Set Your Name")
-                .font(.system(size: 18, weight: .semibold))
-                .lineLimit(1)
-            
-            Text("(This will update when you leave Settings)")
-                .font(.system(size: 8, weight: .regular))
-                .lineLimit(1)
-                .padding(.bottom, 5)
-            
-            TextField("First Name", text: $name)
-                .textFieldStyle(OutlinedTextFieldStyle())
-                .padding(.horizontal)
-                .padding(.bottom, 10)
-                .onChange(of: name) { value in
-                    withAnimation {
-                        username = value
-                    }
-                }
-                .onAppear {
-                    name = username
-                }
-            
             HStack (spacing: 0) {
                 Toggle(isOn: $useMetric, label: {
                     Text("Use Metric Units")
@@ -54,6 +28,7 @@ struct SettingsBottomContentView: View {
                 .toggleStyle(VerticalToggleStyle(height: 90))
             }
             .padding(.horizontal)
+            .padding(.top, 30)
             
             Toggle(isOn: $disableWave, label: {
                 Text("Disable Water Wave Animation")
@@ -61,6 +36,13 @@ struct SettingsBottomContentView: View {
             .toggleStyle(VerticalToggleStyle(height: 50))
             .padding(.top, 10)
             .padding(.horizontal)
+            
+            Spacer()
+            
+            Divider()
+                .padding(.horizontal)
+                .scaleEffect(y: 3)
+                .shadow(radius: 5)
             
             HStack {
                 VStack (spacing: 0) {
@@ -100,6 +82,7 @@ struct SettingsBottomContentView: View {
                 Image("icon")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
+                    .frame(width: 150)
             }
             .padding(.horizontal, 5)
             .padding(.bottom, 10)

@@ -9,7 +9,6 @@ import SwiftUI
 
 struct NavigationTutorialView: View {
     @AppStorage("appState") var appState: String = "goalSetting"
-    @AppStorage("userName") var username: String = ""
     @Binding var color: Color
     
     @State private var showText = false

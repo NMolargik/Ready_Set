@@ -7,9 +7,10 @@
 
 import SwiftUI
 
+
+//TODO: repurpose this page for health permissions!
 struct UserRegistrationView: View {
     @AppStorage("appState") var appState: String = "splash"
-    @AppStorage("userName") var username: String = ""
     @Binding var color: Color
     
     @State private var name = ""
@@ -24,7 +25,6 @@ struct UserRegistrationView: View {
         }
         .gesture(dragGesture)
         .onAppear {
-            username = ""
         }
     }
     
@@ -124,7 +124,6 @@ struct UserRegistrationView: View {
         if navigationDragHeight < 50 {
             withAnimation(.easeInOut) {
                 color = .greenStart
-                username = name
                 appState = "goalSetting"
             }
         }

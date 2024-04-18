@@ -46,14 +46,19 @@ struct ExercisePlanDayView: View {
                                     .cornerRadius(12)
                                     .frame(height: 30)
                             }
-                        
+
                         if (isEditing) {
                             Button(action: {
-                                print("Hello!")
                                 withAnimation {
                                     // TODO: remove the sets for this exercise
                                     // TODO: remove Exercise
-                                    
+                                    print("\(exercise.name) - \(exercise.id.id)")
+                                    modelContext.delete(exercise)
+                                    do {
+                                        try modelContext.save()
+                                    } catch {
+                                        print("\(error.localizedDescription)")
+                                    }
                                 }
                             }, label: {
                                 Image(systemName: "minus.circle.fill")

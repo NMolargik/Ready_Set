@@ -18,6 +18,8 @@ struct ExercisePlanDayView: View {
     @State private var sortOrder = SortDescriptor(\Exercise.orderIndex)
 
     var selectedDay: Int
+    @State var durAmount: Int = 0
+    @State var susAmount: Int = 0
 
     init(selectedDay: Int, isEditing: Binding<Bool>) {
         self.selectedDay = selectedDay
@@ -48,27 +50,75 @@ struct ExercisePlanDayView: View {
                             }
 
                         if (isEditing) {
-                            Button(action: {
-                                withAnimation {
-                                    // TODO: remove the sets for this exercise
-                                    // TODO: remove Exercise
-                                    print("\(exercise.name) - \(exercise.id.id)")
-                                    modelContext.delete(exercise)
-                                    do {
-                                        try modelContext.save()
-                                    } catch {
-                                        print("\(error.localizedDescription)")
+                            //Stepper("Buh", value: $amount)
+                            VStack {
+                                Button(action: {
+                                    withAnimation {
+                                        // TODO: remove the sets for this exercise
+                                        // TODO: remove Exercise
+                                        print("\(exercise.name) - \(exercise.id.id) - \(exercise.exerciseSets.count)")
+                                        let es = ExerciseSet(goalType: .duration, repetitionsToDo: 0, durationToDo: 30, weightToLift: 30, lastRepetitionsRecorded: 0, lastDurationRecorded: 0, lastWeightRecorded: 0)
+                                        exercise.exerciseSets.append(es)
+                                        modelContext.insert(es)
+                                        modelContext.insert(exercise)
+                                        do {
+                                            try modelContext.save()
+                                        } catch {
+                                            print("\(error.localizedDescription)")
+                                        }
                                     }
-                                }
-                            }, label: {
-                                Image(systemName: "minus.circle.fill")
-                                    .foregroundStyle(.white, .red)
-                                    .frame(height: 30)
-                            })
-                            .buttonStyle(.plain)
+                                }, label: {
+                                    Image(systemName: "plus.circle.fill")
+                                        .foregroundStyle(.green, .white)
+                                })
+                                Button(action: {
+                                    withAnimation {
+                                        // TODO: remove the sets for this exercise
+                                        // TODO: remove Exercise
+                                        print("\(exercise.name) - \(exercise.id.id)")
+                                        modelContext.delete(exercise)
+                                        do {
+                                            try modelContext.save()
+                                        } catch {
+                                            print("\(error.localizedDescription)")
+                                        }
+                                    }
+                                }, label: {
+                                    Image(systemName: "minus.circle.fill")
+                                        .foregroundStyle(.white, .red)
+                                        .frame(height: 20)
+                                })
+                                .buttonStyle(.plain)
+                            }
                         }
-                        
+
                         Spacer()
+                    }
+                    ForEach(exercise.exerciseSets, id: \.self) { set in
+                        HStack {
+                            Text("\($durAmount.wrappedValue) - \(set.repetitionsToDo) - \(set.weightToLift)")
+                                .frame(height: 20)
+                            if (isEditing) {
+                                VStack {
+                                    Stepper("Duration", value: $durAmount)
+                                    Stepper("Repititions", value: $susAmount)
+                                }
+                                VStack {
+                                    Button(action: {
+                                        withAnimation {
+                                            print("\(set.id.id)")
+                                            exercise.exerciseSets.remove(at: exercise.exerciseSets.firstIndex(of: set) ?? 0)
+                                            modelContext.delete(set)
+                                        }
+                                    }, label: {
+                                        Image(systemName: "minus.circle.fill")
+                                            .foregroundStyle(.white, .red)
+                                            .frame(height: 20)
+                                    })
+                                    .buttonStyle(.plain)
+                                }
+                            }
+                        }
                     }
                 }
             }

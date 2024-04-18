@@ -24,7 +24,7 @@ struct HeaderView: View {
                         .shadow(color: .black, radius: 10)
                     
                     UnevenRoundedRectangle(cornerRadii: .init(bottomTrailing: 5, topTrailing: 5))
-                        .frame(width: max(geometry.size.width * min(progress, 1) + 20, 0), height: 60)
+                        .frame(width: min(geometry.size.width * min(progress, 1) + 20, geometry.size.width), height: 60)
                         .foregroundStyle(selectedTab.gradient)
                         .shadow(color: selectedTab.secondaryColor, radius: 8, x: 0, y: 0)
                         .animation(.easeInOut(duration: 1), value: progress)

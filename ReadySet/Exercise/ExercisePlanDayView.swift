@@ -96,13 +96,10 @@ struct ExercisePlanDayView: View {
                     }
                     ForEach(exercise.exerciseSets, id: \.self) { set in
                         HStack {
-                            Text("\($durAmount.wrappedValue) - \(set.repetitionsToDo) - \(set.weightToLift)")
+                            Text("\(set.durationToDo) - \(set.repetitionsToDo) - \(set.weightToLift)")
                                 .frame(height: 20)
                             if (isEditing) {
-                                VStack {
-                                    Stepper("Duration", value: $durAmount)
-                                    Stepper("Repititions", value: $susAmount)
-                                }
+                                ExerciseSetEditor(set: set)
                                 VStack {
                                     Button(action: {
                                         withAnimation {

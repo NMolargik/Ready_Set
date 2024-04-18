@@ -17,6 +17,7 @@
 		0E940A8B2BC6FE0400144477 /* ReadySetUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E940A8A2BC6FE0400144477 /* ReadySetUITests.swift */; };
 		0E940A8D2BC6FE0400144477 /* ReadySetUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E940A8C2BC6FE0400144477 /* ReadySetUITestsLaunchTests.swift */; };
 		0E98616A2BCE971F00488D9E /* WaterChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9861692BCE971F00488D9E /* WaterChartView.swift */; };
+		0EBC76F02BD1CE9A00880FFB /* ExerciseSetEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBC76EF2BD1CE9A00880FFB /* ExerciseSetEditor.swift */; };
 		EB3AB33C2BC70CF5008B6F22 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB33A2BC70CF5008B6F22 /* HeaderView.swift */; };
 		EB3AB33D2BC70CF5008B6F22 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB33B2BC70CF5008B6F22 /* HomeView.swift */; };
 		EB3AB33F2BC710D1008B6F22 /* NavColumnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB33E2BC710D1008B6F22 /* NavColumnView.swift */; };
@@ -99,6 +100,7 @@
 		0E940A8A2BC6FE0400144477 /* ReadySetUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadySetUITests.swift; sourceTree = "<group>"; };
 		0E940A8C2BC6FE0400144477 /* ReadySetUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadySetUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		0E9861692BCE971F00488D9E /* WaterChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterChartView.swift; sourceTree = "<group>"; };
+		0EBC76EF2BD1CE9A00880FFB /* ExerciseSetEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSetEditor.swift; sourceTree = "<group>"; };
 		EB3AB33A2BC70CF5008B6F22 /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		EB3AB33B2BC70CF5008B6F22 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		EB3AB33E2BC710D1008B6F22 /* NavColumnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavColumnView.swift; sourceTree = "<group>"; };
@@ -345,6 +347,7 @@
 				EB3AB34D2BC729DE008B6F22 /* ExerciseTopContentView.swift */,
 				EB4D9C4D2BCC73E90071BA99 /* ExerciseBottomContentView.swift */,
 				EB4D9C512BCC80A10071BA99 /* ExercisePlanDayView.swift */,
+				0EBC76EF2BD1CE9A00880FFB /* ExerciseSetEditor.swift */,
 				EB3AB3642BC772D6008B6F22 /* Widgets */,
 			);
 			path = Exercise;
@@ -524,6 +527,7 @@
 				EB3AB3552BC72A46008B6F22 /* EnergyTopContentView.swift in Sources */,
 				EB7110F72BC84B520078F796 /* HomeViewModel.swift in Sources */,
 				EB4D9C572BCC8B6B0071BA99 /* WaterViewModel.swift in Sources */,
+				0EBC76F02BD1CE9A00880FFB /* ExerciseSetEditor.swift in Sources */,
 				EB3AB3512BC72A30008B6F22 /* SettingsTopContentView.swift in Sources */,
 				EB3AB34E2BC729DE008B6F22 /* ExerciseTopContentView.swift in Sources */,
 				EB4D9C5D2BCDA9D40071BA99 /* ExerciseFitnessWidgetView.swift in Sources */,

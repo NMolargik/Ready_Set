@@ -22,6 +22,7 @@ struct GoalSetView: View {
             Color.base
             VStack {
                 if showText {
+                    Spacer()
                     Text("Time to fill out your exercise sets. You should only have to do this once, and you can move forward empty if you want.")
                         .multilineTextAlignment(.center)
                         .font(.body)
@@ -31,8 +32,14 @@ struct GoalSetView: View {
                 }
                 
                 Spacer()
-                
-                
+                Text("Swipe Upwards\nOn The Canvas When Finished")
+                    .frame(height: 100)
+                    .font(.body)
+                    .multilineTextAlignment(.center)
+                    .foregroundStyle(.fontGray)
+                    .animation(.easeInOut(duration: 2))
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
+
             }
             .blur(radius: blurRadiusForDrag())
             .padding(.bottom, 15)
@@ -56,6 +63,10 @@ struct GoalSetView: View {
         DragGesture(minimumDistance: 20, coordinateSpace: .global)
             .onChanged { value in navigationDragHeight = value.translation.height }
             .onEnded { value in
+                withAnimation(.smooth) {
+                    handleDragEnd(navigationDragHeight: value.translation.height)
+                    navigationDragHeight = 0.0
+                }
             }
     }
     

@@ -73,7 +73,7 @@ struct SettingsBottomContentView: View {
                         .bold()
                         .font(.caption)
                     
-                    Text("Contributions from Nicholas Yoder, v1.0.0")
+                    Text("Contributions from nythepegasus, v1.0.0")
                         .bold()
                         .font(.caption)
                         .lineLimit(3)

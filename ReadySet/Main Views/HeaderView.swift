@@ -76,7 +76,7 @@ struct HeaderView: View {
                 .frame(width: max(geometry.size.width * min(progress, 1.0), 0), height: 5)
                 .foregroundStyle(selectedTab.gradient)
                 .shadow(color: selectedTab.secondaryColor, radius: 4, x: 0, y: 3)
-                .animation(.easeInOut(duration: 1), value: progress)
+                .animation(.easeInOut(duration: 0.5), value: progress)
         }
     }
     

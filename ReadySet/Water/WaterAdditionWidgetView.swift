@@ -155,7 +155,7 @@ struct WaterAdditionWidgetView: View {
     }
     
     func mapSliderValue(value: Double) -> Int {
-        return (-5 + ((useMetric ? 4000 : 128) + 5) * (Int(value.rounded(.up))) / 100)
+        return (-2 + ((useMetric ? 1000 : 32) + 8) * (Int(value.rounded(.up))) / 100)
     }
 }
 

@@ -14,16 +14,9 @@ struct ExercisePlanDayView: View {
     @Environment(\.modelContext) var modelContext
     @Query(sort: [SortDescriptor(\Exercise.orderIndex)]) var exercises: [Exercise]
     
+    @Binding var selectedDay: Int
     @Binding var isEditing: Bool
     @State private var sortOrder = SortDescriptor(\Exercise.orderIndex)
-    
-    init(selectedDay: Int, isEditing: Binding<Bool>) {
-        _exercises = Query(filter: #Predicate {
-            return $0.weekday == selectedDay
-        }, sort: [SortDescriptor(\Exercise.orderIndex)])
-        
-        _isEditing = isEditing
-    }
     
     let weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     
@@ -61,19 +54,41 @@ struct ExercisePlanDayView: View {
                         
                         Spacer()
                     }
-                        
+                }
+            }
+            
+            Button(action: {
+                withAnimation {
+                    addExercise(currentLength: exercises.count, weekday: selectedDay)
+                }
+            }, label: {
+                Text("Add Exercise")
+            })
+        }
+        .padding(.horizontal, 5)
+    }
+    
+    func addExercise(currentLength: Int, weekday: Int) {
+        let exercise = Exercise(weekday: weekday, orderIndex: currentLength + 1)
+        modelContext.insert(exercise)
+    }
+
+}
+
+
+
 //                    ForEach(exercise.$exerciseSets, id: \.self) { set in
 //                        VStack {
 //                            if (isEditing) {
 //                                HStack (alignment: .top, spacing: 0) {
 //                                    Button(action: {
-//                                        
+//
 //                                    }, label: {
 //                                        Image(systemName: "minus.circle.fill")
 //                                            .foregroundStyle(.white, .red)
 //                                    })
 //                                    .frame(height: 20)
-//                                    
+//
 //                                    HStack (alignment: .top, spacing: 0) {
 //                                        VStack {
 //                                            Picker("Select Activity Type", selection: set.activityType) {
@@ -84,7 +99,7 @@ struct ExercisePlanDayView: View {
 //                                            .frame(width: 140)
 //                                            .padding(.leading, 5)
 //                                        }
-//                                        
+//
 //                                        VStack {
 //                                            if set.goalType == .weight {
 //                                                // Stepper for repetitions
@@ -92,13 +107,13 @@ struct ExercisePlanDayView: View {
 //                                                    Text("\(set.repetitionsToDo) reps")
 //                                                        .frame(width: 90)
 //                                                }
-//                                                
+//
 //                                                // Stepper for weight lifted
 //                                                Stepper(value: set.weightToLift, in: 1...500, step: 10) {
 //                                                    Text("\(set.weightToLift) \(useMetric ? "kg" : "lbs")")
 //                                                        .frame(width: 90)
 //                                                }
-//                                                
+//
 //                                            } else if set.goalType == .duration {
 //                                                // Stepper for duration (in minutes)
 //                                                Stepper(value: set.durationToDo, in: 1...180, step: 1) {
@@ -122,16 +137,16 @@ struct ExercisePlanDayView: View {
 //                                        HStack {
 //                                            if (set.repetitionsToDo != 0) {
 //                                                Image(systemName: "repeat")
-//                                                
+//
 //                                                Text("\(set.repetitionsToDo) reps")
 //                                            }
-//                                            
+//
 //                                            if (set.weightToLift != 0) {
 //                                                Image(systemName: "scalemass.fill")
-//                                                
+//
 //                                                Text("\(set.repetititonsToDo) \(useMetric ? "kg" : "lbs")")
 //                                            }
-//                                            
+//
 //                                            if (set.durationToDo != 0) {
 //                                                Text("\(set.durationToDo / 60) minutes")
 //                                            }
@@ -145,34 +160,18 @@ struct ExercisePlanDayView: View {
 //                                                .frame(height: 30)
 //                                        }
 //                                    }
-//                                    
+//
 //                                    Button(action: {
-//                                        
+//
 //                                    }, label: {
 //                                        Image(systemName: "minus.circle.fill")
 //                                            .foregroundStyle(.white, .red)
 //                                    })
 //                                    .frame(height: 20)
 //                                    .padding(.leading, 5)
-//                                    
+//
 //                                    Spacer()
 //                                }
 //                            }
 //                        }
 //                    }
-                }
-            }
-            
-            Button(action: {
-                withAnimation {
-                    //TODO: add a new exerciseEntry
-                }
-            }, label: {
-                Text("Add Exercise")
-            })
-        }
-        .padding(.horizontal, 5)
-    }
-
-}
-

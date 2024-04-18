@@ -292,14 +292,6 @@
 			path = Widgets;
 			sourceTree = "<group>";
 		};
-		EB4D9C4C2BCC73800071BA99 /* Exercise Plan */ = {
-			isa = PBXGroup;
-			children = (
-				EB4D9C512BCC80A10071BA99 /* ExercisePlanDayView.swift */,
-			);
-			path = "Exercise Plan";
-			sourceTree = "<group>";
-		};
 		EB4D9C5E2BCDAB990071BA99 /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
@@ -355,7 +347,7 @@
 				EB4D9C4F2BCC73F60071BA99 /* ExerciseViewModel.swift */,
 				EB3AB34D2BC729DE008B6F22 /* ExerciseTopContentView.swift */,
 				EB4D9C4D2BCC73E90071BA99 /* ExerciseBottomContentView.swift */,
-				EB4D9C4C2BCC73800071BA99 /* Exercise Plan */,
+				EB4D9C512BCC80A10071BA99 /* ExercisePlanDayView.swift */,
 				EB3AB3642BC772D6008B6F22 /* Widgets */,
 			);
 			path = Exercise;

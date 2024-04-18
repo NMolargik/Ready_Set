@@ -55,7 +55,10 @@ struct ExerciseBottomContentView: View {
                         .tag(index)
                 }
             }
-            .tabViewStyle(.automatic)
+            .tabViewStyle(.page(indexDisplayMode: .never))
+            .onAppear {
+                  UIScrollView.appearance().isScrollEnabled = false
+            }
         }
         .padding(5)
         .onAppear {

@@ -14,7 +14,7 @@ struct SettingsTabItem: ITabItem {
     var icon = "Cog"
     var color = Color.purpleStart
     var secondaryColor = Color.purpleEnd
-    var gradient = LinearGradient(colors: [.purpleStart, .purpleEnd], startPoint: .topLeading, endPoint: .bottomTrailing)
+    var gradient = LinearGradient(colors: [.purpleStart, .purple], startPoint: .topLeading, endPoint: .bottomTrailing)
     var sheetPresentationDetent = PresentationDetent.fraction(0)
     
     func bumpTab(up: Bool) -> any ITabItem {

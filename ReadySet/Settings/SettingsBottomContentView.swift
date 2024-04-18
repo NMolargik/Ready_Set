@@ -48,18 +48,15 @@ struct SettingsBottomContentView: View {
                 VStack (spacing: 0) {
                     Text("Ready, Set")
                         .bold()
-                        .font(.caption)
+                        .font(.title3)
                         .padding(.top, 5)
                     
                     Text("2024, Nicholas Molargik")
-                        .bold()
                         .font(.caption)
                     
-                    Text("Contributions from nythepegasus, v1.0.0")
-                        .bold()
+                    Text("Contributions from nythepegasus\n v1.0.0")
                         .font(.caption)
                         .lineLimit(3)
-                        .frame(height: 35)
                         .multilineTextAlignment(.center)
                     
                     ShareLink(

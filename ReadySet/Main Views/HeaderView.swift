@@ -23,11 +23,12 @@ struct HeaderView: View {
                         .foregroundColor(.baseInvert)
                         .shadow(color: .black, radius: 10)
                     
-                    Rectangle()
-                        .frame(width: max(geometry.size.width * min(progress, 1), 0), height: 60)
+                    UnevenRoundedRectangle(cornerRadii: .init(bottomTrailing: 5, topTrailing: 5))
+                        .frame(width: max(geometry.size.width * min(progress, 1) + 20, 0), height: 60)
                         .foregroundStyle(selectedTab.gradient)
                         .shadow(color: selectedTab.secondaryColor, radius: 8, x: 0, y: 0)
                         .animation(.easeInOut(duration: 1), value: progress)
+                    
                 }
             }
         }
@@ -36,6 +37,6 @@ struct HeaderView: View {
 }
 
 #Preview {
-    HeaderView(progress: .constant(0.85), selectedTab: .constant(ExerciseTabItem()))
+    HeaderView(progress: .constant(0.1), selectedTab: .constant(ExerciseTabItem()))
 }
 

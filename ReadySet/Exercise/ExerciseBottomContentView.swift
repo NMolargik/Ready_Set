@@ -61,7 +61,7 @@ struct ExerciseBottomContentView: View {
                 }
             }
             
-            .padding(5)
+            .padding(.horizontal)
             .onAppear {
                 withAnimation {
                     exerciseViewModel.getCurrentWeekday()

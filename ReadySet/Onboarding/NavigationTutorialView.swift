@@ -143,6 +143,7 @@ struct NavigationTutorialView: View {
     private func handleDragEnd(navigationDragHeight: CGFloat) {
         withAnimation(.easeInOut(duration: 2)) {
             appState = "running"
+            UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
         }
     }
 }

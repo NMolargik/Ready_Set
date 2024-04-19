@@ -55,6 +55,9 @@ struct HealthPermissionView: View {
                     Image(systemName: "checkmark.circle.fill")
                         .font(.title)
                         .foregroundStyle(.green)
+                        .onAppear {
+                            UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+                        }
                     
                 } else if showMoreText {
                     Button(action: {
@@ -151,6 +154,7 @@ struct HealthPermissionView: View {
                 onboardingProgress = 0.75
                 onboardingGradient = LinearGradient(colors: [.greenStart, .blueEnd, .orangeStart], startPoint: .leading, endPoint: .trailing)
                 appState = "goalSetting"
+                UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
             }
         }
     }

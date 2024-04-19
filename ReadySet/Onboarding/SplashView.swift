@@ -103,6 +103,7 @@ struct SplashView: View {
                 onboardingProgress = 0.5
                 onboardingGradient = LinearGradient(colors: [.greenStart, .blueEnd], startPoint: .leading, endPoint: .trailing)
                 appState = "healthPermission"
+                UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
             }
         }
     }

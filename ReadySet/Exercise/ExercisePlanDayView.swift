@@ -100,7 +100,6 @@ struct ExercisePlanDayView: View {
             }
             .padding(.horizontal, 5)
         }
-        .padding(.bottom, 15)
         .scrollDisabled(!isEditing && !isExpanded)
         .onChange(of: isEditing) {
             if (!isEditing) {

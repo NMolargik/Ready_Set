@@ -31,7 +31,7 @@ struct MainView: View {
                 withAnimation {
                     onboardingProgress = 0.25
                     onboardingGradient = LinearGradient(colors: [.greenStart, .greenEnd], startPoint: .leading, endPoint: .trailing)
-                    appState = "healthPermission"
+                    appState = "splash"
                 }
             }
         }
@@ -51,6 +51,7 @@ struct MainView: View {
                 .transition(.opacity)
         case "navigationTutorial":
             NavigationTutorialView(onboardingProgress: $onboardingProgress, onboardingGradient: $onboardingGradient)
+                .animation(.easeInOut, value: appState)
                 .transition(.opacity)
         default:
             HomeView(healthStore: healthController.healthStore)

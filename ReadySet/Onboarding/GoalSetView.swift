@@ -24,6 +24,7 @@ struct GoalSetView: View {
             VStack {
                 if showText {
                     Spacer()
+                    
                     Text("Tap days to enter Sets, or skip until later")
                         .multilineTextAlignment(.center)
                         .font(.body)
@@ -32,43 +33,45 @@ struct GoalSetView: View {
                         .transition(.push(from: .top))
                 }
                 
-                HStack(spacing: 6) {
-                    ForEach(weekDays.indices, id: \.self) { index in
-                        Text(selectedDay == index ? weekDays[index] : String(weekDays[index].prefix(1)))
-                            .font(.system(size: selectedDay == index ? 15 : 10))
-                            .bold()
-                            .foregroundStyle(selectedDay == index ? LinearGradient(colors: [.greenEnd, .green, .greenEnd], startPoint: .leading, endPoint: .trailing) : LinearGradient(colors: [.secondary], startPoint: .leading, endPoint: .trailing))
-                            .padding(.horizontal, 8)
-                            .onTapGesture {
-                                withAnimation(.easeInOut) {
-                                    selectedDay = index
-                                }
-                            }
-                            .animation(.bouncy, value: selectedDay)
-                            .zIndex(selectedDay == index ? 2 : 1)
-                            .transition(.opacity)
-                    }
-                }
-                .padding(.horizontal, 10)
-                
                 ZStack {
                     Rectangle()
                         .cornerRadius(35)
                         .foregroundStyle(.ultraThinMaterial)
                         .shadow(radius: 1)
-                    
-                    TabView(selection: $selectedDay) {
-                        ForEach(weekDays.indices, id: \.self) { index in
-                            ExercisePlanDayView(selectedDay: $selectedDay.wrappedValue, isEditing: .constant(true), isExpanded: .constant(false))
-                                .tag(index)
+                    VStack {
+                        HStack(spacing: 6) {
+                            ForEach(weekDays.indices, id: \.self) { index in
+                                Text(selectedDay == index ? weekDays[index] : String(weekDays[index].prefix(1)))
+                                    .font(.system(size: selectedDay == index ? 15 : 10))
+                                    .bold()
+                                    .foregroundStyle(selectedDay == index ? LinearGradient(colors: [.greenEnd, .green, .greenEnd], startPoint: .leading, endPoint: .trailing) : LinearGradient(colors: [.secondary], startPoint: .leading, endPoint: .trailing))
+                                    .padding(.horizontal, 8)
+                                    .onTapGesture {
+                                        withAnimation(.easeInOut) {
+                                            selectedDay = index
+                                        }
+                                    }
+                                    .animation(.bouncy, value: selectedDay)
+                                    .zIndex(selectedDay == index ? 2 : 1)
+                                    .transition(.opacity)
+                            }
+                        }
+                        TabView(selection: $selectedDay) {
+                            ForEach(weekDays.indices, id: \.self) { index in
+                                ExercisePlanDayView(selectedDay: $selectedDay.wrappedValue, isEditing: .constant(true), isExpanded: .constant(false))
+                                    .tag(index)
+                            }
+                        }
+                        .tabViewStyle(.page(indexDisplayMode: .never))
+                        .onAppear {
+                            UIScrollView.appearance().isScrollEnabled = false
+                        }
+                        .padding(.horizontal)
+                        .mask {
+                            Rectangle()
+                                .cornerRadius(35)
                         }
                     }
-                    .tabViewStyle(.page(indexDisplayMode: .never))
-                    .onAppear {
-                        UIScrollView.appearance().isScrollEnabled = false
-                    }
-                    .padding(5)
-                    .padding(.vertical, 10)
                 }
                 .padding(.horizontal, 8)
                 
@@ -97,6 +100,7 @@ struct GoalSetView: View {
         }
         .onAppear {
             getCurrentWeekday()
+            
             animateText()
         }
         

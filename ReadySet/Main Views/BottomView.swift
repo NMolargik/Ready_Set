@@ -36,6 +36,10 @@ struct BottomView: View {
                     }
                 }
                 .animation(.easeInOut(duration: 0.2), value: selectedTab.type)
+                .mask {
+                    Rectangle()
+                        .cornerRadius(35)
+                }
             }
             .geometryGroup()
             .transition(.opacity)

@@ -15,7 +15,7 @@ struct ExerciseSetCapsuleView: View {
         HStack (alignment: .center) {
             Button(action: {
                 UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                withAnimation {
+                withAnimation(.easeInOut(duration: 0.2)) {
                     selectedSet = set
                 }
             }, label: {
@@ -25,29 +25,29 @@ struct ExerciseSetCapsuleView: View {
                             .foregroundStyle(LinearGradient(colors: [.purpleStart, .purpleEnd], startPoint: .leading, endPoint: .trailing))
                         
                         Text(set.durationToDo.description)
-                            .foregroundStyle(.base)
+                            .foregroundStyle(.baseInvert)
                     } else {
                         Image(systemName: "scalemass.fill")
                             .foregroundStyle(LinearGradient(colors: [.blueStart, .blueEnd], startPoint: .leading, endPoint: .trailing))
                         
                         Text(set.weightToLift.description)
-                            .foregroundStyle(.base)
+                            .foregroundStyle(.baseInvert)
                         
                         Image(systemName: "repeat")
                             .foregroundStyle(LinearGradient(colors: [.orangeStart, .orangeEnd], startPoint: .leading, endPoint: .trailing))
                         
                         Text(set.repetitionsToDo.description)
-                            .foregroundStyle(.base)
+                            .foregroundStyle(.baseInvert)
                     }
                 }
                 .lineLimit(1)
                 .padding(3)
                 .background {
                     Rectangle()
-                        .foregroundStyle(.baseInvert)
+                        .foregroundStyle(.baseAccent)
                         .cornerRadius(5)
-                    
                 }
+                .shadow(radius: 5, x: 3, y: 3)
             })
             .buttonStyle(.plain)
         }

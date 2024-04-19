@@ -66,17 +66,9 @@ struct ExerciseEntryHeaderView: View {
                         }
                     }
                 }, label: {
-                    if (selectedExercise.id == exercise.id) {
-                        Image(systemName: "checkmark.circle.fill")
-                            .foregroundStyle(LinearGradient(colors: [.greenStart, .greenEnd], startPoint: .topLeading, endPoint: .bottomTrailing))
-                            .frame(width: 15, height: 15)
-                        
-                    } else {
-                        Image(systemName: "ellipsis.rectangle")
-                            .foregroundStyle(LinearGradient(colors: [.greenStart, .greenEnd], startPoint: .topLeading, endPoint: .bottomTrailing))
-                            .frame(width: 15, height: 15)
-                        
-                    }
+                    Image(systemName: selectedExercise.id == exercise.id ? "checkmark.circle.fill" : "ellipsis.rectangle")
+                        .foregroundStyle(.baseInvert)
+                        .frame(width: 15, height: 15)
                 })
                 .shadow(radius: 5)
                 .padding(.leading, 20)

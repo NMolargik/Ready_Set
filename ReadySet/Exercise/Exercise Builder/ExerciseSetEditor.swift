@@ -76,14 +76,9 @@ struct ExerciseSetEditor: View {
         .background {
             ZStack {
                 Rectangle()
-                    .foregroundStyle(.thickMaterial)
+                    .cornerRadius(5)
+                    .foregroundStyle(.baseAccent)
                     .shadow(radius: 5)
-                Rectangle()
-                    .blendMode(.destinationOut)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 5)
-                            .stroke(.baseInvert, lineWidth: 1)
-                    )
             }
             .compositingGroup()
         }

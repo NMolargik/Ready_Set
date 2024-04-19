@@ -14,8 +14,6 @@ struct HeaderView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .leading, spacing: 0) {
-                //Spacer()
-                
                 ZStack(alignment: .leading) {
                     Rectangle()
                         .frame(height: 60)

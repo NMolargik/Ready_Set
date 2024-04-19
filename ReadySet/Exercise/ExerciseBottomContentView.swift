@@ -28,6 +28,7 @@ struct ExerciseBottomContentView: View {
                             .foregroundStyle(selectedDay == index ? LinearGradient(colors: [.greenEnd, .green, .greenEnd], startPoint: .leading, endPoint: .trailing) : LinearGradient(colors: [.secondary], startPoint: .leading, endPoint: .trailing))
                             .padding(.horizontal, 4)
                             .onTapGesture {
+                                UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
                                 withAnimation(.easeInOut) {
                                     selectedDay = index
                                 }
@@ -80,7 +81,7 @@ struct ExerciseBottomContentView: View {
             }
         }, label: {
             Image(systemName: exerciseViewModel.expandedSets ? "arrow.up.right.and.arrow.down.left.circle.fill" : "arrow.up.left.and.arrow.down.right.circle.fill")
-                .foregroundStyle(LinearGradient(colors: [.greenStart, .greenEnd], startPoint: .topLeading, endPoint: .bottomTrailing))
+                .foregroundStyle(.baseInvert)
                 .font(.system(size: 25))
                 .tag("edpandButton")
         })
@@ -97,7 +98,7 @@ struct ExerciseBottomContentView: View {
             }
         }, label: {
             Image(systemName: exerciseViewModel.editingSets ? "checkmark.circle.fill" : "pencil.circle.fill")
-                .foregroundStyle(LinearGradient(colors: [.greenStart, .greenEnd], startPoint: .topLeading, endPoint: .bottomTrailing))
+                .foregroundStyle(.baseInvert)
                 .font(.system(size: 25))
                 .tag("editButton")
         })

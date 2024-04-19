@@ -4,7 +4,6 @@
 //
 //  Created by Nick Molargik on 4/14/24.
 //
-// NOTE: THIS FILE HAS NOT BE OPTIMIZED OR COMPARTMENTALIZED YET
 
 import SwiftUI
 import SwiftData

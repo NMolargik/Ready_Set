@@ -25,12 +25,12 @@ struct ExerciseSetRecordingView: View {
             
             Button(action: {
                 UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                withAnimation {
+                withAnimation(.easeInOut(duration: 0.2)) {
                     selectedSet = ExerciseSet()
                 }
             }, label: {
                 Text("Save")
-                    .foregroundStyle(LinearGradient(colors: [.greenStart, .greenEnd], startPoint: .topLeading, endPoint: .bottomTrailing))
+                    .foregroundStyle(.greenEnd)
                     .bold()
             })
             .buttonStyle(.plain)
@@ -38,18 +38,13 @@ struct ExerciseSetRecordingView: View {
         }
         .padding(.vertical, 3)
         .padding(.horizontal, 5)
-        .background(ZStack {
+        .background(
             Rectangle()
-                .foregroundStyle(.thickMaterial)
+                .foregroundStyle(.baseAccent)
                 .shadow(radius: 5)
-            Rectangle()
-                .blendMode(.destinationOut)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(.baseInvert, lineWidth: 1)
-                )
-        }
-        .compositingGroup())
+                .cornerRadius(5)
+        )
+        .compositingGroup()
         .animation(.easeInOut, value: selectedSet)
         .padding(.leading)
     }

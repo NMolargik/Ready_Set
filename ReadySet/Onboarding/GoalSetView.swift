@@ -47,6 +47,7 @@ struct GoalSetView: View {
                                     .foregroundStyle(selectedDay == index ? LinearGradient(colors: [.greenEnd, .green, .greenEnd], startPoint: .leading, endPoint: .trailing) : LinearGradient(colors: [.secondary], startPoint: .leading, endPoint: .trailing))
                                     .padding(.horizontal, 8)
                                     .onTapGesture {
+                                        UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
                                         withAnimation(.easeInOut) {
                                             selectedDay = index
                                         }

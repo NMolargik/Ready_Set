@@ -24,7 +24,7 @@ struct WaterTopContentView: View {
                         .onAppear {
                             waterSliderValue = waterViewModel.waterGoal
                         }
-                        .onChange(of: waterSliderValue) { _ in
+                        .onChange(of: waterSliderValue) {
                             if (!decreaseHaptics) {
                                 UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                             }
@@ -90,8 +90,8 @@ struct WaterTopContentView: View {
                 startAnimationIfNeeded()
             }
         }
-        .onChange(of: waterViewModel.editingWaterGoal) { editing in
-            if !editing {
+        .onChange(of: waterViewModel.editingWaterGoal) {
+            if !waterViewModel.editingWaterGoal {
                 withAnimation(.easeOut(duration: 0.5)) {
                     startAnimation = 0
                 }

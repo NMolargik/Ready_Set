@@ -39,7 +39,7 @@ struct ExerciseTopContentView: View {
 
     private var stepGoalEditor: some View {
         SliderView(range: 1000...15000, gradient: ExerciseTabItem().gradient, step: 1000, label: "steps", sliderValue: $stepSliderValue)
-            .onChange(of: stepSliderValue) { _ in
+            .onChange(of: stepSliderValue) {
                 if (!decreaseHaptics) {
                     UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                 }

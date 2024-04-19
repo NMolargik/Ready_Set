@@ -57,10 +57,8 @@ struct ExercisePlanDayView: View {
                                 VStack {
                                     Button(action: {
                                         withAnimation {
-                                            // TODO: remove the sets for this exercise
-                                            // TODO: remove Exercise
                                             print("\(exercise.name) - \(exercise.id.id) - \(exercise.exerciseSets.count)")
-                                            let es = ExerciseSet(goalType: .duration, repetitionsToDo: 0, durationToDo: 30, weightToLift: 30, lastRepetitionsRecorded: 0, lastDurationRecorded: 0, lastWeightRecorded: 0)
+                                            let es = ExerciseSet(goalType: .duration, repetitionsToDo: 10, durationToDo: 0, weightToLift: 120, lastRepetitionsRecorded: 0, lastDurationRecorded: 0, lastWeightRecorded: 0)
                                             exercise.exerciseSets.append(es)
                                             modelContext.insert(es)
                                             modelContext.insert(exercise)

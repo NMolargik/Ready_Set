@@ -22,7 +22,7 @@ struct EnergyTopContentView: View {
                         .onAppear {
                             energysliderValue = energyViewModel.energyGoal
                         }
-                        .onChange(of: energysliderValue) { _ in
+                        .onChange(of: energysliderValue) {
                             if (!decreaseHaptics) {
                                 UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                             }

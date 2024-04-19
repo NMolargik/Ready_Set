@@ -50,8 +50,10 @@ struct HomeView: View {
         .background(backgroundGradient)
         .gesture(dragGesture)
         .onAppear(perform: setupViewModels)
-        .onChange(of: scenePhase, perform: handleScenePhase)
-        .onChange(of: useMetric) { _ in
+        .onChange(of: scenePhase) {
+            handleScenePhase(newPhase: scenePhase)
+        }
+        .onChange(of: useMetric) {
             setGoalsAfterUnitChange()
         }
     }

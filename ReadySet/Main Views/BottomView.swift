@@ -45,10 +45,10 @@ struct BottomView: View {
                     Spacer()
                     
                     LinearGradient(colors: [.green.opacity(0.5), .clear, .clear], startPoint: .bottom, endPoint: .top)
-                        .frame(height: 175)
+                        .frame(height: 70)
                         .mask {
                             UnevenRoundedRectangle(cornerRadii: RectangleCornerRadii(bottomLeading: 30, bottomTrailing: 30))
-                                .frame(height: 175)
+                                .frame(height: 70)
                         }
                 }
                 .transition(.opacity)

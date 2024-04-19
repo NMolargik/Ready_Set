@@ -18,16 +18,9 @@ struct ExerciseWeeklyStepsWidgetView: View {
                 .foregroundStyle(.thinMaterial)
                 .shadow(radius: 1)
         
-            HStack (spacing: 1) {
-                Image(systemName: "calendar")
-                    .foregroundStyle(.baseInvert)
-                    .font(.body)
-                
-                Text("Weekly Steps: \(weeklySteps)")
-                    
-            }
-            .font(.caption)
-            .foregroundStyle(.fontGray)
+            Text("Weekly Steps: \(weeklySteps)")
+                .font(.caption)
+                .foregroundStyle(.fontGray)
         }
         .frame(height: 35)
     }

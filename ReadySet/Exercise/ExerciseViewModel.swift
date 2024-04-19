@@ -21,7 +21,6 @@ class ExerciseViewModel: ObservableObject {
     @Published var currentDay: Int = 1
     @Published var stepCountWeek: [Date : Int] = [:]
     @Published var healthStore: HKHealthStore?
-    
 
     init() {
         self.getCurrentWeekday()

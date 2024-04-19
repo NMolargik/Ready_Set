@@ -17,7 +17,7 @@ class ExerciseSet: Identifiable {
     var weightToLift: Int
     let timestamp: Date
 
-    init(goalType: GoalType = .weight, repetitionsToDo: Int = 0, durationToDo: Int = 0, weightToLift: Int = 0, timestamp: Date = .now) {
+    init(goalType: GoalType = .weight, repetitionsToDo: Int = 5, durationToDo: Int = 10, weightToLift: Int = 100, timestamp: Date = .now) {
         self.id = UUID()
         self.goalType = goalType
         self.repetitionsToDo = repetitionsToDo

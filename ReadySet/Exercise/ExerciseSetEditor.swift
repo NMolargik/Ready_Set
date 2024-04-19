@@ -8,66 +8,67 @@
 import SwiftUI
 
 struct ExerciseSetEditor: View {
-    @Bindable var set: ExerciseSet
-    var goalType: GoalType
+    @Bindable var exerciseSet: ExerciseSet
     
     init(set: ExerciseSet) {
-        self.set = set
-        self.goalType = set.goalType
+        self.exerciseSet = set
     }
 
     var body: some View {
         HStack {
-            VStack {
-                Picker("Type", selection: $set.goalType) {
-                    Text("Duration").tag(GoalType.duration)
-                    Text("Reps").tag(GoalType.weight)
-                }
-                .frame(width: 150)
-                .pickerStyle(.segmented)
-                
-                Spacer()
+            VStack(spacing: 2) {
+                Button(action: {
+                    UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+                    withAnimation {
+                        exerciseSet.goalType = .weight
+                    }
+                }, label: {
+                    Text("Reps")
+                        .bold()
+                        .padding(.horizontal, 5)
+                        .padding(.vertical, 3)
+                        .foregroundStyle(.baseInvert)
+                        .frame(width: 80)
+                        .background {
+                            Rectangle()
+                                .cornerRadius(5)
+                                .foregroundStyle(exerciseSet.goalType == .weight ? .blueEnd : .baseAccent)
+                        }
+                })
+                     
+                Button(action: {
+                    UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+                    withAnimation {
+                        exerciseSet.goalType = .duration
+                    }
+                }, label: {
+                    Text("Duration")
+                        .bold()
+                        .padding(.horizontal, 5)
+                        .padding(.vertical, 3)
+                        .foregroundStyle(.baseInvert)
+                        .frame(width: 80)
+                        .background {
+                            Rectangle()
+                                .cornerRadius(5)
+                                .foregroundStyle(exerciseSet.goalType == .duration ? .purpleEnd : .baseAccent)
+                        }
+                })
+                .frame(width: 80)
             }
             
-            VStack {
-                if ($set.wrappedValue.goalType == .duration) {
-                    
-                    Stepper(value: self.$set.durationToDo, label: {
-                        HStack {
-                            Image(systemName: "stopwatch")
-                                .foregroundStyle(.greenEnd)
-                            
-                            Text(self.set.durationToDo.description)
-                                .bold()
-                                .foregroundStyle(.baseInvert)
-                        }
-                    })
+            VStack(spacing: 2) {
+                if exerciseSet.goalType == .duration {
+                    CustomStepperView(value: $exerciseSet.durationToDo, step: 5, iconName: "stopwatch.fill", colors: [.purpleStart, .purpleEnd])
                     
                 } else {
-                    Stepper(value: self.$set.weightToLift, label: {
-                        HStack {
-                            Image(systemName: "scalemass")
-                                .foregroundStyle(.baseInvert)
-                            
-                            Text(set.weightToLift.description)
-                                .bold()
-                                .foregroundStyle(.baseInvert)
-                        }
-                    })
+                    CustomStepperView(value: $exerciseSet.weightToLift, step: 5, iconName: "scalemass.fill", colors: [.blueStart, .blueEnd])
                     
-                    Stepper(value: self.$set.repetitionsToDo, label: {
-                        HStack {
-                            Image(systemName: "repeat")
-                                .foregroundStyle(.orangeEnd)
-                            
-                            Text(set.repetitionsToDo.description)
-                                .bold()
-                                .foregroundStyle(.baseInvert)
-                        }
-                    })
+                    CustomStepperView(value: $exerciseSet.repetitionsToDo, step: 1, iconName: "repeat", colors: [.orangeStart, .orangeEnd])
                 }
             }
-            .animation(.easeInOut, value: goalType)
+            .padding(.vertical, 3)
+            .animation(.easeInOut, value: exerciseSet.goalType)
             .transition(.opacity)
         }
         .compositingGroup()

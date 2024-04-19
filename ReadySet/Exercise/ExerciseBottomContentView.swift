@@ -79,8 +79,8 @@ struct ExerciseBottomContentView: View {
                 exerciseViewModel.expandedSets.toggle()
             }
         }, label: {
-            Image(systemName: exerciseViewModel.expandedSets ? "arrow.up.right.and.arrow.down.left.circle.fill" : "arrow.down.left.and.arrow.up.right.circle.fill")
-                .foregroundStyle(.greenEnd, .baseInvert)
+            Image(systemName: exerciseViewModel.expandedSets ? "arrow.up.right.and.arrow.down.left.circle.fill" : "arrow.up.left.and.arrow.down.right.circle.fill")
+                .foregroundStyle(LinearGradient(colors: [.greenStart, .greenEnd], startPoint: .topLeading, endPoint: .bottomTrailing))
                 .font(.system(size: 25))
                 .tag("edpandButton")
         })
@@ -97,7 +97,7 @@ struct ExerciseBottomContentView: View {
             }
         }, label: {
             Image(systemName: exerciseViewModel.editingSets ? "checkmark.circle.fill" : "pencil.circle.fill")
-                .foregroundStyle(.greenEnd, .baseInvert)
+                .foregroundStyle(LinearGradient(colors: [.greenStart, .greenEnd], startPoint: .topLeading, endPoint: .bottomTrailing))
                 .font(.system(size: 25))
                 .tag("editButton")
         })
@@ -108,7 +108,6 @@ struct ExerciseBottomContentView: View {
     }
 }
 
-// Preview
 #Preview {
     ExerciseBottomContentView(exerciseViewModel: ExerciseViewModel())
 }

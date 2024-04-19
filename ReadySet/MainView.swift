@@ -26,6 +26,13 @@ struct MainView: View {
         }
         .transition(.opacity)
         .ignoresSafeArea()
+        .onAppear {
+            if appState != "running" {
+                withAnimation {
+                    appState = "healthPermission"
+                }
+            }
+        }
     }
     
     @ViewBuilder

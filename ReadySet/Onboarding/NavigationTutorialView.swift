@@ -110,7 +110,7 @@ struct NavigationTutorialView: View {
     private func animateText() {
         withAnimation(.easeInOut(duration: 2)) {
             showText = true
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                 withAnimation(.easeInOut(duration: 1.5)) {
                     showMoreText = true
                 }

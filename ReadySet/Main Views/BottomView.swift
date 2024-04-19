@@ -44,7 +44,7 @@ struct BottomView: View {
                 VStack {
                     Spacer()
                     
-                    LinearGradient(colors: [.white.opacity(0.5), .clear, .clear], startPoint: .bottom, endPoint: .top)
+                    LinearGradient(colors: [.green.opacity(0.5), .clear, .clear], startPoint: .bottom, endPoint: .top)
                         .frame(height: 175)
                         .mask {
                             UnevenRoundedRectangle(cornerRadii: RectangleCornerRadii(bottomLeading: 30, bottomTrailing: 30))
@@ -52,6 +52,7 @@ struct BottomView: View {
                         }
                 }
                 .transition(.opacity)
+                .zIndex(4)
             }
         }
     }

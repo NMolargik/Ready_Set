@@ -10,37 +10,20 @@ import UIKit
 
 struct SettingsTopContentView: View {
     @AppStorage("appState") var appState: String = "splash"
-    
     @Environment(\.colorScheme) var colorScheme
     
     @ObservedObject var exerciseViewModel: ExerciseViewModel
-    
     @State private var showingDeleteAlert = false
     
     var body: some View {
         HStack(spacing: 10) {
             settingButton(action: returnToGuide,
-                          labelText: "Go To\nGuide",
+                          labelText: "Return To Navigation Tutorial",
                           imageName: "arrowshape.turn.up.backward.2.fill",
                           imageColors: [.purpleStart, .purpleEnd])
-
-            settingButton(action: { showingDeleteAlert = true },
-                          labelText: "Delete\nSet Data",
-                          imageName: "trash.fill",
-                          imageColors: [.fontGray, .fontGray])
         }
         .padding(.leading, 8)
         .padding(.top, 5)
-        .alert(isPresented: $showingDeleteAlert) {
-            Alert(
-                title: Text("Confirm Deletion"),
-                message: Text("Are you sure you want to delete all of your set data records? This will remove all set completion history but leave your list of sets in place. This action cannot be undone."),
-                primaryButton: .destructive(Text("Delete")) {
-                    performDeleteAction()
-                },
-                secondaryButton: .cancel()
-            )
-        }
     }
 
     private func settingButton(action: @escaping () -> Void, labelText: String, imageName: String, imageColors: [Color]) -> some View {
@@ -51,7 +34,11 @@ struct SettingsTopContentView: View {
             }
         }, label: {
             ZStack {
-                defaultRectangle
+                Rectangle()
+                    .frame(height: 80)
+                    .cornerRadius(10)
+                    .foregroundStyle(.thinMaterial)
+                    .shadow(radius: 1)
                 HStack {
                     Spacer()
                     
@@ -74,23 +61,9 @@ struct SettingsTopContentView: View {
         .buttonStyle(.plain)
     }
 
-    private var defaultRectangle: some View {
-        Rectangle()
-            .frame(height: 80)
-            .cornerRadius(10)
-            .foregroundStyle(.thinMaterial)
-            .shadow(radius: 1)
-    }
-
     private func returnToGuide() {
         withAnimation {
             appState = "navigationTutorial"
-        }
-    }
-
-    private func performDeleteAction() {
-        withAnimation {
-            //TODO: rewrite
         }
     }
 }

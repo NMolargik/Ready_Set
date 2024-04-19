@@ -74,6 +74,7 @@ struct ExerciseBottomContentView: View {
     
     private var expandButton: some View {
         Button(action: {
+            UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
             withAnimation {
                 exerciseViewModel.expandedSets.toggle()
             }
@@ -90,6 +91,7 @@ struct ExerciseBottomContentView: View {
 
     private var editButton: some View {
         Button(action: {
+            UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
             withAnimation {
                 exerciseViewModel.editingSets.toggle()
             }

@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-
-    //TODO: fix this page!
 struct GoalSetView: View {
     @AppStorage("appState") var appState: String = "goalSetting"
     @Binding var onboardingProgress: Float
@@ -16,7 +14,6 @@ struct GoalSetView: View {
     
     @State private var showText = false
     @State private var showMoreText = false
-    @State private var navigationDragHeight = 0.0
     @State var selectedDay = 1
     
     let weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
@@ -74,24 +71,45 @@ struct GoalSetView: View {
                     .padding(.vertical, 10)
                 }
                 .padding(.horizontal, 8)
-                .padding(.bottom, 40)
                 
                 Spacer()
                 
-                Text("Swipe Upwards On The Canvas When Ready")
-                    .font(.body)
-                    .multilineTextAlignment(.center)
-                    .foregroundStyle(.fontGray)
-                    .id("InstructionText")
-                    .zIndex(1)
-
+                
+                Button(action: {
+                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                    withAnimation(.easeInOut) {
+                        onboardingProgress = 1
+                        onboardingGradient = LinearGradient(colors: [.greenStart, .blueEnd, .orangeStart, .purpleEnd], startPoint: .leading, endPoint: .trailing)
+                        appState = "navigationTutorial"
+                    }
+                }, label: {
+                    Text("Tap Here When Finished")
+                        .font(.body)
+                        .multilineTextAlignment(.center)
+                        .foregroundStyle(.blueEnd)
+                        .id("InstructionText")
+                        .zIndex(1)
+                })
+                .padding(.vertical, 30)
+                .buttonStyle(.plain)
             }
             .padding(.top, 60)
-            .padding(.bottom, 30)
-            .blur(radius: blurRadiusForDrag())
         }
-        .gesture(dragGesture)
-        .onAppear(perform: animateText)
+        .onAppear {
+            getCurrentWeekday()
+            animateText()
+        }
+        
+    }
+    
+    func getCurrentWeekday() {
+        let currentDate = Date()
+        let calendar = Calendar.current
+        if let dayOfWeek = calendar.dateComponents([.weekday], from: currentDate).weekday {
+            self.selectedDay = dayOfWeek - 1
+        } else {
+            self.selectedDay = 1
+        }
     }
 
     private func animateText() {
@@ -101,31 +119,6 @@ struct GoalSetView: View {
                 withAnimation {
                     showMoreText = true
                 }
-            }
-        }
-    }
-    
-    private var dragGesture: some Gesture {
-        DragGesture(minimumDistance: 20, coordinateSpace: .global)
-            .onChanged { value in navigationDragHeight = value.translation.height }
-            .onEnded { value in
-                withAnimation(.easeInOut) {
-                    handleDragEnd(navigationDragHeight: value.translation.height)
-                    navigationDragHeight = 0.0
-                }
-            }
-    }
-    
-    private func blurRadiusForDrag() -> CGFloat {
-        abs(navigationDragHeight) > 20.0 ? abs(navigationDragHeight * 0.03) : 0
-    }
-    
-    private func handleDragEnd(navigationDragHeight: CGFloat) {
-        if navigationDragHeight < 50 {
-            withAnimation(.easeInOut) {
-                onboardingProgress = 1
-                onboardingGradient = LinearGradient(colors: [.greenStart, .blueEnd, .orangeStart, .purpleEnd], startPoint: .leading, endPoint: .trailing)
-                appState = "navigationTutorial"
             }
         }
     }

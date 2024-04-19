@@ -58,6 +58,7 @@ struct HealthPermissionView: View {
                     
                 } else if showMoreText {
                     Button(action: {
+                        UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
                         showProgress = true
                         healthController.requestAuthorization()
                         

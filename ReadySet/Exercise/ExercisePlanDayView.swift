@@ -4,6 +4,7 @@
 //
 //  Created by Nick Molargik on 4/14/24.
 //
+// NOTE: THIS FILE HAS NOT BE OPTIMIZED OR COMPARTMENTALIZED YET
 
 import SwiftUI
 import SwiftData
@@ -60,8 +61,8 @@ struct ExercisePlanDayView: View {
                         HStack (spacing: 0) {
                             if (isEditing) {
                                 Button(action: {
+                                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                                     withAnimation {
-                                        print("\(exercise.name) - \(exercise.id.id)")
                                         modelContext.delete(exercise)
                                         do {
                                             try modelContext.save()
@@ -77,6 +78,7 @@ struct ExercisePlanDayView: View {
                                 .buttonStyle(.plain)
                                 
                                 Button(action: {
+                                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                                     withAnimation {
                                         if (selectedExercise.id == exercise.id) {
                                             exercise.name = selectedExercise.name
@@ -99,6 +101,7 @@ struct ExercisePlanDayView: View {
                                     }
                                 })
                                 .padding(.leading, 20)
+                                .buttonStyle(.plain)
                             }
 
                             if (exercise.id == selectedExercise.id && isEditing) {
@@ -125,8 +128,9 @@ struct ExercisePlanDayView: View {
                             
                             if (isEditing) {
                                 Button(action: {
+                                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                                     withAnimation {
-                                        let newSet = ExerciseSet(goalType: .duration, repetitionsToDo: 0, durationToDo: 30, weightToLift: 30, lastRepetitionsRecorded: 0, lastDurationRecorded: 0, lastWeightRecorded: 0)
+                                        let newSet = ExerciseSet(goalType: .duration, repetitionsToDo: 0, durationToDo: 30, weightToLift: 30)
                                         exercise.exerciseSets.append(newSet)
                                         modelContext.insert(newSet)
                                         do {
@@ -150,6 +154,7 @@ struct ExercisePlanDayView: View {
                                             .shadow(radius: 5)
                                     }
                                 })
+                                .buttonStyle(.plain)
                             }
                         }
                         .animation(.easeInOut, value: exercises.count)
@@ -176,6 +181,7 @@ struct ExercisePlanDayView: View {
                                             .padding(.bottom, 4)
                                         
                                         Button(action: {
+                                            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                                             withAnimation {
                                                 exercise.exerciseSets.remove(at: exercise.exerciseSets.firstIndex(of: set) ?? 0)
                                                 modelContext.delete(set)
@@ -197,56 +203,155 @@ struct ExercisePlanDayView: View {
                             } else {
                                 HFlow(itemSpacing: 4, rowSpacing: 6) {
                                     ForEach(exercise.exerciseSets, id: \.self) { set in
-                                        HStack (alignment: .center) {
-                                            Button(action: {
-                                                withAnimation {
-                                                    selectedSet = set
-                                                }
-                                            }, label: {
-                                                HStack {
-                                                    if (set.goalType == .duration) {
-                                                        Image(systemName: "stopwatch")
-                                                            .foregroundStyle(.greenEnd)
-                                                        
-                                                        Text(set.durationToDo.description)
-                                                            .foregroundStyle(.base)
+                                        if (selectedSet.id == set.id) {
+                                            HStack {
+                                                VStack {
+                                                    if selectedSet.goalType == .duration {
+                                                        Stepper(value: Binding(
+                                                            get: { selectedSet.durationToDo },
+                                                            set: { selectedSet.durationToDo = $0 }
+                                                        ), label: {
+                                                            HStack {
+                                                                Image(systemName: "stopwatch")
+                                                                    .foregroundStyle(.greenEnd)
+                                                                Text("\(selectedSet.durationToDo)")
+                                                                    .bold()
+                                                                    .foregroundStyle(.baseInvert)
+                                                            }
+                                                        })
                                                     } else {
-                                                        Image(systemName: "scalemass")
-                                                            .foregroundStyle(.baseAccent)
+                                                        Stepper(value: Binding(
+                                                            get: { selectedSet.weightToLift },
+                                                            set: { selectedSet.weightToLift = $0 }
+                                                        ), label: {
+                                                            HStack {
+                                                                Image(systemName: "scalemass")
+                                                                    .foregroundStyle(.baseInvert)
+                                                                Text("\(selectedSet.weightToLift)")
+                                                                    .bold()
+                                                                    .foregroundStyle(.baseInvert)
+                                                            }
+                                                        })
                                                         
-                                                        Text(set.weightToLift.description)
-                                                            .foregroundStyle(.base)
-                                                        
-                                                        Image(systemName: "repeat")
-                                                            .foregroundStyle(.orangeEnd)
-                                                        
-                                                        Text(set.repetitionsToDo.description)
-                                                            .foregroundStyle(.base)
+                                                        Stepper(value: Binding(
+                                                            get: { selectedSet.repetitionsToDo },
+                                                            set: { selectedSet.repetitionsToDo = $0 }
+                                                        ), label: {
+                                                            HStack {
+                                                                Image(systemName: "repeat")
+                                                                    .foregroundStyle(.orangeEnd)
+                                                                Text("\(selectedSet.repetitionsToDo)")
+                                                                    .bold()
+                                                                    .foregroundStyle(.baseInvert)
+                                                            }
+                                                            
+                                                        })
                                                     }
                                                 }
-                                                .lineLimit(1)
-                                                .padding(3)
-                                                .background {
-                                                    Rectangle()
+                                                .frame(width: 200, alignment: .leading)
+                                                
+                                                Spacer()
+                                                
+                                                Button(action: {
+                                                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                                                    withAnimation {
+                                                        selectedSet = ExerciseSet()
+                                                    }
+                                                }, label: {
+                                                    Text("Save")
                                                         .foregroundStyle(.baseInvert)
-                                                        .cornerRadius(5)
-                                                        
+                                                        .bold()
+                                                        .padding(10)
+                                                })
+                                                .buttonStyle(.plain)
+                                                .background {
+                                                    ZStack {
+                                                        Rectangle()
+                                                            .cornerRadius(5)
+                                                            .foregroundStyle(.blue)
+                                                            .shadow(radius: 5)
+                                                    }
+                                                    .compositingGroup()
                                                 }
-                                            })
+                                                .padding(.trailing)
+                                            }
+                                            .frame(width: 300)
+                                            .padding(3)
+                                            .background {
+                                                ZStack {
+                                                    Rectangle()
+                                                        .foregroundStyle(.thickMaterial)
+                                                        .shadow(radius: 5)
+                                                    Rectangle()
+                                                        .blendMode(.destinationOut)
+                                                        .overlay(
+                                                            RoundedRectangle(cornerRadius: 5)
+                                                                .stroke(.baseInvert, lineWidth: 1)
+                                                        )
+                                                }
+                                                .compositingGroup()
+                                            }
+                                            .animation(.easeInOut, value: selectedSet)
+                                            .transition(.scale(scale: 0.1, anchor: .leading))
+                                            
+                                        } else {
+                                            
+                                            
+                                            HStack (alignment: .center) {
+                                                Button(action: {
+                                                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                                                    withAnimation {
+                                                        selectedSet = set
+                                                    }
+                                                }, label: {
+                                                    HStack {
+                                                        if (set.goalType == .duration) {
+                                                            Image(systemName: "stopwatch")
+                                                                .foregroundStyle(.greenEnd)
+                                                            
+                                                            Text(set.durationToDo.description)
+                                                                .foregroundStyle(.base)
+                                                        } else {
+                                                            Image(systemName: "scalemass")
+                                                                .foregroundStyle(.baseAccent)
+                                                            
+                                                            Text(set.weightToLift.description)
+                                                                .foregroundStyle(.base)
+                                                            
+                                                            Image(systemName: "repeat")
+                                                                .foregroundStyle(.orangeEnd)
+                                                            
+                                                            Text(set.repetitionsToDo.description)
+                                                                .foregroundStyle(.base)
+                                                        }
+                                                    }
+                                                    .lineLimit(1)
+                                                    .padding(3)
+                                                    .background {
+                                                        Rectangle()
+                                                            .foregroundStyle(.baseInvert)
+                                                            .cornerRadius(5)
+                                                        
+                                                    }
+                                                })
+                                                .buttonStyle(.plain)
+                                            }
+                                            
+                                            .animation(.easeInOut, value: exercises.count)
+                                            .transition(.move(edge: .leading).combined(with: .opacity))
                                         }
-                                        
-                                        .animation(.easeInOut, value: exercises.count)
-                                        .transition(.move(edge: .leading).combined(with: .opacity))
                                     }
                                 }
                             }
                         }
+                        .padding(.bottom, 5)
                     }
                 }
                 
                 if (isEditing) {
                     HStack {
                         Button(action: {
+                            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                             withAnimation {
                                 addExercise(currentLength: exercises.count, weekday: selectedDay)
                             }
@@ -265,6 +370,7 @@ struct ExercisePlanDayView: View {
                                 
                             }
                         })
+                        .buttonStyle(.plain)
                         
                         Spacer()
                     }
@@ -276,6 +382,12 @@ struct ExercisePlanDayView: View {
             .padding(.horizontal, 5)
         }
         .scrollDisabled(!isEditing && !isExpanded)
+        .onChange(of: isEditing) {
+            if (!isEditing) {
+                selectedSet = ExerciseSet()
+                selectedExercise = Exercise()
+            }
+        }
     }
     
     func addExercise(currentLength: Int, weekday: Int) {
@@ -283,5 +395,4 @@ struct ExercisePlanDayView: View {
         modelContext.insert(exercise)
         selectedExercise = exercise
     }
-
 }

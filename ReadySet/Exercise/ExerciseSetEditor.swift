@@ -67,7 +67,10 @@ struct ExerciseSetEditor: View {
                     })
                 }
             }
+            .animation(.easeInOut, value: goalType)
+            .transition(.opacity)
         }
+        .compositingGroup()
         .padding(3)
         .background {
             ZStack {

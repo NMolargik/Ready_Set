@@ -10,9 +10,9 @@ import SwiftUI
 struct MainView: View {
     @AppStorage("appState") var appState: String = "splash"
     
-    @State var color: Color = .clear
-    @State var onboardingProgress : Float = 0.0
-    @State var onboardingGradient = LinearGradient(colors: [.clear, .clear], startPoint: .leading, endPoint: .trailing)
+    @State private var color: Color = .clear
+    @State private var onboardingProgress : Float = 0.0
+    @State private var onboardingGradient = LinearGradient(colors: [.clear, .clear], startPoint: .leading, endPoint: .trailing)
     
     @State var healthController = HealthBaseController()
     
@@ -69,7 +69,7 @@ struct MainView: View {
                         ZStack(alignment: .leading) {
                             Rectangle()
                                 .frame(height: 60)
-                                .foregroundColor(.baseAccent)
+                                .foregroundStyle(.baseAccent)
                                 .shadow(color: .black, radius: 10)
                             
                             Rectangle()

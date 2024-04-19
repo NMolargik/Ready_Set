@@ -13,10 +13,10 @@ struct ChartView: View {
     var yLabel: String
     var unitLabel: String
     var color: Color
+    var showGoal: Bool
     @Binding var data: [Date: Int]
     @Binding var average: Double
     @Binding var goal: Double
-    var showGoal: Bool
     
     var body: some View {
         Group {
@@ -47,7 +47,7 @@ struct ChartView: View {
                     Text("Avg: \(Int(average))\(unitLabel)")
                         .bold()
                         .font(.caption)
-                        .foregroundColor(.primary)
+                        .foregroundStyle(.primary)
                         .opacity(0.7)
                         .padding(.leading, 4)
                 }
@@ -59,7 +59,7 @@ struct ChartView: View {
                         Text("Goal: \(Int(goal))\(unitLabel)")
                             .bold()
                             .font(.caption)
-                            .foregroundColor(.primary)
+                            .foregroundStyle(.primary)
                             .opacity(0.7)
                             .padding(.leading, 4)
                     }
@@ -88,5 +88,5 @@ struct ChartView: View {
 }
 
 #Preview {
-    ChartView(title: "Chart", yLabel: "Ounces", unitLabel: "oz", color: Color.white, data: .constant([:]), average: .constant(0), goal: .constant(0), showGoal: true)
+    ChartView(title: "Chart", yLabel: "Ounces", unitLabel: "oz", color: Color.white, showGoal: true, data: .constant([:]), average: .constant(0), goal: .constant(0))
 }

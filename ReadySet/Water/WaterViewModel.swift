@@ -5,7 +5,6 @@
 //  Created by Nick Molargik on 4/14/24.
 //
 
-import Foundation
 import SwiftUI
 import HealthKit
 
@@ -41,7 +40,7 @@ class WaterViewModel: ObservableObject {
         }
     }
     
-    func readWaterConsumedToday() {
+    private func readWaterConsumedToday() {
         guard let waterCountType = HKQuantityType.quantityType(forIdentifier: .dietaryWater) else {
             return
         }
@@ -74,7 +73,7 @@ class WaterViewModel: ObservableObject {
         healthStore?.execute(query)
     }
 
-    func readWaterConsumedWeek() {
+    private func readWaterConsumedWeek() {
         guard let waterCountType = HKQuantityType.quantityType(forIdentifier: .dietaryWater) else {
             return
         }
@@ -128,7 +127,7 @@ class WaterViewModel: ObservableObject {
         healthStore?.execute(query)
     }
 
-    func addWaterConsumed(waterAmount: Double, completion: @escaping () -> Void) {
+    private func addWaterConsumed(waterAmount: Double, completion: @escaping () -> Void) {
         let waterType = HKQuantityType.quantityType(forIdentifier: .dietaryWater)!
         
         

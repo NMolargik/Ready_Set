@@ -147,7 +147,7 @@ struct HealthPermissionView: View {
             }
     }
     
-    func handleDragEnd(navigationDragHeight: CGFloat) {
+    private func handleDragEnd(navigationDragHeight: CGFloat) {
         healthController.requestAuthorization()
         if navigationDragHeight < 50 {
             withAnimation(.easeInOut) {

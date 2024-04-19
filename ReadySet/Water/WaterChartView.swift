@@ -20,7 +20,7 @@ struct WaterChartView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            ChartView(title: "Water Consumed", yLabel: useMetric ? "Milliliters" : "Ounces", unitLabel: useMetric ? "ml" : "oz", color: .blueEnd, data: $waterViewModel.waterConsumedWeek, average: .constant(averageWaterConsumed), goal: $waterViewModel.waterGoal, showGoal: true)
+            ChartView(title: "Water Consumed", yLabel: useMetric ? "Milliliters" : "Ounces", unitLabel: useMetric ? "ml" : "oz", color: .blueEnd, showGoal: true, data: $waterViewModel.waterConsumedWeek, average: .constant(averageWaterConsumed), goal: $waterViewModel.waterGoal)
         }
     }
 }

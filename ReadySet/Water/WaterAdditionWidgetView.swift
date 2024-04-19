@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Foundation
 
 struct WaterAdditionWidgetView: View {
     @AppStorage("useMetric") var useMetric: Bool = false
@@ -154,7 +153,7 @@ struct WaterAdditionWidgetView: View {
         }
     }
     
-    func mapSliderValue(value: Double) -> Int {
+    private func mapSliderValue(value: Double) -> Int {
         return (-2 + ((useMetric ? 1000 : 32) + 8) * (Int(value.rounded(.up))) / 100)
     }
 }

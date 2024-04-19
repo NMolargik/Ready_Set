@@ -5,7 +5,6 @@
 //  Created by Nicholas Yoder on 4/14/24.
 //
 
-import Foundation
 import SwiftUI
 import HealthKit
 
@@ -46,7 +45,7 @@ class EnergyViewModel: ObservableObject {
         }
     }
     
-    func readEnergyConsumedToday() {
+    private func readEnergyConsumedToday() {
         guard let energyCountType = HKQuantityType.quantityType(forIdentifier: .dietaryEnergyConsumed) else {
             return
         }
@@ -78,7 +77,7 @@ class EnergyViewModel: ObservableObject {
         healthStore?.execute(query)
     }
 
-    func readEnergyConsumedWeek() {
+    private func readEnergyConsumedWeek() {
         guard let energyCountType = HKQuantityType.quantityType(forIdentifier: .dietaryEnergyConsumed) else {
             return
         }
@@ -132,7 +131,7 @@ class EnergyViewModel: ObservableObject {
         healthStore?.execute(query)
     }
     
-    func readEnergyBurnedToday() {
+    private func readEnergyBurnedToday() {
         guard let energyCountType = HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned) else {
             return
         }
@@ -164,7 +163,7 @@ class EnergyViewModel: ObservableObject {
         healthStore?.execute(query)
     }
 
-    func readEnergyBurnedWeek() {
+    private func readEnergyBurnedWeek() {
         guard let energyCountType = HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned) else {
             return
         }
@@ -218,7 +217,7 @@ class EnergyViewModel: ObservableObject {
         healthStore?.execute(query)
     }
     
-    func addEnergyConsumed(energy: Double, completion: @escaping () -> Void) {
+    private func addEnergyConsumed(energy: Double, completion: @escaping () -> Void) {
         let energyType = HKQuantityType.quantityType(forIdentifier: .dietaryEnergyConsumed)!
         let energysample = HKQuantitySample(type: energyType, quantity: HKQuantity(unit: self.useMetric ? HKUnit.jouleUnit(with: .kilo) : HKUnit.kilocalorie(), doubleValue: energy), start: Date(), end: Date())
         self.healthStore?.save(energysample, withCompletion: { (success, error) -> Void in

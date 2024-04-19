@@ -5,7 +5,6 @@
 //  Created by Nick Molargik on 4/10/24.
 //
 
-import Foundation
 import SwiftUI
 
 struct SettingsTabItem: ITabItem {

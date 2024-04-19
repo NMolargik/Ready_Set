@@ -10,9 +10,9 @@ import SwiftData
 
 @Model
 class Exercise: Identifiable {
-    var id: UUID
-    var weekday: Int
-    var orderIndex: Int
+    let id: UUID
+    let weekday: Int
+    let orderIndex: Int
     var name: String
     @Relationship(deleteRule: .cascade) var exerciseSets = [ExerciseSet]()
     

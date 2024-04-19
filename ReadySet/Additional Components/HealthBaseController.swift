@@ -5,7 +5,6 @@
 //  Created by Nick Molargik on 4/15/24.
 //
 
-import Foundation
 import HealthKit
 
 struct HealthBaseController {

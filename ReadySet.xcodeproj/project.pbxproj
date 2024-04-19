@@ -41,6 +41,12 @@
 		EB3AB36C2BC77C3E008B6F22 /* ExerciseWeeklyStepsWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB36B2BC77C3E008B6F22 /* ExerciseWeeklyStepsWidgetView.swift */; };
 		EB4742B52BD2A933009A23E4 /* Flow in Frameworks */ = {isa = PBXBuildFile; productRef = EB4742B42BD2A933009A23E4 /* Flow */; };
 		EB4742B72BD2A933009A23E4 /* Renderer in Frameworks */ = {isa = PBXBuildFile; productRef = EB4742B62BD2A933009A23E4 /* Renderer */; };
+		EB4742BA2BD324C5009A23E4 /* ExerciseEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4742B92BD324C5009A23E4 /* ExerciseEntryView.swift */; };
+		EB4742BC2BD324DF009A23E4 /* ExerciseEntryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4742BB2BD324DF009A23E4 /* ExerciseEntryHeaderView.swift */; };
+		EB4742BE2BD32502009A23E4 /* ExerciseSetRecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4742BD2BD32502009A23E4 /* ExerciseSetRecordingView.swift */; };
+		EB4742C02BD3251C009A23E4 /* CustomStepperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4742BF2BD3251C009A23E4 /* CustomStepperView.swift */; };
+		EB4742C22BD32558009A23E4 /* ExerciseSetGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4742C12BD32558009A23E4 /* ExerciseSetGridView.swift */; };
+		EB4742C42BD32576009A23E4 /* ExerciseSetCapsuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4742C32BD32576009A23E4 /* ExerciseSetCapsuleView.swift */; };
 		EB4D9C4E2BCC73E90071BA99 /* ExerciseBottomContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C4D2BCC73E90071BA99 /* ExerciseBottomContentView.swift */; };
 		EB4D9C502BCC73F60071BA99 /* ExerciseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C4F2BCC73F60071BA99 /* ExerciseViewModel.swift */; };
 		EB4D9C522BCC80A10071BA99 /* ExercisePlanDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C512BCC80A10071BA99 /* ExercisePlanDayView.swift */; };
@@ -125,6 +131,12 @@
 		EB3AB3692BC77B19008B6F22 /* ExerciseHealthWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseHealthWidgetView.swift; sourceTree = "<group>"; };
 		EB3AB36B2BC77C3E008B6F22 /* ExerciseWeeklyStepsWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseWeeklyStepsWidgetView.swift; sourceTree = "<group>"; };
 		EB3AB36D2BC7957D008B6F22 /* ReadySet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ReadySet.entitlements; sourceTree = "<group>"; };
+		EB4742B92BD324C5009A23E4 /* ExerciseEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseEntryView.swift; sourceTree = "<group>"; };
+		EB4742BB2BD324DF009A23E4 /* ExerciseEntryHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseEntryHeaderView.swift; sourceTree = "<group>"; };
+		EB4742BD2BD32502009A23E4 /* ExerciseSetRecordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSetRecordingView.swift; sourceTree = "<group>"; };
+		EB4742BF2BD3251C009A23E4 /* CustomStepperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomStepperView.swift; sourceTree = "<group>"; };
+		EB4742C12BD32558009A23E4 /* ExerciseSetGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSetGridView.swift; sourceTree = "<group>"; };
+		EB4742C32BD32576009A23E4 /* ExerciseSetCapsuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSetCapsuleView.swift; sourceTree = "<group>"; };
 		EB4D9C4D2BCC73E90071BA99 /* ExerciseBottomContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseBottomContentView.swift; sourceTree = "<group>"; };
 		EB4D9C4F2BCC73F60071BA99 /* ExerciseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseViewModel.swift; sourceTree = "<group>"; };
 		EB4D9C512BCC80A10071BA99 /* ExercisePlanDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisePlanDayView.swift; sourceTree = "<group>"; };
@@ -295,6 +307,20 @@
 			path = Widgets;
 			sourceTree = "<group>";
 		};
+		EB4742B82BD324B4009A23E4 /* Exercise Builder */ = {
+			isa = PBXGroup;
+			children = (
+				EB4D9C512BCC80A10071BA99 /* ExercisePlanDayView.swift */,
+				0EBC76EF2BD1CE9A00880FFB /* ExerciseSetEditor.swift */,
+				EB4742B92BD324C5009A23E4 /* ExerciseEntryView.swift */,
+				EB4742BB2BD324DF009A23E4 /* ExerciseEntryHeaderView.swift */,
+				EB4742BD2BD32502009A23E4 /* ExerciseSetRecordingView.swift */,
+				EB4742C32BD32576009A23E4 /* ExerciseSetCapsuleView.swift */,
+				EB4742C12BD32558009A23E4 /* ExerciseSetGridView.swift */,
+			);
+			path = "Exercise Builder";
+			sourceTree = "<group>";
+		};
 		EB4D9C5E2BCDAB990071BA99 /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
@@ -333,6 +359,7 @@
 			isa = PBXGroup;
 			children = (
 				EB7110F92BC8574A0078F796 /* CustomTextFields.swift */,
+				EB4742BF2BD3251C009A23E4 /* CustomStepperView.swift */,
 				EB4D9C7C2BCF074E0071BA99 /* VerticalToggleStyle.swift */,
 				EB4D9C782BCEF2390071BA99 /* ChartView.swift */,
 				EB4D9C722BCDFE540071BA99 /* SliderView.swift */,
@@ -350,8 +377,7 @@
 				EB4D9C4F2BCC73F60071BA99 /* ExerciseViewModel.swift */,
 				EB3AB34D2BC729DE008B6F22 /* ExerciseTopContentView.swift */,
 				EB4D9C4D2BCC73E90071BA99 /* ExerciseBottomContentView.swift */,
-				EB4D9C512BCC80A10071BA99 /* ExercisePlanDayView.swift */,
-				0EBC76EF2BD1CE9A00880FFB /* ExerciseSetEditor.swift */,
+				EB4742B82BD324B4009A23E4 /* Exercise Builder */,
 				EB3AB3642BC772D6008B6F22 /* Widgets */,
 			);
 			path = Exercise;
@@ -536,11 +562,13 @@
 				EB4D9C732BCDFE540071BA99 /* SliderView.swift in Sources */,
 				EB4D9C602BCDABAA0071BA99 /* EnergyFitnessWidgetView.swift in Sources */,
 				EB3AB3552BC72A46008B6F22 /* EnergyTopContentView.swift in Sources */,
+				EB4742C22BD32558009A23E4 /* ExerciseSetGridView.swift in Sources */,
 				EB7110F72BC84B520078F796 /* HomeViewModel.swift in Sources */,
 				EB4D9C572BCC8B6B0071BA99 /* WaterViewModel.swift in Sources */,
 				0EBC76F02BD1CE9A00880FFB /* ExerciseSetEditor.swift in Sources */,
 				EB3AB3512BC72A30008B6F22 /* SettingsTopContentView.swift in Sources */,
 				EB3AB34E2BC729DE008B6F22 /* ExerciseTopContentView.swift in Sources */,
+				EB4742C02BD3251C009A23E4 /* CustomStepperView.swift in Sources */,
 				EB4D9C5D2BCDA9D40071BA99 /* ExerciseFitnessWidgetView.swift in Sources */,
 				EB3AB3462BC711FA008B6F22 /* ExerciseTabItem.swift in Sources */,
 				EB4D9C6B2BCDCB1B0071BA99 /* BouncingChevronView.swift in Sources */,
@@ -551,6 +579,7 @@
 				EB4D9C792BCEF2390071BA99 /* ChartView.swift in Sources */,
 				EB7111012BC8B3C20078F796 /* WaterAdditionWidgetView.swift in Sources */,
 				EB4D9C522BCC80A10071BA99 /* ExercisePlanDayView.swift in Sources */,
+				EB4742BC2BD324DF009A23E4 /* ExerciseEntryHeaderView.swift in Sources */,
 				EB4D9C7D2BCF074E0071BA99 /* VerticalToggleStyle.swift in Sources */,
 				EB3AB3622BC76FED008B6F22 /* EnergyBottomContentView.swift in Sources */,
 				EB4D9C672BCDBE890071BA99 /* GoalSetView.swift in Sources */,
@@ -558,12 +587,15 @@
 				EB4D9C772BCEE0F60071BA99 /* EnergyChartView.swift in Sources */,
 				EB3AB34C2BC71214008B6F22 /* SettingsTabITem.swift in Sources */,
 				0E940A6D2BC6FE0200144477 /* MainView.swift in Sources */,
+				EB4742C42BD32576009A23E4 /* ExerciseSetCapsuleView.swift in Sources */,
 				EB3AB3602BC76FE5008B6F22 /* WaterBottomContentView.swift in Sources */,
 				EB4D9C652BCDBDF60071BA99 /* SplashView.swift in Sources */,
+				EB4742BA2BD324C5009A23E4 /* ExerciseEntryView.swift in Sources */,
 				EB3AB3442BC711A8008B6F22 /* ITabItem.swift in Sources */,
 				EB3AB35E2BC76FDC008B6F22 /* SettingsBottomContentView.swift in Sources */,
 				EB3AB35A2BC76F8C008B6F22 /* BottomView.swift in Sources */,
 				EB7110FA2BC8574A0078F796 /* CustomTextFields.swift in Sources */,
+				EB4742BE2BD32502009A23E4 /* ExerciseSetRecordingView.swift in Sources */,
 				EB3AB3532BC72A3A008B6F22 /* WaterTopContentView.swift in Sources */,
 				0E940A6B2BC6FE0200144477 /* ReadySetApp.swift in Sources */,
 				EB3AB36A2BC77B19008B6F22 /* ExerciseHealthWidgetView.swift in Sources */,
@@ -746,7 +778,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ReadySet/ReadySet.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "\"ReadySet/Preview Content\"";
 				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
 				ENABLE_PREVIEWS = YES;
@@ -787,7 +819,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ReadySet/ReadySet.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "\"ReadySet/Preview Content\"";
 				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
 				ENABLE_PREVIEWS = YES;

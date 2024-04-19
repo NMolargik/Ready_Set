@@ -60,11 +60,11 @@ struct EnergyTopContentView: View {
             VStack(alignment: .leading) {
                 Text("~\(Int(energyViewModel.energyConsumedToday)) \(useMetric ? "kJ" : "cal") Consumed")
                     .bold()
-                    .foregroundColor(.fontGray)
+                    .foregroundStyle(.fontGray)
                 
                 Text("~\(Int(energyViewModel.energyBurnedToday)) Burned")
                     .bold()
-                    .foregroundColor(.fontGray)
+                    .foregroundStyle(.fontGray)
             }
             Spacer()
             EnergyFitnessWidgetView()

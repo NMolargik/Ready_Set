@@ -16,7 +16,7 @@ struct BouncingChevronView: View {
     var body: some View {
         Image(systemName: "chevron.up")
             .font(.body)
-            .foregroundColor(.fontGray)
+            .foregroundStyle(.fontGray)
             .offset(y: bounce ? -animationDistance : animationDistance)
             .animation(Animation.easeInOut(duration: animationDuration).repeatForever(autoreverses: true), value: bounce)
             .onAppear {

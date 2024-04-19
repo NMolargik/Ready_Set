@@ -5,7 +5,6 @@
 //  Created by Nick Molargik on 4/14/24.
 //
 
-import Foundation
 import SwiftUI
 import HealthKit
 
@@ -48,7 +47,7 @@ class ExerciseViewModel: ObservableObject {
         self.editingStepGoal = false
     }
     
-    func readStepCountToday() {
+    private func readStepCountToday() {
         guard let stepCountType = HKQuantityType.quantityType(forIdentifier: .stepCount) else {
             return
         }
@@ -80,7 +79,7 @@ class ExerciseViewModel: ObservableObject {
         healthStore?.execute(query)
     }
     
-    func readStepCountWeek() {
+    private func readStepCountWeek() {
         guard let stepCountType = HKQuantityType.quantityType(forIdentifier: .stepCount) else {
             return
         }

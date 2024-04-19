@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Foundation
 
 struct HeaderView: View {
     @Binding var progress: Double
@@ -20,7 +19,7 @@ struct HeaderView: View {
                 ZStack(alignment: .leading) {
                     Rectangle()
                         .frame(height: 60)
-                        .foregroundColor(.baseAccent)
+                        .foregroundStyle(.baseAccent)
                         .shadow(color: .black, radius: 10)
                     
                     Rectangle()

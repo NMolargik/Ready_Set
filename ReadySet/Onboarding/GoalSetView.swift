@@ -14,7 +14,7 @@ struct GoalSetView: View {
     
     @State private var showText = false
     @State private var showMoreText = false
-    @State var selectedDay = 1
+    @State private var selectedDay = 1
     
     let weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     
@@ -106,7 +106,7 @@ struct GoalSetView: View {
         
     }
     
-    func getCurrentWeekday() {
+    private func getCurrentWeekday() {
         let currentDate = Date()
         let calendar = Calendar.current
         if let dayOfWeek = calendar.dateComponents([.weekday], from: currentDate).weekday {

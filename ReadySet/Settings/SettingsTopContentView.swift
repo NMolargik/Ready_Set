@@ -22,7 +22,7 @@ struct SettingsTopContentView: View {
             settingButton(action: returnToGuide,
                           labelText: "Go To\nGuide",
                           imageName: "arrowshape.turn.up.backward.2.fill",
-                          imageColors: [.purple, .pink])
+                          imageColors: [.purpleStart, .purpleEnd])
 
             settingButton(action: { showingDeleteAlert = true },
                           labelText: "Delete\nSet Data",
@@ -54,14 +54,19 @@ struct SettingsTopContentView: View {
                 defaultRectangle
                 HStack {
                     Spacer()
+                    
                     Text(labelText)
                         .bold()
                         .multilineTextAlignment(.center)
                         .foregroundStyle(.fontGray)
+                    
                     Spacer()
+                    
                     Image(systemName: imageName)
+                        .symbolRenderingMode(.hierarchical)
                         .font(.title)
-                        .foregroundStyle(imageColors[0], imageColors[1])
+                        .foregroundStyle(LinearGradient(colors: [imageColors[0], imageColors[1]], startPoint: .leading, endPoint: .trailing))
+                    
                     Spacer()
                 }
             }

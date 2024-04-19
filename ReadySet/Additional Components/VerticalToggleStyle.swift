@@ -31,7 +31,7 @@ struct VerticalToggleStyle: ToggleStyle {
         .padding()
         .overlay(
             RoundedRectangle(cornerRadius: 20)
-                .stroke(configuration.isOn ? Color.green: Color.purple, lineWidth: 2)
+                .stroke(configuration.isOn ? Color.green: Color.purpleStart, lineWidth: 2)
                 .shadow(radius: 2)
         )
     }

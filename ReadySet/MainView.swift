@@ -6,67 +6,81 @@
 //
 
 import SwiftUI
-import CoreData
 
 struct MainView: View {
     @AppStorage("appState") var appState: String = "splash"
-        var healthController = HealthBaseController()
-        
-        @State var color: Color = .clear
-        
-        var body: some View {
-            ZStack {
-                contentView(for: appState)
-                    .animation(.easeInOut, value: appState)
-                    .transition(.opacity)
-                
-                onboardingOverlay()
-            }
-            .transition(.opacity)
-            .onAppear(perform: handleAppear)
-            .ignoresSafeArea()
+    
+    @State var color: Color = .clear
+    @State var onboardingProgress : Float = 0.0
+    @State var onboardingGradient = LinearGradient(colors: [.clear, .clear], startPoint: .leading, endPoint: .trailing)
+    
+    @State var healthController = HealthBaseController()
+    
+    var body: some View {
+        ZStack {
+            contentView(for: appState)
+                .animation(.easeInOut, value: appState)
+                .transition(.opacity)
+            
+            onboardingOverlay()
         }
-        
-        @ViewBuilder
-        private func contentView(for appState: String) -> some View {
-            switch appState {
-            case "splash":
-                SplashView(color: $color)
-                    .transition(.opacity)
-            case "register":
-                UserRegistrationView(color: $color)
-                    .transition(.opacity)
-            case "goalSetting":
-                GoalSetView(color: $color)
-                    .onAppear(perform: healthController.requestAuthorization)
-                    .transition(.opacity)
-            case "navigationTutorial":
-                NavigationTutorialView(color: $color)
-                    .transition(.opacity)
-            default:
-                HomeView(healthStore: healthController.healthStore)
-                    .transition(.push(from: .bottom))
-            }
+        .transition(.opacity)
+        .onAppear(perform: handleAppear)
+        .ignoresSafeArea()
+    }
+    
+    @ViewBuilder
+    private func contentView(for appState: String) -> some View {
+        switch appState {
+        case "splash":
+            SplashView(onboardingProgress: $onboardingProgress, onboardingGradient: $onboardingGradient)
+                .transition(.opacity)
+        case "healthPermission":
+            HealthPermissionView(onboardingProgress: $onboardingProgress, onboardingGradient: $onboardingGradient, healthController: $healthController)
+                .transition(.opacity)
+        case "goalSetting":
+            GoalSetView(onboardingProgress: $onboardingProgress, onboardingGradient: $onboardingGradient)
+                .transition(.opacity)
+        case "navigationTutorial":
+            NavigationTutorialView(onboardingProgress: $onboardingProgress, onboardingGradient: $onboardingGradient)
+                .transition(.opacity)
+        default:
+            HomeView(healthStore: healthController.healthStore)
+                .transition(.opacity)
         }
-        
-        @ViewBuilder
-        private func onboardingOverlay() -> some View {
-            if appState != "running" {
-                VStack {
-                    Rectangle()
-                        .foregroundStyle(LinearGradient(colors: [color, .clear, .clear], startPoint: .top, endPoint: .bottom))
-                        .frame(height: 200)
-                        .id("OnboardingHeader")
-                    Spacer()
+    }
+    
+    @ViewBuilder
+    private func onboardingOverlay() -> some View {
+        if appState != "running" {
+            VStack {
+                GeometryReader { geometry in
+                    VStack(alignment: .leading, spacing: 0) {
+                        ZStack(alignment: .leading) {
+                            Rectangle()
+                                .frame(height: 60)
+                                .foregroundColor(.baseAccent)
+                                .shadow(color: .black, radius: 10)
+                            
+                            Rectangle()
+                                .frame(width: min(geometry.size.width * CGFloat(min(onboardingProgress, 1)), geometry.size.width), height: 60)
+                                .foregroundStyle(onboardingGradient)
+                                .animation(.easeInOut(duration: 1), value: onboardingProgress)
+                        }
+                    }
                 }
+                .frame(height: 60)
+                
+                Spacer()
             }
         }
-        
-        private func handleAppear() {
-            if appState != "running" {
-                appState = "splash"
-            }
+    }
+    
+    private func handleAppear() {
+        if appState != "running" {
+            appState = "splash"
         }
+    }
 }
 
 #Preview {

@@ -83,8 +83,6 @@ struct SettingsBottomContentView: View {
             }
             .padding(.horizontal, 5)
             .padding(.bottom, 10)
-            
-            Spacer()
 
         }
     }

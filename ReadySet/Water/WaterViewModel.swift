@@ -13,7 +13,7 @@ class WaterViewModel: ObservableObject {
     @AppStorage("useMetric") var useMetric: Bool = false
     @AppStorage("waterGoal") var waterGoal: Double = 8
     
-    @Published var proposedWaterGoal = 8
+    @Published var proposedWaterGoal = 64
     @Published var editingWaterGoal = false
     @Published var waterConsumedToday: Int = 0
     @Published var waterConsumedWeek: [Date: Int] = [:]

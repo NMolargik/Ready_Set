@@ -20,15 +20,14 @@ struct HeaderView: View {
                 ZStack(alignment: .leading) {
                     Rectangle()
                         .frame(height: 60)
-                        .foregroundColor(.baseInvert)
+                        .foregroundColor(.baseAccent)
                         .shadow(color: .black, radius: 10)
                     
-                    UnevenRoundedRectangle(cornerRadii: .init(bottomTrailing: 5, topTrailing: 5))
-                        .frame(width: min(geometry.size.width * min(progress, 1) + 20, geometry.size.width), height: 60)
+                    Rectangle()
+                        .frame(width: max(0.05 * geometry.size.width, min(geometry.size.width * min(progress, 1), geometry.size.width)), height: 60)
                         .foregroundStyle(selectedTab.gradient)
                         .shadow(color: selectedTab.secondaryColor, radius: 8, x: 0, y: 0)
                         .animation(.easeInOut(duration: 1), value: progress)
-                    
                 }
             }
         }

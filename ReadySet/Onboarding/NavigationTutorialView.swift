@@ -9,7 +9,8 @@ import SwiftUI
 
 struct NavigationTutorialView: View {
     @AppStorage("appState") var appState: String = "goalSetting"
-    @Binding var color: Color
+    @Binding var onboardingProgress: Float
+    @Binding var onboardingGradient: LinearGradient
     
     @State private var showText = false
     @State private var showMoreText = false
@@ -26,7 +27,7 @@ struct NavigationTutorialView: View {
                 if showText {
                     HStack {
                         iconStack
-                        instructionText
+                        navText
                     }     .transition(.opacity)
                     
                 }
@@ -36,9 +37,13 @@ struct NavigationTutorialView: View {
                 
                 if showMoreText {
                     moreInstructions
+                    
+                    Spacer()
+                    
+                    instructionText
                 }
             }
-            .padding(.bottom, 15)
+            .padding(.bottom, 30)
             .onAppear(perform: animateText)
             .blur(radius: blurRadiusForDrag())
         }
@@ -59,8 +64,8 @@ struct NavigationTutorialView: View {
         .padding(.leading, 5)
     }
     
-    private var instructionText: some View {
-        Text("You can navigate Ready, Set by swiping vertically, just as you have been!\n\nOr by tapping any of these icons wherever they appear.")
+    private var navText: some View {
+        Text("You can navigate Ready, Set by swiping vertically, just as you have been...\n\nOr by tapping any of these icons wherever they appear.")
             .multilineTextAlignment(.leading)
             .font(.body)
             .foregroundStyle(.fontGray)
@@ -75,15 +80,26 @@ struct NavigationTutorialView: View {
                 .foregroundStyle(.fontGray)
                 .padding(.horizontal)
                 .padding(.bottom, 50)
-            
-            BouncingChevronView().padding(.bottom, 15)
-            finalSwipeInstruction
-                .padding(.bottom, 10)
         }
     }
     
+    private var instructionText: some View {
+        VStack {
+            BouncingChevronView()
+                .padding(.bottom, 5)
+            
+            Text("Swipe Upwards On The Canvas When Ready")
+                .font(.body)
+                .multilineTextAlignment(.center)
+                .foregroundStyle(.fontGray)
+                .id("InstructionText")
+                .zIndex(1)
+        }
+        .padding(.bottom, 15)
+    }
+    
     private var finalSwipeInstruction: some View {
-        Text("Swipe Upwards\nTo Enter Ready, Set")
+        Text("Swipe Upwards To Enter Ready, Set")
             .font(.body)
             .multilineTextAlignment(.center)
             .foregroundStyle(.fontGray)
@@ -111,7 +127,7 @@ struct NavigationTutorialView: View {
     }
     
     private func handleDrag(value: DragGesture.Value) {
-        withAnimation {
+        withAnimation (.easeInOut(duration: 3)) {
             if showMoreText && value.translation.height < 50 {
                 handleDragEnd(navigationDragHeight: value.translation.height)
             }
@@ -125,12 +141,11 @@ struct NavigationTutorialView: View {
     
     private func handleDragEnd(navigationDragHeight: CGFloat) {
         withAnimation(.easeInOut(duration: 2)) {
-            color = .clear
             appState = "running"
         }
     }
 }
 
 #Preview {
-    NavigationTutorialView(color: .constant(.clear))
+    NavigationTutorialView(onboardingProgress: .constant(1.2), onboardingGradient: .constant(LinearGradient(colors: [.greenStart, .blueEnd, .orangeStart, .purpleEnd], startPoint: .leading, endPoint: .trailing)))
 }

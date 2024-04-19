@@ -22,7 +22,6 @@ struct HomeView: View {
 
     var body: some View {
         VStack {
-            
             HeaderView(
                 progress: progressForSelectedTab,
                 selectedTab: $homeViewModel.selectedTab
@@ -35,7 +34,7 @@ struct HomeView: View {
                               waterViewModel: waterViewModel, energyViewModel: energyViewModel,
                               tabItems: $homeViewModel.tabItems, selectedTab: $homeViewModel.selectedTab,
                               navigationDragHeight: $navigationDragHeight)
-                .transition(.move(edge: .top).combined(with: .opacity))
+                .transition(.opacity)
                 .zIndex(1)
             }
                 

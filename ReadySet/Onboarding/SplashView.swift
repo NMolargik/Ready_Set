@@ -9,7 +9,8 @@ import SwiftUI
 
 struct SplashView: View {
     @AppStorage("appState") var appState: String = "splash"
-    @Binding var color: Color
+    @Binding var onboardingProgress: Float
+    @Binding var onboardingGradient: LinearGradient
     
     @State private var showText = false
     @State private var navigationDragHeight = 0.0
@@ -17,11 +18,17 @@ struct SplashView: View {
     var body: some View {
         ZStack {
             Color.base
+            
             splashContent
         }
         .gesture(splashDragGesture)
         .onAppear {
-            animateInitialColorChange()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                withAnimation(.easeInOut(duration: 2)) {
+                    onboardingProgress = 0.25
+                    onboardingGradient = LinearGradient(colors: [.greenStart, .greenEnd], startPoint: .leading, endPoint: .trailing)
+                }
+            }
         }
     }
     
@@ -33,7 +40,7 @@ struct SplashView: View {
             }
             Spacer()
         }
-        .padding(.bottom, 15)
+        .padding(.bottom, 30)
         .blur(radius: effectiveBlurRadius())
         .transition(.opacity)
         .onAppear(perform: animateTextAppearance)
@@ -43,22 +50,28 @@ struct SplashView: View {
         VStack(spacing: 0) {
             Spacer()
             Text("Hello")
-                .font(.largeTitle)
+                .bold()
+                .font(.system(size: 80))
                 .foregroundStyle(.fontGray)
                 .id("SplashText")
             Spacer()
-            BouncingChevronView().padding(.bottom, 15)
+            
             instructionText
         }
     }
     
     private var instructionText: some View {
-        Text("Swipe Upwards\nOn The Canvas To Continue")
-            .font(.body)
-            .multilineTextAlignment(.center)
-            .foregroundStyle(.fontGray)
-            .id("InstructionText")
-            .zIndex(1)
+        VStack {
+            BouncingChevronView()
+                .padding(.bottom, 5)
+            
+            Text("Swipe Upwards On The Canvas To Continue")
+                .font(.body)
+                .multilineTextAlignment(.center)
+                .foregroundStyle(.fontGray)
+                .id("InstructionText")
+                .zIndex(1)
+        }
     }
     
     private func animateTextAppearance() {
@@ -77,7 +90,7 @@ struct SplashView: View {
         DragGesture(minimumDistance: 20, coordinateSpace: .global)
             .onChanged { value in navigationDragHeight = value.translation.height }
             .onEnded { value in
-                withAnimation(.smooth) {
+                withAnimation(.easeInOut) {
                     handleDragEnd(navigationDragHeight: navigationDragHeight)
                     navigationDragHeight = 0.0
                 }
@@ -87,19 +100,14 @@ struct SplashView: View {
     private func handleDragEnd(navigationDragHeight: CGFloat) {
         if navigationDragHeight < 50 {
             withAnimation(.easeInOut) {
-                color = .orangeStart
-                appState = "register"
+                onboardingProgress = 0.5
+                onboardingGradient = LinearGradient(colors: [.greenStart, .blueEnd], startPoint: .leading, endPoint: .trailing)
+                appState = "healthPermission"
             }
-        }
-    }
-    
-    private func animateInitialColorChange() {
-        withAnimation {
-            color = .purpleStart
         }
     }
 }
 
 #Preview {
-    SplashView(color: .constant(.purpleStart))
+    SplashView(onboardingProgress: .constant(0.25), onboardingGradient: .constant(LinearGradient(colors: [.greenStart, .greenEnd], startPoint: .leading, endPoint: .trailing)))
 }

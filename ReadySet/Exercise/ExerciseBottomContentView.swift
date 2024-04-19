@@ -25,7 +25,7 @@ struct ExerciseBottomContentView: View {
                         .font(.system(size: selectedDay == index ? 15 : 10))
                         .bold()
                         .foregroundStyle(selectedDay == index ? LinearGradient(colors: [.greenEnd, .green, .greenEnd], startPoint: .leading, endPoint: .trailing) : LinearGradient(colors: [.secondary], startPoint: .leading, endPoint: .trailing))
-                        .padding(4)
+                        .padding(.horizontal, 4)
                         .onTapGesture {
                             withAnimation(.easeInOut) {
                                 selectedDay = index
@@ -42,8 +42,6 @@ struct ExerciseBottomContentView: View {
                         .animation(.easeInOut, value: selectedDay)
                 }
                 
-                Spacer()
-                
                 editButton
             }
             .padding(.horizontal, 10)
@@ -51,7 +49,7 @@ struct ExerciseBottomContentView: View {
             
             TabView(selection: $selectedDay) {
                 ForEach(weekDays.indices, id: \.self) { index in
-                    ExercisePlanDayView(selectedDay: $selectedDay.wrappedValue, isEditing: $exerciseViewModel.editingSets)
+                    ExercisePlanDayView(selectedDay: $selectedDay.wrappedValue, isEditing: $exerciseViewModel.editingSets, isExpanded: $exerciseViewModel.expandedSets)
                         .tag(index)
                 }
             }
@@ -76,18 +74,34 @@ struct ExerciseBottomContentView: View {
                 exerciseViewModel.expandedSets.toggle()
             }
         }, label: {
-            Image(systemName: exerciseViewModel.expandedSets ? "chevron.down" : "chevron.up")
-                .foregroundStyle(.greenEnd)
+            Text(exerciseViewModel.expandedSets ? "Collapse" : "Expand")
+                .animation(.linear, value: exerciseViewModel.expandedSets)
         })
-        .frame(width: 30, height: 30)
+        .id("expandButton")
+        .bold()
+        .foregroundStyle(.greenEnd)
+        .padding(.horizontal, 8)
+        .background {
+            Rectangle()
+                .cornerRadius(20)
+                .frame(height: 25)
+                .foregroundStyle(.fontGray)
+                .shadow(radius: 3)
+        }
     }
 
     private var editButton: some View {
-        Button(exerciseViewModel.editingSets ? "Save" : "Edit") {
+        Button(action: {
             withAnimation {
                 exerciseViewModel.editingSets.toggle()
             }
-        }
+        }, label: {
+            Image(systemName: exerciseViewModel.editingSets ? "checkmark.circle.fill" : "pencil.circle.fill")
+                .foregroundStyle(.greenEnd, .fontGray)
+                .font(.system(size: 25))
+        })
+        .id("editButton")
+        .shadow(radius: 3)
         .buttonStyle(.plain)
         .bold()
         .foregroundStyle(.greenEnd)

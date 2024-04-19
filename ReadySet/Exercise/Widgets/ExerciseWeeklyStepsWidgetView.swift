@@ -1,5 +1,5 @@
 //
-//  ExerciseStatWidgetView.swift
+//  ExerciseWeeklyStepsWidgetView.swift
 //  ReadySet
 //
 //  Created by Nick Molargik on 4/10/24.
@@ -8,8 +8,7 @@
 import SwiftUI
 import Foundation
 
-struct ExerciseStatWidgetView: View {
-    @Binding var totalSets: Int
+struct ExerciseWeeklyStepsWidgetView: View {
     @Binding var weeklySteps: Int
     
     var body: some View {
@@ -19,8 +18,10 @@ struct ExerciseStatWidgetView: View {
                 .foregroundStyle(.thinMaterial)
                 .shadow(radius: 1)
         
-            VStack (alignment: .leading) {
-                Text("Sets Recorded: \(totalSets)")
+            HStack (spacing: 1) {
+                Image(systemName: "calendar")
+                    .foregroundStyle(.baseInvert)
+                    .font(.body)
                 
                 Text("Weekly Steps: \(weeklySteps)")
                     
@@ -33,5 +34,5 @@ struct ExerciseStatWidgetView: View {
 }
 
 #Preview {
-    ExerciseStatWidgetView(totalSets: .constant(10), weeklySteps: .constant(5000))
+    ExerciseWeeklyStepsWidgetView(weeklySteps: .constant(5000))
 }

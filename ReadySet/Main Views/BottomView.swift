@@ -20,7 +20,7 @@ struct BottomView: View {
                 .cornerRadius(35)
                 .foregroundStyle(.ultraThinMaterial)
                 .shadow(radius: 1)
-                .animation(.smooth(duration: 0.5), value: selectedTab.type)
+                .animation(.easeInOut(duration: 0.5), value: selectedTab.type)
             
             Group {
                 switch (selectedTab.type) {
@@ -34,7 +34,7 @@ struct BottomView: View {
                     SettingsBottomContentView()
                 }
             }
-            .animation(.smooth(duration: 0.2), value: selectedTab.type)
+            .animation(.easeInOut(duration: 0.2), value: selectedTab.type)
         }
         .transition(.opacity)
     }

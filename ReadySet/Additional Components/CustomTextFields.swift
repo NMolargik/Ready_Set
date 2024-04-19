@@ -27,7 +27,7 @@ struct OutlinedTextFieldStyle: TextFieldStyle {
         .padding()
         .background(
             RoundedRectangle(cornerRadius: 25)
-                .stroke(.purple, lineWidth: 2)
+                .stroke(.purpleStart, lineWidth: 2)
                 .shadow(radius: 2)
                 .opacity(0.9)
             

@@ -25,7 +25,6 @@ struct MainView: View {
             onboardingOverlay()
         }
         .transition(.opacity)
-        .onAppear(perform: handleAppear)
         .ignoresSafeArea()
     }
     
@@ -46,6 +45,7 @@ struct MainView: View {
                 .transition(.opacity)
         default:
             HomeView(healthStore: healthController.healthStore)
+                .animation(.easeInOut, value: appState)
                 .transition(.opacity)
         }
     }
@@ -73,12 +73,6 @@ struct MainView: View {
                 
                 Spacer()
             }
-        }
-    }
-    
-    private func handleAppear() {
-        if appState != "running" {
-            appState = "splash"
         }
     }
 }

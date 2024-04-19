@@ -10,6 +10,7 @@ import SwiftData
 
 @Model
 class ExerciseSet: Identifiable {
+    var id: UUID
     var goalType: GoalType
     var repetitionsToDo: Int
     var durationToDo: Int
@@ -19,6 +20,7 @@ class ExerciseSet: Identifiable {
     var lastWeightRecorded: Int
 
     init(goalType: GoalType = .weight, repetitionsToDo: Int = 0, durationToDo: Int = 0, weightToLift: Int = 0, lastRepetitionsRecorded: Int = 0, lastDurationRecorded: Int = 0, lastWeightRecorded: Int = 0) {
+        self.id = UUID()
         self.goalType = goalType
         self.repetitionsToDo = repetitionsToDo
         self.durationToDo = durationToDo

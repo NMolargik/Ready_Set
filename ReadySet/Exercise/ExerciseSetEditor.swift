@@ -17,18 +17,75 @@ struct ExerciseSetEditor: View {
     }
 
     var body: some View {
-        Picker("Type", selection: $set.goalType) {
-            Text("Duration").tag(GoalType.duration)
-            Text("Repitition/Weight").tag(GoalType.weight)
-        }
-        VStack {
-            if ($set.wrappedValue.goalType == .duration) {
-                Stepper("D", value: self.$set.durationToDo)
-            } else {
-                Stepper("R", value: self.$set.repetitionsToDo)
-                Stepper("W", value: self.$set.weightToLift)
+        HStack {
+            VStack {
+                Picker("Type", selection: $set.goalType) {
+                    Text("Duration").tag(GoalType.duration)
+                    Text("Reps").tag(GoalType.weight)
+                }
+                .frame(width: 150)
+                .pickerStyle(.segmented)
+                
+                Spacer()
             }
+            
+            VStack {
+                if ($set.wrappedValue.goalType == .duration) {
+                    
+                    Stepper(value: self.$set.durationToDo, label: {
+                        HStack {
+                            Image(systemName: "stopwatch")
+                                .foregroundStyle(.greenEnd)
+                            
+                            Text(self.set.durationToDo.description)
+                                .bold()
+                                .foregroundStyle(.baseInvert)
+                        }
+                    })
+                    
+                } else {
+                    Stepper(value: self.$set.weightToLift, label: {
+                        HStack {
+                            Image(systemName: "scalemass")
+                                .foregroundStyle(.baseInvert)
+                            
+                            Text(set.weightToLift.description)
+                                .bold()
+                                .foregroundStyle(.baseInvert)
+                        }
+                    })
+                    
+                    Stepper(value: self.$set.repetitionsToDo, label: {
+                        HStack {
+                            Image(systemName: "repeat")
+                                .foregroundStyle(.orangeEnd)
+                            
+                            Text(set.repetitionsToDo.description)
+                                .bold()
+                                .foregroundStyle(.baseInvert)
+                        }
+                    })
+                }
+            }
+        }
+        .padding(3)
+        .background {
+            ZStack {
+                Rectangle()
+                    .foregroundStyle(.thickMaterial)
+                    .shadow(radius: 5)
+                Rectangle()
+                    .blendMode(.destinationOut)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 5)
+                            .stroke(.baseInvert, lineWidth: 1)
+                    )
+            }
+            .compositingGroup()
         }
     }
 }
 
+#Preview {
+    ExerciseSetEditor(set: ExerciseSet())
+}

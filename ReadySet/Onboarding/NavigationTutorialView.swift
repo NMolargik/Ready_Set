@@ -123,6 +123,7 @@ struct NavigationTutorialView: View {
             .onChanged { value in navigationDragHeight = value.translation.height }
             .onEnded { value in
                 handleDrag(value: value)
+                navigationDragHeight = 0.0
             }
     }
     

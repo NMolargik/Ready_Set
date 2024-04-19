@@ -68,9 +68,10 @@ struct GoalSetView: View {
                     }
                     .tabViewStyle(.page(indexDisplayMode: .never))
                     .onAppear {
-                          UIScrollView.appearance().isScrollEnabled = false
+                        UIScrollView.appearance().isScrollEnabled = false
                     }
-                    
+                    .padding(5)
+                    .padding(.vertical, 10)
                 }
                 .padding(.horizontal, 8)
                 .padding(.bottom, 40)

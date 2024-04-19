@@ -18,7 +18,6 @@ struct HealthPermissionView: View {
     @State private var showText = false
     @State private var showProgress = false
     @State private var showMoreText = false
-    @State private var showButton = false
     @State private var navigationDragHeight = 0.0
     
     var body: some View {
@@ -57,7 +56,7 @@ struct HealthPermissionView: View {
                         .font(.title)
                         .foregroundStyle(.green)
                     
-                } else if showButton {
+                } else if showMoreText {
                     Button(action: {
                         showProgress = true
                         healthController.requestAuthorization()
@@ -121,12 +120,6 @@ struct HealthPermissionView: View {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             withAnimation(.easeInOut(duration: 1.2)) {
                 showMoreText = true
-            }
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            withAnimation(.easeInOut(duration: 1.2)) {
-                showButton = true
             }
         }
     }

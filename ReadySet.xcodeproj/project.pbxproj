@@ -39,6 +39,8 @@
 		EB3AB3682BC7798C008B6F22 /* ExerciseStepsWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3672BC7798C008B6F22 /* ExerciseStepsWidgetView.swift */; };
 		EB3AB36A2BC77B19008B6F22 /* ExerciseHealthWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3692BC77B19008B6F22 /* ExerciseHealthWidgetView.swift */; };
 		EB3AB36C2BC77C3E008B6F22 /* ExerciseWeeklyStepsWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB36B2BC77C3E008B6F22 /* ExerciseWeeklyStepsWidgetView.swift */; };
+		EB4742B52BD2A933009A23E4 /* Flow in Frameworks */ = {isa = PBXBuildFile; productRef = EB4742B42BD2A933009A23E4 /* Flow */; };
+		EB4742B72BD2A933009A23E4 /* Renderer in Frameworks */ = {isa = PBXBuildFile; productRef = EB4742B62BD2A933009A23E4 /* Renderer */; };
 		EB4D9C4E2BCC73E90071BA99 /* ExerciseBottomContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C4D2BCC73E90071BA99 /* ExerciseBottomContentView.swift */; };
 		EB4D9C502BCC73F60071BA99 /* ExerciseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C4F2BCC73F60071BA99 /* ExerciseViewModel.swift */; };
 		EB4D9C522BCC80A10071BA99 /* ExercisePlanDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C512BCC80A10071BA99 /* ExercisePlanDayView.swift */; };
@@ -159,6 +161,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB4742B52BD2A933009A23E4 /* Flow in Frameworks */,
+				EB4742B72BD2A933009A23E4 /* Renderer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,6 +407,10 @@
 			dependencies = (
 			);
 			name = ReadySet;
+			packageProductDependencies = (
+				EB4742B42BD2A933009A23E4 /* Flow */,
+				EB4742B62BD2A933009A23E4 /* Renderer */,
+			);
 			productName = ReadySet;
 			productReference = 0E940A672BC6FE0200144477 /* ReadySet.app */;
 			productType = "com.apple.product-type.application";
@@ -475,6 +483,9 @@
 				Base,
 			);
 			mainGroup = 0E940A5E2BC6FE0200144477;
+			packageReferences = (
+				EB4742B32BD2A933009A23E4 /* XCRemoteSwiftPackageReference "SwiftUI-Flow" */,
+			);
 			productRefGroup = 0E940A682BC6FE0200144477 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -926,6 +937,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EB4742B32BD2A933009A23E4 /* XCRemoteSwiftPackageReference "SwiftUI-Flow" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/tevelee/SwiftUI-Flow.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EB4742B42BD2A933009A23E4 /* Flow */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EB4742B32BD2A933009A23E4 /* XCRemoteSwiftPackageReference "SwiftUI-Flow" */;
+			productName = Flow;
+		};
+		EB4742B62BD2A933009A23E4 /* Renderer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EB4742B32BD2A933009A23E4 /* XCRemoteSwiftPackageReference "SwiftUI-Flow" */;
+			productName = Renderer;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0E940A5F2BC6FE0200144477 /* Project object */;
 }

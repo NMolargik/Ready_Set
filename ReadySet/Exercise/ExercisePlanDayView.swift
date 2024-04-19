@@ -39,92 +39,107 @@ struct ExercisePlanDayView: View {
             VStack {
                 ForEach(exercises, id: \.self) { exercise in
                     VStack (spacing: 5) {
-                        HStack (spacing: 5) {
+                        HStack (spacing: 0) {
+                            if (isEditing) {
+                                Button(action: {
+                                    withAnimation {
+                                        print("\(exercise.name) - \(exercise.id.id)")
+                                        modelContext.delete(exercise)
+                                        do {
+                                            try modelContext.save()
+                                        } catch {
+                                            print("\(error.localizedDescription)")
+                                        }
+                                    }
+                                }, label: {
+                                    Image(systemName: "minus.circle.fill")
+                                        .foregroundStyle(.white, .red)
+                                        .frame(width: 15, height: 15)
+                                })
+                                .buttonStyle(.plain)
+                            }
+                            
                             Text(exercise.name)
-                                .padding(.horizontal, 10)
+                                .padding(.horizontal, 5)
                                 .fontWeight(.semibold)
-                                .frame(width: 300, alignment: .leading)
-                                .foregroundStyle(.base)
-                                .background {
-                                    Rectangle()
-                                        .foregroundStyle(.greenEnd)
-                                        .cornerRadius(12)
-                                        .frame(height: 30)
-                                }
+                                .frame(width: 250, alignment: .leading)
+                                .foregroundStyle(.baseInvert)
+                            
+                            Spacer()
                             
                             if (isEditing) {
-                                //Stepper("Buh", value: $amount)
-                                VStack {
-                                    Button(action: {
-                                        withAnimation {
-                                            print("\(exercise.name) - \(exercise.id.id) - \(exercise.exerciseSets.count)")
-                                            let es = ExerciseSet(goalType: .duration, repetitionsToDo: 10, durationToDo: 0, weightToLift: 120, lastRepetitionsRecorded: 0, lastDurationRecorded: 0, lastWeightRecorded: 0)
-                                            exercise.exerciseSets.append(es)
-                                            modelContext.insert(es)
-                                            modelContext.insert(exercise)
-                                            do {
-                                                try modelContext.save()
-                                            } catch {
-                                                print("\(error.localizedDescription)")
-                                            }
+                                Button(action: {
+                                    withAnimation {
+                                        print("\(exercise.name) - \(exercise.id.id) - \(exercise.exerciseSets.count)")
+                                        let newSet = ExerciseSet(goalType: .duration, repetitionsToDo: 0, durationToDo: 30, weightToLift: 30, lastRepetitionsRecorded: 0, lastDurationRecorded: 0, lastWeightRecorded: 0, orderIndex: exercise.exerciseSets.count)
+                                        exercise.exerciseSets.append(newSet)
+                                        modelContext.insert(newSet)
+
+                                        do {
+                                            try modelContext.save()
+                                        } catch {
+                                            print("\(error.localizedDescription)")
                                         }
-                                    }, label: {
+                                    }
+                                }, label: {
+                                    HStack (spacing: 0) {
                                         Image(systemName: "plus.circle.fill")
-                                            .foregroundStyle(.green, .white)
-                                    })
+                                            .foregroundStyle(.white, .green)
+                                            .frame(height: 15)
+                                        
+                                        Text("Set")
+                                            .bold()
+                                            .foregroundStyle(.baseInvert)
+                                            .padding(.horizontal, 2)
+                                            .padding(.vertical, 2)
+                                            .shadow(radius: 5)
+                                    }
+                                })
+                                //.frame(width: )
+                            }
+                                    
+                        }
+                        .animation(.easeInOut, value: exercises.count)
+                        .transition(.move(edge: .leading))
+                        
+                        ForEach(exercise.exerciseSets.sorted(by: {$0.orderIndex < $1.orderIndex}), id: \.self) { exerciseSet in
+                            HStack {
+                                if (isEditing) {
                                     Button(action: {
                                         withAnimation {
-                                            // TODO: remove the sets for this exercise
-                                            // TODO: remove Exercise
-                                            print("\(exercise.name) - \(exercise.id.id)")
-                                            modelContext.delete(exercise)
-                                            do {
-                                                try modelContext.save()
-                                            } catch {
-                                                print("\(error.localizedDescription)")
-                                            }
+                                            print("\(exerciseSet.id.id)")
+                                            exercise.exerciseSets.remove(at: exerciseSet.orderIndex - 1)
+                                            modelContext.delete(exerciseSet)
                                         }
                                     }, label: {
                                         Image(systemName: "minus.circle.fill")
                                             .foregroundStyle(.white, .red)
-                                            .frame(height: 20)
+                                            .frame(width: 15, height: 15)
                                     })
                                     .buttonStyle(.plain)
-                                }
-                            }
-                            
-                            Spacer()
-                        }
-                        ForEach(exercise.exerciseSets, id: \.self) { set in
-                            HStack {
-                                if (set.goalType == .duration) {
-                                    Text("\(set.durationToDo)")
-                                        .frame(height: 20)
-                                } else {
-                                    Text("\(set.repetitionsToDo) - \(set.weightToLift)")
-                                        .frame(height: 20)
-                                }
-                                if (isEditing) {
-                                    ExerciseSetEditor(set: set)
+                                    
+                                    ExerciseSetEditor(exerciseSet: exerciseSet)
                                     VStack {
-                                        Button(action: {
-                                            withAnimation {
-                                                print("\(set.id.id)")
-                                                exercise.exerciseSets.remove(at: exercise.exerciseSets.firstIndex(of: set) ?? 0)
-                                                modelContext.delete(set)
-                                            }
-                                        }, label: {
-                                            Image(systemName: "minus.circle.fill")
-                                                .foregroundStyle(.white, .red)
-                                                .frame(height: 20)
-                                        })
-                                        .buttonStyle(.plain)
+                                        
                                     }
                                 }
+                                
+                                if (exerciseSet.goalType == .duration) {
+                                    Text("\(exerciseSet.durationToDo)")
+                                        .frame(height: 20)
+                                } else {
+                                    Text("\(exerciseSet.repetitionsToDo) - \(exerciseSet.weightToLift)")
+                                        .frame(height: 20)
+                                }
+                                
                             }
+                            .padding(.leading)
+                            .animation(.easeInOut, value: exercises.count)
+                            .transition(.move(edge: .leading).combined(with: .opacity))
                         }
                     }
                 }
+                
                 
                 Button(action: {
                     withAnimation {
@@ -133,6 +148,8 @@ struct ExercisePlanDayView: View {
                 }, label: {
                     Text("Add Exercise")
                 })
+                .animation(.easeInOut, value: exercises.count)
+                .transition(.move(edge: .leading))
             }
             .padding(.horizontal, 5)
         }

@@ -127,7 +127,7 @@ struct NavigationTutorialView: View {
     }
     
     private func handleDrag(value: DragGesture.Value) {
-        withAnimation (.easeInOut(duration: 3)) {
+        withAnimation (.easeInOut) {
             if showMoreText && value.translation.height < 50 {
                 handleDragEnd(navigationDragHeight: value.translation.height)
             }

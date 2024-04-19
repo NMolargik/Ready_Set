@@ -175,7 +175,7 @@ struct ExercisePlanDayView: View {
                             }
                             
                             if (isEditing) {
-                                ForEach(exercise.exerciseSets, id: \.self) { set in
+                                ForEach(exercise.exerciseSets.sorted(by: { $0.timestamp < $1.timestamp })) { set in
                                     HStack {
                                         ExerciseSetEditor(set: set)
                                             .padding(.bottom, 4)

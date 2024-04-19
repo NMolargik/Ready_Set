@@ -29,6 +29,8 @@ struct MainView: View {
         .onAppear {
             if appState != "running" {
                 withAnimation {
+                    onboardingProgress = 0.25
+                    onboardingGradient = LinearGradient(colors: [.greenStart, .greenEnd], startPoint: .leading, endPoint: .trailing)
                     appState = "healthPermission"
                 }
             }

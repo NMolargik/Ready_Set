@@ -8,25 +8,25 @@
 import SwiftUI
 
 struct ExerciseSetEditor: View {
-    @Bindable var exerciseSet: ExerciseSet
+    @Bindable var set: ExerciseSet
     var goalType: GoalType
     
-    init(exerciseSet: ExerciseSet) {
-        self.exerciseSet = exerciseSet
-        self.goalType = exerciseSet.goalType
+    init(set: ExerciseSet) {
+        self.set = set
+        self.goalType = set.goalType
     }
 
     var body: some View {
-        Picker("Type", selection: $exerciseSet.goalType) {
+        Picker("Type", selection: $set.goalType) {
             Text("Duration").tag(GoalType.duration)
             Text("Repitition/Weight").tag(GoalType.weight)
         }
         VStack {
-            if ($exerciseSet.wrappedValue.goalType == .duration) {
-                Stepper("D", value: self.$exerciseSet.durationToDo)
+            if ($set.wrappedValue.goalType == .duration) {
+                Stepper("D", value: self.$set.durationToDo)
             } else {
-                Stepper("R", value: self.$exerciseSet.repetitionsToDo)
-                Stepper("W", value: self.$exerciseSet.weightToLift)
+                Stepper("R", value: self.$set.repetitionsToDo)
+                Stepper("W", value: self.$set.weightToLift)
             }
         }
     }

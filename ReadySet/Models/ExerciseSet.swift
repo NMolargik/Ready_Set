@@ -17,9 +17,8 @@ class ExerciseSet: Identifiable {
     var lastRepetitionsRecorded: Int
     var lastDurationRecorded: Int
     var lastWeightRecorded: Int
-    var orderIndex: Int
 
-    init(goalType: GoalType = .weight, repetitionsToDo: Int = 0, durationToDo: Int = 0, weightToLift: Int = 0, lastRepetitionsRecorded: Int = 0, lastDurationRecorded: Int = 0, lastWeightRecorded: Int = 0, orderIndex: Int = 0) {
+    init(goalType: GoalType = .weight, repetitionsToDo: Int = 0, durationToDo: Int = 0, weightToLift: Int = 0, lastRepetitionsRecorded: Int = 0, lastDurationRecorded: Int = 0, lastWeightRecorded: Int = 0) {
         self.goalType = goalType
         self.repetitionsToDo = repetitionsToDo
         self.durationToDo = durationToDo
@@ -27,7 +26,6 @@ class ExerciseSet: Identifiable {
         self.lastRepetitionsRecorded = lastRepetitionsRecorded
         self.lastDurationRecorded = lastDurationRecorded
         self.lastWeightRecorded = lastWeightRecorded
-        self.orderIndex = 0
     }
 }
 

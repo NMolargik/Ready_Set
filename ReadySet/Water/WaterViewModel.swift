@@ -11,7 +11,7 @@ import HealthKit
 
 class WaterViewModel: ObservableObject {
     @AppStorage("useMetric") var useMetric: Bool = false
-    @AppStorage("waterGoal") var waterGoal: Double = 8
+    @AppStorage("waterGoal") var waterGoal: Double = 64
     
     @Published var proposedWaterGoal = 64
     @Published var editingWaterGoal = false

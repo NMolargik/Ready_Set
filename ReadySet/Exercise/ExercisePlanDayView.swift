@@ -49,7 +49,8 @@ struct ExercisePlanDayView: View {
                     Spacer()
                     
                     Text("Tap The Pencil To Add Exercises")
-                        .font(.title2)
+                        .bold()
+                        .font(.title3)
                         .foregroundStyle(.baseInvert)
                         .animation(.easeInOut, value: exercises)
                         .transition(.opacity)

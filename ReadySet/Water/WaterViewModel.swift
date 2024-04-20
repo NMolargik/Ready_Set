@@ -7,6 +7,7 @@
 
 import SwiftUI
 import HealthKit
+import Foundation
 
 class WaterViewModel: ObservableObject {
     @AppStorage("useMetric") var useMetric: Bool = false
@@ -22,7 +23,6 @@ class WaterViewModel: ObservableObject {
         self.proposedWaterGoal = Int(self.waterGoal)
         self.readInitial()
     }
-    
 
     func readInitial() {
         self.readWaterConsumedToday()
@@ -35,6 +35,7 @@ class WaterViewModel: ObservableObject {
                 withAnimation (.easeInOut) {
                     self.readWaterConsumedToday()
                     self.readWaterConsumedWeek()
+                    print(self.waterConsumedWeek.description)
                 }
             }
         }
@@ -119,6 +120,7 @@ class WaterViewModel: ObservableObject {
                     let day = statistics.startDate
                     DispatchQueue.main.async {
                         self.waterConsumedWeek[day] = amount
+                        print("Water amount for \(day): \(amount)")
                     }
                 }
             }
@@ -129,7 +131,6 @@ class WaterViewModel: ObservableObject {
 
     private func addWaterConsumed(waterAmount: Double, completion: @escaping () -> Void) {
         let waterType = HKQuantityType.quantityType(forIdentifier: .dietaryWater)!
-        
         
         let waterSample = HKQuantitySample(type: waterType, quantity: HKQuantity(unit: self.useMetric ? HKUnit.literUnit(with: .milli) : HKUnit.fluidOunceUS(), doubleValue: waterAmount), start: Date(), end: Date())
         

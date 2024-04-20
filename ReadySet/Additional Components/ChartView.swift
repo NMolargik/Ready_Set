@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Charts
+import Foundation
 
 struct ChartView: View {
     var title: String

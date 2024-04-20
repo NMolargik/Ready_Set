@@ -62,6 +62,9 @@ class WaterViewModel: ObservableObject {
             _, result, error in
             guard let result = result, let sum = result.sumQuantity() else {
                 print("HealthKit - Error - Failed to read water gallons today: \(error?.localizedDescription ?? "UNKNOWN ERROR")")
+                DispatchQueue.main.async {
+                    self.waterConsumedToday = 0
+                }
                 return
             }
 

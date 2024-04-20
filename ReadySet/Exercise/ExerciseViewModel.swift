@@ -68,6 +68,9 @@ class ExerciseViewModel: ObservableObject {
             _, result, error in
             guard let result = result, let sum = result.sumQuantity() else {
                 print("failed to read step count: \(error?.localizedDescription ?? "UNKNOWN ERROR")")
+                DispatchQueue.main.async {
+                    self.stepsToday = 0
+                }
                 return
             }
             

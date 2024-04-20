@@ -66,6 +66,9 @@ class EnergyViewModel: ObservableObject {
             _, result, error in
             guard let result = result, let sum = result.sumQuantity() else {
                 print("HealthKit - Error - Failed to read energy consumed today: \(error?.localizedDescription ?? "UNKNOWN ERROR")")
+                DispatchQueue.main.async {
+                    self.energyConsumedToday = 0
+                }
                 return
             }
 

@@ -89,11 +89,19 @@ struct GoalSetView: View {
                 }, label: {
                     Text("Tap Here When Finished")
                         .font(.body)
+                        .bold()
                         .multilineTextAlignment(.center)
                         .foregroundStyle(.blueEnd)
+                        .padding(5)
                         .id("InstructionText")
                         .zIndex(1)
                 })
+                .background {
+                    Rectangle()
+                        .cornerRadius(5)
+                        .foregroundStyle(.fontGray)
+                        .shadow(radius: 5)
+                }
                 .padding(.vertical, 30)
                 .buttonStyle(.plain)
             }

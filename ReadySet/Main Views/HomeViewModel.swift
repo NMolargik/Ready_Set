@@ -8,7 +8,7 @@
 import SwiftUI
 
 class HomeViewModel: ObservableObject {
-    @AppStorage("lastUseDate") var lastUseDate: String = ""
+    @AppStorage("lastUseDate") var lastUseDate: String = "2024-04-19"
 
     @Published var selectedTab: any ITabItem = ExerciseTabItem()
     @Published var tabItems = TabItemType.allItems
@@ -30,17 +30,23 @@ class HomeViewModel: ObservableObject {
         let currentDate = Date()
         let calendar = Calendar.current
         let dateComponents = calendar.dateComponents([.year, .month, .day], from: currentDate)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         
         if let dateOnly = calendar.date(from: dateComponents) {
-            if dateOnly.description != lastUseDate {
-                lastUseDate = dateOnly.description
+            let formattedDate = dateFormatter.string(from: dateOnly)
+            print("Last Date: \(lastUseDate) | Current Date: \(formattedDate)")
+            if formattedDate != lastUseDate {
+                lastUseDate = formattedDate
                 return true
-            } else {
-                return false
             }
         } else {
             print("Failed to remove time from the current date")
-            return false
         }
+        return false
     }
 }
+
+
+
+

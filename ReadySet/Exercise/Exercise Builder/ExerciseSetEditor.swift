@@ -62,7 +62,7 @@ struct ExerciseSetEditor: View {
                     CustomStepperView(value: $exerciseSet.durationToDo, step: 5, iconName: "stopwatch.fill", colors: [.purpleStart, .purpleEnd])
                     
                 } else {
-                    CustomStepperView(value: $exerciseSet.weightToLift, step: 5, iconName: "scalemass.fill", colors: [.blueStart, .blueEnd])
+                    CustomStepperView(value: $exerciseSet.weightToLift, step: 5, iconName: "dumbbell.fill", colors: [.greenStart, .greenEnd])
                     
                     CustomStepperView(value: $exerciseSet.repetitionsToDo, step: 1, iconName: "repeat", colors: [.orangeStart, .orangeEnd])
                 }

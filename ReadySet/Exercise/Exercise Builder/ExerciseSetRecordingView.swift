@@ -17,7 +17,7 @@ struct ExerciseSetRecordingView: View {
                     CustomStepperView(value: $selectedSet.durationToDo, step: 5, iconName: "stopwatch.fill", colors: [.purpleStart, .purpleEnd])
                     
                 } else {
-                    CustomStepperView(value: $selectedSet.weightToLift, step: 5, iconName: "scalemass.fill", colors: [.blueStart, .blueEnd])
+                    CustomStepperView(value: $selectedSet.weightToLift, step: 5, iconName: "dumbbell.fill", colors: [.greenStart, .greenEnd])
                     
                     CustomStepperView(value: $selectedSet.repetitionsToDo, step: 1, iconName: "repeat", colors: [.orangeStart, .orangeEnd])
                 }

@@ -110,9 +110,12 @@ struct HomeView: View {
             energyViewModel.healthStore = healthStore
         }
         
-        exerciseViewModel.readInitial()
-        waterViewModel.readInitial()
-        energyViewModel.readInitial()
+        
+        if homeViewModel.needRefreshFromDate() {
+            exerciseViewModel.readInitial()
+            waterViewModel.readInitial()
+            energyViewModel.readInitial()
+        }
     }
     
     private func setGoalsAfterUnitChange() {

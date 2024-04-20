@@ -24,7 +24,7 @@ struct ChartView: View {
                 .bold()
                 .font(.title3)
                 .foregroundStyle(color)
-                .shadow(radius: 2)
+                .shadow(radius: 5, x: 2, y: 3)
             
             Chart {
                 ForEach(Array(data).sorted(by: { $0.key < $1.key }), id: \.key) { (date, value) in

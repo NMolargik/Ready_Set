@@ -54,6 +54,8 @@ struct SplashView: View {
                 .font(.system(size: 80))
                 .foregroundStyle(.fontGray)
                 .id("SplashText")
+                .shadow(radius: 5)
+            
             Spacer()
             
             instructionText

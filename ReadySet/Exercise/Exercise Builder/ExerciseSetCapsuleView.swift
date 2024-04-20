@@ -27,8 +27,8 @@ struct ExerciseSetCapsuleView: View {
                         Text(set.durationToDo.description)
                             .foregroundStyle(.baseInvert)
                     } else {
-                        Image(systemName: "scalemass.fill")
-                            .foregroundStyle(LinearGradient(colors: [.blueStart, .blueEnd], startPoint: .leading, endPoint: .trailing))
+                        Image(systemName: "dumbbell.fill")
+                            .foregroundStyle(LinearGradient(colors: [.greenStart, .greenEnd], startPoint: .leading, endPoint: .trailing))
                         
                         Text(set.weightToLift.description)
                             .foregroundStyle(.baseInvert)

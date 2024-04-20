@@ -125,6 +125,11 @@ class WaterViewModel: ObservableObject {
                         self.waterConsumedWeek[day] = amount
                         print("Water amount for \(day): \(amount)")
                     }
+                } else {
+                    let day = statistics.startDate
+                    DispatchQueue.main.async {
+                        self.waterConsumedWeek[day] = 0
+                    }
                 }
             }
         }

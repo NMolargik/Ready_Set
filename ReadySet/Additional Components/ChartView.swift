@@ -15,7 +15,7 @@ struct ChartView: View {
     var unitLabel: String
     var color: Color
     var showGoal: Bool
-    @Binding var data: [Date: Int]
+    @State var data: [Date: Int]
     @Binding var average: Double
     @Binding var goal: Double
     
@@ -89,5 +89,5 @@ struct ChartView: View {
 }
 
 #Preview {
-    ChartView(title: "Chart", yLabel: "Ounces", unitLabel: "oz", color: Color.white, showGoal: true, data: .constant([:]), average: .constant(0), goal: .constant(0))
+    ChartView(title: "Chart", yLabel: "Ounces", unitLabel: "oz", color: Color.white, showGoal: true, data: [:], average: .constant(0), goal: .constant(0))
 }

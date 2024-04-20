@@ -35,7 +35,6 @@ struct HealthPermissionView: View {
                         .foregroundStyle(.fontGray)
                         .id("WelcomeText")
                         .padding(.bottom, permitted ? 0 : 30)
-                        .shadow(radius: 5)
                 }
                 
                 if showMoreText {

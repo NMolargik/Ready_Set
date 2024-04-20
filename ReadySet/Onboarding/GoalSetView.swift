@@ -99,8 +99,7 @@ struct GoalSetView: View {
                 .background {
                     Rectangle()
                         .cornerRadius(5)
-                        .foregroundStyle(.fontGray)
-                        .shadow(radius: 5)
+                        .foregroundStyle(.baseAccent)
                 }
                 .padding(.vertical, 30)
                 .buttonStyle(.plain)

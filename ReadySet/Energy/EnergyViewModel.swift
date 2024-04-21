@@ -85,13 +85,18 @@ class EnergyViewModel: ObservableObject {
             return
         }
         let calendar = Calendar.current
-        guard let endOfWeek = calendar.date(byAdding: .day, value: 1, to: calendar.startOfDay(for: Date())) else {
-			print("HealthKit - Error - Failed to calculate start of the week.")
+        guard let endOfToday = calendar.date(bySetting: .hour, value: 23, of: calendar.startOfDay(for: Date())) else {
+            print("HealthKit - Error - Failed to calculate the end date of the week.")
             return
         }
 
-        guard let startOfWeek = calendar.date(byAdding: .day, value: -7, to: endOfWeek) else {
+        guard let endOfWeek = calendar.date(bySetting: .minute, value: 59, of: endOfToday) else {
             print("HealthKit - Error - Failed to calculate the end date of the week.")
+            return
+        }
+
+        guard let startOfWeek = calendar.date(byAdding: .day, value: -6, to: endOfWeek) else {
+            print("HealthKit - Error - Failed to calculate the start date of the week.")
             return
         }
 
@@ -169,15 +174,18 @@ class EnergyViewModel: ObservableObject {
             return
         }
         let calendar = Calendar.current
-        let today = calendar.startOfDay(for: Date())
-
-        guard let startOfWeek = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: today)) else {
-            print("HealthKit - Error - Failed to calculate the start date of the week.")
+        guard let endOfToday = calendar.date(bySetting: .hour, value: 23, of: calendar.startOfDay(for: Date())) else {
+            print("HealthKit - Error - Failed to calculate the end date of the week.")
             return
         }
 
-        guard let endOfWeek = calendar.date(byAdding: .day, value: 6, to: startOfWeek) else {
+        guard let endOfWeek = calendar.date(bySetting: .minute, value: 59, of: endOfToday) else {
             print("HealthKit - Error - Failed to calculate the end date of the week.")
+            return
+        }
+
+        guard let startOfWeek = calendar.date(byAdding: .day, value: -6, to: endOfWeek) else {
+            print("HealthKit - Error - Failed to calculate the start date of the week.")
             return
         }
 

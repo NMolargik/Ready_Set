@@ -23,9 +23,10 @@ struct ChartView: View {
         Group {
             Text(title)
                 .bold()
-                .font(.title3)
+                .font(.title2)
                 .foregroundStyle(color)
-                .shadow(radius: 5, x: 2, y: 3)
+                .shadow(radius: 1, x: 2, y: 2)
+                .opacity(0.8)
             
             Chart {
                 ForEach(Array(data).sorted(by: { $0.key < $1.key }), id: \.key) { (date, value) in

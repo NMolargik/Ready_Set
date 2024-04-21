@@ -131,6 +131,12 @@ class EnergyViewModel: ObservableObject {
                         self.energyConsumedWeek[day] = kiloEnergy
                     }
                 }
+                else {
+                   let day = statistics.startDate
+                   DispatchQueue.main.async {
+                       self.energyConsumedWeek[day] = 0
+                   }
+               }
             }
         }
 
@@ -218,6 +224,11 @@ class EnergyViewModel: ObservableObject {
                     let day = statistics.startDate
                     DispatchQueue.main.async {
                         self.energyBurnedWeek[day] = kiloEnergy
+                    }
+                } else {
+                    let day = statistics.startDate
+                    DispatchQueue.main.async {
+                        self.energyBurnedWeek[day] = 0
                     }
                 }
             }

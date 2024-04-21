@@ -54,7 +54,7 @@ struct SettingsBottomContentView: View {
                     Text("2024, Nicholas Molargik")
                         .font(.caption)
                     
-                    Text("Contributions from Nikki Yoder and Dante Maslin\n v1.0.0")
+                    Text("Contributions from nythepegasus and Dante Maslin\n v1.0.1")
                         .font(.caption)
                         .lineLimit(3)
                         .multilineTextAlignment(.center)

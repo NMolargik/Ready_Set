@@ -42,11 +42,7 @@ class WaterViewModel: ObservableObject, HKHelper {
     }
     
     private func readWaterConsumedToday() {
-        guard let waterCountType = HKQuantityType.quantityType(forIdentifier: .dietaryWater) else {
-            return
-        }
-
-        hkQuery(type: waterCountType) {
+        hkQuery(type: waterConsumed) {
             _, result, error in
             guard let result = result, let sum = result.sumQuantity() else {
                 print("HealthKit - Error - Failed to read water gallons today: \(error?.localizedDescription ?? "UNKNOWN ERROR")")
@@ -65,13 +61,10 @@ class WaterViewModel: ObservableObject, HKHelper {
     }
 
     private func readWaterConsumedWeek() {
-        guard let waterCountType = HKQuantityType.quantityType(forIdentifier: .dietaryWater) else {
-            return
-        }
         let endOfWeek = Date().endOfDay
         let startOfWeek = endOfWeek.addingDays(-6).startOfDay
 
-        hkColQuery(type: waterCountType, anchor: startOfWeek) { _, result, error in
+        hkColQuery(type: waterConsumed, anchor: startOfWeek) { _, result, error in
             guard let result = result else {
                 if let error = error {
                     print("HealthKit - Error - An error occurred while retrieving water gallons for the week: \(error.localizedDescription)")
@@ -101,9 +94,7 @@ class WaterViewModel: ObservableObject, HKHelper {
     }
 
     private func addWaterConsumed(waterAmount: Double, completion: @escaping () -> Void) {
-        let waterType = HKQuantityType.quantityType(forIdentifier: .dietaryWater)!
-        
-        let waterSample = HKQuantitySample(type: waterType, quantity: HKQuantity(unit: self.useMetric ? HKUnit.literUnit(with: .milli) : HKUnit.fluidOunceUS(), doubleValue: waterAmount), start: Date(), end: Date())
+        let waterSample = HKQuantitySample(type: waterConsumed, quantity: HKQuantity(unit: self.useMetric ? HKUnit.literUnit(with: .milli) : HKUnit.fluidOunceUS(), doubleValue: waterAmount), start: Date(), end: Date())
         
         healthStore?.save(waterSample, withCompletion: { (success, error) -> Void in
 

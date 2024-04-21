@@ -46,11 +46,7 @@ class EnergyViewModel: ObservableObject, HKHelper {
     }
 
     private func readEnergyConsumedToday() {
-        guard let energyCountType = HKQuantityType.quantityType(forIdentifier: .dietaryEnergyConsumed) else {
-            return
-        }
-
-        hkQuery(type: energyCountType) {
+        hkQuery(type: energyConsumed) {
             _, result, error in
             guard let result = result, let sum = result.sumQuantity() else {
                 print("HealthKit - Error - Failed to read energy consumed today: \(error?.localizedDescription ?? "UNKNOWN ERROR")")
@@ -68,13 +64,10 @@ class EnergyViewModel: ObservableObject, HKHelper {
     }
 
     private func readEnergyConsumedWeek() {
-        guard let energyCountType = HKQuantityType.quantityType(forIdentifier: .dietaryEnergyConsumed) else {
-            return
-        }
         let endOfWeek = Date().endOfDay
         let startOfWeek = endOfWeek.addingDays(-6).startOfDay
 
-        hkColQuery(type: energyCountType, anchor: startOfWeek) { _, result, error in
+        hkColQuery(type: energyConsumed, anchor: startOfWeek) { _, result, error in
             guard let result = result else {
                 if let error = error {
                     print("HealthKit - Error - An error occurred while retrieving energy consumed for the week: \(error.localizedDescription)")
@@ -104,11 +97,7 @@ class EnergyViewModel: ObservableObject, HKHelper {
     }
     
     private func readEnergyBurnedToday() {
-        guard let energyCountType: HKQuantityType = HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned) else {
-            return
-        }
-
-        hkQuery(type: energyCountType) {
+        hkQuery(type: energyBurned) {
             _, result, error in
             guard let result = result, let sum = result.sumQuantity() else {
                 print("HealthKit - Error - Failed to read energy consumed today: \(error?.localizedDescription ?? "UNKNOWN ERROR")")
@@ -123,13 +112,10 @@ class EnergyViewModel: ObservableObject, HKHelper {
     }
 
     private func readEnergyBurnedWeek() {
-        guard let energyCountType = HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned) else {
-            return
-        }
         let endOfWeek = Date().endOfDay
         let startOfWeek = endOfWeek.addingDays(-6).startOfDay
 
-        hkColQuery(type: energyCountType, anchor: endOfWeek) { _, result, error in
+        hkColQuery(type: energyBurned, anchor: endOfWeek) { _, result, error in
             guard let result = result else {
                 if let error = error {
                     print("HealthKit - Error - An error occurred while retrieving energy consumed for the week: \(error.localizedDescription)")
@@ -158,8 +144,7 @@ class EnergyViewModel: ObservableObject, HKHelper {
     }
     
     private func addEnergyConsumed(energy: Double, completion: @escaping () -> Void) {
-        let energyType = HKQuantityType.quantityType(forIdentifier: .dietaryEnergyConsumed)!
-        let energysample = HKQuantitySample(type: energyType, quantity: HKQuantity(unit: self.useMetric ? HKUnit.jouleUnit(with: .kilo) : HKUnit.kilocalorie(), doubleValue: energy), start: Date(), end: Date())
+        let energysample = HKQuantitySample(type: energyConsumed, quantity: HKQuantity(unit: self.useMetric ? HKUnit.jouleUnit(with: .kilo) : HKUnit.kilocalorie(), doubleValue: energy), start: Date(), end: Date())
         self.healthStore?.save(energysample, withCompletion: { (success, error) -> Void in
             if error != nil {
                 print("HealthKit - Error - \(String(describing: error))")

@@ -14,6 +14,22 @@ protocol HKHelper {
 }
 
 extension HKHelper {
+    var energyBurned: HKQuantityType {
+        return HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned)!
+    }
+
+    var energyConsumed: HKQuantityType {
+        return HKQuantityType.quantityType(forIdentifier: .dietaryEnergyConsumed)!
+    }
+
+    var waterConsumed: HKQuantityType {
+        return HKQuantityType.quantityType(forIdentifier: .dietaryWater)!
+    }
+
+    var stepCount: HKQuantityType {
+        return HKQuantityType.quantityType(forIdentifier: .stepCount)!
+    }
+
     var todayPredicate: NSPredicate {
         return HKQuery.predicateForSamples(
             withStart: Date().startOfDay,

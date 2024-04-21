@@ -23,3 +23,12 @@ class Exercise: Identifiable {
         self.name = name
     }
 }
+
+extension ModelContext {
+    func delete(exercise: Exercise) {
+        for eset in exercise.exerciseSets {
+            self.delete(eset)
+        }
+        self.delete(exercise)
+    }
+}

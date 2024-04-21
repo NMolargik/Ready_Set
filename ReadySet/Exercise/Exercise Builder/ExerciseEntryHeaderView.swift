@@ -22,7 +22,7 @@ struct ExerciseEntryHeaderView: View {
                 Button(action: {
                     UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                     withAnimation {
-                        modelContext.delete(exercise)
+                        modelContext.delete(exercise: exercise)
                     }
                 }, label: {
                     Image(systemName: "minus.circle.fill")

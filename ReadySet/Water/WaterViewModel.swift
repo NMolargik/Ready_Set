@@ -9,7 +9,7 @@ import SwiftUI
 import HealthKit
 import Foundation
 
-class WaterViewModel: ObservableObject {
+class WaterViewModel: ObservableObject, HKHelper {
     @AppStorage("useMetric") var useMetric: Bool = false
     @AppStorage("waterGoal") var waterGoal: Double = 64
     
@@ -46,19 +46,7 @@ class WaterViewModel: ObservableObject {
             return
         }
 
-        let now = Date()
-        let startDate = Calendar.current.startOfDay(for: now)
-        let predicate = HKQuery.predicateForSamples(
-            withStart: startDate,
-            end: now,
-            options: .strictStartDate
-        )
-
-        let query = HKStatisticsQuery(
-            quantityType: waterCountType,
-            quantitySamplePredicate: predicate,
-            options: .cumulativeSum
-        ) {
+        hkQuery(type: waterCountType, predicate: todayPredicate) {
             _, result, error in
             guard let result = result, let sum = result.sumQuantity() else {
                 print("HealthKit - Error - Failed to read water gallons today: \(error?.localizedDescription ?? "UNKNOWN ERROR")")
@@ -74,44 +62,16 @@ class WaterViewModel: ObservableObject {
                 self.waterConsumedToday = amount
             }
         }
-        healthStore?.execute(query)
     }
 
     private func readWaterConsumedWeek() {
         guard let waterCountType = HKQuantityType.quantityType(forIdentifier: .dietaryWater) else {
             return
         }
-        let calendar = Calendar.current
-        guard let endOfToday = calendar.date(bySetting: .hour, value: 23, of: calendar.startOfDay(for: Date())) else {
-            print("HealthKit - Error - Failed to calculate the end date of the week.")
-            return
-        }
+        let endOfWeek = Date().endOfDay
+        let startOfWeek = endOfWeek.addingDays(-6).startOfDay
 
-        guard let endOfWeek = calendar.date(bySetting: .minute, value: 59, of: endOfToday) else {
-            print("HealthKit - Error - Failed to calculate the end date of the week.")
-            return
-        }
-
-        guard let startOfWeek = calendar.date(byAdding: .day, value: -6, to: endOfWeek) else {
-            print("HealthKit - Error - Failed to calculate the start date of the week.")
-            return
-        }
-
-        let predicate = HKQuery.predicateForSamples(
-            withStart: startOfWeek,
-            end: endOfWeek,
-            options: .strictStartDate
-        )
-
-        let query = HKStatisticsCollectionQuery(
-            quantityType: waterCountType,
-            quantitySamplePredicate: predicate,
-            options: .cumulativeSum,
-            anchorDate: startOfWeek,
-            intervalComponents: DateComponents(day: 1)
-        )
-
-        query.initialResultsHandler = { _, result, error in
+        hkColQuery(type: waterCountType, predicate: weekPredicate, anchor: startOfWeek) { _, result, error in
             guard let result = result else {
                 if let error = error {
                     print("HealthKit - Error - An error occurred while retrieving water gallons for the week: \(error.localizedDescription)")
@@ -138,8 +98,6 @@ class WaterViewModel: ObservableObject {
                 }
             }
         }
-
-        healthStore?.execute(query)
     }
 
     private func addWaterConsumed(waterAmount: Double, completion: @escaping () -> Void) {

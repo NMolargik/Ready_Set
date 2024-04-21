@@ -98,18 +98,10 @@ struct HomeView: View {
     }
 
     private func setupViewModels() {
-        if exerciseViewModel.healthStore == nil {
-            exerciseViewModel.healthStore = healthStore
-        }
-        
-        if waterViewModel.healthStore == nil {
-            waterViewModel.healthStore = healthStore
-        }
-        
-        if energyViewModel.healthStore == nil {
-            energyViewModel.healthStore = healthStore
-        }
-        
+        exerciseViewModel.healthStore = healthStore
+        waterViewModel.healthStore = healthStore
+        energyViewModel.healthStore = healthStore
+
         if homeViewModel.needRefreshFromDate() {
             exerciseViewModel.readInitial()
             waterViewModel.readInitial()

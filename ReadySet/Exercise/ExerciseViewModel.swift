@@ -8,7 +8,7 @@
 import SwiftUI
 import HealthKit
 
-class ExerciseViewModel: ObservableObject {
+class ExerciseViewModel: ObservableObject, HKHelper {
     @AppStorage("stepGoal") var stepGoal: Double = 1000
     
     @Published var expandedSets = false
@@ -33,13 +33,7 @@ class ExerciseViewModel: ObservableObject {
     }
     
     func getCurrentWeekday() {
-        let currentDate = Date()
-        let calendar = Calendar.current
-        if let dayOfWeek = calendar.dateComponents([.weekday], from: currentDate).weekday {
-            self.currentDay = dayOfWeek
-        } else {
-            self.currentDay = 1
-        }
+        self.currentDay = Date().weekday
     }
     
     func saveStepGoal() {
@@ -51,20 +45,8 @@ class ExerciseViewModel: ObservableObject {
         guard let stepCountType = HKQuantityType.quantityType(forIdentifier: .stepCount) else {
             return
         }
-        
-        let now = Date()
-        let startDate = Calendar.current.startOfDay(for: now)
-        let predicate = HKQuery.predicateForSamples(
-            withStart: startDate,
-            end: now,
-            options: .strictStartDate
-        )
-        
-        let query = HKStatisticsQuery(
-            quantityType: stepCountType,
-            quantitySamplePredicate: predicate,
-            options: .cumulativeSum
-        ) {
+
+        hkQuery(type: stepCountType, predicate: todayPredicate) {
             _, result, error in
             guard let result = result, let sum = result.sumQuantity() else {
                 print("failed to read step count: \(error?.localizedDescription ?? "UNKNOWN ERROR")")
@@ -79,44 +61,16 @@ class ExerciseViewModel: ObservableObject {
                 self.stepsToday = steps
             }
         }
-        healthStore?.execute(query)
     }
     
     private func readStepCountWeek() {
         guard let stepCountType = HKQuantityType.quantityType(forIdentifier: .stepCount) else {
             return
         }
-        let calendar = Calendar.current
-        guard let endOfToday = calendar.date(bySetting: .hour, value: 23, of: calendar.startOfDay(for: Date())) else {
-            print("HealthKit - Error - Failed to calculate the end date of the week.")
-            return
-        }
+        let endOfWeek = Date().endOfDay
+        let startOfWeek = endOfWeek.addingDays(-6).startOfDay
 
-        guard let endOfWeek = calendar.date(bySetting: .minute, value: 59, of: endOfToday) else {
-            print("HealthKit - Error - Failed to calculate the end date of the week.")
-            return
-        }
-
-        guard let startOfWeek = calendar.date(byAdding: .day, value: -6, to: endOfWeek) else {
-            print("HealthKit - Error - Failed to calculate the start date of the week.")
-            return
-        }
-
-        let predicate = HKQuery.predicateForSamples(
-            withStart: startOfWeek,
-            end: endOfWeek,
-            options: .strictStartDate
-        )
-
-        let query = HKStatisticsCollectionQuery(
-            quantityType: stepCountType,
-            quantitySamplePredicate: predicate,
-            options: .cumulativeSum,
-            anchorDate: startOfWeek,
-            intervalComponents: DateComponents(day: 1)
-        )
-
-        query.initialResultsHandler = { _, result, error in
+        hkColQuery(type: stepCountType, predicate: weekPredicate, anchor: startOfWeek) { _, result, error in
             guard let result = result else {
                 if let error = error {
                     print("HealthKit - Error - An error occurred while retrieving energy consumed for the week: \(error.localizedDescription)")
@@ -142,7 +96,5 @@ class ExerciseViewModel: ObservableObject {
                 }
             }
         }
-
-        healthStore?.execute(query)
     }
 }

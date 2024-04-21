@@ -8,7 +8,7 @@
 import SwiftUI
 import HealthKit
 
-class EnergyViewModel: ObservableObject {
+class EnergyViewModel: ObservableObject, HKHelper {
     @AppStorage("useMetric") var useMetric: Bool = false
     @AppStorage("energyGoal") var energyGoal: Double = 2000
 
@@ -44,25 +44,13 @@ class EnergyViewModel: ObservableObject {
             }
         }
     }
-    
+
     private func readEnergyConsumedToday() {
         guard let energyCountType = HKQuantityType.quantityType(forIdentifier: .dietaryEnergyConsumed) else {
             return
         }
 
-        let now = Date()
-        let startDate = Calendar.current.startOfDay(for: now)
-        let predicate = HKQuery.predicateForSamples(
-            withStart: startDate,
-            end: now,
-            options: .strictStartDate
-        )
-
-        let query = HKStatisticsQuery(
-            quantityType: energyCountType,
-            quantitySamplePredicate: predicate,
-            options: .cumulativeSum
-        ) {
+        hkQuery(type: energyCountType, predicate: todayPredicate) {
             _, result, error in
             guard let result = result, let sum = result.sumQuantity() else {
                 print("HealthKit - Error - Failed to read energy consumed today: \(error?.localizedDescription ?? "UNKNOWN ERROR")")
@@ -77,44 +65,16 @@ class EnergyViewModel: ObservableObject {
                 self.energyConsumedToday = Energy
             }
         }
-        healthStore?.execute(query)
     }
 
     private func readEnergyConsumedWeek() {
         guard let energyCountType = HKQuantityType.quantityType(forIdentifier: .dietaryEnergyConsumed) else {
             return
         }
-        let calendar = Calendar.current
-        guard let endOfToday = calendar.date(bySetting: .hour, value: 23, of: calendar.startOfDay(for: Date())) else {
-            print("HealthKit - Error - Failed to calculate the end date of the week.")
-            return
-        }
+        let endOfWeek = Date().endOfDay
+        let startOfWeek = endOfWeek.addingDays(-6).startOfDay
 
-        guard let endOfWeek = calendar.date(bySetting: .minute, value: 59, of: endOfToday) else {
-            print("HealthKit - Error - Failed to calculate the end date of the week.")
-            return
-        }
-
-        guard let startOfWeek = calendar.date(byAdding: .day, value: -6, to: endOfWeek) else {
-            print("HealthKit - Error - Failed to calculate the start date of the week.")
-            return
-        }
-
-        let predicate = HKQuery.predicateForSamples(
-            withStart: startOfWeek,
-            end: endOfWeek,
-            options: .strictStartDate
-        )
-
-        let query = HKStatisticsCollectionQuery(
-            quantityType: energyCountType,
-            quantitySamplePredicate: predicate,
-            options: .cumulativeSum,
-            anchorDate: startOfWeek,
-            intervalComponents: DateComponents(day: 1)
-        )
-
-        query.initialResultsHandler = { _, result, error in
+        hkColQuery(type: energyCountType, predicate: weekPredicate, anchor: startOfWeek) { _, result, error in
             guard let result = result else {
                 if let error = error {
                     print("HealthKit - Error - An error occurred while retrieving energy consumed for the week: \(error.localizedDescription)")
@@ -141,28 +101,14 @@ class EnergyViewModel: ObservableObject {
                 }
             }
         }
-
-        healthStore?.execute(query)
     }
     
     private func readEnergyBurnedToday() {
-        guard let energyCountType = HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned) else {
+        guard let energyCountType: HKQuantityType = HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned) else {
             return
         }
 
-        let now = Date()
-        let startDate = Calendar.current.startOfDay(for: now)
-        let predicate = HKQuery.predicateForSamples(
-            withStart: startDate,
-            end: now,
-            options: .strictStartDate
-        )
-
-        let query = HKStatisticsQuery(
-            quantityType: energyCountType,
-            quantitySamplePredicate: predicate,
-            options: .cumulativeSum
-        ) {
+        hkQuery(type: energyCountType, predicate: todayPredicate) {
             _, result, error in
             guard let result = result, let sum = result.sumQuantity() else {
                 print("HealthKit - Error - Failed to read energy consumed today: \(error?.localizedDescription ?? "UNKNOWN ERROR")")
@@ -174,44 +120,16 @@ class EnergyViewModel: ObservableObject {
                 self.energyBurnedToday = energy
             }
         }
-        healthStore?.execute(query)
     }
 
     private func readEnergyBurnedWeek() {
         guard let energyCountType = HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned) else {
             return
         }
-        let calendar = Calendar.current
-        guard let endOfToday = calendar.date(bySetting: .hour, value: 23, of: calendar.startOfDay(for: Date())) else {
-            print("HealthKit - Error - Failed to calculate the end date of the week.")
-            return
-        }
+        let endOfWeek = Date().endOfDay
+        let startOfWeek = endOfWeek.addingDays(-6).startOfDay
 
-        guard let endOfWeek = calendar.date(bySetting: .minute, value: 59, of: endOfToday) else {
-            print("HealthKit - Error - Failed to calculate the end date of the week.")
-            return
-        }
-
-        guard let startOfWeek = calendar.date(byAdding: .day, value: -6, to: endOfWeek) else {
-            print("HealthKit - Error - Failed to calculate the start date of the week.")
-            return
-        }
-
-        let predicate = HKQuery.predicateForSamples(
-            withStart: startOfWeek,
-            end: endOfWeek,
-            options: .strictStartDate
-        )
-
-        let query = HKStatisticsCollectionQuery(
-            quantityType: energyCountType,
-            quantitySamplePredicate: predicate,
-            options: .cumulativeSum,
-            anchorDate: startOfWeek,
-            intervalComponents: DateComponents(day: 1)
-        )
-
-        query.initialResultsHandler = { _, result, error in
+        hkColQuery(type: energyCountType, predicate: weekPredicate, anchor: endOfWeek) { _, result, error in
             guard let result = result else {
                 if let error = error {
                     print("HealthKit - Error - An error occurred while retrieving energy consumed for the week: \(error.localizedDescription)")
@@ -237,8 +155,6 @@ class EnergyViewModel: ObservableObject {
                 }
             }
         }
-
-        healthStore?.execute(query)
     }
     
     private func addEnergyConsumed(energy: Double, completion: @escaping () -> Void) {

@@ -50,7 +50,7 @@ class EnergyViewModel: ObservableObject, HKHelper {
             return
         }
 
-        hkQuery(type: energyCountType, predicate: todayPredicate) {
+        hkQuery(type: energyCountType) {
             _, result, error in
             guard let result = result, let sum = result.sumQuantity() else {
                 print("HealthKit - Error - Failed to read energy consumed today: \(error?.localizedDescription ?? "UNKNOWN ERROR")")
@@ -74,7 +74,7 @@ class EnergyViewModel: ObservableObject, HKHelper {
         let endOfWeek = Date().endOfDay
         let startOfWeek = endOfWeek.addingDays(-6).startOfDay
 
-        hkColQuery(type: energyCountType, predicate: weekPredicate, anchor: startOfWeek) { _, result, error in
+        hkColQuery(type: energyCountType, anchor: startOfWeek) { _, result, error in
             guard let result = result else {
                 if let error = error {
                     print("HealthKit - Error - An error occurred while retrieving energy consumed for the week: \(error.localizedDescription)")
@@ -108,7 +108,7 @@ class EnergyViewModel: ObservableObject, HKHelper {
             return
         }
 
-        hkQuery(type: energyCountType, predicate: todayPredicate) {
+        hkQuery(type: energyCountType) {
             _, result, error in
             guard let result = result, let sum = result.sumQuantity() else {
                 print("HealthKit - Error - Failed to read energy consumed today: \(error?.localizedDescription ?? "UNKNOWN ERROR")")
@@ -129,7 +129,7 @@ class EnergyViewModel: ObservableObject, HKHelper {
         let endOfWeek = Date().endOfDay
         let startOfWeek = endOfWeek.addingDays(-6).startOfDay
 
-        hkColQuery(type: energyCountType, predicate: weekPredicate, anchor: endOfWeek) { _, result, error in
+        hkColQuery(type: energyCountType, anchor: endOfWeek) { _, result, error in
             guard let result = result else {
                 if let error = error {
                     print("HealthKit - Error - An error occurred while retrieving energy consumed for the week: \(error.localizedDescription)")

@@ -24,20 +24,20 @@ extension HKHelper {
 
     var weekPredicate: NSPredicate {
         return HKQuery.predicateForSamples(
-            withStart: Date().addingTimeInterval(-6).startOfDay,
+            withStart: Date().addingDays(-6).startOfDay,
             end: Date().endOfDay,
             options: .strictStartDate
         )
     }
-
-    func hkColQuery(type: HKQuantityType, predicate: NSPredicate, anchor: Date, callback: @escaping (HKStatisticsCollectionQuery, HKStatisticsCollection?, (any Error)?) -> Void) {
-        let query = HKStatisticsCollectionQuery(quantityType: type, quantitySamplePredicate: predicate, options: .cumulativeSum, anchorDate: anchor, intervalComponents: DateComponents(day: 1))
+    
+    func hkColQuery(type: HKQuantityType, anchor: Date, callback: @escaping (HKStatisticsCollectionQuery, HKStatisticsCollection?, (any Error)?) -> Void) {
+        let query = HKStatisticsCollectionQuery(quantityType: type, quantitySamplePredicate: weekPredicate, options: .cumulativeSum, anchorDate: anchor, intervalComponents: DateComponents(day: 1))
         query.initialResultsHandler = callback
         healthStore?.execute(query)
     }
 
-    func hkQuery(type: HKQuantityType, predicate: NSPredicate, callback: @escaping (HKStatisticsQuery, HKStatistics?, (any Error)?) -> Void) {
-        let query = HKStatisticsQuery(quantityType: type, quantitySamplePredicate: predicate, options: .cumulativeSum, completionHandler: callback)
+    func hkQuery(type: HKQuantityType, callback: @escaping (HKStatisticsQuery, HKStatistics?, (any Error)?) -> Void) {
+        let query = HKStatisticsQuery(quantityType: type, quantitySamplePredicate: todayPredicate, options: .cumulativeSum, completionHandler: callback)
         healthStore?.execute(query)
     }
 }

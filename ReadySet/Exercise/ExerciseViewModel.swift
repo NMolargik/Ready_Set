@@ -46,7 +46,7 @@ class ExerciseViewModel: ObservableObject, HKHelper {
             return
         }
 
-        hkQuery(type: stepCountType, predicate: todayPredicate) {
+        hkQuery(type: stepCountType) {
             _, result, error in
             guard let result = result, let sum = result.sumQuantity() else {
                 print("failed to read step count: \(error?.localizedDescription ?? "UNKNOWN ERROR")")
@@ -70,7 +70,7 @@ class ExerciseViewModel: ObservableObject, HKHelper {
         let endOfWeek = Date().endOfDay
         let startOfWeek = endOfWeek.addingDays(-6).startOfDay
 
-        hkColQuery(type: stepCountType, predicate: weekPredicate, anchor: startOfWeek) { _, result, error in
+        hkColQuery(type: stepCountType, anchor: startOfWeek) { _, result, error in
             guard let result = result else {
                 if let error = error {
                     print("HealthKit - Error - An error occurred while retrieving energy consumed for the week: \(error.localizedDescription)")

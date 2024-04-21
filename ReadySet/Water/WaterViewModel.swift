@@ -46,7 +46,7 @@ class WaterViewModel: ObservableObject, HKHelper {
             return
         }
 
-        hkQuery(type: waterCountType, predicate: todayPredicate) {
+        hkQuery(type: waterCountType) {
             _, result, error in
             guard let result = result, let sum = result.sumQuantity() else {
                 print("HealthKit - Error - Failed to read water gallons today: \(error?.localizedDescription ?? "UNKNOWN ERROR")")
@@ -71,7 +71,7 @@ class WaterViewModel: ObservableObject, HKHelper {
         let endOfWeek = Date().endOfDay
         let startOfWeek = endOfWeek.addingDays(-6).startOfDay
 
-        hkColQuery(type: waterCountType, predicate: weekPredicate, anchor: startOfWeek) { _, result, error in
+        hkColQuery(type: waterCountType, anchor: startOfWeek) { _, result, error in
             guard let result = result else {
                 if let error = error {
                     print("HealthKit - Error - An error occurred while retrieving water gallons for the week: \(error.localizedDescription)")

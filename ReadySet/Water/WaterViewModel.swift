@@ -42,18 +42,8 @@ class WaterViewModel: ObservableObject, HKHelper {
     }
     
     private func readWaterConsumedToday() {
-        hkQuery(type: waterConsumed) {
-            _, result, error in
-            guard let result = result, let sum = result.sumQuantity() else {
-                print("HealthKit - Error - Failed to read water gallons today: \(error?.localizedDescription ?? "UNKNOWN ERROR")")
-                DispatchQueue.main.async {
-                    self.waterConsumedToday = 0
-                }
-                return
-            }
-
-            let amount = Int(sum.doubleValue(for: self.useMetric ? HKUnit.literUnit(with: .milli) : HKUnit.fluidOunceUS()))
-            
+        let unit = self.useMetric ? HKUnit.literUnit(with: .milli) : HKUnit.fluidOunceUS()
+        hkQuery(type: waterConsumed, failed: "Failed to read water gallons today", unit: unit) { amount in
             DispatchQueue.main.async {
                 self.waterConsumedToday = amount
             }

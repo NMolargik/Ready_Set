@@ -42,19 +42,9 @@ class ExerciseViewModel: ObservableObject, HKHelper {
     }
     
     private func readStepCountToday() {
-        hkQuery(type: stepCount) {
-            _, result, error in
-            guard let result = result, let sum = result.sumQuantity() else {
-                print("failed to read step count: \(error?.localizedDescription ?? "UNKNOWN ERROR")")
-                DispatchQueue.main.async {
-                    self.stepsToday = 0
-                }
-                return
-            }
-            
-            let steps = Int(sum.doubleValue(for: HKUnit.count()))
+        hkQuery(type: stepCount, failed: "Failed to read step count", unit: HKUnit.count()) { amount in
             DispatchQueue.main.async {
-                self.stepsToday = steps
+                self.stepsToday = amount
             }
         }
     }

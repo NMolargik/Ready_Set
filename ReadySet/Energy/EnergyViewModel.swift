@@ -46,19 +46,10 @@ class EnergyViewModel: ObservableObject, HKHelper {
     }
 
     private func readEnergyConsumedToday() {
-        hkQuery(type: energyConsumed) {
-            _, result, error in
-            guard let result = result, let sum = result.sumQuantity() else {
-                print("HealthKit - Error - Failed to read energy consumed today: \(error?.localizedDescription ?? "UNKNOWN ERROR")")
-                DispatchQueue.main.async {
-                    self.energyConsumedToday = 0
-                }
-                return
-            }
-
-            let Energy = Int(sum.doubleValue(for: self.useMetric ? HKUnit.jouleUnit(with: .kilo) : HKUnit.kilocalorie()))
+        let unit = self.useMetric ? HKUnit.jouleUnit(with: .kilo) : HKUnit.kilocalorie()
+        hkQuery(type: energyConsumed, failed: "Failed to read energy consumed today", unit: unit) { amount in
             DispatchQueue.main.async {
-                self.energyConsumedToday = Energy
+                self.energyBurnedToday = amount
             }
         }
     }
@@ -97,16 +88,10 @@ class EnergyViewModel: ObservableObject, HKHelper {
     }
     
     private func readEnergyBurnedToday() {
-        hkQuery(type: energyBurned) {
-            _, result, error in
-            guard let result = result, let sum = result.sumQuantity() else {
-                print("HealthKit - Error - Failed to read energy consumed today: \(error?.localizedDescription ?? "UNKNOWN ERROR")")
-                return
-            }
-
-            let energy = Int(sum.doubleValue(for: self.useMetric ? HKUnit.jouleUnit(with: .kilo) : HKUnit.kilocalorie()))
+        let unit = self.useMetric ? HKUnit.jouleUnit(with: .kilo) : HKUnit.kilocalorie()
+        hkQuery(type: energyBurned, failed: "Failed to read energy burned today", unit: unit) { amount in
             DispatchQueue.main.async {
-                self.energyBurnedToday = energy
+                self.energyBurnedToday = amount
             }
         }
     }

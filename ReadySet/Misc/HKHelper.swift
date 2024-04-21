@@ -51,9 +51,17 @@ extension HKHelper {
         query.initialResultsHandler = callback
         healthStore?.execute(query)
     }
-
-    func hkQuery(type: HKQuantityType, callback: @escaping (HKStatisticsQuery, HKStatistics?, (any Error)?) -> Void) {
-        let query = HKStatisticsQuery(quantityType: type, quantitySamplePredicate: todayPredicate, options: .cumulativeSum, completionHandler: callback)
+    
+    func hkQuery(type: HKQuantityType, failed: String, unit: HKUnit, with block: @escaping (Int) -> Void) {
+        let query = HKStatisticsQuery(quantityType: type, quantitySamplePredicate: todayPredicate) { _, result, error in
+            guard let result = result, let sum = result.sumQuantity() else {
+                print("HealthKit - Error - \(failed): \(error?.localizedDescription ?? "Unknown Error")")
+                block(0)
+                return
+            }
+            let amount = Int(sum.doubleValue(for: unit))
+            block(amount)
+        }
         healthStore?.execute(query)
     }
 }

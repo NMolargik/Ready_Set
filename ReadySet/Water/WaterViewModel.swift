@@ -51,34 +51,12 @@ class WaterViewModel: ObservableObject, HKHelper {
     }
 
     private func readWaterConsumedWeek() {
-        let endOfWeek = Date().endOfDay
-        let startOfWeek = endOfWeek.addingDays(-6).startOfDay
-
-        hkColQuery(type: waterConsumed, anchor: startOfWeek) { _, result, error in
-            guard let result = result else {
-                if let error = error {
-                    print("HealthKit - Error - An error occurred while retrieving water gallons for the week: \(error.localizedDescription)")
-                }
-                return
-            }
-
-            result.enumerateStatistics(from: startOfWeek, to: endOfWeek) { statistics, _ in
-                if let quantity = statistics.sumQuantity() {
-                    let amount = Int(quantity.doubleValue(for: self.useMetric ? HKUnit.literUnit(with: .milli) : HKUnit.fluidOunceUS()))
-
-                    let day = statistics.startDate
-                    DispatchQueue.main.async {
-                        self.waterConsumedWeek[day] = amount
-                        print("Water amount for \(day): \(amount)")
-                    }
-                } else {
-                    let day = statistics.startDate
-                    if day < endOfWeek {
-                        DispatchQueue.main.async {
-                            self.waterConsumedWeek[day] = 0
-                        }
-                    }
-                }
+        let unit = self.useMetric ? HKUnit.literUnit(with: .milli) : HKUnit.fluidOunceUS()
+        let end = Date().endOfDay
+        let start = end.addingDays(-6).startOfDay
+        hkColQuery(type: waterConsumed, start: start, end: end, unit: unit, failed: "Error while reading water during week") { day, amount in
+            DispatchQueue.main.async {
+                self.waterConsumedWeek[day] = amount
             }
         }
     }

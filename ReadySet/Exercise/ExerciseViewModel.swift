@@ -50,33 +50,12 @@ class ExerciseViewModel: ObservableObject, HKHelper {
     }
     
     private func readStepCountWeek() {
-        let endOfWeek = Date().endOfDay
-        let startOfWeek = endOfWeek.addingDays(-6).startOfDay
+        let end = Date().endOfDay
+        let start = end.addingDays(-6).startOfDay
 
-        hkColQuery(type: stepCount, anchor: startOfWeek) { _, result, error in
-            guard let result = result else {
-                if let error = error {
-                    print("HealthKit - Error - An error occurred while retrieving energy consumed for the week: \(error.localizedDescription)")
-                }
-                return
-            }
-
-            result.enumerateStatistics(from: startOfWeek, to: endOfWeek) { statistics, _ in
-                if let quantity = statistics.sumQuantity() {
-                    let steps = Int(quantity.doubleValue(for: HKUnit.count()))
-                    
-                    let day = statistics.startDate
-                    DispatchQueue.main.async {
-                        self.stepCountWeek[day] = steps
-                    }
-                } else {
-                    let day = statistics.startDate
-                    if day < endOfWeek {
-                        DispatchQueue.main.async {
-                            self.stepCountWeek[day] = 0
-                        }
-                    }
-                }
+        hkColQuery(type: stepCount, start: start, end: end, unit: HKUnit.count(), failed: "Error while reading step count during week") { day, amount in
+            DispatchQueue.main.async {
+                self.stepCountWeek[day] = amount
             }
         }
     }

@@ -46,9 +46,30 @@ extension HKHelper {
         )
     }
     
-    func hkColQuery(type: HKQuantityType, anchor: Date, callback: @escaping (HKStatisticsCollectionQuery, HKStatisticsCollection?, (any Error)?) -> Void) {
-        let query = HKStatisticsCollectionQuery(quantityType: type, quantitySamplePredicate: weekPredicate, options: .cumulativeSum, anchorDate: anchor, intervalComponents: DateComponents(day: 1))
-        query.initialResultsHandler = callback
+    func hkColQuery(type: HKQuantityType, start: Date, end: Date, unit: HKUnit, failed: String, with block: @escaping (Date, Int) -> Void){
+        let query = HKStatisticsCollectionQuery(quantityType: type, quantitySamplePredicate: weekPredicate, anchorDate: start, intervalComponents: DateComponents(day: 1))
+        query.initialResultsHandler = { _, result, error in
+            guard let result = result else {
+                if let error = error {
+                    print("HealthKit - Error - An error occurred while retrieving energy consumed for the week: \(error.localizedDescription)")
+                }
+                return
+            }
+
+            result.enumerateStatistics(from: start, to: end) { statistics, _ in
+                if let quantity = statistics.sumQuantity() {
+                    let steps = Int(quantity.doubleValue(for: unit))
+
+                    let day = statistics.startDate
+                    block(day, steps)
+                } else {
+                    let day = statistics.startDate
+                    if day < end {
+                        block(day, 0)
+                    }
+                }
+            }
+        }
         healthStore?.execute(query)
     }
     

@@ -55,38 +55,16 @@ class EnergyViewModel: ObservableObject, HKHelper {
     }
 
     private func readEnergyConsumedWeek() {
-        let endOfWeek = Date().endOfDay
-        let startOfWeek = endOfWeek.addingDays(-6).startOfDay
-
-        hkColQuery(type: energyConsumed, anchor: startOfWeek) { _, result, error in
-            guard let result = result else {
-                if let error = error {
-                    print("HealthKit - Error - An error occurred while retrieving energy consumed for the week: \(error.localizedDescription)")
-                }
-                return
-            }
-
-            result.enumerateStatistics(from: startOfWeek, to: endOfWeek) { statistics, _ in
-                if let quantity = statistics.sumQuantity() {
-                    let kiloEnergy = Int(quantity.doubleValue(for: self.useMetric ? HKUnit.jouleUnit(with: .kilo) : HKUnit.kilocalorie()))
-                    
-                    let day = statistics.startDate
-                    DispatchQueue.main.async {
-                        self.energyConsumedWeek[day] = kiloEnergy
-                    }
-                }
-                else {
-                    let day = statistics.startDate
-                    if day < endOfWeek {
-                        DispatchQueue.main.async {
-                            self.energyConsumedWeek[day] = 0
-                        }
-                    }
-                }
+        let unit = self.useMetric ? HKUnit.jouleUnit(with: .kilo) : HKUnit.kilocalorie()
+        let end = Date().endOfDay
+        let start = end.addingDays(-6).startOfDay
+        hkColQuery(type: energyConsumed, start: start, end: end, unit: unit, failed: "Error while reading consumed calories during week") { day, amount in
+            DispatchQueue.main.async {
+                self.energyConsumedWeek[day] = amount
             }
         }
     }
-    
+
     private func readEnergyBurnedToday() {
         let unit = self.useMetric ? HKUnit.jouleUnit(with: .kilo) : HKUnit.kilocalorie()
         hkQuery(type: energyBurned, failed: "Failed to read energy burned today", unit: unit) { amount in
@@ -97,33 +75,12 @@ class EnergyViewModel: ObservableObject, HKHelper {
     }
 
     private func readEnergyBurnedWeek() {
-        let endOfWeek = Date().endOfDay
-        let startOfWeek = endOfWeek.addingDays(-6).startOfDay
-
-        hkColQuery(type: energyBurned, anchor: endOfWeek) { _, result, error in
-            guard let result = result else {
-                if let error = error {
-                    print("HealthKit - Error - An error occurred while retrieving energy consumed for the week: \(error.localizedDescription)")
-                }
-                return
-            }
-
-            result.enumerateStatistics(from: startOfWeek, to: endOfWeek) { statistics, _ in
-                if let quantity = statistics.sumQuantity() {
-                    let kiloEnergy = Int(quantity.doubleValue(for: self.useMetric ? HKUnit.jouleUnit(with: .kilo) : HKUnit.kilocalorie()))
-                    
-                    let day = statistics.startDate
-                    DispatchQueue.main.async {
-                        self.energyBurnedWeek[day] = kiloEnergy
-                    }
-                } else {
-                    let day = statistics.startDate
-                    if day < endOfWeek {
-                        DispatchQueue.main.async {
-                            self.energyBurnedWeek[day] = 0
-                        }
-                    }
-                }
+        let unit = self.useMetric ? HKUnit.jouleUnit(with: .kilo) : HKUnit.kilocalorie()
+        let end = Date().endOfDay
+        let start = end.addingDays(-6).startOfDay
+        hkColQuery(type: energyBurned, start: start, end: end, unit: unit, failed: "Error while reading burned calories during week") { day, amount in
+            DispatchQueue.main.async {
+                self.energyBurnedWeek[day] = amount
             }
         }
     }

@@ -132,6 +132,13 @@ class ExerciseViewModel: ObservableObject {
                     DispatchQueue.main.async {
                         self.stepCountWeek[day] = steps
                     }
+                } else {
+                    let day = statistics.startDate
+                    if day < endOfWeek {
+                        DispatchQueue.main.async {
+                            self.stepCountWeek[day] = 0
+                        }
+                    }
                 }
             }
         }

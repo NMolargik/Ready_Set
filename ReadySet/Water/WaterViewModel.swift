@@ -130,8 +130,10 @@ class WaterViewModel: ObservableObject {
                     }
                 } else {
                     let day = statistics.startDate
-                    DispatchQueue.main.async {
-                        self.waterConsumedWeek[day] = 0
+                    if day < endOfWeek {
+                        DispatchQueue.main.async {
+                            self.waterConsumedWeek[day] = 0
+                        }
                     }
                 }
             }

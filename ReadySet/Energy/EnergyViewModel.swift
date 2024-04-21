@@ -132,11 +132,13 @@ class EnergyViewModel: ObservableObject {
                     }
                 }
                 else {
-                   let day = statistics.startDate
-                   DispatchQueue.main.async {
-                       self.energyConsumedWeek[day] = 0
-                   }
-               }
+                    let day = statistics.startDate
+                    if day < endOfWeek {
+                        DispatchQueue.main.async {
+                            self.energyConsumedWeek[day] = 0
+                        }
+                    }
+                }
             }
         }
 
@@ -227,8 +229,10 @@ class EnergyViewModel: ObservableObject {
                     }
                 } else {
                     let day = statistics.startDate
-                    DispatchQueue.main.async {
-                        self.energyBurnedWeek[day] = 0
+                    if day < endOfWeek {
+                        DispatchQueue.main.async {
+                            self.energyBurnedWeek[day] = 0
+                        }
                     }
                 }
             }

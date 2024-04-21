@@ -73,7 +73,7 @@ extension HKHelper {
         healthStore?.execute(query)
     }
     
-    func hkQuery(type: HKQuantityType, failed: String, unit: HKUnit, with block: @escaping (Int) -> Void) {
+    func hkQuery(type: HKQuantityType, unit: HKUnit, failed: String, with block: @escaping (Int) -> Void) {
         let query = HKStatisticsQuery(quantityType: type, quantitySamplePredicate: todayPredicate) { _, result, error in
             guard let result = result, let sum = result.sumQuantity() else {
                 print("HealthKit - Error - \(failed): \(error?.localizedDescription ?? "Unknown Error")")

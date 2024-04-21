@@ -43,7 +43,7 @@ class WaterViewModel: ObservableObject, HKHelper {
     
     private func readWaterConsumedToday() {
         let unit = self.useMetric ? HKUnit.literUnit(with: .milli) : HKUnit.fluidOunceUS()
-        hkQuery(type: waterConsumed, failed: "Failed to read water gallons today", unit: unit) { amount in
+        hkQuery(type: waterConsumed, unit: unit, failed: "Failed to read water gallons today") { amount in
             DispatchQueue.main.async {
                 self.waterConsumedToday = amount
             }

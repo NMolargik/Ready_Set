@@ -47,7 +47,7 @@ class EnergyViewModel: ObservableObject, HKHelper {
 
     private func readEnergyConsumedToday() {
         let unit = self.useMetric ? HKUnit.jouleUnit(with: .kilo) : HKUnit.kilocalorie()
-        hkQuery(type: energyConsumed, failed: "Failed to read energy consumed today", unit: unit) { amount in
+        hkQuery(type: energyConsumed, unit: unit, failed: "Failed to read energy consumed today") { amount in
             DispatchQueue.main.async {
                 self.energyBurnedToday = amount
             }
@@ -67,7 +67,7 @@ class EnergyViewModel: ObservableObject, HKHelper {
 
     private func readEnergyBurnedToday() {
         let unit = self.useMetric ? HKUnit.jouleUnit(with: .kilo) : HKUnit.kilocalorie()
-        hkQuery(type: energyBurned, failed: "Failed to read energy burned today", unit: unit) { amount in
+        hkQuery(type: energyBurned, unit: unit, failed: "Failed to read energy burned today") { amount in
             DispatchQueue.main.async {
                 self.energyBurnedToday = amount
             }

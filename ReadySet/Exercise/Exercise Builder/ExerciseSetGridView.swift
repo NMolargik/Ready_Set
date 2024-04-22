@@ -15,13 +15,15 @@ struct ExerciseSetGridView: View {
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack {
+            LazyHStack {
                 ForEach(exercise.exerciseSets, id: \.self) { set in
                     if (selectedSet.id == set.id) {
                         ExerciseSetRecordingView(selectedSet: $selectedSet)
+                            .id(selectedSet.id)
                         
                     } else {
                         ExerciseSetCapsuleView(set: set, selectedSet: $selectedSet)
+                            .id(set.id)
                     }
                 }
             }

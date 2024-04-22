@@ -34,10 +34,7 @@ struct MainView: View {
                     onboardingGradient = LinearGradient(colors: [.greenStart, .greenEnd], startPoint: .leading, endPoint: .trailing)
                     appState = "splash"
                 }
-            } else {
-                
             }
-            
         }
     }
     

@@ -9,24 +9,36 @@ import SwiftUI
 import SwiftData
 
 struct ExerciseBottomContentView: View {
-    @Environment(\.modelContext) var modelContext
+    @Query(sort: [SortDescriptor(\Exercise.orderIndex)]) var exercises: [Exercise]
     
     @ObservedObject var exerciseViewModel: ExerciseViewModel
-    @State private var selectedDay: Int = 1
     @State private var sortOrder = SortDescriptor(\Exercise.orderIndex)
+    @State private var selectedDay: Int = 1
     
     private let weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     
     var body: some View {
         ZStack {
+            TabView(selection: $selectedDay) {
+                ForEach(weekDays.indices, id: \.self) { index in
+                    @State var exercises = exercises.filter({$0.weekday == selectedDay})
+                
+                    ExercisePlanDayView(exercises: $exercises, isEditing: $exerciseViewModel.editingSets, isExpanded: $exerciseViewModel.expandedSets, selectedDay: selectedDay)
+                        .tag(index)
+                }
+            }
+            .tabViewStyle(.page(indexDisplayMode: .never))
+            
             VStack {
-                HStack(spacing: 6) {
+                Spacer()
+                
+                HStack(spacing: 2) {
                     ForEach(weekDays.indices, id: \.self) { index in
                         Text(selectedDay == index ? weekDays[index] : String(weekDays[index].prefix(1)))
                             .font(.system(size: selectedDay == index ? 15 : 10))
                             .bold()
                             .foregroundStyle(selectedDay == index ? LinearGradient(colors: [.greenEnd, .green, .greenEnd], startPoint: .leading, endPoint: .trailing) : LinearGradient(colors: [.secondary], startPoint: .leading, endPoint: .trailing))
-                            .padding(.horizontal, 4)
+                            .padding(.horizontal, 1)
                             .onTapGesture {
                                 UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
                                 withAnimation(.easeInOut) {
@@ -47,50 +59,54 @@ struct ExerciseBottomContentView: View {
                     editButton
                         .transition(.opacity)
                 }
-                .padding(.horizontal, 10)
-                .padding(.top, 5)
-                
-                TabView(selection: $selectedDay) {
-                    ForEach(weekDays.indices, id: \.self) { index in
-                        ExercisePlanDayView(selectedDay: $selectedDay.wrappedValue, isEditing: $exerciseViewModel.editingSets, isExpanded: $exerciseViewModel.expandedSets)
-                            .id(index)
+                .drawingGroup()
+                .padding(.horizontal, 15)
+                .padding(.vertical, 2)
+                .onAppear {
+                    withAnimation {
+                        exerciseViewModel.getCurrentWeekday()
+                        selectedDay = exerciseViewModel.currentDay - 1
                     }
                 }
-                .tabViewStyle(.page(indexDisplayMode: .never))
-            }
-            
-            .padding(.horizontal)
-            .onAppear {
-                withAnimation {
-                    exerciseViewModel.getCurrentWeekday()
-                    selectedDay = exerciseViewModel.currentDay - 1
+                .background {
+                    Rectangle()
+                        .foregroundStyle(.thickMaterial)
+                        .shadow(radius: exerciseViewModel.expandedSets ? 0 : 5, x: 0, y: exerciseViewModel.expandedSets ? 0 : -10)
                 }
             }
         }
-        .animation(.easeIn, value: exerciseViewModel.expandedSets)
+        .geometryGroup()
     }
     
     private var expandButton: some View {
         Button(action: {
             UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
-            withAnimation {
+            withAnimation(.easeInOut) {
                 exerciseViewModel.expandedSets.toggle()
             }
         }, label: {
-            Image(systemName: exerciseViewModel.expandedSets ? "arrow.up.right.and.arrow.down.left.circle.fill" : "arrow.up.left.and.arrow.down.right.circle.fill")
-                .foregroundStyle(.baseInvert)
-                .font(.system(size: 25))
+            Text(exerciseViewModel.expandedSets ? "Collapse" : "View All")
+                .foregroundStyle(.base)
+                .font(.body)
                 .tag("edpandButton")
+                .padding(.vertical, 2)
+                .padding(.horizontal, 5)
+                .background {
+                    Rectangle()
+                        .cornerRadius(10)
+                        .foregroundStyle(.baseInvert)
+                        .shadow(radius: 3)
+                }
         })
-        .shadow(radius: 3)
         .buttonStyle(.plain)
         .bold()
+        .padding(.trailing, 5)
     }
 
     private var editButton: some View {
         Button(action: {
             UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
-            withAnimation {
+            withAnimation(.easeInOut) {
                 exerciseViewModel.editingSets.toggle()
             }
         }, label: {
@@ -103,6 +119,7 @@ struct ExerciseBottomContentView: View {
         .shadow(radius: 3)
         .buttonStyle(.plain)
         .bold()
+        .padding(.trailing, 3)
     }
 }
 

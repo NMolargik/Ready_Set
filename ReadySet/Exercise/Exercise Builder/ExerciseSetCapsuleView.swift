@@ -9,34 +9,32 @@ import SwiftUI
 
 struct ExerciseSetCapsuleView: View {
     @State var set: ExerciseSet
-    @Binding var selectedSet: ExerciseSet
+    @Binding var selectedSet: String
     
     var body: some View {
         HStack (alignment: .center) {
             Button(action: {
                 UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                withAnimation(.easeInOut(duration: 0.2)) {
-                    selectedSet = set
-                }
+                selectedSet = set.id.uuidString
             }, label: {
                 HStack {
                     if (set.goalType == .duration) {
                         Image(systemName: "stopwatch.fill")
                             .foregroundStyle(LinearGradient(colors: [.purpleStart, .purpleEnd], startPoint: .leading, endPoint: .trailing))
                         
-                        Text(set.durationToDo.description)
+                        Text(set.durationToDo.formatted())
                             .foregroundStyle(.baseInvert)
                     } else {
                         Image(systemName: "dumbbell.fill")
                             .foregroundStyle(LinearGradient(colors: [.greenStart, .greenEnd], startPoint: .leading, endPoint: .trailing))
                         
-                        Text(set.weightToLift.description)
+                        Text(set.weightToLift.formatted())
                             .foregroundStyle(.baseInvert)
                         
                         Image(systemName: "repeat")
                             .foregroundStyle(LinearGradient(colors: [.orangeStart, .orangeEnd], startPoint: .leading, endPoint: .trailing))
                         
-                        Text(set.repetitionsToDo.description)
+                        Text(set.repetitionsToDo.formatted())
                             .foregroundStyle(.baseInvert)
                     }
                 }
@@ -51,6 +49,6 @@ struct ExerciseSetCapsuleView: View {
             })
             .buttonStyle(.plain)
         }
-        .transition(.move(edge: .leading).combined(with: .opacity))
+        .drawingGroup()
     }
 }

@@ -9,32 +9,21 @@ import SwiftUI
 import SwiftData
 
 struct ExercisePlanDayView: View {
+    @Environment(\.modelContext) private var modelContext
     @AppStorage("useMetric") var useMetric: Bool = false
-    @Environment(\.modelContext) var modelContext
     @FocusState private var keyboardShown: Bool
-    
-    @Query(sort: [SortDescriptor(\Exercise.orderIndex)]) var exercises: [Exercise]
 
+    @Binding var exercises: [Exercise]
     @Binding var isEditing: Bool
     @Binding var isExpanded: Bool
     @State var sortOrder = SortDescriptor(\Exercise.orderIndex)
     @State private var selectedExercise: Exercise = Exercise()
-    @State private var selectedSet: ExerciseSet = ExerciseSet()
+    @State private var selectedSet: String = ""
 
     var selectedDay: Int
     let columns = [
         GridItem(.flexible(minimum: 50, maximum: 100))
     ]
-    
-    init(selectedDay: Int, isEditing: Binding<Bool>, isExpanded: Binding<Bool>) {
-        self.selectedDay = selectedDay
-        _exercises = Query(filter: #Predicate {
-            return $0.weekday == selectedDay
-        }, sort: [SortDescriptor(\Exercise.orderIndex)])
-        
-        _isEditing = isEditing
-        _isExpanded = isExpanded
-    }
     
     let weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     
@@ -56,7 +45,6 @@ struct ExercisePlanDayView: View {
                 
                 ForEach(exercises, id: \.self) { exercise in
                     ExerciseEntryView(exercise: exercise, isEditing: $isEditing, selectedExercise: $selectedExercise, selectedSet: $selectedSet, keyboardShown: $keyboardShown)
-                        .animation(.easeInOut, value: exercises)
                         .id(exercise.id)
                 }
                 
@@ -96,11 +84,13 @@ struct ExercisePlanDayView: View {
                 }
             }
             .padding(.horizontal, 5)
+            .padding(.vertical, 30)
         }
         .scrollDisabled(!isEditing && !isExpanded)
         .onChange(of: isEditing) {
             if (!isEditing) {
                 selectedExercise = Exercise()
+                selectedSet = ""
             }
         }
     }

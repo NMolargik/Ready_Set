@@ -35,6 +35,7 @@ struct ExerciseSetEditor: View {
                                 .foregroundStyle(exerciseSet.goalType == .weight ? .blueEnd : .baseAccent)
                         }
                 })
+                .buttonStyle(.plain)
                      
                 Button(action: {
                     UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
@@ -55,6 +56,7 @@ struct ExerciseSetEditor: View {
                         }
                 })
                 .frame(width: 80)
+                .buttonStyle(.plain)
             }
             
             VStack(spacing: 2) {

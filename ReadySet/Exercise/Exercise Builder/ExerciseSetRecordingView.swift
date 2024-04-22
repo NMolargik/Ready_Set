@@ -8,25 +8,26 @@
 import SwiftUI
 
 struct ExerciseSetRecordingView: View {
-    @Binding var selectedSet: ExerciseSet
+    @State var set: ExerciseSet
+    @Binding var selectedSet: String
 
     var body: some View {
         HStack {
             VStack(spacing: 0) {
-                if selectedSet.goalType == .duration {
-                    CustomStepperView(value: $selectedSet.durationToDo, step: 5, iconName: "stopwatch.fill", colors: [.purpleStart, .purpleEnd])
+                if set.goalType == .duration {
+                    CustomStepperView(value: $set.durationToDo, step: 5, iconName: "stopwatch.fill", colors: [.purpleStart, .purpleEnd])
                     
                 } else {
-                    CustomStepperView(value: $selectedSet.weightToLift, step: 5, iconName: "dumbbell.fill", colors: [.greenStart, .greenEnd])
+                    CustomStepperView(value: $set.weightToLift, step: 5, iconName: "dumbbell.fill", colors: [.greenStart, .greenEnd])
                     
-                    CustomStepperView(value: $selectedSet.repetitionsToDo, step: 1, iconName: "repeat", colors: [.orangeStart, .orangeEnd])
+                    CustomStepperView(value: $set.repetitionsToDo, step: 1, iconName: "repeat", colors: [.orangeStart, .orangeEnd])
                 }
             }
             
             Button(action: {
                 UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                 withAnimation(.easeInOut(duration: 0.2)) {
-                    selectedSet = ExerciseSet()
+                    selectedSet = ""
                 }
             }, label: {
                 Text("Save")

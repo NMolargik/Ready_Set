@@ -74,7 +74,7 @@ struct HealthPermissionView: View {
                     }, label: {
                         ZStack {
                             Rectangle()
-                                .foregroundStyle(.fontGray)
+                                .foregroundStyle(.blue)
                                 .cornerRadius(10)
                                 .frame(width: 250, height: 50)
                                 .padding()
@@ -82,7 +82,7 @@ struct HealthPermissionView: View {
                             
                             HStack {
                                 Text("Authorize Health")
-                                    .foregroundStyle(.baseInvert)
+                                    .foregroundStyle(.base)
                                 
                                 Image(systemName: "heart.fill")
                                     .foregroundStyle(.pink)

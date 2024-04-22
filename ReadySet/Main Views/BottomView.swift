@@ -11,7 +11,6 @@ struct BottomView: View {
     @ObservedObject var exerciseViewModel: ExerciseViewModel
     @ObservedObject var waterViewModel: WaterViewModel
     @ObservedObject var energyViewModel: EnergyViewModel
-    
     @Binding var selectedTab: any ITabItem
     
     var body: some View {
@@ -43,21 +42,6 @@ struct BottomView: View {
             }
             .geometryGroup()
             .transition(.opacity)
-            
-            if (selectedTab.type == .exercise && !exerciseViewModel.expandedSets && !exerciseViewModel.editingSets) {
-                VStack {
-                    Spacer()
-                    
-                    LinearGradient(colors: [.green.opacity(0.5), .clear, .clear], startPoint: .bottom, endPoint: .top)
-                        .frame(height: 70)
-                        .mask {
-                            UnevenRoundedRectangle(cornerRadii: RectangleCornerRadii(bottomLeading: 30, bottomTrailing: 30))
-                                .frame(height: 70)
-                        }
-                }
-                .transition(.opacity)
-                .zIndex(4)
-            }
         }
     }
 }

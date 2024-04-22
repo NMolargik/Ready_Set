@@ -6,9 +6,12 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct GoalSetView: View {
     @AppStorage("appState") var appState: String = "goalSetting"
+    @Query(sort: [SortDescriptor(\Exercise.orderIndex)]) var exercises: [Exercise]
+    
     @Binding var onboardingProgress: Float
     @Binding var onboardingGradient: LinearGradient
     
@@ -25,12 +28,13 @@ struct GoalSetView: View {
                 if showText {
                     Spacer()
                     
-                    Text("Tap days to enter Sets, or skip until later")
+                    Text("Swipe between days to enter exercises and their sets, or skip until later")
                         .multilineTextAlignment(.center)
                         .font(.body)
                         .foregroundStyle(.fontGray)
-                        .padding(.horizontal)
+                        .padding(7)
                         .transition(.push(from: .top))
+                    
                 }
                 
                 ZStack {
@@ -59,14 +63,13 @@ struct GoalSetView: View {
                         }
                         TabView(selection: $selectedDay) {
                             ForEach(weekDays.indices, id: \.self) { index in
-                                ExercisePlanDayView(selectedDay: $selectedDay.wrappedValue, isEditing: .constant(true), isExpanded: .constant(false))
+                                @State var exercises = exercises.filter({$0.weekday == index})
+                                
+                                ExercisePlanDayView(exercises: $exercises, isEditing: .constant(true), isExpanded: .constant(false), selectedDay: selectedDay)
                                     .tag(index)
                             }
                         }
                         .tabViewStyle(.page(indexDisplayMode: .never))
-                        .onAppear {
-                            UIScrollView.appearance().isScrollEnabled = false
-                        }
                         .padding(.horizontal)
                         .mask {
                             Rectangle()
@@ -91,15 +94,16 @@ struct GoalSetView: View {
                         .font(.body)
                         .bold()
                         .multilineTextAlignment(.center)
-                        .foregroundStyle(.blueEnd)
-                        .padding(5)
+                        .foregroundStyle(.base)
+                        .padding(8)
                         .id("InstructionText")
                         .zIndex(1)
                 })
                 .background {
                     Rectangle()
                         .cornerRadius(5)
-                        .foregroundStyle(.baseAccent)
+                        .foregroundStyle(.blue)
+                        .shadow(radius: 5)
                 }
                 .padding(.vertical, 30)
                 .buttonStyle(.plain)

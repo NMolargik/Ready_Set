@@ -13,7 +13,8 @@ struct ExerciseEntryHeaderView: View {
     @State var exercise: Exercise
     @Binding var isEditing: Bool
     @Binding var selectedExercise: Exercise
-    @Binding var selectedSet: ExerciseSet
+    @Binding var selectedSet: String
+    @FocusState private var focusTextField
     var keyboardShown: FocusState<Bool>.Binding
     
     var body: some View {
@@ -43,7 +44,10 @@ struct ExerciseEntryHeaderView: View {
                     }
                     .frame(maxWidth: 200, alignment: .leading)
                     .scaleEffect(0.9)
-                    .focused(keyboardShown)
+                    .focused($focusTextField)
+                    .onAppear {
+                        focusTextField = true
+                    }
                 
             } else {
                 Text(exercise.name)
@@ -59,10 +63,11 @@ struct ExerciseEntryHeaderView: View {
                     UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                     withAnimation {
                         if (selectedExercise.id == exercise.id) {
-                            exercise.name = selectedExercise.name
+                            exercise.name = selectedExercise.name == "" ? "Unnamed Exercise" : selectedExercise.name
                             selectedExercise = Exercise()
                         } else {
                             selectedExercise = exercise
+                            exercise.name = ""
                         }
                     }
                 }, label: {
@@ -85,20 +90,21 @@ struct ExerciseEntryHeaderView: View {
                         let newSet = ExerciseSet(goalType: .weight, repetitionsToDo: 5, durationToDo: 10, weightToLift: 100)
                         exercise.exerciseSets.append(newSet)
                         modelContext.insert(newSet)
-                        selectedSet = newSet
+                        selectedSet = newSet.id.uuidString
                     }
                 }, label: {
                     HStack (spacing: 0) {
-                        Image(systemName: "plus.circle.fill")
-                            .foregroundStyle(LinearGradient(colors: [.greenStart, .greenEnd], startPoint: .leading, endPoint: .trailing))
-                            .frame(height: 15)
-                        
                         Text("Set")
                             .bold()
                             .foregroundStyle(.baseInvert)
-                            .padding(.horizontal, 2)
+                            
                             .padding(.vertical, 2)
                             .shadow(radius: 5)
+                        
+                        Image(systemName: "plus.circle.fill")
+                            .foregroundStyle(LinearGradient(colors: [.greenStart, .greenEnd], startPoint: .leading, endPoint: .trailing))
+                            .frame(height: 15)
+                            .padding(.horizontal, 2)
                     }
                 })
                 .buttonStyle(.plain)

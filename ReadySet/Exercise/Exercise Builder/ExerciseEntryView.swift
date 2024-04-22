@@ -6,13 +6,14 @@
 //
 
 import SwiftUI
+import Flow
 
 struct ExerciseEntryView: View {
     @Environment(\.modelContext) var modelContext
     @State var exercise: Exercise
     @Binding var isEditing: Bool
     @Binding var selectedExercise: Exercise
-    @Binding var selectedSet: ExerciseSet
+    @Binding var selectedSet: String
     
     var keyboardShown: FocusState<Bool>.Binding
     
@@ -35,7 +36,7 @@ struct ExerciseEntryView: View {
                 }
                 
                 if (isEditing) {
-                    ForEach(exercise.exerciseSets.sorted(by: { $0.timestamp < $1.timestamp })) { set in
+                    ForEach(exercise.exerciseSets.sorted(by: { $0.timestamp < $1.timestamp }), id: \.id) { set in
                         HStack {
                             ExerciseSetEditor(set: set)
                                 .padding(.bottom, 4)
@@ -56,13 +57,26 @@ struct ExerciseEntryView: View {
                         }
                     }
                 } else {
-                    ExerciseSetGridView(exercise: exercise, isEditing: $isEditing)
+                    HStack {
+                        HFlow(itemSpacing: 10, rowSpacing: 8) {
+                            ForEach(exercise.exerciseSets, id: \.self) { set in
+                                if (set.id.uuidString == selectedSet) {
+                                    ExerciseSetRecordingView(set: set, selectedSet: $selectedSet)
+                                        .id(selectedSet)
+                                    
+                                } else {
+                                    ExerciseSetCapsuleView(set: set, selectedSet: $selectedSet)
+                                        .id(set.id)
+                                }
+                            }
+                        }
+                    }
                 }
             }
             .padding(.bottom, 5)
             .onChange(of: isEditing) {
                 if (!isEditing) {
-                    selectedSet = ExerciseSet()
+                    selectedSet = ""
                 }
             }
         }

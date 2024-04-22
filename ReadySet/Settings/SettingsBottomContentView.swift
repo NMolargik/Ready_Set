@@ -11,6 +11,8 @@ struct SettingsBottomContentView: View {
     @AppStorage("useMetric") var useMetric: Bool = false
     @AppStorage("decreaseHaptics") var decreaseHaptics: Bool = false
     @AppStorage("disableWave") var disableWave: Bool = false
+    
+    let vectorURL = "https://www.vecteezy.com/free-vector/iphone-15"
 
     var body: some View {
         VStack {
@@ -54,14 +56,28 @@ struct SettingsBottomContentView: View {
                     Text("2024, Nicholas Molargik")
                         .font(.caption)
                     
-<<<<<<< HEAD
-                    Text("Contributions from nythepegasus and Dante Maslin\n v1.0.0")
-=======
-                    Text("Contributions from nythepegasus and Dante Maslin\nv\(Bundle.main.bundleVersion)")
->>>>>>> f9285fc60e79dd742b3d8a060b8eca495c063b6e
+                    Text("Contributions from nythepegasus and Dante Maslin")
                         .font(.caption)
                         .lineLimit(3)
                         .multilineTextAlignment(.center)
+                    
+                    Button(action: {
+                        UIApplication.shared.open(URL(string: vectorURL)!)
+                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                    }, label: {
+                        Text("iPhone 15 Vectors by Vecteezy")
+                            .font(.caption)
+                            .lineLimit(3)
+                            .multilineTextAlignment(.center)
+                            .foregroundStyle(.blue)
+                    })
+                    .buttonStyle(.plain)
+                    
+                    Text("Version \(Bundle.main.bundleVersion)")
+                        .font(.caption)
+                        .lineLimit(3)
+                        .multilineTextAlignment(.center)
+                    
                     
                     ShareLink(
                         item: URL(string: "https://apps.apple.com/app/id6484503374")!,

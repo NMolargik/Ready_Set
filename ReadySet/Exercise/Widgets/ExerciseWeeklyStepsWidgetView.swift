@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ExerciseWeeklyStepsWidgetView: View {
-    @Binding var weeklySteps: Int
+    @ObservedObject var exerciseViewModel: ExerciseViewModel
     
     var body: some View {
         ZStack {
@@ -17,7 +17,7 @@ struct ExerciseWeeklyStepsWidgetView: View {
                 .foregroundStyle(.thinMaterial)
                 .shadow(radius: 1)
         
-            Text("Weekly Steps: \(weeklySteps)")
+            Text("Weekly Steps: \(exerciseViewModel.stepCountWeek.values.reduce(0, +))")
                 .font(.caption)
                 .foregroundStyle(.fontGray)
         }
@@ -26,5 +26,5 @@ struct ExerciseWeeklyStepsWidgetView: View {
 }
 
 #Preview {
-    ExerciseWeeklyStepsWidgetView(weeklySteps: .constant(5000))
+    ExerciseWeeklyStepsWidgetView(exerciseViewModel: ExerciseViewModel())
 }

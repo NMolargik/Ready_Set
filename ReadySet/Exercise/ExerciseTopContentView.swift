@@ -60,7 +60,7 @@ struct ExerciseTopContentView: View {
             VStack(spacing: 10) {
                 ExerciseStepsWidgetView(exerciseViewModel: exerciseViewModel)
                 
-                ExerciseWeeklyStepsWidgetView(weeklySteps: .constant(exerciseViewModel.stepCountWeek.values.reduce(0, +)))
+                ExerciseWeeklyStepsWidgetView(exerciseViewModel: exerciseViewModel)
                 
             }
         }

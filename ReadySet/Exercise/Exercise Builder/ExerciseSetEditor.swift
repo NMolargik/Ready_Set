@@ -8,11 +8,7 @@
 import SwiftUI
 
 struct ExerciseSetEditor: View {
-    @Bindable var exerciseSet: ExerciseSet
-    
-    init(set: ExerciseSet) {
-        self.exerciseSet = set
-    }
+    @Binding var exerciseSet: ExerciseSet
 
     var body: some View {
         HStack {
@@ -88,5 +84,5 @@ struct ExerciseSetEditor: View {
 }
 
 #Preview {
-    ExerciseSetEditor(set: ExerciseSet())
+    ExerciseSetEditor(exerciseSet: .constant(ExerciseSet()))
 }

@@ -36,9 +36,9 @@ struct ExerciseEntryView: View {
                 }
                 
                 if (isEditing) {
-                    ForEach(exercise.exerciseSets.sorted(by: { $0.timestamp < $1.timestamp }), id: \.id) { set in
+                    ForEach($exercise.exerciseSets.sorted(by: { $0.wrappedValue.timestamp < $1.wrappedValue.timestamp }), id: \.id) { $set in
                         HStack {
-                            ExerciseSetEditor(set: set)
+                            ExerciseSetEditor(exerciseSet: $set)
                                 .padding(.bottom, 4)
                             
                             Button(action: {
@@ -59,8 +59,8 @@ struct ExerciseEntryView: View {
                 } else {
                     HStack {
                         HFlow(itemSpacing: 10, rowSpacing: 8) {
-                            ForEach($exercise.exerciseSets, id: \.self) { $set in
-                                if (set.id.uuidString == selectedSet) {
+                            ForEach($exercise.exerciseSets.sorted(by: { $0.wrappedValue.timestamp < $1.wrappedValue.timestamp }), id: \.id) { $set in
+                                if ($set.id.uuidString == selectedSet) {
                                     HStack {
                                         VStack(spacing: 0) {
                                             if set.goalType == .duration {

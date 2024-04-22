@@ -27,7 +27,7 @@ struct BottomView: View {
                 Group {
                     switch (selectedTab.type) {
                     case .exercise:
-                        ExerciseBottomContentView(exerciseViewModel: _exerciseViewModel, selectedDay: $selectedDay)
+                        ExerciseBottomContentView(exerciseViewModel: exerciseViewModel, selectedDay: $selectedDay)
                     case .water:
                         WaterBottomContentView(waterViewModel: waterViewModel)
                     case .Energy:

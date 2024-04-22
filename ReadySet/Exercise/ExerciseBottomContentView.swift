@@ -17,16 +17,6 @@ struct ExerciseBottomContentView: View {
     
     private let weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     
-    init(exerciseViewModel: ObservedObject<ExerciseViewModel>, selectedDay: Binding<Int>) {
-        _selectedDay = selectedDay
-        _exercises = Query(filter: #Predicate {
-            return $0.weekday == selectedDay.wrappedValue
-        }, sort: \.orderIndex)
-        
-        _exerciseViewModel = exerciseViewModel
-    }
-    
-    
     var body: some View {
         ZStack {
             VStack {
@@ -63,7 +53,6 @@ struct ExerciseBottomContentView: View {
                 TabView(selection: $selectedDay) {
                     ForEach(weekDays.indices, id: \.self) { index in
                         ExercisePlanDayView(exercises: exercises.filter({ $0.weekday == selectedDay }), isEditing: $exerciseViewModel.editingSets, isExpanded: $exerciseViewModel.expandedSets, selectedDay: selectedDay)
-//                        ExercisePlanDayView(selectedDay: $selectedDay.wrappedValue, isEditing: $exerciseViewModel.editingSets, isExpanded: $exerciseViewModel.expandedSets)
                             .tag(index)
                     }
                 }

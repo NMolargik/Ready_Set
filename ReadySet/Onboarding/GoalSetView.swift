@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct GoalSetView: View {
     @AppStorage("appState") var appState: String = "goalSetting"
     @Binding var onboardingProgress: Float
     @Binding var onboardingGradient: LinearGradient
-    
+    @Query(sort: [SortDescriptor(\Exercise.orderIndex)]) var exercises: [Exercise]
     @State private var showText = false
     @State private var showMoreText = false
     @State private var selectedDay = 1
@@ -59,7 +60,7 @@ struct GoalSetView: View {
                         }
                         TabView(selection: $selectedDay) {
                             ForEach(weekDays.indices, id: \.self) { index in
-                                ExercisePlanDayView(selectedDay: $selectedDay.wrappedValue, isEditing: .constant(true), isExpanded: .constant(false))
+                                ExercisePlanDayView(exercises: exercises.filter({ $0.weekday == selectedDay }), isEditing: .constant(true), isExpanded: .constant(false), selectedDay: selectedDay)
                                     .tag(index)
                             }
                         }

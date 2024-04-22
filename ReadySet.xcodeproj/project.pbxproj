@@ -42,7 +42,6 @@
 		EB3AB36C2BC77C3E008B6F22 /* ExerciseWeeklyStepsWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB36B2BC77C3E008B6F22 /* ExerciseWeeklyStepsWidgetView.swift */; };
 		EB4742BA2BD324C5009A23E4 /* ExerciseEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4742B92BD324C5009A23E4 /* ExerciseEntryView.swift */; };
 		EB4742BC2BD324DF009A23E4 /* ExerciseEntryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4742BB2BD324DF009A23E4 /* ExerciseEntryHeaderView.swift */; };
-		EB4742BE2BD32502009A23E4 /* ExerciseSetRecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4742BD2BD32502009A23E4 /* ExerciseSetRecordingView.swift */; };
 		EB4742C02BD3251C009A23E4 /* CustomStepperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4742BF2BD3251C009A23E4 /* CustomStepperView.swift */; };
 		EB4742C42BD32576009A23E4 /* ExerciseSetCapsuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4742C32BD32576009A23E4 /* ExerciseSetCapsuleView.swift */; };
 		EB4D9C4E2BCC73E90071BA99 /* ExerciseBottomContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C4D2BCC73E90071BA99 /* ExerciseBottomContentView.swift */; };
@@ -114,7 +113,6 @@
 		EB3AB36D2BC7957D008B6F22 /* ReadySet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ReadySet.entitlements; sourceTree = "<group>"; };
 		EB4742B92BD324C5009A23E4 /* ExerciseEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseEntryView.swift; sourceTree = "<group>"; };
 		EB4742BB2BD324DF009A23E4 /* ExerciseEntryHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseEntryHeaderView.swift; sourceTree = "<group>"; };
-		EB4742BD2BD32502009A23E4 /* ExerciseSetRecordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSetRecordingView.swift; sourceTree = "<group>"; };
 		EB4742BF2BD3251C009A23E4 /* CustomStepperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomStepperView.swift; sourceTree = "<group>"; };
 		EB4742C32BD32576009A23E4 /* ExerciseSetCapsuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSetCapsuleView.swift; sourceTree = "<group>"; };
 		EB4D9C4D2BCC73E90071BA99 /* ExerciseBottomContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseBottomContentView.swift; sourceTree = "<group>"; };
@@ -289,7 +287,6 @@
 				EB4742B92BD324C5009A23E4 /* ExerciseEntryView.swift */,
 				EB4742BB2BD324DF009A23E4 /* ExerciseEntryHeaderView.swift */,
 				EB4742C32BD32576009A23E4 /* ExerciseSetCapsuleView.swift */,
-				EB4742BD2BD32502009A23E4 /* ExerciseSetRecordingView.swift */,
 			);
 			path = "Exercise Builder";
 			sourceTree = "<group>";
@@ -509,7 +506,6 @@
 				EB3AB35A2BC76F8C008B6F22 /* BottomView.swift in Sources */,
 				0E1A3E902BD4CF0C005CD025 /* Date+Extension.swift in Sources */,
 				EB7110FA2BC8574A0078F796 /* CustomTextFields.swift in Sources */,
-				EB4742BE2BD32502009A23E4 /* ExerciseSetRecordingView.swift in Sources */,
 				EB3AB3532BC72A3A008B6F22 /* WaterTopContentView.swift in Sources */,
 				0E940A6B2BC6FE0200144477 /* ReadySetApp.swift in Sources */,
 				EB3AB36A2BC77B19008B6F22 /* ExerciseHealthWidgetView.swift in Sources */,

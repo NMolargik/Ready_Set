@@ -16,6 +16,7 @@ struct ExerciseSetCapsuleView: View {
             Button(action: {
                 UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                 selectedSet = set.id.uuidString
+                print(set.timestamp.description)
             }, label: {
                 HStack {
                     if (set.goalType == .duration) {

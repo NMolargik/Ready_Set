@@ -12,8 +12,8 @@ struct ExercisePlanDayView: View {
     @AppStorage("useMetric") var useMetric: Bool = false
     @Environment(\.modelContext) var modelContext
     @FocusState private var keyboardShown: Bool
-    
-    @Query(sort: [SortDescriptor(\Exercise.orderIndex)]) var exercises: [Exercise]
+    @State var exercises: [Exercise]
+
 
     @Binding var isEditing: Bool
     @Binding var isExpanded: Bool
@@ -26,17 +26,6 @@ struct ExercisePlanDayView: View {
         GridItem(.flexible(minimum: 50, maximum: 100))
     ]
 
-    
-    init(selectedDay: Int, isEditing: Binding<Bool>, isExpanded: Binding<Bool>) {
-        self.selectedDay = selectedDay
-        _exercises = Query(filter: #Predicate {
-            return $0.weekday == selectedDay
-        }, sort: [SortDescriptor(\Exercise.orderIndex)])
-        
-        _isEditing = isEditing
-        _isExpanded = isExpanded
-    }
-    
     let weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     
     var body: some View {

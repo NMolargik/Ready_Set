@@ -11,6 +11,7 @@ struct BottomView: View {
     @ObservedObject var exerciseViewModel: ExerciseViewModel
     @ObservedObject var waterViewModel: WaterViewModel
     @ObservedObject var energyViewModel: EnergyViewModel
+    @State private var selectedDay: Int = 1
     
     @Binding var selectedTab: any ITabItem
     
@@ -26,7 +27,7 @@ struct BottomView: View {
                 Group {
                     switch (selectedTab.type) {
                     case .exercise:
-                        ExerciseBottomContentView(exerciseViewModel: exerciseViewModel)
+                        ExerciseBottomContentView(exerciseViewModel: _exerciseViewModel, selectedDay: $selectedDay)
                     case .water:
                         WaterBottomContentView(waterViewModel: waterViewModel)
                     case .Energy:
@@ -42,6 +43,12 @@ struct BottomView: View {
                 }
             }
             .geometryGroup()
+            .onAppear {
+                withAnimation {
+                    exerciseViewModel.getCurrentWeekday()
+                    selectedDay = exerciseViewModel.currentDay - 1
+                }
+            }
             .transition(.opacity)
             
             if (selectedTab.type == .exercise && !exerciseViewModel.expandedSets && !exerciseViewModel.editingSets) {

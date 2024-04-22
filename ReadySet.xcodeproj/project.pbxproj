@@ -19,6 +19,7 @@
 		0EBC76F02BD1CE9A00880FFB /* ExerciseSetEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBC76EF2BD1CE9A00880FFB /* ExerciseSetEditor.swift */; };
 		EB1FDC172BD6B99300253855 /* Flow in Frameworks */ = {isa = PBXBuildFile; productRef = EB1FDC162BD6B99300253855 /* Flow */; };
 		EB1FDC192BD6B99300253855 /* Renderer in Frameworks */ = {isa = PBXBuildFile; productRef = EB1FDC182BD6B99300253855 /* Renderer */; };
+		EB1FDC1B2BD6FCBE00253855 /* ExerciseSetRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1FDC1A2BD6FCBE00253855 /* ExerciseSetRecordView.swift */; };
 		EB3AB33C2BC70CF5008B6F22 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB33A2BC70CF5008B6F22 /* HeaderView.swift */; };
 		EB3AB33D2BC70CF5008B6F22 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB33B2BC70CF5008B6F22 /* HomeView.swift */; };
 		EB3AB33F2BC710D1008B6F22 /* NavColumnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB33E2BC710D1008B6F22 /* NavColumnView.swift */; };
@@ -89,6 +90,7 @@
 		0E940A8C2BC6FE0400144477 /* ReadySetUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadySetUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		0E9861692BCE971F00488D9E /* WaterChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterChartView.swift; sourceTree = "<group>"; };
 		0EBC76EF2BD1CE9A00880FFB /* ExerciseSetEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSetEditor.swift; sourceTree = "<group>"; };
+		EB1FDC1A2BD6FCBE00253855 /* ExerciseSetRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSetRecordView.swift; sourceTree = "<group>"; };
 		EB3AB33A2BC70CF5008B6F22 /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		EB3AB33B2BC70CF5008B6F22 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		EB3AB33E2BC710D1008B6F22 /* NavColumnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavColumnView.swift; sourceTree = "<group>"; };
@@ -287,6 +289,7 @@
 				EB4742B92BD324C5009A23E4 /* ExerciseEntryView.swift */,
 				EB4742BB2BD324DF009A23E4 /* ExerciseEntryHeaderView.swift */,
 				EB4742C32BD32576009A23E4 /* ExerciseSetCapsuleView.swift */,
+				EB1FDC1A2BD6FCBE00253855 /* ExerciseSetRecordView.swift */,
 			);
 			path = "Exercise Builder";
 			sourceTree = "<group>";
@@ -493,6 +496,7 @@
 				EB4D9C7D2BCF074E0071BA99 /* VerticalToggleStyle.swift in Sources */,
 				EB3AB3622BC76FED008B6F22 /* EnergyBottomContentView.swift in Sources */,
 				EB4D9C672BCDBE890071BA99 /* GoalSetView.swift in Sources */,
+				EB1FDC1B2BD6FCBE00253855 /* ExerciseSetRecordView.swift in Sources */,
 				0E7DCA5E2BC6FF7400B9403C /* ExerciseSet.swift in Sources */,
 				EB4D9C772BCEE0F60071BA99 /* EnergyChartView.swift in Sources */,
 				EB3AB34C2BC71214008B6F22 /* SettingsTabITem.swift in Sources */,

@@ -20,6 +20,20 @@
 		EB1FDC172BD6B99300253855 /* Flow in Frameworks */ = {isa = PBXBuildFile; productRef = EB1FDC162BD6B99300253855 /* Flow */; };
 		EB1FDC192BD6B99300253855 /* Renderer in Frameworks */ = {isa = PBXBuildFile; productRef = EB1FDC182BD6B99300253855 /* Renderer */; };
 		EB1FDC1B2BD6FCBE00253855 /* ExerciseSetRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1FDC1A2BD6FCBE00253855 /* ExerciseSetRecordView.swift */; };
+		EB1FDC232BD7053000253855 /* ReadySetWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1FDC222BD7053000253855 /* ReadySetWatchApp.swift */; };
+		EB1FDC252BD7053000253855 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1FDC242BD7053000253855 /* ContentView.swift */; };
+		EB1FDC272BD7053200253855 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB1FDC262BD7053200253855 /* Assets.xcassets */; };
+		EB1FDC2A2BD7053200253855 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB1FDC292BD7053200253855 /* Preview Assets.xcassets */; };
+		EB1FDC2D2BD7053200253855 /* ReadySetWatch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = EB1FDC202BD7053000253855 /* ReadySetWatch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		EB1FDC322BD7058F00253855 /* GoalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBEEC7A62BD184160058BDFD /* GoalType.swift */; };
+		EB1FDC332BD7058F00253855 /* ExerciseSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7DCA5D2BC6FF7400B9403C /* ExerciseSet.swift */; };
+		EB1FDC342BD7058F00253855 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBEEC77A2BD0251F0058BDFD /* Exercise.swift */; };
+		EB1FDC352BD7059A00253855 /* ITabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3432BC711A8008B6F22 /* ITabItem.swift */; };
+		EB1FDC362BD705FB00253855 /* TabItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3402BC71105008B6F22 /* TabItemType.swift */; };
+		EB1FDC372BD7060100253855 /* EnergyTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3492BC7120C008B6F22 /* EnergyTabItem.swift */; };
+		EB1FDC382BD7060100253855 /* ExerciseTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3452BC711FA008B6F22 /* ExerciseTabItem.swift */; };
+		EB1FDC392BD7060100253855 /* WaterTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3472BC71204008B6F22 /* WaterTabItem.swift */; };
+		EB1FDC3A2BD7060800253855 /* SettingsTabITem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB34B2BC71214008B6F22 /* SettingsTabITem.swift */; };
 		EB3AB33C2BC70CF5008B6F22 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB33A2BC70CF5008B6F22 /* HeaderView.swift */; };
 		EB3AB33D2BC70CF5008B6F22 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB33B2BC70CF5008B6F22 /* HomeView.swift */; };
 		EB3AB33F2BC710D1008B6F22 /* NavColumnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB33E2BC710D1008B6F22 /* NavColumnView.swift */; };
@@ -74,6 +88,30 @@
 		EBEEC7A72BD184160058BDFD /* GoalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBEEC7A62BD184160058BDFD /* GoalType.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		EB1FDC2B2BD7053200253855 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0E940A5F2BC6FE0200144477 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EB1FDC1F2BD7053000253855;
+			remoteInfo = "ReadySetWatch Watch App";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		EB1FDC312BD7053200253855 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				EB1FDC2D2BD7053200253855 /* ReadySetWatch Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		0E1A3E8F2BD4CF0C005CD025 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		0E1A3E912BD4DA45005CD025 /* HKHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKHelper.swift; sourceTree = "<group>"; };
@@ -91,6 +129,11 @@
 		0E9861692BCE971F00488D9E /* WaterChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterChartView.swift; sourceTree = "<group>"; };
 		0EBC76EF2BD1CE9A00880FFB /* ExerciseSetEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSetEditor.swift; sourceTree = "<group>"; };
 		EB1FDC1A2BD6FCBE00253855 /* ExerciseSetRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSetRecordView.swift; sourceTree = "<group>"; };
+		EB1FDC202BD7053000253855 /* ReadySetWatch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ReadySetWatch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB1FDC222BD7053000253855 /* ReadySetWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadySetWatchApp.swift; sourceTree = "<group>"; };
+		EB1FDC242BD7053000253855 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		EB1FDC262BD7053200253855 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EB1FDC292BD7053200253855 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		EB3AB33A2BC70CF5008B6F22 /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		EB3AB33B2BC70CF5008B6F22 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		EB3AB33E2BC710D1008B6F22 /* NavColumnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavColumnView.swift; sourceTree = "<group>"; };
@@ -158,12 +201,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EB1FDC1D2BD7053000253855 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		0E1A3E8E2BD4CEFE005CD025 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				EB4D9C6E2BCDE8310071BA99 /* HealthBaseController.swift */,
 				0E1A3E912BD4DA45005CD025 /* HKHelper.swift */,
 				0E1A3E8F2BD4CF0C005CD025 /* Date+Extension.swift */,
 			);
@@ -196,6 +247,7 @@
 				0E940A692BC6FE0200144477 /* ReadySet */,
 				0E940A7F2BC6FE0400144477 /* ReadySetTests */,
 				0E940A892BC6FE0400144477 /* ReadySetUITests */,
+				EB1FDC212BD7053000253855 /* ReadySetWatch Watch App */,
 				0E940A682BC6FE0200144477 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -204,6 +256,7 @@
 			isa = PBXGroup;
 			children = (
 				0E940A672BC6FE0200144477 /* ReadySet.app */,
+				EB1FDC202BD7053000253855 /* ReadySetWatch Watch App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -255,6 +308,25 @@
 				0E940A8C2BC6FE0400144477 /* ReadySetUITestsLaunchTests.swift */,
 			);
 			path = ReadySetUITests;
+			sourceTree = "<group>";
+		};
+		EB1FDC212BD7053000253855 /* ReadySetWatch Watch App */ = {
+			isa = PBXGroup;
+			children = (
+				EB1FDC222BD7053000253855 /* ReadySetWatchApp.swift */,
+				EB1FDC242BD7053000253855 /* ContentView.swift */,
+				EB1FDC262BD7053200253855 /* Assets.xcassets */,
+				EB1FDC282BD7053200253855 /* Preview Content */,
+			);
+			path = "ReadySetWatch Watch App";
+			sourceTree = "<group>";
+		};
+		EB1FDC282BD7053200253855 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				EB1FDC292BD7053200253855 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		EB3AB3422BC71191008B6F22 /* TabItems */ = {
@@ -337,7 +409,6 @@
 				EB4D9C782BCEF2390071BA99 /* ChartView.swift */,
 				EB4D9C722BCDFE540071BA99 /* SliderView.swift */,
 				EB4D9C6A2BCDCB1B0071BA99 /* BouncingChevronView.swift */,
-				EB4D9C6E2BCDE8310071BA99 /* HealthBaseController.swift */,
 				EB4D9C702BCDF7970071BA99 /* RoundedTriangleShape.swift */,
 				EB4D9C742BCE00020071BA99 /* FitnessAlertButtonsView.swift */,
 			);
@@ -400,10 +471,12 @@
 				0E940A632BC6FE0200144477 /* Sources */,
 				0E940A642BC6FE0200144477 /* Frameworks */,
 				0E940A652BC6FE0200144477 /* Resources */,
+				EB1FDC312BD7053200253855 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				EB1FDC2C2BD7053200253855 /* PBXTargetDependency */,
 			);
 			name = ReadySet;
 			packageProductDependencies = (
@@ -412,6 +485,23 @@
 			);
 			productName = ReadySet;
 			productReference = 0E940A672BC6FE0200144477 /* ReadySet.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EB1FDC1F2BD7053000253855 /* ReadySetWatch Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EB1FDC2E2BD7053200253855 /* Build configuration list for PBXNativeTarget "ReadySetWatch Watch App" */;
+			buildPhases = (
+				EB1FDC1C2BD7053000253855 /* Sources */,
+				EB1FDC1D2BD7053000253855 /* Frameworks */,
+				EB1FDC1E2BD7053000253855 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "ReadySetWatch Watch App";
+			productName = "ReadySetWatch Watch App";
+			productReference = EB1FDC202BD7053000253855 /* ReadySetWatch Watch App.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -425,6 +515,9 @@
 				LastUpgradeCheck = 1530;
 				TargetAttributes = {
 					0E940A662BC6FE0200144477 = {
+						CreatedOnToolsVersion = 15.3;
+					};
+					EB1FDC1F2BD7053000253855 = {
 						CreatedOnToolsVersion = 15.3;
 					};
 				};
@@ -446,6 +539,7 @@
 			projectRoot = "";
 			targets = (
 				0E940A662BC6FE0200144477 /* ReadySet */,
+				EB1FDC1F2BD7053000253855 /* ReadySetWatch Watch App */,
 			);
 		};
 /* End PBXProject section */
@@ -458,6 +552,15 @@
 				EB4D9C7F2BCF2B6D0071BA99 /* Launch Screen.storyboard in Resources */,
 				0E940A722BC6FE0400144477 /* Preview Assets.xcassets in Resources */,
 				0E940A6F2BC6FE0400144477 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB1FDC1E2BD7053000253855 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB1FDC2A2BD7053200253855 /* Preview Assets.xcassets in Resources */,
+				EB1FDC272BD7053200253855 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -531,7 +634,33 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EB1FDC1C2BD7053000253855 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB1FDC252BD7053000253855 /* ContentView.swift in Sources */,
+				EB1FDC322BD7058F00253855 /* GoalType.swift in Sources */,
+				EB1FDC372BD7060100253855 /* EnergyTabItem.swift in Sources */,
+				EB1FDC382BD7060100253855 /* ExerciseTabItem.swift in Sources */,
+				EB1FDC392BD7060100253855 /* WaterTabItem.swift in Sources */,
+				EB1FDC352BD7059A00253855 /* ITabItem.swift in Sources */,
+				EB1FDC3A2BD7060800253855 /* SettingsTabITem.swift in Sources */,
+				EB1FDC362BD705FB00253855 /* TabItemType.swift in Sources */,
+				EB1FDC332BD7058F00253855 /* ExerciseSet.swift in Sources */,
+				EB1FDC342BD7058F00253855 /* Exercise.swift in Sources */,
+				EB1FDC232BD7053000253855 /* ReadySetWatchApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EB1FDC2C2BD7053200253855 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EB1FDC1F2BD7053000253855 /* ReadySetWatch Watch App */;
+			targetProxy = EB1FDC2B2BD7053200253855 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		0E940A8E2BC6FE0400144477 /* Debug */ = {
@@ -658,6 +787,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0E4A5E252BCC80E0003678C2 /* Build.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ReadySet/ReadySet.entitlements;
@@ -699,6 +829,7 @@
 		0E940A922BC6FE0400144477 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ReadySet/ReadySet.entitlements;
@@ -737,6 +868,66 @@
 			};
 			name = Release;
 		};
+		EB1FDC2F2BD7053200253855 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"ReadySetWatch Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = R8Q8DM58C6;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = ReadySetWatch;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = nickmolargik.ReadySet;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nickmolargik.ReadySet.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.4;
+			};
+			name = Debug;
+		};
+		EB1FDC302BD7053200253855 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"ReadySetWatch Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = ReadySetWatch;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = nickmolargik.ReadySet;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nickmolargik.ReadySet.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.4;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -754,6 +945,15 @@
 			buildConfigurations = (
 				0E940A912BC6FE0400144477 /* Debug */,
 				0E940A922BC6FE0400144477 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EB1FDC2E2BD7053200253855 /* Build configuration list for PBXNativeTarget "ReadySetWatch Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB1FDC2F2BD7053200253855 /* Debug */,
+				EB1FDC302BD7053200253855 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -25,7 +25,6 @@ struct ExercisePlanDayView: View {
     let columns = [
         GridItem(.flexible(minimum: 50, maximum: 100))
     ]
-
     
     init(selectedDay: Int, isEditing: Binding<Bool>, isExpanded: Binding<Bool>) {
         self.selectedDay = selectedDay
@@ -41,7 +40,7 @@ struct ExercisePlanDayView: View {
     
     var body: some View {
         ScrollView {
-            VStack {
+            LazyVStack {
                 if (exercises.count == 0 && !isEditing) {
                     Spacer()
                     
@@ -58,6 +57,7 @@ struct ExercisePlanDayView: View {
                 ForEach(exercises, id: \.self) { exercise in
                     ExerciseEntryView(exercise: exercise, isEditing: $isEditing, selectedExercise: $selectedExercise, selectedSet: $selectedSet, keyboardShown: $keyboardShown)
                         .animation(.easeInOut, value: exercises)
+                        .id(exercise.id)
                 }
                 
                 if (isEditing) {

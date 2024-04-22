@@ -54,7 +54,11 @@ struct SettingsBottomContentView: View {
                     Text("2024, Nicholas Molargik")
                         .font(.caption)
                     
+<<<<<<< HEAD
                     Text("Contributions from nythepegasus and Dante Maslin\n v1.0.0")
+=======
+                    Text("Contributions from nythepegasus and Dante Maslin\nv\(Bundle.main.bundleVersion)")
+>>>>>>> f9285fc60e79dd742b3d8a060b8eca495c063b6e
                         .font(.caption)
                         .lineLimit(3)
                         .multilineTextAlignment(.center)

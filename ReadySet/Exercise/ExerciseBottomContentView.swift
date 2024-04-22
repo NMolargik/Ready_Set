@@ -10,10 +10,10 @@ import SwiftData
 
 struct ExerciseBottomContentView: View {
     @Environment(\.modelContext) var modelContext
-    @Query(sort: [SortDescriptor(\Exercise.orderIndex)]) var exercises: [Exercise]
+    
     @ObservedObject var exerciseViewModel: ExerciseViewModel
+    @State private var selectedDay: Int = 1
     @State private var sortOrder = SortDescriptor(\Exercise.orderIndex)
-    @Binding var selectedDay: Int
     
     private let weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     
@@ -52,7 +52,7 @@ struct ExerciseBottomContentView: View {
                 
                 TabView(selection: $selectedDay) {
                     ForEach(weekDays.indices, id: \.self) { index in
-                        ExercisePlanDayView(exercises: exercises.filter({ $0.weekday == selectedDay }), isEditing: $exerciseViewModel.editingSets, isExpanded: $exerciseViewModel.expandedSets, selectedDay: selectedDay)
+                        ExercisePlanDayView(selectedDay: $selectedDay.wrappedValue, isEditing: $exerciseViewModel.editingSets, isExpanded: $exerciseViewModel.expandedSets)
                             .tag(index)
                     }
                 }
@@ -63,6 +63,12 @@ struct ExerciseBottomContentView: View {
             }
             
             .padding(.horizontal)
+            .onAppear {
+                withAnimation {
+                    exerciseViewModel.getCurrentWeekday()
+                    selectedDay = exerciseViewModel.currentDay - 1
+                }
+            }
         }
         .animation(.easeIn, value: exerciseViewModel.expandedSets)
     }
@@ -102,7 +108,7 @@ struct ExerciseBottomContentView: View {
         .bold()
     }
 }
-//
-//#Preview {
-//    ExerciseBottomContentView(selectedDay: 1, exerciseViewModel: ExerciseViewModel())
-//}
+
+#Preview {
+    ExerciseBottomContentView(exerciseViewModel: ExerciseViewModel())
+}

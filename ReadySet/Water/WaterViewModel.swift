@@ -43,22 +43,26 @@ class WaterViewModel: ObservableObject, HKHelper {
     
     private func readWaterConsumedToday() {
         let unit = self.useMetric ? HKUnit.literUnit(with: .milli) : HKUnit.fluidOunceUS()
-        hkQuery(type: waterConsumed, unit: unit, failed: "Failed to read water gallons today") { amount in
-            DispatchQueue.main.async {
-                self.waterConsumedToday = amount
+        DispatchQueue.background(background: {
+            self.hkQuery(type: self.waterConsumed, unit: unit, failed: "Failed to read water gallons today") { amount in
+                DispatchQueue.main.async {
+                    self.waterConsumedToday = amount
+                }
             }
-        }
+        })
     }
 
     private func readWaterConsumedWeek() {
         let unit = self.useMetric ? HKUnit.literUnit(with: .milli) : HKUnit.fluidOunceUS()
         let end = Date().endOfDay
         let start = end.addingDays(-6).startOfDay
-        hkColQuery(type: waterConsumed, start: start, end: end, unit: unit, failed: "Error while reading water during week") { day, amount in
-            DispatchQueue.main.async {
-                self.waterConsumedWeek[day] = amount
+        DispatchQueue.background(background: {
+            self.hkColQuery(type: self.waterConsumed, start: start, end: end, unit: unit, failed: "Error while reading water during week") { day, amount in
+                DispatchQueue.main.async {
+                    self.waterConsumedWeek[day] = amount
+                }
             }
-        }
+        })
     }
 
     private func addWaterConsumed(waterAmount: Double, completion: @escaping () -> Void) {

@@ -47,42 +47,50 @@ class EnergyViewModel: ObservableObject, HKHelper {
 
     private func readEnergyConsumedToday() {
         let unit = self.useMetric ? HKUnit.jouleUnit(with: .kilo) : HKUnit.kilocalorie()
-        hkQuery(type: energyConsumed, unit: unit, failed: "Failed to read energy consumed today") { amount in
-            DispatchQueue.main.async {
-                self.energyConsumedToday = amount
+        DispatchQueue.background(background: {
+            self.hkQuery(type: self.energyConsumed, unit: unit, failed: "Failed to read energy consumed today") { amount in
+                DispatchQueue.main.async {
+                    self.energyConsumedToday = amount
+                }
             }
-        }
+        })
     }
 
     private func readEnergyConsumedWeek() {
         let unit = self.useMetric ? HKUnit.jouleUnit(with: .kilo) : HKUnit.kilocalorie()
         let end = Date().endOfDay
         let start = end.addingDays(-6).startOfDay
-        hkColQuery(type: energyConsumed, start: start, end: end, unit: unit, failed: "Error while reading consumed calories during week") { day, amount in
-            DispatchQueue.main.async {
-                self.energyConsumedWeek[day] = amount
+        DispatchQueue.background(background: {
+            self.hkColQuery(type: self.energyConsumed, start: start, end: end, unit: unit, failed: "Error while reading consumed calories during week") { day, amount in
+                DispatchQueue.main.async {
+                    self.energyConsumedWeek[day] = amount
+                }
             }
-        }
+        })
     }
 
     private func readEnergyBurnedToday() {
         let unit = self.useMetric ? HKUnit.jouleUnit(with: .kilo) : HKUnit.kilocalorie()
-        hkQuery(type: energyBurned, unit: unit, failed: "Failed to read energy burned today") { amount in
-            DispatchQueue.main.async {
-                self.energyBurnedToday = amount
+        DispatchQueue.background(background: {
+            self.hkQuery(type: self.energyBurned, unit: unit, failed: "Failed to read energy burned today") { amount in
+                DispatchQueue.main.async {
+                    self.energyBurnedToday = amount
+                }
             }
-        }
+        })
     }
 
     private func readEnergyBurnedWeek() {
         let unit = self.useMetric ? HKUnit.jouleUnit(with: .kilo) : HKUnit.kilocalorie()
         let end = Date().endOfDay
         let start = end.addingDays(-6).startOfDay
-        hkColQuery(type: energyBurned, start: start, end: end, unit: unit, failed: "Error while reading burned calories during week") { day, amount in
-            DispatchQueue.main.async {
-                self.energyBurnedWeek[day] = amount
+        DispatchQueue.background(background: {
+            self.hkColQuery(type: self.energyBurned, start: start, end: end, unit: unit, failed: "Error while reading burned calories during week") { day, amount in
+                DispatchQueue.main.async {
+                    self.energyBurnedWeek[day] = amount
+                }
             }
-        }
+        })
     }
     
     private func addEnergyConsumed(energy: Double, completion: @escaping () -> Void) {

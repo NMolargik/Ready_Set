@@ -27,13 +27,17 @@ class ExerciseViewModel: ObservableObject, HKHelper {
     }
     
     func readInitial() {
-        self.getCurrentWeekday()
-        self.readStepCountToday()
-        self.readStepCountWeek()
+        DispatchQueue.main.async {
+            self.getCurrentWeekday()
+            self.readStepCountToday()
+            self.readStepCountWeek()
+        }
     }
     
     func getCurrentWeekday() {
-        self.currentDay = Date().weekday
+        DispatchQueue.main.async {
+            self.currentDay = Date().weekday
+        }
     }
     
     func saveStepGoal() {
@@ -42,21 +46,25 @@ class ExerciseViewModel: ObservableObject, HKHelper {
     }
     
     private func readStepCountToday() {
-        hkQuery(type: stepCount, unit: HKUnit.count(), failed: "Failed to read step count") { amount in
-            DispatchQueue.main.async {
-                self.stepsToday = amount
+        DispatchQueue.background(background: {
+            self.hkQuery(type: self.stepCount, unit: HKUnit.count(), failed: "Failed to read step count") { amount in
+                DispatchQueue.main.async {
+                    self.stepsToday = amount
+                }
             }
-        }
+        })
     }
     
     private func readStepCountWeek() {
         let end = Date().endOfDay
         let start = end.addingDays(-6).startOfDay
 
-        hkColQuery(type: stepCount, start: start, end: end, unit: HKUnit.count(), failed: "Error while reading step count during week") { day, amount in
-            DispatchQueue.main.async {
-                self.stepCountWeek[day] = amount
+        DispatchQueue.background(background: {
+            self.hkColQuery(type: self.stepCount, start: start, end: end, unit: HKUnit.count(), failed: "Error while reading step count during week") { day, amount in
+                DispatchQueue.main.async {
+                    self.stepCountWeek[day] = amount
+                }
             }
-        }
+        })
     }
 }

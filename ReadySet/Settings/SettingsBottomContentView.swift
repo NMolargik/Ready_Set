@@ -13,6 +13,13 @@ struct SettingsBottomContentView: View {
     @AppStorage("disableWave") var disableWave: Bool = false
     
     let vectorURL = "https://www.vecteezy.com/free-vector/iphone-15"
+    var version: String {
+        #if DEBUG
+        return "\(Bundle.main.bundleVersion) - (\(Bundle.main.projectVersion))"
+        #else
+        return "\(Bundle.main.bundleVersion)"
+        #endif
+    }
 
     var body: some View {
         VStack {
@@ -73,7 +80,7 @@ struct SettingsBottomContentView: View {
                     })
                     .buttonStyle(.plain)
                     
-                    Text("Version \(Bundle.main.bundleVersion)")
+                    Text("Version \(version)")
                         .font(.caption)
                         .lineLimit(3)
                         .multilineTextAlignment(.center)

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E13F84E2BD6A6A90000EB92 /* DQ+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E13F84D2BD6A6A90000EB92 /* DQ+Extension.swift */; };
 		0E1A3E902BD4CF0C005CD025 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1A3E8F2BD4CF0C005CD025 /* Date+Extension.swift */; };
 		0E1A3E922BD4DA45005CD025 /* HKHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1A3E912BD4DA45005CD025 /* HKHelper.swift */; };
 		0E4A5E2A2BCC9D59003678C2 /* EnergyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4A5E292BCC9D59003678C2 /* EnergyViewModel.swift */; };
@@ -75,6 +76,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E13F84D2BD6A6A90000EB92 /* DQ+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DQ+Extension.swift"; sourceTree = "<group>"; };
 		0E1A3E8F2BD4CF0C005CD025 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		0E1A3E912BD4DA45005CD025 /* HKHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKHelper.swift; sourceTree = "<group>"; };
 		0E4A5E252BCC80E0003678C2 /* Build.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Build.xcconfig; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 			children = (
 				0E1A3E912BD4DA45005CD025 /* HKHelper.swift */,
 				0E1A3E8F2BD4CF0C005CD025 /* Date+Extension.swift */,
+				0E13F84D2BD6A6A90000EB92 /* DQ+Extension.swift */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -495,6 +498,7 @@
 				EB4742BC2BD324DF009A23E4 /* ExerciseEntryHeaderView.swift in Sources */,
 				EB4D9C7D2BCF074E0071BA99 /* VerticalToggleStyle.swift in Sources */,
 				EB3AB3622BC76FED008B6F22 /* EnergyBottomContentView.swift in Sources */,
+				0E13F84E2BD6A6A90000EB92 /* DQ+Extension.swift in Sources */,
 				EB4D9C672BCDBE890071BA99 /* GoalSetView.swift in Sources */,
 				EB1FDC1B2BD6FCBE00253855 /* ExerciseSetRecordView.swift in Sources */,
 				0E7DCA5E2BC6FF7400B9403C /* ExerciseSet.swift in Sources */,
@@ -662,7 +666,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ReadySet/ReadySet.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
 				DEVELOPMENT_ASSET_PATHS = "\"ReadySet/Preview Content\"";
 				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
 				ENABLE_PREVIEWS = YES;
@@ -683,7 +687,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = "$(MARKETING_VERSION)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(PRODUCT_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = "$(PRODUCT_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -703,7 +707,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ReadySet/ReadySet.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
 				DEVELOPMENT_ASSET_PATHS = "\"ReadySet/Preview Content\"";
 				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
 				ENABLE_PREVIEWS = YES;
@@ -724,7 +728,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = "$(MARKETING_VERSION)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(PRODUCT_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = "$(PRODUCT_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

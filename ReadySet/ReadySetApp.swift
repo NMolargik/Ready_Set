@@ -20,6 +20,10 @@ struct ReadySetApp: App {
 
 
 extension Bundle {
+    var projectVersion: String {
+        return self.object(forInfoDictionaryKey: "CFBundleVersion") as! String
+    }
+    
     var bundleVersion: String {
         return self.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
     }

@@ -13,31 +13,17 @@ enum TabItemType {
 
     //iOS
     
+    
     static var allItems: [any ITabItem] {
+        #if os(iOS)
         [ExerciseTabItem(), WaterTabItem(), EnergyTabItem(), SettingsTabItem()]
+        #else
+        [ExerciseTabItem(), WaterTabItem(), EnergyTabItem()]
+        #endif
     }
     
     static func shiftItems(forward: Bool) -> [any ITabItem] {
         var shiftedItems = allItems
-        if forward {
-            let firstItem = shiftedItems.removeFirst()
-            shiftedItems.append(firstItem)
-        } else {
-            let lastItem = shiftedItems.removeLast()
-            shiftedItems.insert(lastItem, at: 0)
-        }
-        
-        return shiftedItems
-    }
-    
-    //watchOS
-    
-    static var allWatchItems: [any ITabItem] {
-        [ExerciseTabItem(), WaterTabItem(), EnergyTabItem()]
-    }
-    
-    static func shiftItemsWatch(forward: Bool) -> [any ITabItem] {
-        var shiftedItems = allWatchItems
         if forward {
             let firstItem = shiftedItems.removeFirst()
             shiftedItems.append(firstItem)

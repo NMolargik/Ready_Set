@@ -17,11 +17,19 @@ struct EnergyTabItem: ITabItem {
     var sheetPresentationDetent = PresentationDetent.fraction(0.3)
     
     func bumpTab(up: Bool) -> any ITabItem {
+        #if os(iOS)
         return up ? WaterTabItem() : SettingsTabItem()
+        #else
+        return up ? WaterTabItem() : ExerciseTabItem()
+        #endif
     }
     
     func reorderTabs() -> [any ITabItem] {
+        #if os(iOS)
         UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
         return [EnergyTabItem(), SettingsTabItem(), ExerciseTabItem(), WaterTabItem()]
+        #else
+        return [EnergyTabItem(), ExerciseTabItem(), WaterTabItem()]
+        #endif
     }
 }

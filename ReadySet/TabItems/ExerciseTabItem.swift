@@ -18,11 +18,20 @@ struct ExerciseTabItem: ITabItem {
     
     
     func bumpTab(up: Bool) -> any ITabItem {
+        #if os(iOS)
         return up ? SettingsTabItem() : WaterTabItem()
+        #else
+        return up ? EnergyTabItem() : WaterTabItem()
+        #endif
     }
     
     func reorderTabs() -> [any ITabItem] {
+        #if os(iOS)
         UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
         return [ExerciseTabItem(), WaterTabItem(), EnergyTabItem(), SettingsTabItem()]
+        #else
+        return [ExerciseTabItem(), WaterTabItem(), EnergyTabItem()]
+        #endif
+        
     }
 }

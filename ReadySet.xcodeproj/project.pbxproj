@@ -22,7 +22,6 @@
 		EB1FDC1B2BD6FCBE00253855 /* ExerciseSetRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1FDC1A2BD6FCBE00253855 /* ExerciseSetRecordView.swift */; };
 		EB1FDC232BD7053000253855 /* ReadySetWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1FDC222BD7053000253855 /* ReadySetWatchApp.swift */; };
 		EB1FDC252BD7053000253855 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1FDC242BD7053000253855 /* ContentView.swift */; };
-		EB1FDC272BD7053200253855 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB1FDC262BD7053200253855 /* Assets.xcassets */; };
 		EB1FDC2A2BD7053200253855 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB1FDC292BD7053200253855 /* Preview Assets.xcassets */; };
 		EB1FDC2D2BD7053200253855 /* ReadySetWatch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = EB1FDC202BD7053000253855 /* ReadySetWatch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		EB1FDC322BD7058F00253855 /* GoalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBEEC7A62BD184160058BDFD /* GoalType.swift */; };
@@ -33,7 +32,15 @@
 		EB1FDC372BD7060100253855 /* EnergyTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3492BC7120C008B6F22 /* EnergyTabItem.swift */; };
 		EB1FDC382BD7060100253855 /* ExerciseTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3452BC711FA008B6F22 /* ExerciseTabItem.swift */; };
 		EB1FDC392BD7060100253855 /* WaterTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3472BC71204008B6F22 /* WaterTabItem.swift */; };
-		EB1FDC3A2BD7060800253855 /* SettingsTabITem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB34B2BC71214008B6F22 /* SettingsTabITem.swift */; };
+		EB1FDC3B2BD706D300253855 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7110F62BC84B520078F796 /* HomeViewModel.swift */; };
+		EB1FDC3C2BD706F000253855 /* EnergyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4A5E292BCC9D59003678C2 /* EnergyViewModel.swift */; };
+		EB1FDC3D2BD706F000253855 /* ExerciseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C4F2BCC73F60071BA99 /* ExerciseViewModel.swift */; };
+		EB1FDC3E2BD706F000253855 /* WaterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C562BCC8B6B0071BA99 /* WaterViewModel.swift */; };
+		EB1FDC402BD7492000253855 /* HKHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1A3E912BD4DA45005CD025 /* HKHelper.swift */; };
+		EB1FDC412BD7494D00253855 /* HealthBaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C6E2BCDE8310071BA99 /* HealthBaseController.swift */; };
+		EB1FDC422BD7495100253855 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1A3E8F2BD4CF0C005CD025 /* Date+Extension.swift */; };
+		EB1FDC442BD74A7B00253855 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB1FDC432BD74A7B00253855 /* Assets.xcassets */; };
+		EB1FDC452BD7E81800253855 /* SettingsTabITem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB34B2BC71214008B6F22 /* SettingsTabITem.swift */; };
 		EB3AB33C2BC70CF5008B6F22 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB33A2BC70CF5008B6F22 /* HeaderView.swift */; };
 		EB3AB33D2BC70CF5008B6F22 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB33B2BC70CF5008B6F22 /* HomeView.swift */; };
 		EB3AB33F2BC710D1008B6F22 /* NavColumnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB33E2BC710D1008B6F22 /* NavColumnView.swift */; };
@@ -132,8 +139,8 @@
 		EB1FDC202BD7053000253855 /* ReadySetWatch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ReadySetWatch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB1FDC222BD7053000253855 /* ReadySetWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadySetWatchApp.swift; sourceTree = "<group>"; };
 		EB1FDC242BD7053000253855 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		EB1FDC262BD7053200253855 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EB1FDC292BD7053200253855 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		EB1FDC432BD74A7B00253855 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EB3AB33A2BC70CF5008B6F22 /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		EB3AB33B2BC70CF5008B6F22 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		EB3AB33E2BC710D1008B6F22 /* NavColumnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavColumnView.swift; sourceTree = "<group>"; };
@@ -314,8 +321,8 @@
 			isa = PBXGroup;
 			children = (
 				EB1FDC222BD7053000253855 /* ReadySetWatchApp.swift */,
+				EB1FDC432BD74A7B00253855 /* Assets.xcassets */,
 				EB1FDC242BD7053000253855 /* ContentView.swift */,
-				EB1FDC262BD7053200253855 /* Assets.xcassets */,
 				EB1FDC282BD7053200253855 /* Preview Content */,
 			);
 			path = "ReadySetWatch Watch App";
@@ -560,7 +567,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB1FDC2A2BD7053200253855 /* Preview Assets.xcassets in Resources */,
-				EB1FDC272BD7053200253855 /* Assets.xcassets in Resources */,
+				EB1FDC442BD74A7B00253855 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -639,16 +646,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB1FDC252BD7053000253855 /* ContentView.swift in Sources */,
+				EB1FDC412BD7494D00253855 /* HealthBaseController.swift in Sources */,
 				EB1FDC322BD7058F00253855 /* GoalType.swift in Sources */,
 				EB1FDC372BD7060100253855 /* EnergyTabItem.swift in Sources */,
 				EB1FDC382BD7060100253855 /* ExerciseTabItem.swift in Sources */,
+				EB1FDC452BD7E81800253855 /* SettingsTabITem.swift in Sources */,
 				EB1FDC392BD7060100253855 /* WaterTabItem.swift in Sources */,
 				EB1FDC352BD7059A00253855 /* ITabItem.swift in Sources */,
-				EB1FDC3A2BD7060800253855 /* SettingsTabITem.swift in Sources */,
+				EB1FDC3C2BD706F000253855 /* EnergyViewModel.swift in Sources */,
+				EB1FDC3D2BD706F000253855 /* ExerciseViewModel.swift in Sources */,
+				EB1FDC3E2BD706F000253855 /* WaterViewModel.swift in Sources */,
+				EB1FDC3B2BD706D300253855 /* HomeViewModel.swift in Sources */,
 				EB1FDC362BD705FB00253855 /* TabItemType.swift in Sources */,
+				EB1FDC402BD7492000253855 /* HKHelper.swift in Sources */,
 				EB1FDC332BD7058F00253855 /* ExerciseSet.swift in Sources */,
 				EB1FDC342BD7058F00253855 /* Exercise.swift in Sources */,
 				EB1FDC232BD7053000253855 /* ReadySetWatchApp.swift in Sources */,
+				EB1FDC422BD7495100253855 /* Date+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

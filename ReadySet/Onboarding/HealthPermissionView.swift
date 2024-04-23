@@ -58,18 +58,21 @@ struct HealthPermissionView: View {
                         .onAppear {
                             UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
                         }
-                    
+
                 } else if showMoreText {
                     Button(action: {
                         UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
                         showProgress = true
-                        healthController.requestAuthorization()
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                            withAnimation {
+                        healthController.requestAuthorization() { val in
+                            DispatchQueue.main.async {
                                 showProgress = false
-                                permitted = true
+                                permitted = val
+                                appState = "goalSetting"
+                                onboardingGradient = LinearGradient(colors: [.greenStart, .blueEnd, .orangeStart], startPoint: .leading, endPoint: .trailing)
+                                onboardingProgress = 0.75
                             }
+                            UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+                            return
                         }
                     }, label: {
                         ZStack {
@@ -79,24 +82,37 @@ struct HealthPermissionView: View {
                                 .frame(width: 250, height: 50)
                                 .padding()
                                 .shadow(radius: 10)
-                            
+
                             HStack {
                                 Text("Authorize Health")
                                     .foregroundStyle(.base)
-                                
+
                                 Image(systemName: "heart.fill")
                                     .foregroundStyle(.pink)
                             }
                             .font(.title2)
                             .bold()
                             .padding()
-                            
+
                         }
                     })
+                    .onAppear {
+                        healthController.requestAuthorization() { val in
+                            DispatchQueue.main.async {
+                                showProgress = false
+                                permitted = val
+                                appState = "goalSetting"
+                                onboardingGradient = LinearGradient(colors: [.greenStart, .blueEnd, .orangeStart], startPoint: .leading, endPoint: .trailing)
+                                onboardingProgress = 0.75
+                            }
+                            UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+                            return
+                        }
+                    }
                 }
-                
+
                 Spacer()
-                    
+
                 if (permitted) {
                     Text("Swipe Upwards On The Canvas To Continue")
                         .font(.body)
@@ -146,9 +162,22 @@ struct HealthPermissionView: View {
                 }
             }
     }
-    
+
     private func handleDragEnd(navigationDragHeight: CGFloat) {
-        healthController.requestAuthorization()
+        healthController.requestAuthorization() { val in
+            print(val)
+            if val {
+                DispatchQueue.main.async {
+                    withAnimation(.easeInOut) {
+                        appState = "goalSetting"
+                        onboardingGradient = LinearGradient(colors: [.greenStart, .blueEnd, .orangeStart], startPoint: .leading, endPoint: .trailing)
+                        onboardingProgress = 0.75
+                    }
+                    UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+                    return
+                }
+            }
+        }
         if navigationDragHeight < 50 {
             withAnimation(.easeInOut) {
                 onboardingProgress = 0.75

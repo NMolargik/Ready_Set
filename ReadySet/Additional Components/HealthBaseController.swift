@@ -10,7 +10,7 @@ import HealthKit
 struct HealthBaseController {
     var healthStore = HKHealthStore()
     
-    func requestAuthorization() {
+    func requestAuthorization(completion: @escaping (Bool) -> Void) {
         let toReads = Set([
             HKObjectType.quantityType(forIdentifier: .stepCount)!,
             HKObjectType.quantityType(forIdentifier: .dietaryWater)!,
@@ -32,8 +32,10 @@ struct HealthBaseController {
         healthStore.requestAuthorization(toShare: toShares, read: toReads) {
             success, error in
             if success {
+                completion(true)
                 print("HealthKit Approved")
             } else {
+                completion(false)
                 print("HealthKit - Error - \(String(describing: error))")
             }
         }

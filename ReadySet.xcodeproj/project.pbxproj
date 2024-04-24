@@ -41,6 +41,8 @@
 		EB1FDC422BD7495100253855 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1A3E8F2BD4CF0C005CD025 /* Date+Extension.swift */; };
 		EB1FDC442BD74A7B00253855 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB1FDC432BD74A7B00253855 /* Assets.xcassets */; };
 		EB1FDC452BD7E81800253855 /* SettingsTabITem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB34B2BC71214008B6F22 /* SettingsTabITem.swift */; };
+		EB1FDC472BD8029100253855 /* WatchConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1FDC462BD8029100253855 /* WatchConnector.swift */; };
+		EB1FDC482BD8029800253855 /* WatchConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1FDC462BD8029100253855 /* WatchConnector.swift */; };
 		EB3AB33C2BC70CF5008B6F22 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB33A2BC70CF5008B6F22 /* HeaderView.swift */; };
 		EB3AB33D2BC70CF5008B6F22 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB33B2BC70CF5008B6F22 /* HomeView.swift */; };
 		EB3AB33F2BC710D1008B6F22 /* NavColumnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB33E2BC710D1008B6F22 /* NavColumnView.swift */; };
@@ -141,6 +143,7 @@
 		EB1FDC242BD7053000253855 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		EB1FDC292BD7053200253855 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		EB1FDC432BD74A7B00253855 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EB1FDC462BD8029100253855 /* WatchConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnector.swift; sourceTree = "<group>"; };
 		EB3AB33A2BC70CF5008B6F22 /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		EB3AB33B2BC70CF5008B6F22 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		EB3AB33E2BC710D1008B6F22 /* NavColumnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavColumnView.swift; sourceTree = "<group>"; };
@@ -221,6 +224,7 @@
 		0E1A3E8E2BD4CEFE005CD025 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				EB1FDC462BD8029100253855 /* WatchConnector.swift */,
 				EB4D9C6E2BCDE8310071BA99 /* HealthBaseController.swift */,
 				0E1A3E912BD4DA45005CD025 /* HKHelper.swift */,
 				0E1A3E8F2BD4CF0C005CD025 /* Date+Extension.swift */,
@@ -637,6 +641,7 @@
 				EB4D9C4E2BCC73E90071BA99 /* ExerciseBottomContentView.swift in Sources */,
 				EB3AB36C2BC77C3E008B6F22 /* ExerciseWeeklyStepsWidgetView.swift in Sources */,
 				EB7110F42BC847610078F796 /* HealthPermissionView.swift in Sources */,
+				EB1FDC482BD8029800253855 /* WatchConnector.swift in Sources */,
 				EB4D9C622BCDABB20071BA99 /* EnergyHealthWidgetView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -658,6 +663,7 @@
 				EB1FDC3E2BD706F000253855 /* WaterViewModel.swift in Sources */,
 				EB1FDC3B2BD706D300253855 /* HomeViewModel.swift in Sources */,
 				EB1FDC362BD705FB00253855 /* TabItemType.swift in Sources */,
+				EB1FDC472BD8029100253855 /* WatchConnector.swift in Sources */,
 				EB1FDC402BD7492000253855 /* HKHelper.swift in Sources */,
 				EB1FDC332BD7058F00253855 /* ExerciseSet.swift in Sources */,
 				EB1FDC342BD7058F00253855 /* Exercise.swift in Sources */,

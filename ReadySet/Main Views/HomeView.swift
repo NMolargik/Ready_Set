@@ -16,7 +16,10 @@ struct HomeView: View {
     @StateObject var exerciseViewModel = ExerciseViewModel()
     @StateObject var waterViewModel = WaterViewModel()
     @StateObject var energyViewModel = EnergyViewModel()
-
+    
+    @StateObject var watchConnector: WatchConnector = 
+        WatchConnector()
+    
     @State private var navigationDragHeight = 0.0
     @State var healthStore: HKHealthStore
 
@@ -49,7 +52,10 @@ struct HomeView: View {
         }
         .background(backgroundGradient)
         .gesture(dragGesture)
-        .onAppear(perform: setupViewModels)
+        .onAppear {
+            setupViewModels()
+            setupConnectorClosures()
+        }
         .onChange(of: scenePhase) {
             handleScenePhase(newPhase: scenePhase)
         }
@@ -110,6 +116,28 @@ struct HomeView: View {
             exerciseViewModel.readInitial()
             waterViewModel.readInitial()
             energyViewModel.readInitial()
+        }
+    }
+    
+    private func setupConnectorClosures() {
+        watchConnector.requestWaterConsumptionBalance = {
+            return waterViewModel.waterConsumedToday
+        }
+        
+        watchConnector.requestEnergyConsumptionBalance = {
+            return energyViewModel.energyConsumedToday
+        }
+        
+        watchConnector.addConsumption = { entryType, consumption in
+            if (entryType == .water) {
+                withAnimation {
+                    waterViewModel.addWater(waterToAdd: Double(consumption))
+                }
+            } else {
+                withAnimation {
+                    energyViewModel.addEnergy(energy: Double(consumption))
+                }
+            }
         }
     }
     

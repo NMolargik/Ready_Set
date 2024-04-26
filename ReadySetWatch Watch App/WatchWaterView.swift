@@ -13,7 +13,7 @@ struct WatchWaterView: View {
     @Binding var useMetric: Bool
     
     @State private var isTurning = false
-    @State private var rotation = 0.0
+    @State var rotation : Double = 0
     @State var orientation: WKInterfaceDeviceCrownOrientation = .right
     
     var addWaterIntake: ((Int) -> Bool)
@@ -72,6 +72,11 @@ struct WatchWaterView: View {
                             .bold()
                             .font(.system(size: 10))
                             .foregroundStyle(.blueEnd)
+                        
+                        
+                        Text("Rotation \(rotation)")
+                            .focusable()
+                            .digitalCrownRotation($rotation)
                     }
                     .padding(.top, 4)
                     
@@ -83,23 +88,22 @@ struct WatchWaterView: View {
                 if orientation == .right && !isTurning {
                     Spacer()
                 }
-                
             }
         }
-        .digitalCrownRotation($rotation)
         .onAppear {
             orientation = WKInterfaceDevice.current().crownOrientation
         }
-        .onChange(of: rotation) {
-            print(rotation)
-            withAnimation {
-                if rotation != 0.0 {
-                    isTurning = true
-                } else {
-                    isTurning = false
-                }
-            }
-        }
+//        .onChange(of: rotation) {
+//            print(rotation)
+//            withAnimation {
+//                if rotation != 0.0 {
+//                    isTurning = true
+//                } else {
+//                    isTurning = false
+//                }
+//            }
+//        }
+        
     }
 }
 

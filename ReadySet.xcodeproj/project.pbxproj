@@ -46,6 +46,7 @@
 		EB2BB0662BDB25A200C3DA78 /* WatchExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BB0652BDB25A200C3DA78 /* WatchExerciseView.swift */; };
 		EB2BB0682BDB263E00C3DA78 /* WatchWaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BB0672BDB263E00C3DA78 /* WatchWaterView.swift */; };
 		EB2BB06A2BDB26C700C3DA78 /* WatchEnergyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BB0692BDB26C700C3DA78 /* WatchEnergyView.swift */; };
+		EB2BB06E2BDB4C9D00C3DA78 /* CrownRotationAdditionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BB06D2BDB4C9D00C3DA78 /* CrownRotationAdditionView.swift */; };
 		EB3AB33C2BC70CF5008B6F22 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB33A2BC70CF5008B6F22 /* HeaderView.swift */; };
 		EB3AB33D2BC70CF5008B6F22 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB33B2BC70CF5008B6F22 /* HomeView.swift */; };
 		EB3AB33F2BC710D1008B6F22 /* NavColumnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB33E2BC710D1008B6F22 /* NavColumnView.swift */; };
@@ -163,6 +164,7 @@
 		EB2BB0672BDB263E00C3DA78 /* WatchWaterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchWaterView.swift; sourceTree = "<group>"; };
 		EB2BB0692BDB26C700C3DA78 /* WatchEnergyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchEnergyView.swift; sourceTree = "<group>"; };
 		EB2BB06B2BDB311800C3DA78 /* ReadySetWatch Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ReadySetWatch Watch App.entitlements"; sourceTree = "<group>"; };
+		EB2BB06D2BDB4C9D00C3DA78 /* CrownRotationAdditionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrownRotationAdditionView.swift; sourceTree = "<group>"; };
 		EB3AB33A2BC70CF5008B6F22 /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		EB3AB33B2BC70CF5008B6F22 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		EB3AB33E2BC710D1008B6F22 /* NavColumnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavColumnView.swift; sourceTree = "<group>"; };
@@ -354,6 +356,7 @@
 				EB2BB0652BDB25A200C3DA78 /* WatchExerciseView.swift */,
 				EB2BB0672BDB263E00C3DA78 /* WatchWaterView.swift */,
 				EB2BB0692BDB26C700C3DA78 /* WatchEnergyView.swift */,
+				EB2BB06C2BDB4C2700C3DA78 /* Additional Components */,
 				EB1FDC432BD74A7B00253855 /* Assets.xcassets */,
 				EB1FDC282BD7053200253855 /* Preview Content */,
 			);
@@ -406,6 +409,14 @@
 				EB2BB0632BDB1F4F00C3DA78 /* HeaderView.swift */,
 			);
 			path = "Main Views";
+			sourceTree = "<group>";
+		};
+		EB2BB06C2BDB4C2700C3DA78 /* Additional Components */ = {
+			isa = PBXGroup;
+			children = (
+				EB2BB06D2BDB4C9D00C3DA78 /* CrownRotationAdditionView.swift */,
+			);
+			path = "Additional Components";
 			sourceTree = "<group>";
 		};
 		EB3AB3422BC71191008B6F22 /* TabItems */ = {
@@ -735,6 +746,7 @@
 				EB2BB05F2BDB1D6E00C3DA78 /* WatchEnergyTabItem.swift in Sources */,
 				EB2BB05B2BDB1BFD00C3DA78 /* IWatchTabItem.swift in Sources */,
 				EB2BB05D2BDB1D4800C3DA78 /* WatchWaterTabItem.swift in Sources */,
+				EB2BB06E2BDB4C9D00C3DA78 /* CrownRotationAdditionView.swift in Sources */,
 				EB2BB0442BDADDA000C3DA78 /* PhoneConnector.swift in Sources */,
 				EB2BB0682BDB263E00C3DA78 /* WatchWaterView.swift in Sources */,
 				EB1FDC232BD7053000253855 /* ReadySetWatchApp.swift in Sources */,

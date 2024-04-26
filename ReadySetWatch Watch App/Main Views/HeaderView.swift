@@ -33,7 +33,7 @@ struct HeaderView: View {
         }
         .frame(height: 60)
         .padding(.leading, 20)
-        .padding(.trailing, 50)
+        .padding(.trailing, 70)
         .padding(.top, 10)
         .ignoresSafeArea()
     }

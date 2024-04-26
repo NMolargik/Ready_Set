@@ -28,14 +28,17 @@ struct HomeView: View {
                     }
                 
                 
-                WatchWaterView(waterBalance: $mainWatchViewModel.waterBalance, waterGoal: $mainWatchViewModel.waterGoal, useMetric: $mainWatchViewModel.useMetric, addWaterIntake: { _ in
-                    return false
+                WatchWaterView(waterBalance: $mainWatchViewModel.waterBalance, waterGoal: $mainWatchViewModel.waterGoal, useMetric: $mainWatchViewModel.useMetric, addWaterIntake: { water in
+                        let _ = phoneConnector.sendNewWaterIntakeToPhone(intake: water) { _ in
+                        }
                     
-                })
-                    .tag(1)
-                    .tabItem {
-                        tabImage(selectedTab: mainWatchViewModel.selectedTab, tabItem: WatchWaterTabItem())
+                        return true
                     }
+                )
+                .tag(1)
+                .tabItem {
+                    tabImage(selectedTab: mainWatchViewModel.selectedTab, tabItem: WatchWaterTabItem())
+                }
                 
                 WatchEnergyView(energyBalance: $mainWatchViewModel.energyBalance, energyGoal: $mainWatchViewModel.energyGoal, useMetric: $mainWatchViewModel.useMetric, addEnergyIntake: { _ in
                     return false

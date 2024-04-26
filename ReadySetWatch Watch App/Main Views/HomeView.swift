@@ -28,25 +28,37 @@ struct HomeView: View {
                     }
                 
                 
-                WatchWaterView(waterBalance: $mainWatchViewModel.waterBalance, waterGoal: $mainWatchViewModel.waterGoal, useMetric: $mainWatchViewModel.useMetric, addWaterIntake: { water in
-                    let message = phoneConnector.sendNewWaterIntakeToPhone(intake: water, completion: { message in
-                    })
-                    
-                    return " "
+                WatchWaterView(waterBalance: $mainWatchViewModel.waterBalance, waterGoal: $mainWatchViewModel.waterGoal, useMetric: $mainWatchViewModel.useMetric, addWaterIntake: { water, completion in
+                    phoneConnector.sendNewIntakeToPhone(intake: water, entryType: .water) { success in
+                        completion(success)
                     }
-                )
+                }, requestWaterBalanceUpdate: {
+                    withAnimation {
+                        phoneConnector.requestValuesFromPhone(values: ["giveWaterBalance"]) { response in
+                            mainWatchViewModel.respondToPhoneUpdate(update: response)
+                        }
+                    }
+                })
                 .tag(1)
                 .tabItem {
                     tabImage(selectedTab: mainWatchViewModel.selectedTab, tabItem: WatchWaterTabItem())
                 }
                 
-                WatchEnergyView(energyBalance: $mainWatchViewModel.energyBalance, energyGoal: $mainWatchViewModel.energyGoal, useMetric: $mainWatchViewModel.useMetric, addEnergyIntake: { _ in
-                    return false
-                })
-                    .tag(2)
-                    .tabItem {
-                        tabImage(selectedTab: mainWatchViewModel.selectedTab, tabItem: WatchEnergyTabItem())
+                WatchEnergyView(energyBalance: $mainWatchViewModel.energyBalance, energyGoal: $mainWatchViewModel.energyGoal, useMetric: $mainWatchViewModel.useMetric, addEnergyIntake: { energy, completion in
+                    phoneConnector.sendNewIntakeToPhone(intake: energy, entryType: .energy) { success in
+                        completion(success)
                     }
+                }, requestEnergyBalanceUpdate: {
+                    withAnimation {
+                        phoneConnector.requestValuesFromPhone(values: ["giveEnergyBalance"]) { response in
+                            mainWatchViewModel.respondToPhoneUpdate(update: response)
+                        }
+                    }
+                })
+                .tag(2)
+                .tabItem {
+                    tabImage(selectedTab: mainWatchViewModel.selectedTab, tabItem: WatchEnergyTabItem())
+                }
             }
             .tabViewStyle(.page(indexDisplayMode: .always))
             

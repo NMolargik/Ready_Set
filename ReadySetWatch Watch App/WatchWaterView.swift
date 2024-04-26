@@ -13,10 +13,12 @@ struct WatchWaterView: View {
     @Binding var useMetric: Bool
     
     @State private var isTurning = false
+    @State private var isUpdating = false
     @State var rotation : Double = 0
     @State var orientation: WKInterfaceDeviceCrownOrientation = .right
     
-    var addWaterIntake: ((Int) -> String)
+    var addWaterIntake: ((Int, @escaping (Bool) -> Void) -> Void)
+    var requestWaterBalanceUpdate: () -> Void
     
     var body: some View {
         ZStack {
@@ -54,25 +56,28 @@ struct WatchWaterView: View {
                 .transition(.blurReplace())
             }
             
-            CrownRotationAdditionView(isTurning: $isTurning, rotation: $rotation, min: 8, max: 128, step: 2, unitOfMeasurement: useMetric ? "mL" : "oz", addColor: .blueStart, gradient: WatchWaterTabItem().gradient,
-                onAdd: { water in
-                    Task {
-                        withAnimation {
-                            let response = addWaterIntake(water)
-                            print(response)
-                            isTurning = false
-                            rotation = 0.0
+            CrownRotationAdditionView(isTurning: $isTurning, rotation: $rotation, min: 8, max: 128, step: 2, unitOfMeasurement: useMetric ? "mL" : "oz", addColor: .blueStart, gradient: WatchWaterTabItem().gradient, onAdd: { water in
+                    isUpdating = true
+                    addWaterIntake(water) { success in
+                        DispatchQueue.main.async {
+                            withAnimation {
+                                requestWaterBalanceUpdate()
+                                isTurning = success
+                                
+                                
+                                //TODO: Add alert if appropriate
+                                isUpdating = false
+                                rotation = 0.0
+                            }
                         }
                     }
-                    
-                },
-                onCancel: {
-                    withAnimation {
-                        isTurning = false
-                        rotation = 0.0
-                    }
+            },
+            onCancel: {
+                withAnimation {
+                    isTurning = false
+                    rotation = 0.0
                 }
-            )
+            })
         }
         .onAppear {
             orientation = WKInterfaceDevice.current().crownOrientation
@@ -88,111 +93,6 @@ struct WatchWaterView: View {
             }
         }
     }
-    
-    private var waterAdditionView: some View {
-        VStack {
-            if orientation == .left && !isTurning {
-                Spacer()
-            }
-            
-            HStack {
-                if orientation == .right && !isTurning {
-                    Spacer()
-                }
-                
-                VStack (spacing: 0) {
-                    if (!isTurning) {
-                        Image(systemName: "chevron.up")
-                            .scaleEffect(y: 0.6)
-                            .padding(.bottom, 4)
-                    }
-                    
-                    Text("+\(Int(abs(rotation))) \(useMetric ? "mL" : "oz")")
-                        .focusable(true)
-                        .digitalCrownRotation($rotation)
-                        .opacity(rotation == 0.0 ? 0 : 100)
-                        .bold()
-                        .font(.system(size: 30))
-                        .foregroundStyle(WatchWaterTabItem().gradient)
-                        .animation(.easeInOut, value: waterBalance)
-                        .transition(.blurReplace())
-                        .frame(width: isTurning ? 100 : 0, height: isTurning ? 40 : 0)
-                        .shadow(color: .white, radius: 8)
-
-                    HStack (spacing: 0) {
-                        Button(action: {
-                            withAnimation {
-                                
-                                //TODO: add water
-                                isTurning = false
-                                rotation = 0.0
-                            }
-                        }, label: {
-                            Text("Add")
-                                .bold()
-                                .font(.system(size: isTurning ? 15 : 10))
-                                .foregroundStyle(.blue)
-                                .padding(.horizontal, isTurning ? 20 : 0)
-                                .padding(.vertical, isTurning ? 10 : 0)
-                                .frame(width: isTurning ? 80 : 20)
-                                .background {
-                                    if (isTurning) {
-                                        Rectangle()
-                                            .cornerRadius(10)
-                                            .foregroundStyle(.white)
-                                            .padding()
-                                    }
-                                }
-                        })
-                        .disabled(!isTurning)
-                        .buttonStyle(.plain)
-                        
-                        Button(action: {
-                            withAnimation {
-                                isTurning = false
-                                rotation = 0.0
-                            }
-                        }, label: {
-                            Text("Cancel")
-                                .bold()
-                                .font(.system(size: isTurning ? 15 : 0))
-                                .foregroundStyle(.white)
-                                .padding(.horizontal, isTurning ? 5 : 0)
-                                .padding(.vertical, isTurning ? 10 : 0)
-                                .frame(width: isTurning ? 80 : 0)
-                                .background {
-                                    if (isTurning) {
-                                        Rectangle()
-                                            .cornerRadius(10)
-                                            .foregroundStyle(.red)
-                                            .padding()
-                                    }
-                                }
-                        })
-                        .disabled(!isTurning)
-                        .buttonStyle(.plain)
-                    }
-                }
-                .padding(.top, 4)
-                .frame(width: isTurning ? 150 : 30, height: isTurning ? 150 : 30)
-                .background {
-                    RoundedRectangle(cornerRadius: 20.0)
-                        .foregroundStyle(.thinMaterial)
-                        
-                }
-                
-                if orientation == .left && !isTurning {
-                    Spacer()
-                }
-            }
-            
-            if orientation == .right && !isTurning {
-                Spacer()
-            }
-        }
-        .animation(.easeInOut, value: isTurning)
-        .transition(.opacity)
-    }
 }
 
 #Preview {
@@ -200,7 +100,9 @@ struct WatchWaterView: View {
         waterBalance: .constant(100),
         waterGoal: .constant(128),
         useMetric: .constant(true),
-        addWaterIntake: { _ in
-            return ""
-        })
+        addWaterIntake: { _,_  in
+            return
+        },
+        requestWaterBalanceUpdate: { return }
+    )
 }

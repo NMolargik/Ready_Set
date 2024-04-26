@@ -61,56 +61,33 @@ class PhoneConnector: NSObject, WCSessionDelegate, ObservableObject {
             }
         } else {
             let output = self.buildResponseOutput(response: ["appState" : "inoperable"])
+            completion(output)
         }
     }
     
-    func sendNewWaterIntakeToPhone(intake: Int, completion: @escaping () -> String?) {
+    func sendNewIntakeToPhone(intake: Int, entryType: EntryType, completion: @escaping (Bool) -> Void) {
         if session.isReachable {
-            let payload: [String : Any] = ["waterIntake" : intake]
+            let payload: [String : Any] = [(entryType == .water ? "waterIntake" : "energyIntake") : intake]
             
-            session.sendMessage(payload) { response in
-                print(response.description)
-                if let success = response["complete"] as? Bool {
-                    if success {
-                        print("Water intake report successed")
-                        completion("success")
+            session.sendMessage(payload, replyHandler: { response in
+                DispatchQueue.main.async {
+                    if let success = response["complete"] as? Bool {
+                        completion(success)
                     } else {
-                        print("Water intake report failed")
-                        completion("There was an unknown error")
+                        completion(false)
                     }
-                } else {
-                    print("Session is not reachable for water intake report")
-                    completion("Ready, Set not responding on iPhone")
                 }
-            }
-        } else {
-            print("Session is not reachable for water intake report")
-            completion("Ready, Set not responding on iPhone")
-        }
-    }
-    
-    func sendNewEnergyIntakeToPhone(intake: Int, completion: @escaping (String?) -> Void) {
-        if session.isReachable {
-            let payload: [String : Any] = ["energyIntake" : intake]
-            
-            session.sendMessage(payload) { response in
-                print(response.description)
-                if let success = response["complete"] as? Bool {
-                    if success {
-                        print("Energy intake report successed")
-                        completion(nil)
-                    } else {
-                        print("Energy intake report failed")
-                        completion("There was an unknown error")
-                    }
-                } else {
-                    print("Session is not reachable for energy intake report")
-                    completion("Ready, Set not responding on iPhone")
+            }, errorHandler: { error in
+                DispatchQueue.main.async {
+                    print("Error sending message: \(error.localizedDescription)")
+                    completion(false)
                 }
-            }
+            })
         } else {
-            print("Session is not reachable for energy intake report")
-            completion("Ready, Set not responding on iPhone")
+            DispatchQueue.main.async {
+                print("Session is not reachable for intake report")
+                completion(false)
+            }
         }
     }
     

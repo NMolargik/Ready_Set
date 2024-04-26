@@ -13,9 +13,12 @@ struct WatchEnergyView: View {
     @Binding var useMetric: Bool
     
     @State private var isTurning = false
+    @State private var isUpdating = false
     @State var rotation : Double = 0
+    @State var orientation: WKInterfaceDeviceCrownOrientation = .right
     
-    var addEnergyIntake: ((Int) -> Bool)
+    var addEnergyIntake: ((Int, @escaping (Bool) -> Void) -> Void)
+    var requestEnergyBalanceUpdate: () -> Void
     
     var body: some View {
         ZStack {
@@ -53,29 +56,27 @@ struct WatchEnergyView: View {
                 .transition(.blurReplace())
             }
             
-            CrownRotationAdditionView(isTurning: $isTurning, rotation: $rotation, min: 80 , max: 1000, step: 20, unitOfMeasurement: useMetric ? "kJ" : "cal", addColor: .orangeStart, gradient: WatchEnergyTabItem().gradient, 
-                onAdd: { energy in
-                Task {
-                    withAnimation {
-                        let success = addEnergyIntake(energy)
-                        if (success) {
-                            isTurning = false
-                            rotation = 0.0
-                        } else {
-                            //TODO: show an alert
-                            print("ouch")
+            CrownRotationAdditionView(isTurning: $isTurning, rotation: $rotation, min: 80 , max: 1000, step: 20, unitOfMeasurement: useMetric ? "kJ" : "cal", addColor: .orangeStart, gradient: WatchEnergyTabItem().gradient, onAdd: { energy in
+                    isUpdating = true
+                    addEnergyIntake(energy) { success in
+                        DispatchQueue.main.async {
+                            withAnimation {
+                                requestEnergyBalanceUpdate()
+                                isTurning = success
+                                
+                                //TODO: add alert if appropriate
+                                isUpdating = false
+                                rotation = 0.0
+                            }
                         }
                     }
+            },
+            onCancel: {
+                withAnimation {
+                    isTurning = false
+                    rotation = 0.0
                 }
-                    
-                },
-                onCancel: {
-                    withAnimation {
-                        isTurning = false
-                        rotation = 0.0
-                    }
-                }
-            )
+            })
         }
         
         .onChange(of: rotation) {
@@ -96,7 +97,9 @@ struct WatchEnergyView: View {
         energyBalance: .constant(1000),
         energyGoal: .constant(2300),
         useMetric: .constant(true),
-        addEnergyIntake: { _ in
-            return false
-        })
+        addEnergyIntake: { _,_ in
+            return
+        },
+        requestEnergyBalanceUpdate: { return }
+    )
 }

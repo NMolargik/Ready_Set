@@ -64,7 +64,7 @@ class PhoneConnector: NSObject, WCSessionDelegate, ObservableObject {
         }
     }
     
-    func sendNewWaterIntakeToPhone(intake: Int, completion: @escaping (String?) -> Void) {
+    func sendNewWaterIntakeToPhone(intake: Int, completion: @escaping () -> String?) {
         if session.isReachable {
             let payload: [String : Any] = ["waterIntake" : intake]
             
@@ -73,7 +73,7 @@ class PhoneConnector: NSObject, WCSessionDelegate, ObservableObject {
                 if let success = response["complete"] as? Bool {
                     if success {
                         print("Water intake report successed")
-                        completion(nil)
+                        completion("success")
                     } else {
                         print("Water intake report failed")
                         completion("There was an unknown error")

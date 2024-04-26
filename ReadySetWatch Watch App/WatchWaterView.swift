@@ -16,7 +16,7 @@ struct WatchWaterView: View {
     @State var rotation : Double = 0
     @State var orientation: WKInterfaceDeviceCrownOrientation = .right
     
-    var addWaterIntake: ((Int) -> Bool)
+    var addWaterIntake: ((Int) -> String)
     
     var body: some View {
         ZStack {
@@ -56,18 +56,14 @@ struct WatchWaterView: View {
             
             CrownRotationAdditionView(isTurning: $isTurning, rotation: $rotation, min: 8, max: 128, step: 2, unitOfMeasurement: useMetric ? "mL" : "oz", addColor: .blueStart, gradient: WatchWaterTabItem().gradient,
                 onAdd: { water in
-                Task {
-                    withAnimation {
-                        let success = addWaterIntake(water)
-                        if (success) {
+                    Task {
+                        withAnimation {
+                            let response = addWaterIntake(water)
+                            print(response)
                             isTurning = false
                             rotation = 0.0
-                        } else {
-                            //TODO: show an alert
-                            print("ouch")
                         }
                     }
-                }
                     
                 },
                 onCancel: {
@@ -205,6 +201,6 @@ struct WatchWaterView: View {
         waterGoal: .constant(128),
         useMetric: .constant(true),
         addWaterIntake: { _ in
-            return false
+            return ""
         })
 }

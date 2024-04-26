@@ -29,10 +29,10 @@ struct HomeView: View {
                 
                 
                 WatchWaterView(waterBalance: $mainWatchViewModel.waterBalance, waterGoal: $mainWatchViewModel.waterGoal, useMetric: $mainWatchViewModel.useMetric, addWaterIntake: { water in
-                        let _ = phoneConnector.sendNewWaterIntakeToPhone(intake: water) { _ in
-                        }
+                    let message = phoneConnector.sendNewWaterIntakeToPhone(intake: water, completion: { message in
+                    })
                     
-                        return true
+                    return " "
                     }
                 )
                 .tag(1)

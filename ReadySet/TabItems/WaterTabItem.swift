@@ -14,20 +14,14 @@ struct WaterTabItem: ITabItem {
     var color = Color.blueEnd
     var secondaryColor = Color.blueStart
     var gradient = LinearGradient(colors: [.blueEnd, .blueStart], startPoint: .topLeading, endPoint: .bottomTrailing)
-    var sheetPresentationDetent = PresentationDetent.fraction(0.3)
     
     func bumpTab(up: Bool) -> any ITabItem {
         return up ? ExerciseTabItem() : EnergyTabItem()
     }
     
     func reorderTabs() -> [any ITabItem] {
-        #if os(iOS)
         UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
         return [WaterTabItem(), EnergyTabItem(), SettingsTabItem(), ExerciseTabItem()]
-        #else
-        return [WaterTabItem(), EnergyTabItem(), SettingsTabItem()]
-        #endif
-
     }
 }
 

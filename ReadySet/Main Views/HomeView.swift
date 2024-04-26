@@ -70,7 +70,7 @@ struct HomeView: View {
             return .constant(Double(exerciseViewModel.stepsToday) / exerciseViewModel.stepGoal)
         case .water:
             return .constant(Double(waterViewModel.waterConsumedToday) / waterViewModel.waterGoal)
-        case .Energy:
+        case .energy:
             return .constant(Double(energyViewModel.energyConsumedToday) / energyViewModel.energyGoal)
         case .settings:
             return .constant(1.0)

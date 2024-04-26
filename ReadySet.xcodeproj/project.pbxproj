@@ -24,29 +24,28 @@
 		EB1FDC252BD7053000253855 /* MainWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1FDC242BD7053000253855 /* MainWatchView.swift */; };
 		EB1FDC2A2BD7053200253855 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB1FDC292BD7053200253855 /* Preview Assets.xcassets */; };
 		EB1FDC2D2BD7053200253855 /* Ready, Set, Wrist.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = EB1FDC202BD7053000253855 /* Ready, Set, Wrist.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		EB1FDC322BD7058F00253855 /* GoalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBEEC7A62BD184160058BDFD /* GoalType.swift */; };
-		EB1FDC332BD7058F00253855 /* ExerciseSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7DCA5D2BC6FF7400B9403C /* ExerciseSet.swift */; };
-		EB1FDC342BD7058F00253855 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBEEC77A2BD0251F0058BDFD /* Exercise.swift */; };
-		EB1FDC352BD7059A00253855 /* ITabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3432BC711A8008B6F22 /* ITabItem.swift */; };
-		EB1FDC362BD705FB00253855 /* TabItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3402BC71105008B6F22 /* TabItemType.swift */; };
-		EB1FDC372BD7060100253855 /* EnergyTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3492BC7120C008B6F22 /* EnergyTabItem.swift */; };
-		EB1FDC382BD7060100253855 /* ExerciseTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3452BC711FA008B6F22 /* ExerciseTabItem.swift */; };
-		EB1FDC392BD7060100253855 /* WaterTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3472BC71204008B6F22 /* WaterTabItem.swift */; };
-		EB1FDC3B2BD706D300253855 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7110F62BC84B520078F796 /* HomeViewModel.swift */; };
-		EB1FDC3C2BD706F000253855 /* EnergyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4A5E292BCC9D59003678C2 /* EnergyViewModel.swift */; };
-		EB1FDC3D2BD706F000253855 /* ExerciseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C4F2BCC73F60071BA99 /* ExerciseViewModel.swift */; };
-		EB1FDC3E2BD706F000253855 /* WaterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C562BCC8B6B0071BA99 /* WaterViewModel.swift */; };
 		EB1FDC402BD7492000253855 /* HKHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1A3E912BD4DA45005CD025 /* HKHelper.swift */; };
 		EB1FDC412BD7494D00253855 /* HealthBaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C6E2BCDE8310071BA99 /* HealthBaseController.swift */; };
 		EB1FDC422BD7495100253855 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1A3E8F2BD4CF0C005CD025 /* Date+Extension.swift */; };
 		EB1FDC442BD74A7B00253855 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB1FDC432BD74A7B00253855 /* Assets.xcassets */; };
-		EB1FDC4E2BD9912700253855 /* SettingsTabITem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB34B2BC71214008B6F22 /* SettingsTabITem.swift */; };
 		EB1FDC502BD9A0C900253855 /* EntryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1FDC4F2BD9A0C900253855 /* EntryType.swift */; };
 		EB1FDC512BD9A0DB00253855 /* EntryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1FDC4F2BD9A0C900253855 /* EntryType.swift */; };
 		EB2BB03E2BDADD3800C3DA78 /* WatchConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BB03D2BDADD3800C3DA78 /* WatchConnector.swift */; };
 		EB2BB0442BDADDA000C3DA78 /* PhoneConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BB0432BDADDA000C3DA78 /* PhoneConnector.swift */; };
 		EB2BB0452BDAE00F00C3DA78 /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB2BB0402BDADD5400C3DA78 /* WatchConnectivity.framework */; };
 		EB2BB0472BDAF66000C3DA78 /* MainWatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BB0462BDAF66000C3DA78 /* MainWatchViewModel.swift */; };
+		EB2BB0492BDB0D9500C3DA78 /* ExerciseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C4F2BCC73F60071BA99 /* ExerciseViewModel.swift */; };
+		EB2BB04C2BDB0DDD00C3DA78 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BB04B2BDB0DDD00C3DA78 /* OnboardingView.swift */; };
+		EB2BB04E2BDB1A0D00C3DA78 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BB04D2BDB1A0D00C3DA78 /* HomeView.swift */; };
+		EB2BB0552BDB1B1100C3DA78 /* WatchTabItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BB0542BDB1B1100C3DA78 /* WatchTabItemType.swift */; };
+		EB2BB0572BDB1B5900C3DA78 /* WatchExerciseTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BB0562BDB1B5900C3DA78 /* WatchExerciseTabItem.swift */; };
+		EB2BB05B2BDB1BFD00C3DA78 /* IWatchTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BB05A2BDB1BFD00C3DA78 /* IWatchTabItem.swift */; };
+		EB2BB05D2BDB1D4800C3DA78 /* WatchWaterTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BB05C2BDB1D4800C3DA78 /* WatchWaterTabItem.swift */; };
+		EB2BB05F2BDB1D6E00C3DA78 /* WatchEnergyTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BB05E2BDB1D6E00C3DA78 /* WatchEnergyTabItem.swift */; };
+		EB2BB0642BDB1F4F00C3DA78 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BB0632BDB1F4F00C3DA78 /* HeaderView.swift */; };
+		EB2BB0662BDB25A200C3DA78 /* WatchExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BB0652BDB25A200C3DA78 /* WatchExerciseView.swift */; };
+		EB2BB0682BDB263E00C3DA78 /* WatchWaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BB0672BDB263E00C3DA78 /* WatchWaterView.swift */; };
+		EB2BB06A2BDB26C700C3DA78 /* WatchEnergyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BB0692BDB26C700C3DA78 /* WatchEnergyView.swift */; };
 		EB3AB33C2BC70CF5008B6F22 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB33A2BC70CF5008B6F22 /* HeaderView.swift */; };
 		EB3AB33D2BC70CF5008B6F22 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB33B2BC70CF5008B6F22 /* HomeView.swift */; };
 		EB3AB33F2BC710D1008B6F22 /* NavColumnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB33E2BC710D1008B6F22 /* NavColumnView.swift */; };
@@ -152,6 +151,18 @@
 		EB2BB0402BDADD5400C3DA78 /* WatchConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchConnectivity.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS10.4.sdk/System/Library/Frameworks/WatchConnectivity.framework; sourceTree = DEVELOPER_DIR; };
 		EB2BB0432BDADDA000C3DA78 /* PhoneConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneConnector.swift; sourceTree = "<group>"; };
 		EB2BB0462BDAF66000C3DA78 /* MainWatchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWatchViewModel.swift; sourceTree = "<group>"; };
+		EB2BB04B2BDB0DDD00C3DA78 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		EB2BB04D2BDB1A0D00C3DA78 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		EB2BB0542BDB1B1100C3DA78 /* WatchTabItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchTabItemType.swift; sourceTree = "<group>"; };
+		EB2BB0562BDB1B5900C3DA78 /* WatchExerciseTabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchExerciseTabItem.swift; sourceTree = "<group>"; };
+		EB2BB05A2BDB1BFD00C3DA78 /* IWatchTabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IWatchTabItem.swift; sourceTree = "<group>"; };
+		EB2BB05C2BDB1D4800C3DA78 /* WatchWaterTabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchWaterTabItem.swift; sourceTree = "<group>"; };
+		EB2BB05E2BDB1D6E00C3DA78 /* WatchEnergyTabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchEnergyTabItem.swift; sourceTree = "<group>"; };
+		EB2BB0632BDB1F4F00C3DA78 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		EB2BB0652BDB25A200C3DA78 /* WatchExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchExerciseView.swift; sourceTree = "<group>"; };
+		EB2BB0672BDB263E00C3DA78 /* WatchWaterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchWaterView.swift; sourceTree = "<group>"; };
+		EB2BB0692BDB26C700C3DA78 /* WatchEnergyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchEnergyView.swift; sourceTree = "<group>"; };
+		EB2BB06B2BDB311800C3DA78 /* ReadySetWatch Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ReadySetWatch Watch App.entitlements"; sourceTree = "<group>"; };
 		EB3AB33A2BC70CF5008B6F22 /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		EB3AB33B2BC70CF5008B6F22 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		EB3AB33E2BC710D1008B6F22 /* NavColumnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavColumnView.swift; sourceTree = "<group>"; };
@@ -286,12 +297,12 @@
 		0E940A692BC6FE0200144477 /* ReadySet */ = {
 			isa = PBXGroup;
 			children = (
-				0E1A3E8E2BD4CEFE005CD025 /* Misc */,
 				EB4D9C542BCC848D0071BA99 /* Info.plist */,
 				EB4D9C7E2BCF2B6D0071BA99 /* Launch Screen.storyboard */,
 				EB3AB36D2BC7957D008B6F22 /* ReadySet.entitlements */,
 				0E940A6A2BC6FE0200144477 /* ReadySetApp.swift */,
 				0E940A6C2BC6FE0200144477 /* MainView.swift */,
+				0E1A3E8E2BD4CEFE005CD025 /* Misc */,
 				0E7DCA5A2BC6FE8000B9403C /* Models */,
 				EB3AB3422BC71191008B6F22 /* TabItems */,
 				EB4D9C632BCDBD460071BA99 /* Onboarding */,
@@ -335,10 +346,14 @@
 		EB1FDC212BD7053000253855 /* ReadySetWatch Watch App */ = {
 			isa = PBXGroup;
 			children = (
+				EB2BB06B2BDB311800C3DA78 /* ReadySetWatch Watch App.entitlements */,
 				EB1FDC222BD7053000253855 /* ReadySetWatchApp.swift */,
-				EB2BB0462BDAF66000C3DA78 /* MainWatchViewModel.swift */,
-				EB2BB0432BDADDA000C3DA78 /* PhoneConnector.swift */,
-				EB1FDC242BD7053000253855 /* MainWatchView.swift */,
+				EB2BB04A2BDB0DC000C3DA78 /* Misc */,
+				EB2BB0532BDB1B0300C3DA78 /* TabItems */,
+				EB2BB0622BDB1F3A00C3DA78 /* Main Views */,
+				EB2BB0652BDB25A200C3DA78 /* WatchExerciseView.swift */,
+				EB2BB0672BDB263E00C3DA78 /* WatchWaterView.swift */,
+				EB2BB0692BDB26C700C3DA78 /* WatchEnergyView.swift */,
 				EB1FDC432BD74A7B00253855 /* Assets.xcassets */,
 				EB1FDC282BD7053200253855 /* Preview Content */,
 			);
@@ -359,6 +374,38 @@
 				EB2BB0402BDADD5400C3DA78 /* WatchConnectivity.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EB2BB04A2BDB0DC000C3DA78 /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				EB2BB0432BDADDA000C3DA78 /* PhoneConnector.swift */,
+			);
+			path = Misc;
+			sourceTree = "<group>";
+		};
+		EB2BB0532BDB1B0300C3DA78 /* TabItems */ = {
+			isa = PBXGroup;
+			children = (
+				EB2BB05A2BDB1BFD00C3DA78 /* IWatchTabItem.swift */,
+				EB2BB0542BDB1B1100C3DA78 /* WatchTabItemType.swift */,
+				EB2BB0562BDB1B5900C3DA78 /* WatchExerciseTabItem.swift */,
+				EB2BB05C2BDB1D4800C3DA78 /* WatchWaterTabItem.swift */,
+				EB2BB05E2BDB1D6E00C3DA78 /* WatchEnergyTabItem.swift */,
+			);
+			path = TabItems;
+			sourceTree = "<group>";
+		};
+		EB2BB0622BDB1F3A00C3DA78 /* Main Views */ = {
+			isa = PBXGroup;
+			children = (
+				EB2BB04B2BDB0DDD00C3DA78 /* OnboardingView.swift */,
+				EB2BB0462BDAF66000C3DA78 /* MainWatchViewModel.swift */,
+				EB1FDC242BD7053000253855 /* MainWatchView.swift */,
+				EB2BB04D2BDB1A0D00C3DA78 /* HomeView.swift */,
+				EB2BB0632BDB1F4F00C3DA78 /* HeaderView.swift */,
+			);
+			path = "Main Views";
 			sourceTree = "<group>";
 		};
 		EB3AB3422BC71191008B6F22 /* TabItems */ = {
@@ -673,24 +720,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB1FDC252BD7053000253855 /* MainWatchView.swift in Sources */,
-				EB1FDC4E2BD9912700253855 /* SettingsTabITem.swift in Sources */,
 				EB1FDC412BD7494D00253855 /* HealthBaseController.swift in Sources */,
-				EB1FDC322BD7058F00253855 /* GoalType.swift in Sources */,
-				EB1FDC372BD7060100253855 /* EnergyTabItem.swift in Sources */,
-				EB1FDC382BD7060100253855 /* ExerciseTabItem.swift in Sources */,
+				EB2BB0662BDB25A200C3DA78 /* WatchExerciseView.swift in Sources */,
 				EB2BB0472BDAF66000C3DA78 /* MainWatchViewModel.swift in Sources */,
-				EB1FDC392BD7060100253855 /* WaterTabItem.swift in Sources */,
-				EB1FDC352BD7059A00253855 /* ITabItem.swift in Sources */,
-				EB1FDC3C2BD706F000253855 /* EnergyViewModel.swift in Sources */,
-				EB1FDC3D2BD706F000253855 /* ExerciseViewModel.swift in Sources */,
-				EB1FDC3E2BD706F000253855 /* WaterViewModel.swift in Sources */,
-				EB1FDC3B2BD706D300253855 /* HomeViewModel.swift in Sources */,
-				EB1FDC362BD705FB00253855 /* TabItemType.swift in Sources */,
+				EB2BB04C2BDB0DDD00C3DA78 /* OnboardingView.swift in Sources */,
 				EB1FDC402BD7492000253855 /* HKHelper.swift in Sources */,
+				EB2BB0572BDB1B5900C3DA78 /* WatchExerciseTabItem.swift in Sources */,
+				EB2BB0642BDB1F4F00C3DA78 /* HeaderView.swift in Sources */,
+				EB2BB04E2BDB1A0D00C3DA78 /* HomeView.swift in Sources */,
 				EB1FDC512BD9A0DB00253855 /* EntryType.swift in Sources */,
-				EB1FDC332BD7058F00253855 /* ExerciseSet.swift in Sources */,
+				EB2BB0492BDB0D9500C3DA78 /* ExerciseViewModel.swift in Sources */,
+				EB2BB0552BDB1B1100C3DA78 /* WatchTabItemType.swift in Sources */,
+				EB2BB06A2BDB26C700C3DA78 /* WatchEnergyView.swift in Sources */,
+				EB2BB05F2BDB1D6E00C3DA78 /* WatchEnergyTabItem.swift in Sources */,
+				EB2BB05B2BDB1BFD00C3DA78 /* IWatchTabItem.swift in Sources */,
+				EB2BB05D2BDB1D4800C3DA78 /* WatchWaterTabItem.swift in Sources */,
 				EB2BB0442BDADDA000C3DA78 /* PhoneConnector.swift in Sources */,
-				EB1FDC342BD7058F00253855 /* Exercise.swift in Sources */,
+				EB2BB0682BDB263E00C3DA78 /* WatchWaterView.swift in Sources */,
 				EB1FDC232BD7053000253855 /* ReadySetWatchApp.swift in Sources */,
 				EB1FDC422BD7495100253855 /* Date+Extension.swift in Sources */,
 			);
@@ -917,6 +963,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "ReadySetWatch Watch App/ReadySetWatch Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ReadySetWatch Watch App/Preview Content\"";
@@ -946,6 +993,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "ReadySetWatch Watch App/ReadySetWatch Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ReadySetWatch Watch App/Preview Content\"";

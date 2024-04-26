@@ -1,25 +1,23 @@
 //
-//  ITabItem.swift
-//  ReadySet
+//  IWatchTabItem.swift
+//  ReadySetWatch Watch App
 //
-//  Created by Nick Molargik on 4/10/24.
+//  Created by Nick Molargik on 4/25/24.
 //
 
+import Foundation
 import SwiftUI
 
-protocol ITabItem: Hashable, Equatable {
+protocol IWatchTabItem: Hashable, Equatable {
     var text: String { get }
-    var type: TabItemType { get }
+    var type: WatchTabItemType { get }
     var icon: String { get }
     var color: Color { get }
     var secondaryColor: Color { get }
     var gradient: LinearGradient { get }
-    
-    func bumpTab(up: Bool) -> any ITabItem
-    func reorderTabs() -> [any ITabItem]
 }
 
-extension ITabItem {
+extension IWatchTabItem {
     func hash(into hasher: inout Hasher) {
         hasher.combine(text)
     }

@@ -7,33 +7,64 @@
 
 import Foundation
 import SwiftUI
+import HealthKit
 
-class MainWatchViewModel: ObservableObject {
-    @Published var appState: String = "inoperable"
+class MainWatchViewModel: ObservableObject, HKHelper {
+    @AppStorage("watchOnboardingComplete") var watchOnboardingComplete = false
+    
+    @Published var selectedTab: Int = 0
+    @Published var appState: String = "running" //TODO, replace this with inoperable
     @Published var useMetric: Bool = false
     @Published var stepGoal: Double = 1000
     @Published var waterGoal: Double = 64
     @Published var energyGoal: Double = 2000
-    
     @Published var stepsTakenToday = 0
     @Published var waterBalance = 0
     @Published var energyBalance = 0
+    @Published var progress : Double =  0
+    
+    @State var healthStore: HKHealthStore? = HealthBaseController().healthStore
     
     func getInitialValues(connector: PhoneConnector) {
         connector.requestInitialsFromPhone { response in
             self.processPhoneUpdate(update: response)
             print("Initial values retrieved and stored!")
+            self.updateProgress()
+        }
+    }
+    
+    func readStepCountToday() {
+        hkQuery(type: stepCount, unit: HKUnit.count(), failed: "Failed to read step count") { amount in
+            DispatchQueue.main.async {
+                self.stepsTakenToday = amount
+            }
+        }
+    }
+    
+    func updateProgress() {
+        withAnimation {
+            switch (selectedTab) {
+            case 0:
+                self.progress = Double(stepsTakenToday / Int(stepGoal) * 100)
+            case 1:
+                self.progress = Double(waterBalance / Int(waterGoal) * 100)
+            default:
+                self.progress = Double(energyBalance / Int(energyGoal) * 100)
+            }
         }
     }
     
     func respondToPhoneUpdate(update: [String : Any]) {
         self.processPhoneUpdate(update: update)
         print("Responded to a phone update")
+        self.updateProgress()
     }
     
     private func processPhoneUpdate(update: [String : Any]) {
         if let appState = update["appState"] as? String {
             self.appState = appState
+        } else {
+            self.appState = "inoperable"
         }
         
         if let useMetric = update["useMetric"] as? Bool {

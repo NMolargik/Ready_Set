@@ -47,6 +47,23 @@ class PhoneConnector: NSObject, WCSessionDelegate, ObservableObject {
         }
     }
     
+    func requestValuesFromPhone(values: [String], completion: @escaping ([String : Any]) -> Void) {
+        var payload: [String : Any] = [:]
+        
+        for value in values {
+            payload[value] = true
+        }
+        
+        if session.isReachable {
+            session.sendMessage(payload) { response in
+                let output = self.buildResponseOutput(response: response)
+                completion(output)
+            }
+        } else {
+            let output = self.buildResponseOutput(response: ["appState" : "inoperable"])
+        }
+    }
+    
     func sendNewWaterIntakeToPhone(intake: Int, completion: @escaping (String?) -> Void) {
         if session.isReachable {
             let payload: [String : Any] = ["waterIntake" : intake]

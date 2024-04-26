@@ -8,18 +8,11 @@
 enum TabItemType {
     case exercise
     case water
-    case Energy
+    case energy
     case settings
 
-    //iOS
-    
-    
     static var allItems: [any ITabItem] {
-        #if os(iOS)
         [ExerciseTabItem(), WaterTabItem(), EnergyTabItem(), SettingsTabItem()]
-        #else
-        [ExerciseTabItem(), WaterTabItem(), EnergyTabItem()]
-        #endif
     }
     
     static func shiftItems(forward: Bool) -> [any ITabItem] {

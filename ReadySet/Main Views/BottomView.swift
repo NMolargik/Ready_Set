@@ -28,7 +28,7 @@ struct BottomView: View {
                         ExerciseBottomContentView(exerciseViewModel: exerciseViewModel)
                     case .water:
                         WaterBottomContentView(waterViewModel: waterViewModel)
-                    case .Energy:
+                    case .energy:
                         EnergyBottomContentView(energyViewModel: energyViewModel)
                     case .settings:
                         SettingsBottomContentView()

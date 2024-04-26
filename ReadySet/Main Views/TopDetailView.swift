@@ -22,7 +22,7 @@ struct TopDetailView: View {
             case .water:
                 WaterTopContentView(waterViewModel: waterViewModel)
                     .transition(.opacity)
-            case .Energy:
+            case .energy:
                 EnergyTopContentView(energyViewModel: energyViewModel)
                     .transition(.opacity)
             case .settings:

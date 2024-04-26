@@ -34,10 +34,7 @@ class WatchConnector: NSObject, WCSessionDelegate, ObservableObject {
     
     func session(_ session: WCSession, didReceiveMessage message: [String: Any], replyHandler: @escaping ([String: Any]) -> Void) {
         var response : [String : Any] = ["complete" : true]
-        
-        if let _ = message["giveAppState"] as? Bool {
-            response["appState"] = self.appState
-        }
+        response["appState"] = self.appState
         
         if let _ = message["giveUseMetric"] as? Bool {
             response["useMetric"] = self.useMetric
@@ -82,41 +79,11 @@ class WatchConnector: NSObject, WCSessionDelegate, ObservableObject {
     
     func sendUpdateToWatch(update: [String : Any]) {
         if session.isReachable {
-            var payload : [String : Any] = [:]
-            
-            if let appState = update["appState"] as? String {
-                payload["appState"] = appState
-            }
-            
-            if let useMetric = update["useMetric"] as? Bool {
-                payload["useMetric"] = useMetric
-            }
-            
-            if let stepGoal = update["stepGoal"] as? Double {
-                payload["stepGoal"] = stepGoal
-            }
-            
-            if let waterGoal = update["waterGoal"] as? Double {
-                payload["waterGoal"] = waterGoal
-            }
-            
-            if let energyGoal = update["energyGoal"] as? Double {
-                payload["energyGoal"] = energyGoal
-            }
-            
-            if let waterBalance = update["waterBalance"] as? Int {
-                payload["waterBalance"] = waterBalance
-            }
-            
-            if let energyBalance = update["energyBalance"] as? Int {
-                payload["energyBalance"] = energyBalance
-            }
-            
-            session.sendMessage(payload) { _ in }
-            
+            var formattedUpdate = update
+            formattedUpdate["appState"] = "running"
+            session.sendMessage(formattedUpdate) { _ in }
         } else {
             print("Session is not reachable for watch update")
-            
         }
     }
     

@@ -39,6 +39,14 @@ struct NavColumnView: View {
         .padding(.bottom, 10)
     }
 
+    private func selectTab(_ tabItem: any ITabItem) {
+        UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+        withAnimation(.snappy) {
+            selectedTab = tabItem
+            tabItems = selectedTab.reorderTabs()
+        }
+    }
+    
     private func tabImage(_ tabItem: any ITabItem) -> some View {
         Image(tabItem.icon)
             .resizable()
@@ -75,14 +83,6 @@ struct NavColumnView: View {
                 .blur(radius: abs(navigationDragHeight) > 20.0 ? abs(navigationDragHeight * 0.03) : 0)
         }
         .frame(height: 120)
-    }
-
-    private func selectTab(_ tabItem: any ITabItem) {
-        UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
-        withAnimation(.snappy) {
-            selectedTab = tabItem
-            tabItems = selectedTab.reorderTabs()
-        }
     }
 }
 

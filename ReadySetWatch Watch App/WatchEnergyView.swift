@@ -93,6 +93,11 @@ struct WatchEnergyView: View {
                 }
             }
         }
+        .onChange(of: energyBalance) {
+            withAnimation {
+                isUpdating = false
+            }
+        }
     }
 }
 

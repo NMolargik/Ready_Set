@@ -34,7 +34,8 @@ struct WatchEnergyView: View {
                 
                 if isUpdating {
                     ProgressView()
-                        .tint(.blue)
+                        .scaleEffect(2)
+                        .tint(.orange)
                 } else {
                     Text(energyBalance.description)
                         .font(.system(size: 45))

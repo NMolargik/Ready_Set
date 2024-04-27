@@ -34,6 +34,7 @@ struct WatchWaterView: View {
                 
                 if isUpdating {
                     ProgressView()
+                        .scaleEffect(2)
                         .tint(.blue)
                 } else {
                     Text(waterBalance.description)
@@ -52,7 +53,7 @@ struct WatchWaterView: View {
                 
                 if (orientation == .left) {
                     Spacer()
-                }
+                } 
             }
             .blur(radius: isTurning ? 20 : 0)
             .animation(.easeInOut, value: isTurning)

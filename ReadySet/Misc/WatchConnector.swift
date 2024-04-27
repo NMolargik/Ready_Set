@@ -53,11 +53,11 @@ class WatchConnector: NSObject, WCSessionDelegate, ObservableObject {
         }
         
         if let _ = message["giveWaterBalance"] as? Bool {
-            response["waterBalance"] = self.requestWaterConsumptionBalance
+            response["waterBalance"] = self.requestWaterConsumptionBalance()
         }
         
         if let _ = message["giveEnergyBalance"] as? Bool {
-            response["energyBalance"] = self.requestEnergyConsumptionBalance
+            response["energyBalance"] = self.requestEnergyConsumptionBalance()
         }
         
         if let waterIntake = message["newWaterIntake"] as? Int {

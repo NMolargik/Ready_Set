@@ -13,7 +13,7 @@ class MainWatchViewModel: ObservableObject, HKHelper {
     @AppStorage("watchOnboardingComplete") var watchOnboardingComplete = false
     
     @Published var selectedTab: Int = 0
-    @Published var appState: String = "running" //TODO, replace this with inoperable
+    @Published var appState: String = "running" //TODO, replace this with 'inoperable'
     @Published var useMetric: Bool = false
     @Published var stepGoal: Double = 1000
     @Published var waterGoal: Double = 64

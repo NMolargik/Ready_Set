@@ -29,7 +29,7 @@ class WaterViewModel: ObservableObject, HKHelper {
         self.readWaterConsumedWeek()
     }
     
-    func addWater(waterToAdd: Double) {
+    func addWater(waterToAdd: Double){
         DispatchQueue.main.async {
             self.addWaterConsumed(waterAmount: waterToAdd) {
                 withAnimation (.easeInOut) {

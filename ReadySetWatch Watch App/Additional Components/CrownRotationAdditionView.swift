@@ -33,73 +33,75 @@ struct CrownRotationAdditionView: View {
                     Spacer()
                 }
                 
-                VStack(spacing: 0) {
+                VStack(spacing: 5) {
                     if (!isTurning) {
-                        Image(systemName: "chevron.up")
-                            .scaleEffect(y: 0.6)
+                        Image(systemName: "digitalcrown.arrow.clockwise")
                             .padding(.bottom, 4)
                     }
                     
-                    Text("+\(Int(abs(rotation)))\(unitOfMeasurement)")
+                    Text("+ \(Int(abs(rotation)))\(unitOfMeasurement)")
                         .focusable(true)
                         .digitalCrownRotation($rotation, from: min, through: max, by: step)
                         .opacity(rotation == 0.0 ? 0 : 100)
                         .bold()
+                        .shadow(color: .black, radius: 1, x: 1, y: 1)
                         .font(.system(size: 30))
                         .foregroundStyle(gradient)
                         .animation(.easeInOut, value: rotation)
-                        .transition(.blurReplace())
-                        .frame(width: isTurning ? 100 : 0, height: isTurning ? 40 : 0)
+                        .frame(width: isTurning ? 120 : 0, height: isTurning ? 40 : 0)
+                        .padding(.bottom, isTurning ? 8 : 0)
 
-                    HStack(spacing: 0) {
+                    HStack(spacing: isTurning ? 8 : 0) {
                         Button(action: {
                             onAdd(Int(rotation))
                         }, label: {
-                            Text("Add")
-                                .bold()
-                                .font(.system(size: isTurning ? 15 : 10))
-                                .foregroundStyle(addColor)
-                                .padding(.horizontal, isTurning ? 20 : 0)
-                                .padding(.vertical, isTurning ? 10 : 0)
-                                .frame(width: isTurning ? 80 : 20)
-                                .background {
-                                    if isTurning {
-                                        Rectangle()
-                                            .cornerRadius(10)
-                                            .foregroundStyle(.white)
-                                            .padding()
-                                    }
+                            ZStack {
+                                if isTurning {
+                                    Rectangle()
+                                        .cornerRadius(10)
+                                        .foregroundStyle(addColor)
                                 }
+
+                                Text("Add")
+                                    .bold()
+                                    .font(.system(size: isTurning ? 15 : 10))
+                                    .foregroundStyle(.white)
+                                    .padding(.horizontal, isTurning ? 12 : 0)
+                                    .padding(.vertical, isTurning ? 10 : 0)
+                                    
+                            }
                         })
+                        .frame(width: isTurning ? 70 : 20, height: isTurning ? 25 : 0)
                         .disabled(!isTurning)
                         .buttonStyle(.plain)
                         
                         Button(action: onCancel, label: {
-                            Text("Cancel")
-                                .bold()
-                                .font(.system(size: isTurning ? 15 : 0))
-                                .foregroundStyle(.white)
-                                .padding(.horizontal, isTurning ? 5 : 0)
-                                .padding(.vertical, isTurning ? 10 : 0)
-                                .frame(width: isTurning ? 80 : 0)
-                                .background {
-                                    if isTurning {
-                                        Rectangle()
-                                            .cornerRadius(10)
-                                            .foregroundStyle(.red)
-                                            .padding()
-                                    }
+                            ZStack {
+                                if isTurning {
+                                    Rectangle()
+                                        .cornerRadius(10)
+                                        .foregroundStyle(.red)
                                 }
+                                
+                                Text("Cancel")
+                                    .bold()
+                                    .font(.system(size: isTurning ? 15 : 0))
+                                    .foregroundStyle(.white)
+                                    .padding(.horizontal, isTurning ? 3 : 0)
+                                    .padding(.vertical, isTurning ? 10 : 0)
+                            }
+                            
                         })
+                        .frame(width: isTurning ? 70 : 0, height: isTurning ? 25 : 0)
                         .disabled(!isTurning)
                         .buttonStyle(.plain)
                     }
                 }
                 .padding(.top, 4)
-                .frame(width: isTurning ? 150 : 30, height: isTurning ? 150 : 30)
+                .frame(width: isTurning ? 160 : 30, height: isTurning ? 110 : 30)
                 .background {
                     RoundedRectangle(cornerRadius: 20.0)
-                        .foregroundStyle(.thinMaterial)
+                        .foregroundStyle(isTurning ? .white : .clear)
                 }
                 
                 if orientation == .left && !isTurning {

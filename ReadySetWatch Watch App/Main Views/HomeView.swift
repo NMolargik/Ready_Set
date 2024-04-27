@@ -66,6 +66,7 @@ struct HomeView: View {
         .onAppear {
             withAnimation {
                 mainWatchViewModel.readStepCountToday()
+                mainWatchViewModel.getInitialValues(connector: phoneConnector)
             }
         }
     }

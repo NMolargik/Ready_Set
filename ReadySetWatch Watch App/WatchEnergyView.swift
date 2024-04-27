@@ -22,54 +22,57 @@ struct WatchEnergyView: View {
     
     var body: some View {
         ZStack {
+            Color.black
+                .ignoresSafeArea()
+                .padding(.top, 1)
+            
             VStack {
-                Text(energyBalance.description)
-                    .bold()
-                    .font(.system(size: 40))
-                    .foregroundStyle(.fontGray)
-                    .animation(.easeInOut, value: energyBalance)
-                    .transition(.blurReplace())
-
-                Text("of")
-                    .bold()
-                    .font(.system(size: 20))
-                    .foregroundStyle(WatchEnergyTabItem().gradient)
                 
-                
-                Text(Int(energyGoal).description)
-                    .bold()
-                    .font(.system(size: 40))
-                    .foregroundStyle(.fontGray)
-                
-                HStack {
-                    Image("Flame")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 30)
-                    
-                    Text("\(useMetric ? "kJ" : "cal") today")
-                        .foregroundStyle(.fontGray)
+                if (orientation == .right) {
+                    Spacer()
                 }
-                .bold()
-                .font(.system(size: 20))
-                .animation(.easeInOut, value: energyGoal)
-                .transition(.blurReplace())
+                
+                if isUpdating {
+                    ProgressView()
+                        .tint(.blue)
+                } else {
+                    Text(energyBalance.description)
+                        .font(.system(size: 45))
+                        .foregroundStyle(WatchEnergyTabItem().gradient)
+                        .animation(.easeInOut, value: energyBalance)
+                        .transition(.blurReplace())
+                }
+                
+                Text("of \(Int(energyGoal).description)")
+                    .font(.system(size: 20))
+                    .foregroundStyle(.fontGray)
+                    
+                Text("\(useMetric ? "kJ" : "cal") today")
+                    .foregroundStyle(.fontGray)
+                
+                if (orientation == .left) {
+                    Spacer()
+                }
             }
+            .blur(radius: isTurning ? 20 : 0)
+            .animation(.easeInOut, value: isTurning)
+            .bold()
+            .font(.system(size: 20))
+            .animation(.easeInOut, value: energyGoal)
+            .transition(.blurReplace())
             
             CrownRotationAdditionView(isTurning: $isTurning, rotation: $rotation, min: 80 , max: 1000, step: 20, unitOfMeasurement: useMetric ? "kJ" : "cal", addColor: .orangeStart, gradient: WatchEnergyTabItem().gradient, onAdd: { energy in
-                    isUpdating = true
-                    addEnergyIntake(energy) { success in
-                        DispatchQueue.main.async {
-                            withAnimation {
-                                requestEnergyBalanceUpdate()
-                                isTurning = success
-                                
-                                //TODO: add alert if appropriate
-                                isUpdating = false
-                                rotation = 0.0
-                            }
+                isUpdating = true
+                isTurning = false
+                rotation = 0.0
+                addEnergyIntake(energy) { success in
+                    DispatchQueue.main.async {
+                        withAnimation {
+                            requestEnergyBalanceUpdate()
+                            //TODO: Add alert if failed
                         }
                     }
+                }
             },
             onCancel: {
                 withAnimation {
@@ -94,7 +97,7 @@ struct WatchEnergyView: View {
 
 #Preview {
     WatchEnergyView(
-        energyBalance: .constant(1000),
+        energyBalance: .constant(5000),
         energyGoal: .constant(2300),
         useMetric: .constant(true),
         addEnergyIntake: { _,_ in

@@ -67,7 +67,7 @@ class PhoneConnector: NSObject, WCSessionDelegate, ObservableObject {
     
     func sendNewIntakeToPhone(intake: Int, entryType: EntryType, completion: @escaping (Bool) -> Void) {
         if session.isReachable {
-            let payload: [String : Any] = [(entryType == .water ? "waterIntake" : "energyIntake") : intake]
+            let payload: [String : Any] = [(entryType == .water ? "newWaterIntake" : "newEnergyIntake") : intake]
             
             session.sendMessage(payload, replyHandler: { response in
                 DispatchQueue.main.async {

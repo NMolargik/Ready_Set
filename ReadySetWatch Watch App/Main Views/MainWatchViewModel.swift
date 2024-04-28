@@ -24,7 +24,9 @@ class MainWatchViewModel: ObservableObject {
     
     func getInitialValues(connector: PhoneConnector) {
         connector.requestInitialsFromPhone { response in
-            self.processPhoneUpdate(update: response)
+            DispatchQueue.main.async {
+                self.processPhoneUpdate(update: response)
+            }
         }
     }
     

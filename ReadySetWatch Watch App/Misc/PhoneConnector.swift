@@ -128,6 +128,7 @@ class PhoneConnector: NSObject, WCSessionDelegate, ObservableObject {
         }
         
         if let stepGoal = response["stepGoal"] as? Double {
+            print(stepGoal)
             output["stepGoal"] = stepGoal
         }
         

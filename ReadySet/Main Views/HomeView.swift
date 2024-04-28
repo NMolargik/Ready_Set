@@ -118,16 +118,18 @@ struct HomeView: View {
         exerciseViewModel.healthStore = healthStore
         waterViewModel.healthStore = healthStore
         energyViewModel.healthStore = healthStore
+        
+        exerciseViewModel.watchConnector = watchConnector
+        waterViewModel.watchConnector = watchConnector
+        energyViewModel.watchConnector = watchConnector
 
         if homeViewModel.needRefreshFromDate() {
             exerciseViewModel.readInitial()
             waterViewModel.readInitial()
             energyViewModel.readInitial()
+            
+            watchConnector.sendUpdateToWatch(update: ["stepBalance" : exerciseViewModel.stepsToday, "waterBalance" : waterViewModel.waterConsumedToday, "energyBalance" : energyViewModel.energyConsumedToday])
         }
-        
-        exerciseViewModel.watchConnector = watchConnector
-        waterViewModel.watchConnector = watchConnector
-        energyViewModel.watchConnector = watchConnector
     }
     
     private func setupConnectorClosures() {

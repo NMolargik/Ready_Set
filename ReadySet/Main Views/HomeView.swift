@@ -131,6 +131,12 @@ struct HomeView: View {
     }
     
     private func setupConnectorClosures() {
+        watchConnector.getInitials = {
+            exerciseViewModel.readInitial()
+            waterViewModel.readInitial()
+            energyViewModel.readInitial()
+        }
+        
         watchConnector.requestStepBalance = {
             return exerciseViewModel.stepsToday
         }

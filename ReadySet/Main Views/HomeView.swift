@@ -131,6 +131,10 @@ struct HomeView: View {
     }
     
     private func setupConnectorClosures() {
+        watchConnector.requestStepBalance = {
+            return exerciseViewModel.stepsToday
+        }
+        
         watchConnector.requestWaterConsumptionBalance = {
             return waterViewModel.waterConsumedToday
         }
@@ -151,7 +155,7 @@ struct HomeView: View {
             }
         }
         
-        watchConnector.sendUpdateToWatch(update: ["appState" : "running"])
+        watchConnector.sendUpdateToWatch(update: ["appState" : "background"])
     }
     
     private func setGoalsAfterUnitChange() {

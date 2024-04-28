@@ -65,18 +65,17 @@ struct WatchWaterView: View {
                         isUpdating = true
                     }
                     
-                    addWaterIntake(Int(amount)) { success in
-                        WKInterfaceDevice.current().play(success ? .success : .failure)
-                        
-                        if (!success) {
-                            showAlert = true
-                        }
-                        
-                        withAnimation {
-                            amountToAdd = 0
-                            isUpdating = false
+                    if (amount > 0) {
+                        addWaterIntake(Int(amount)) { success in
+                            WKInterfaceDevice.current().play(.success)
+                            
+                            withAnimation {
+                                amountToAdd = 0
+                                isUpdating = false
+                            }
                         }
                     }
+                    
                 }, onCancel: {
                     withAnimation {
                         amountToAdd = 0
@@ -90,15 +89,6 @@ struct WatchWaterView: View {
                 isUpdating = false
             }
         }
-        .alert("There was an issue communicating with Ready, Set", isPresented: $showAlert, actions: {
-            Button(action: {
-                withAnimation {
-                    showAlert = false
-                }
-            }, label: {
-                Text("Okay")
-            })
-        })
     }
 }
 

@@ -22,8 +22,6 @@
 		EB1FDC252BD7053000253855 /* MainWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1FDC242BD7053000253855 /* MainWatchView.swift */; };
 		EB1FDC2A2BD7053200253855 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB1FDC292BD7053200253855 /* Preview Assets.xcassets */; };
 		EB1FDC2D2BD7053200253855 /* Ready, Set, Wrist.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = EB1FDC202BD7053000253855 /* Ready, Set, Wrist.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		EB1FDC402BD7492000253855 /* HKHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1A3E912BD4DA45005CD025 /* HKHelper.swift */; };
-		EB1FDC412BD7494D00253855 /* HealthBaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C6E2BCDE8310071BA99 /* HealthBaseController.swift */; };
 		EB1FDC422BD7495100253855 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1A3E8F2BD4CF0C005CD025 /* Date+Extension.swift */; };
 		EB1FDC442BD74A7B00253855 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB1FDC432BD74A7B00253855 /* Assets.xcassets */; };
 		EB1FDC502BD9A0C900253855 /* EntryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1FDC4F2BD9A0C900253855 /* EntryType.swift */; };
@@ -39,7 +37,6 @@
 		EB2BB05B2BDB1BFD00C3DA78 /* IWatchTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BB05A2BDB1BFD00C3DA78 /* IWatchTabItem.swift */; };
 		EB2BB05D2BDB1D4800C3DA78 /* WatchWaterTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BB05C2BDB1D4800C3DA78 /* WatchWaterTabItem.swift */; };
 		EB2BB05F2BDB1D6E00C3DA78 /* WatchEnergyTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BB05E2BDB1D6E00C3DA78 /* WatchEnergyTabItem.swift */; };
-		EB2BB0642BDB1F4F00C3DA78 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BB0632BDB1F4F00C3DA78 /* HeaderView.swift */; };
 		EB2BB0662BDB25A200C3DA78 /* WatchExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BB0652BDB25A200C3DA78 /* WatchExerciseView.swift */; };
 		EB2BB0682BDB263E00C3DA78 /* WatchWaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BB0672BDB263E00C3DA78 /* WatchWaterView.swift */; };
 		EB2BB06A2BDB26C700C3DA78 /* WatchEnergyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BB0692BDB26C700C3DA78 /* WatchEnergyView.swift */; };
@@ -81,7 +78,7 @@
 		EB4D9C602BCDABAA0071BA99 /* EnergyFitnessWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C5F2BCDABAA0071BA99 /* EnergyFitnessWidgetView.swift */; };
 		EB4D9C622BCDABB20071BA99 /* EnergyHealthWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C612BCDABB20071BA99 /* EnergyHealthWidgetView.swift */; };
 		EB4D9C652BCDBDF60071BA99 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C642BCDBDF60071BA99 /* SplashView.swift */; };
-		EB4D9C672BCDBE890071BA99 /* GoalSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C662BCDBE890071BA99 /* GoalSetView.swift */; };
+		EB4D9C672BCDBE890071BA99 /* InitialExerciseBuilderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C662BCDBE890071BA99 /* InitialExerciseBuilderView.swift */; };
 		EB4D9C692BCDBE940071BA99 /* NavigationTutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C682BCDBE940071BA99 /* NavigationTutorialView.swift */; };
 		EB4D9C6B2BCDCB1B0071BA99 /* BouncingChevronView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C6A2BCDCB1B0071BA99 /* BouncingChevronView.swift */; };
 		EB4D9C6F2BCDE8310071BA99 /* HealthBaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4D9C6E2BCDE8310071BA99 /* HealthBaseController.swift */; };
@@ -98,6 +95,7 @@
 		EB7111012BC8B3C20078F796 /* WaterAdditionWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7111002BC8B3C20078F796 /* WaterAdditionWidgetView.swift */; };
 		EBEEC77B2BD0251F0058BDFD /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBEEC77A2BD0251F0058BDFD /* Exercise.swift */; };
 		EBEEC7A72BD184160058BDFD /* GoalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBEEC7A62BD184160058BDFD /* GoalType.swift */; };
+		EBF9DD2C2BDEAB7D009EA21A /* GoalSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF9DD2B2BDEAB7D009EA21A /* GoalSetView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -158,7 +156,6 @@
 		EB2BB05A2BDB1BFD00C3DA78 /* IWatchTabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IWatchTabItem.swift; sourceTree = "<group>"; };
 		EB2BB05C2BDB1D4800C3DA78 /* WatchWaterTabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchWaterTabItem.swift; sourceTree = "<group>"; };
 		EB2BB05E2BDB1D6E00C3DA78 /* WatchEnergyTabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchEnergyTabItem.swift; sourceTree = "<group>"; };
-		EB2BB0632BDB1F4F00C3DA78 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		EB2BB0652BDB25A200C3DA78 /* WatchExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchExerciseView.swift; sourceTree = "<group>"; };
 		EB2BB0672BDB263E00C3DA78 /* WatchWaterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchWaterView.swift; sourceTree = "<group>"; };
 		EB2BB0692BDB26C700C3DA78 /* WatchEnergyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchEnergyView.swift; sourceTree = "<group>"; };
@@ -203,7 +200,7 @@
 		EB4D9C5F2BCDABAA0071BA99 /* EnergyFitnessWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnergyFitnessWidgetView.swift; sourceTree = "<group>"; };
 		EB4D9C612BCDABB20071BA99 /* EnergyHealthWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnergyHealthWidgetView.swift; sourceTree = "<group>"; };
 		EB4D9C642BCDBDF60071BA99 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
-		EB4D9C662BCDBE890071BA99 /* GoalSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalSetView.swift; sourceTree = "<group>"; };
+		EB4D9C662BCDBE890071BA99 /* InitialExerciseBuilderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialExerciseBuilderView.swift; sourceTree = "<group>"; };
 		EB4D9C682BCDBE940071BA99 /* NavigationTutorialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTutorialView.swift; sourceTree = "<group>"; };
 		EB4D9C6A2BCDCB1B0071BA99 /* BouncingChevronView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BouncingChevronView.swift; sourceTree = "<group>"; };
 		EB4D9C6E2BCDE8310071BA99 /* HealthBaseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthBaseController.swift; sourceTree = "<group>"; };
@@ -220,6 +217,7 @@
 		EB7111002BC8B3C20078F796 /* WaterAdditionWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterAdditionWidgetView.swift; sourceTree = "<group>"; };
 		EBEEC77A2BD0251F0058BDFD /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		EBEEC7A62BD184160058BDFD /* GoalType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalType.swift; sourceTree = "<group>"; };
+		EBF9DD2B2BDEAB7D009EA21A /* GoalSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalSetView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -405,7 +403,6 @@
 				EB2BB0462BDAF66000C3DA78 /* MainWatchViewModel.swift */,
 				EB1FDC242BD7053000253855 /* MainWatchView.swift */,
 				EB2BB04D2BDB1A0D00C3DA78 /* HomeView.swift */,
-				EB2BB0632BDB1F4F00C3DA78 /* HeaderView.swift */,
 			);
 			path = "Main Views";
 			sourceTree = "<group>";
@@ -471,7 +468,8 @@
 			children = (
 				EB4D9C642BCDBDF60071BA99 /* SplashView.swift */,
 				EB7110F32BC847610078F796 /* HealthPermissionView.swift */,
-				EB4D9C662BCDBE890071BA99 /* GoalSetView.swift */,
+				EB4D9C662BCDBE890071BA99 /* InitialExerciseBuilderView.swift */,
+				EBF9DD2B2BDEAB7D009EA21A /* GoalSetView.swift */,
 				EB4D9C682BCDBE940071BA99 /* NavigationTutorialView.swift */,
 			);
 			path = Onboarding;
@@ -666,6 +664,7 @@
 				EB3AB33D2BC70CF5008B6F22 /* HomeView.swift in Sources */,
 				EB4D9C732BCDFE540071BA99 /* SliderView.swift in Sources */,
 				EB4D9C602BCDABAA0071BA99 /* EnergyFitnessWidgetView.swift in Sources */,
+				EBF9DD2C2BDEAB7D009EA21A /* GoalSetView.swift in Sources */,
 				EB3AB3552BC72A46008B6F22 /* EnergyTopContentView.swift in Sources */,
 				EB7110F72BC84B520078F796 /* HomeViewModel.swift in Sources */,
 				EB4D9C572BCC8B6B0071BA99 /* WaterViewModel.swift in Sources */,
@@ -689,7 +688,7 @@
 				EB4742BC2BD324DF009A23E4 /* ExerciseEntryHeaderView.swift in Sources */,
 				EB4D9C7D2BCF074E0071BA99 /* VerticalToggleStyle.swift in Sources */,
 				EB3AB3622BC76FED008B6F22 /* EnergyBottomContentView.swift in Sources */,
-				EB4D9C672BCDBE890071BA99 /* GoalSetView.swift in Sources */,
+				EB4D9C672BCDBE890071BA99 /* InitialExerciseBuilderView.swift in Sources */,
 				EB1FDC1B2BD6FCBE00253855 /* ExerciseSetRecordView.swift in Sources */,
 				0E7DCA5E2BC6FF7400B9403C /* ExerciseSet.swift in Sources */,
 				EB4D9C772BCEE0F60071BA99 /* EnergyChartView.swift in Sources */,
@@ -729,13 +728,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB1FDC252BD7053000253855 /* MainWatchView.swift in Sources */,
-				EB1FDC412BD7494D00253855 /* HealthBaseController.swift in Sources */,
 				EB2BB0662BDB25A200C3DA78 /* WatchExerciseView.swift in Sources */,
 				EB2BB0472BDAF66000C3DA78 /* MainWatchViewModel.swift in Sources */,
 				EB2BB04C2BDB0DDD00C3DA78 /* OnboardingView.swift in Sources */,
-				EB1FDC402BD7492000253855 /* HKHelper.swift in Sources */,
 				EB2BB0572BDB1B5900C3DA78 /* WatchExerciseTabItem.swift in Sources */,
-				EB2BB0642BDB1F4F00C3DA78 /* HeaderView.swift in Sources */,
 				EB2BB04E2BDB1A0D00C3DA78 /* HomeView.swift in Sources */,
 				EB1FDC512BD9A0DB00253855 /* EntryType.swift in Sources */,
 				EB2BB0552BDB1B1100C3DA78 /* WatchTabItemType.swift in Sources */,
@@ -893,7 +889,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ReadySet/ReadySet.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "\"ReadySet/Preview Content\"";
 				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
 				ENABLE_PREVIEWS = YES;
@@ -935,7 +931,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ReadySet/ReadySet.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "\"ReadySet/Preview Content\"";
 				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
 				ENABLE_PREVIEWS = YES;
@@ -976,20 +972,18 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "ReadySetWatch Watch App/ReadySetWatch Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "\"ReadySetWatch Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = R8Q8DM58C6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "\"Ready, Set, Wrist uses your health information to read step count\"";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "\"Ready, Set, Wrist uses your health information to read step count\"";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = nickmolargik.ReadySet;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = nickmolargik.ReadySet.watchkitapp;
 				PRODUCT_NAME = "Ready, Set, Wrist";
 				SDKROOT = watchos;
@@ -1008,20 +1002,18 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "ReadySetWatch Watch App/ReadySetWatch Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "\"ReadySetWatch Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "\"Ready, Set, Wrist uses your health information to read step count\"";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "\"Ready, Set, Wrist uses your health information to read step count\"";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = nickmolargik.ReadySet;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = nickmolargik.ReadySet.watchkitapp;
 				PRODUCT_NAME = "Ready, Set, Wrist";
 				SDKROOT = watchos;

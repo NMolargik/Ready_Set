@@ -11,21 +11,31 @@ import HealthKit
 struct WatchExerciseView: View {
     @Binding var stepsTaken: Int
     @Binding var stepGoal: Double
-    @State var orientation: WKInterfaceDeviceCrownOrientation = .right
 
     var body: some View {
         VStack {
             GaugeView(max: $stepGoal, level: $stepsTaken, isUpdating: .constant(false), color: WatchExerciseTabItem().color, unit: " steps")
                 .frame(height: 120)
-                .padding(.bottom, 20)
+            
+            if (stepsTaken == 0 || stepGoal == 1000) {
+                HStack (alignment: .center) {
+                    Text("You may need\nto open Ready, Set")
+                        .font(.system(size: 10))
+                    
+                    Image(systemName: "applewatch.radiowaves.left.and.right")
+                        
+                }
+                .frame(height: 30)
+                .multilineTextAlignment(.trailing)
+                .foregroundStyle(.white)
+                .animation(.easeInOut, value: stepsTaken)
+                    
+            }
         }
         .bold()
         .font(.system(size: 20))
         .animation(.easeInOut, value: stepGoal)
         .transition(.blurReplace())
-        .onAppear {
-            orientation = WKInterfaceDevice.current().crownOrientation
-        }
     }
 }
 

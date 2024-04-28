@@ -82,7 +82,7 @@ struct HealthPermissionView: View {
                             
                             HStack {
                                 Text("Authorize Health")
-                                    .foregroundStyle(.base)
+                                    .foregroundStyle(.white)
                                 
                                 Image(systemName: "heart.fill")
                                     .foregroundStyle(.pink)
@@ -153,7 +153,7 @@ struct HealthPermissionView: View {
             withAnimation(.easeInOut) {
                 onboardingProgress = 0.75
                 onboardingGradient = LinearGradient(colors: [.greenStart, .blueEnd, .orangeStart], startPoint: .leading, endPoint: .trailing)
-                appState = "goalSetting"
+                appState = "initialExerciseBuilder"
                 UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
             }
         }

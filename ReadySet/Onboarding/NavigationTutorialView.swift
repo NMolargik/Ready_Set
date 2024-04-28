@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct NavigationTutorialView: View {
-    @AppStorage("appState") var appState: String = "goalSetting"
+    @AppStorage("appState") var appState: String = "navigationTutorial"
     @Binding var onboardingProgress: Float
     @Binding var onboardingGradient: LinearGradient
     
@@ -36,7 +36,6 @@ struct NavigationTutorialView: View {
            
                 
                 if showMoreText {
-                    moreInstructions
                     
                     Spacer()
                     
@@ -71,18 +70,7 @@ struct NavigationTutorialView: View {
             .foregroundStyle(.fontGray)
             .padding(.trailing)
     }
-    
-    private var moreInstructions: some View {
-        VStack {
-            Text("If you did not enter them previously, we recommend filling out your sets on the Exercise page for the full experience.")
-                .multilineTextAlignment(.center)
-                .font(.body)
-                .foregroundStyle(.fontGray)
-                .padding(.horizontal)
-                .padding(.bottom, 50)
-        }
-    }
-    
+
     private var instructionText: some View {
         VStack {
             BouncingChevronView()

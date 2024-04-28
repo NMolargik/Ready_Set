@@ -10,18 +10,22 @@ import WatchConnectivity
 import SwiftUI
 
 class WatchConnector: NSObject, WCSessionDelegate, ObservableObject {
-    @AppStorage("appState") var appState: String = "splash"
+    @AppStorage("appState") var appState: String = "background"
     @AppStorage("useMetric") var useMetric: Bool = false
     @AppStorage("stepGoal") var stepGoal: Double = 1000
     @AppStorage("waterGoal") var waterGoal: Double = 64
     @AppStorage("energyGoal") var energyGoal: Double = 2000
     
+    var getInitials: (() -> Void)
+    var requestStepBalance: (() -> Int)
     var requestWaterConsumptionBalance: (() -> Int)
     var requestEnergyConsumptionBalance: (() -> Int)
     var addConsumption: ((EntryType, Int) -> Void)
     var session: WCSession
     
     init(session: WCSession = .default) {
+        self.getInitials = { }
+        self.requestStepBalance = { 0 }
         self.requestWaterConsumptionBalance = { 0 }
         self.requestEnergyConsumptionBalance = { 0 }
         self.addConsumption = { _, _ in }
@@ -55,6 +59,10 @@ class WatchConnector: NSObject, WCSessionDelegate, ObservableObject {
             response["energyGoal"] = self.energyGoal
         }
         
+        if let _ = message["giveStepBalance"] as? Bool {
+            response["stepBalance"] = self.requestStepBalance()
+        }
+        
         if let _ = message["giveWaterBalance"] as? Bool {
             response["waterBalance"] = self.requestWaterConsumptionBalance()
         }
@@ -66,16 +74,14 @@ class WatchConnector: NSObject, WCSessionDelegate, ObservableObject {
         if let waterIntake = message["newWaterIntake"] as? Int {
             receiveNewWaterIntakeFromWatch(intake: waterIntake)
             
-            //let newBalance = self.requestWaterConsumptionBalance
-            let newBalance = 2
+            let newBalance = self.requestWaterConsumptionBalance
             response["waterBalance"] = newBalance
         }
         
         if let energyIntake = message["newEnergyIntake"] as? Int {
             receiveNewEnergyIntakeFromWatch(intake: energyIntake)
             
-            //let newBalance = self.requestEnergyConsumptionBalance
-            let newBalance = 2
+            let newBalance = self.requestEnergyConsumptionBalance
             response["energyBalance"] = newBalance
         }
         
@@ -85,7 +91,7 @@ class WatchConnector: NSObject, WCSessionDelegate, ObservableObject {
     func sendUpdateToWatch(update: [String : Any]) {
         if session.isReachable {
             var formattedUpdate = update
-            formattedUpdate["appState"] = "running"
+            formattedUpdate["appState"] = appState
             session.sendMessage(formattedUpdate, replyHandler: nil, errorHandler: { error in
                 print("Error sending message: \(error.localizedDescription)")
             })
@@ -114,7 +120,9 @@ class WatchConnector: NSObject, WCSessionDelegate, ObservableObject {
 
         switch activationState {
         case .activated:
+            self.getInitials()
             print("WCSession activated and ready for communication with the watch.")
+            
         case .inactive:
             print("WCSession is inactive.")
         case .notActivated:

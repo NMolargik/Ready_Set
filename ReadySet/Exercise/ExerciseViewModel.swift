@@ -47,6 +47,7 @@ class ExerciseViewModel: ObservableObject, HKHelper {
         hkQuery(type: stepCount, unit: HKUnit.count(), failed: "Failed to read step count") { amount in
             DispatchQueue.main.async {
                 self.stepsToday = amount
+                self.watchConnector?.sendUpdateToWatch(update: ["stepBalance" : self.stepsToday])
             }
         }
     }

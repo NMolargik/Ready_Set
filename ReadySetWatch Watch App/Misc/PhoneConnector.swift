@@ -59,6 +59,7 @@ class PhoneConnector: NSObject, WCSessionDelegate, ObservableObject {
                 "giveStepGoal" : true,
                 "giveWaterGoal" : true,
                 "giveEnergyGoal" : true,
+                "giveStepBalance" : true,
                 "giveWaterBalance" : true,
                 "giveEnergyBalance" : true
             ]
@@ -96,7 +97,7 @@ class PhoneConnector: NSObject, WCSessionDelegate, ObservableObject {
             let payload: [String : Any] = [(entryType == .water ? "newWaterIntake" : "newEnergyIntake") : intake]
             
             session.sendMessage(payload, replyHandler: { response in
-                if let success = response["complete"] as? Bool {
+                if response["complete"] is Bool {
                     completion(true)
                 } else {
                     completion(false)
@@ -136,6 +137,10 @@ class PhoneConnector: NSObject, WCSessionDelegate, ObservableObject {
         
         if let energyGoal = response["energyGoal"] as? Double {
             output["energyGoal"] = energyGoal
+        }
+        
+        if let stepBalance = response["stepBalance"] as? Int {
+            output["stepBalance"] = stepBalance
         }
         
         if let waterBalance = response["waterBalance"] as? Int {

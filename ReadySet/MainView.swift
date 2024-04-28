@@ -47,9 +47,14 @@ struct MainView: View {
         case "healthPermission":
             HealthPermissionView(onboardingProgress: $onboardingProgress, onboardingGradient: $onboardingGradient, healthController: $healthController)
                 .transition(.opacity)
-        case "goalSetting":
+        case "initialExerciseBuilder":
+            InitialExerciseBuilderView(onboardingProgress: $onboardingProgress, onboardingGradient: $onboardingGradient)
+                .transition(.opacity)
+            
+        case "goalSetView":
             GoalSetView(onboardingProgress: $onboardingProgress, onboardingGradient: $onboardingGradient)
                 .transition(.opacity)
+                 
         case "navigationTutorial":
             NavigationTutorialView(onboardingProgress: $onboardingProgress, onboardingGradient: $onboardingGradient)
                 .animation(.easeInOut, value: appState)

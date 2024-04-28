@@ -13,8 +13,6 @@ struct MainWatchView: View {
     @StateObject var mainWatchViewModel = MainWatchViewModel()
     @StateObject var phoneConnector = PhoneConnector()
     
-    var healthBaseController = HealthBaseController()
-    
     var body: some View {
         VStack {
             HomeView(mainWatchViewModel: mainWatchViewModel, phoneConnector: phoneConnector)
@@ -26,17 +24,15 @@ struct MainWatchView: View {
             setupConnectorClosures()
             phoneConnector.requestInitialsFromPhone { initialPackage in
                 withAnimation {
-                    mainWatchViewModel.respondToPhoneUpdate(update: initialPackage)
+                    mainWatchViewModel.processPhoneUpdate(update: initialPackage)
                 }
             }
-            healthBaseController.requestAuthorization()
-            mainWatchViewModel.healthStore = healthBaseController.healthStore
         }
         .onChange(of: scenePhase) {
             if scenePhase == .active {
                 phoneConnector.requestInitialsFromPhone { initialPackage in
                     withAnimation {
-                        mainWatchViewModel.respondToPhoneUpdate(update: initialPackage)
+                        mainWatchViewModel.processPhoneUpdate(update: initialPackage)
                     }
                 }
             }
@@ -44,7 +40,7 @@ struct MainWatchView: View {
     }
     
     private func setupConnectorClosures() {
-        phoneConnector.respondToPhoneUpdate = mainWatchViewModel.respondToPhoneUpdate(update:)
+        phoneConnector.respondToPhoneUpdate = mainWatchViewModel.processPhoneUpdate(update:)
     }
 }
 

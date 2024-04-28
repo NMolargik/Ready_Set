@@ -15,13 +15,13 @@ struct HomeView: View {
         ZStack {
             VStack {
                 TabView(selection: $mainWatchViewModel.selectedTab) {
-                    if (mainWatchViewModel.appState != "running") {
+                    if (mainWatchViewModel.appState != "running" && mainWatchViewModel.appState != "background") {
                         OnboardingView(appState: $mainWatchViewModel.appState)
                             .containerBackground(LinearGradient(colors: [.purpleStart, .purpleEnd], startPoint: .leading, endPoint: .trailing), for: .tabView)
                             .transition(.opacity)
                             .tag(0)
                     } else {
-                        WatchExerciseView(stepsTaken: $mainWatchViewModel.stepsTakenToday, stepGoal: $mainWatchViewModel.stepGoal)
+                        WatchExerciseView(stepsTaken: $mainWatchViewModel.stepBalance, stepGoal: $mainWatchViewModel.stepGoal)
                             .tag(0)
                             .containerBackground(WatchExerciseTabItem().gradient, for: .tabView)
                         
@@ -32,7 +32,7 @@ struct HomeView: View {
                         }, requestWaterBalanceUpdate: {
                             withAnimation {
                                 phoneConnector.requestValuesFromPhone(values: ["giveWaterBalance"]) { response in
-                                    mainWatchViewModel.respondToPhoneUpdate(update: response)
+                                    mainWatchViewModel.processPhoneUpdate(update: response)
                                 }
                             }
                         })
@@ -46,7 +46,7 @@ struct HomeView: View {
                         }, requestEnergyBalanceUpdate: {
                             withAnimation {
                                 phoneConnector.requestValuesFromPhone(values: ["giveEnergyBalance"]) { response in
-                                    mainWatchViewModel.respondToPhoneUpdate(update: response)
+                                    mainWatchViewModel.processPhoneUpdate(update: response)
                                 }
                             }
                         })
@@ -61,7 +61,6 @@ struct HomeView: View {
         }
         .onAppear {
             withAnimation {
-                mainWatchViewModel.readStepCountToday()
                 mainWatchViewModel.getInitialValues(connector: phoneConnector)
             }
         }

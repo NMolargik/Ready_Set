@@ -22,7 +22,7 @@ struct CrownRotationAdditionView: View {
             Text("+ \(Int(amount)) \(unitOfMeasurement)")
                 .bold()
                 .foregroundStyle(gradient)
-                .font(.title)
+                .font(.title2)
                 .digitalCrownRotation($amount)
             
             Stepper(value: $amount, step: step, label: {
@@ -30,8 +30,8 @@ struct CrownRotationAdditionView: View {
             .colorMultiply(.baseInvert)
             .padding(.horizontal, 20)
             .onChange(of: amount) {
-                if amount < 0 {
-                    amount = 0
+                if amount < min {
+                    amount = min
                 } else if amount > max {
                     amount = max
                 }
@@ -85,9 +85,12 @@ struct CrownRotationAdditionView: View {
             RoundedRectangle(cornerRadius: 20.0)
                 .foregroundStyle(.base)
         }
+        .onAppear {
+            amount = min
+        }
     }
 }
 
 #Preview {
-    CrownRotationAdditionView(amount: .constant(100), min: 8, max: 128, step: 8, unitOfMeasurement: "oz", gradient: WatchWaterTabItem().gradient, onAdd: { _ in }, onCancel: {})
+    CrownRotationAdditionView(amount: .constant(100), min: 8, max: 128, step: 8, unitOfMeasurement: "oz", gradient: WaterTabItem().gradient, onAdd: { _ in }, onCancel: {})
 }

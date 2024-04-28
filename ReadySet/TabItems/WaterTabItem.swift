@@ -20,7 +20,9 @@ struct WaterTabItem: ITabItem {
     }
     
     func reorderTabs() -> [any ITabItem] {
+        #if os(iOS)
         UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+        #endif
         return [WaterTabItem(), EnergyTabItem(), SettingsTabItem(), ExerciseTabItem()]
     }
 }

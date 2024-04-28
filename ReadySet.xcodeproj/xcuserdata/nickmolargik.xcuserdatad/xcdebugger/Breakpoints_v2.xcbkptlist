@@ -151,16 +151,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "3E66BD98-0D93-4F6E-A635-FB08BEA37C0F"
+            uuid = "A68013B2-EE6D-4C50-A4FD-B2AC4C592A23"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ReadySet/Misc/WatchConnector.swift"
+            filePath = "ReadySet/Main Views/HomeView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
-            landmarkName = "session(_:didReceiveMessage:replyHandler:)"
+            startingLineNumber = "202"
+            endingLineNumber = "202"
+            landmarkName = "handleScenePhase(newPhase:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

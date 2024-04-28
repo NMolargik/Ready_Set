@@ -16,7 +16,6 @@ class WatchConnector: NSObject, WCSessionDelegate, ObservableObject {
     @AppStorage("waterGoal") var waterGoal: Double = 64
     @AppStorage("energyGoal") var energyGoal: Double = 2000
     
-    var getInitials: (() -> Void)
     var requestStepBalance: (() -> Int)
     var requestWaterConsumptionBalance: (() -> Int)
     var requestEnergyConsumptionBalance: (() -> Int)
@@ -24,7 +23,6 @@ class WatchConnector: NSObject, WCSessionDelegate, ObservableObject {
     var session: WCSession
     
     init(session: WCSession = .default) {
-        self.getInitials = { }
         self.requestStepBalance = { 0 }
         self.requestWaterConsumptionBalance = { 0 }
         self.requestEnergyConsumptionBalance = { 0 }
@@ -120,7 +118,6 @@ class WatchConnector: NSObject, WCSessionDelegate, ObservableObject {
 
         switch activationState {
         case .activated:
-            self.getInitials()
             print("WCSession activated and ready for communication with the watch.")
             
         case .inactive:

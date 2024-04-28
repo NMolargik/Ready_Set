@@ -23,7 +23,7 @@ struct WatchEnergyView: View {
     var body: some View {
         ZStack {
             VStack {
-                GaugeView(max: $energyGoal, level: $energyBalance, isUpdating: $isUpdating, color: WatchEnergyTabItem().color, unit: useMetric ? "kJ" : "cal")
+                GaugeView(max: $energyGoal, level: $energyBalance, isUpdating: $isUpdating, color: EnergyTabItem().color, unit: useMetric ? "kJ" : "cal")
                     .frame(height: 120)
                 
                 Button(action: {
@@ -58,7 +58,7 @@ struct WatchEnergyView: View {
             .transition(.blurReplace())
             
             if (isAdding) {
-                CrownRotationAdditionView(amount: $amountToAdd, min: 8, max: energyGoal, step: 20, unitOfMeasurement: useMetric ? "kJ" : "cal", gradient: WatchEnergyTabItem().gradient, onAdd: { amount in
+                CrownRotationAdditionView(amount: $amountToAdd, min: 8, max: energyGoal, step: 20, unitOfMeasurement: useMetric ? "kJ" : "cal", gradient: EnergyTabItem().gradient, onAdd: { amount in
                     withAnimation {
                         isUpdating = true
                         isAdding = false
@@ -72,6 +72,11 @@ struct WatchEnergyView: View {
                                 amountToAdd = 0
                                 isUpdating = false
                             }
+                        }
+                    } else {
+                        withAnimation {
+                            amountToAdd = 0
+                            isUpdating = false
                         }
                     }
                 }, onCancel: {

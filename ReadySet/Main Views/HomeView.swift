@@ -62,6 +62,7 @@ struct HomeView: View {
             handleScenePhase(newPhase: scenePhase)
         }
         .onChange(of: useMetric) {
+            watchConnector.sendUpdateToWatch(update: ["useMetric" : useMetric])
             setGoalsAfterUnitChange()
         }
         .onChange(of: selectedDay) {
@@ -139,12 +140,6 @@ struct HomeView: View {
     }
     
     private func setupConnectorClosures() {
-        watchConnector.getInitials = {
-            exerciseViewModel.readInitial()
-            waterViewModel.readInitial()
-            energyViewModel.readInitial()
-        }
-        
         watchConnector.requestStepBalance = {
             return exerciseViewModel.stepsToday
         }
@@ -202,6 +197,9 @@ struct HomeView: View {
             waterViewModel.readInitial()
             energyViewModel.readInitial() 
         }
+        
+        print(appState)
+        watchConnector.sendUpdateToWatch(update: ["appState" : appState])
     }
 }
 

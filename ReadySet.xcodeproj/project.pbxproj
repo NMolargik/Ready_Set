@@ -31,11 +31,6 @@
 		EB2BB0472BDAF66000C3DA78 /* MainWatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BB0462BDAF66000C3DA78 /* MainWatchViewModel.swift */; };
 		EB2BB04C2BDB0DDD00C3DA78 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BB04B2BDB0DDD00C3DA78 /* OnboardingView.swift */; };
 		EB2BB04E2BDB1A0D00C3DA78 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BB04D2BDB1A0D00C3DA78 /* HomeView.swift */; };
-		EB2BB0552BDB1B1100C3DA78 /* WatchTabItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BB0542BDB1B1100C3DA78 /* WatchTabItemType.swift */; };
-		EB2BB0572BDB1B5900C3DA78 /* WatchExerciseTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BB0562BDB1B5900C3DA78 /* WatchExerciseTabItem.swift */; };
-		EB2BB05B2BDB1BFD00C3DA78 /* IWatchTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BB05A2BDB1BFD00C3DA78 /* IWatchTabItem.swift */; };
-		EB2BB05D2BDB1D4800C3DA78 /* WatchWaterTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BB05C2BDB1D4800C3DA78 /* WatchWaterTabItem.swift */; };
-		EB2BB05F2BDB1D6E00C3DA78 /* WatchEnergyTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BB05E2BDB1D6E00C3DA78 /* WatchEnergyTabItem.swift */; };
 		EB2BB0662BDB25A200C3DA78 /* WatchExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BB0652BDB25A200C3DA78 /* WatchExerciseView.swift */; };
 		EB2BB0682BDB263E00C3DA78 /* WatchWaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BB0672BDB263E00C3DA78 /* WatchWaterView.swift */; };
 		EB2BB06A2BDB26C700C3DA78 /* WatchEnergyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BB0692BDB26C700C3DA78 /* WatchEnergyView.swift */; };
@@ -118,6 +113,13 @@
 		EBF9DD642BDEF96B009EA21A /* ReadySetEnergyWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF9DD632BDEF96B009EA21A /* ReadySetEnergyWidget.swift */; };
 		EBF9DD662BDEF973009EA21A /* ReadySetEnergyWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF9DD652BDEF973009EA21A /* ReadySetEnergyWidgetView.swift */; };
 		EBF9DD682BDEFAA8009EA21A /* EnergyWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF9DD672BDEFAA8009EA21A /* EnergyWidgetProvider.swift */; };
+		EBF9DD692BDF0139009EA21A /* TabItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3402BC71105008B6F22 /* TabItemType.swift */; };
+		EBF9DD6A2BDF0139009EA21A /* ExerciseTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3452BC711FA008B6F22 /* ExerciseTabItem.swift */; };
+		EBF9DD6B2BDF0139009EA21A /* WaterTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3472BC71204008B6F22 /* WaterTabItem.swift */; };
+		EBF9DD6C2BDF0139009EA21A /* EnergyTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3492BC7120C008B6F22 /* EnergyTabItem.swift */; };
+		EBF9DD6D2BDF0139009EA21A /* SettingsTabITem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB34B2BC71214008B6F22 /* SettingsTabITem.swift */; };
+		EBF9DD6E2BDF0139009EA21A /* ITabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3432BC711A8008B6F22 /* ITabItem.swift */; };
+		EBF9DD702BDF0454009EA21A /* WatchTrackerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF9DD6F2BDF0454009EA21A /* WatchTrackerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -191,11 +193,6 @@
 		EB2BB0462BDAF66000C3DA78 /* MainWatchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWatchViewModel.swift; sourceTree = "<group>"; };
 		EB2BB04B2BDB0DDD00C3DA78 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		EB2BB04D2BDB1A0D00C3DA78 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		EB2BB0542BDB1B1100C3DA78 /* WatchTabItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchTabItemType.swift; sourceTree = "<group>"; };
-		EB2BB0562BDB1B5900C3DA78 /* WatchExerciseTabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchExerciseTabItem.swift; sourceTree = "<group>"; };
-		EB2BB05A2BDB1BFD00C3DA78 /* IWatchTabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IWatchTabItem.swift; sourceTree = "<group>"; };
-		EB2BB05C2BDB1D4800C3DA78 /* WatchWaterTabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchWaterTabItem.swift; sourceTree = "<group>"; };
-		EB2BB05E2BDB1D6E00C3DA78 /* WatchEnergyTabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchEnergyTabItem.swift; sourceTree = "<group>"; };
 		EB2BB0652BDB25A200C3DA78 /* WatchExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchExerciseView.swift; sourceTree = "<group>"; };
 		EB2BB0672BDB263E00C3DA78 /* WatchWaterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchWaterView.swift; sourceTree = "<group>"; };
 		EB2BB0692BDB26C700C3DA78 /* WatchEnergyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchEnergyView.swift; sourceTree = "<group>"; };
@@ -272,6 +269,7 @@
 		EBF9DD632BDEF96B009EA21A /* ReadySetEnergyWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadySetEnergyWidget.swift; sourceTree = "<group>"; };
 		EBF9DD652BDEF973009EA21A /* ReadySetEnergyWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadySetEnergyWidgetView.swift; sourceTree = "<group>"; };
 		EBF9DD672BDEFAA8009EA21A /* EnergyWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnergyWidgetProvider.swift; sourceTree = "<group>"; };
+		EBF9DD6F2BDF0454009EA21A /* WatchTrackerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchTrackerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -413,7 +411,6 @@
 				EB2BB06B2BDB311800C3DA78 /* ReadySetWatch Watch App.entitlements */,
 				EB1FDC222BD7053000253855 /* ReadySetWatchApp.swift */,
 				EB2BB04A2BDB0DC000C3DA78 /* Misc */,
-				EB2BB0532BDB1B0300C3DA78 /* TabItems */,
 				EB2BB0622BDB1F3A00C3DA78 /* Main Views */,
 				EB2BB0652BDB25A200C3DA78 /* WatchExerciseView.swift */,
 				EB2BB0672BDB263E00C3DA78 /* WatchWaterView.swift */,
@@ -451,18 +448,6 @@
 			path = Misc;
 			sourceTree = "<group>";
 		};
-		EB2BB0532BDB1B0300C3DA78 /* TabItems */ = {
-			isa = PBXGroup;
-			children = (
-				EB2BB05A2BDB1BFD00C3DA78 /* IWatchTabItem.swift */,
-				EB2BB0542BDB1B1100C3DA78 /* WatchTabItemType.swift */,
-				EB2BB0562BDB1B5900C3DA78 /* WatchExerciseTabItem.swift */,
-				EB2BB05C2BDB1D4800C3DA78 /* WatchWaterTabItem.swift */,
-				EB2BB05E2BDB1D6E00C3DA78 /* WatchEnergyTabItem.swift */,
-			);
-			path = TabItems;
-			sourceTree = "<group>";
-		};
 		EB2BB0622BDB1F3A00C3DA78 /* Main Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -470,6 +455,7 @@
 				EB2BB0462BDAF66000C3DA78 /* MainWatchViewModel.swift */,
 				EB1FDC242BD7053000253855 /* MainWatchView.swift */,
 				EB2BB04D2BDB1A0D00C3DA78 /* HomeView.swift */,
+				EBF9DD6F2BDF0454009EA21A /* WatchTrackerView.swift */,
 			);
 			path = "Main Views";
 			sourceTree = "<group>";
@@ -546,6 +532,7 @@
 			isa = PBXGroup;
 			children = (
 				EB3AB33B2BC70CF5008B6F22 /* HomeView.swift */,
+				EB7110F62BC84B520078F796 /* HomeViewModel.swift */,
 				EB3AB33A2BC70CF5008B6F22 /* HeaderView.swift */,
 				EB3AB3562BC76F07008B6F22 /* TopDetailView.swift */,
 				EB3AB3592BC76F8C008B6F22 /* BottomView.swift */,
@@ -574,7 +561,6 @@
 			children = (
 				EB4D9C4F2BCC73F60071BA99 /* ExerciseViewModel.swift */,
 				EB3AB34D2BC729DE008B6F22 /* ExerciseTopContentView.swift */,
-				EB7110F62BC84B520078F796 /* HomeViewModel.swift */,
 				EB4D9C4D2BCC73E90071BA99 /* ExerciseBottomContentView.swift */,
 				EB4742B82BD324B4009A23E4 /* Exercise Builder */,
 				EB3AB3642BC772D6008B6F22 /* Widgets */,
@@ -865,17 +851,19 @@
 				EB2BB0662BDB25A200C3DA78 /* WatchExerciseView.swift in Sources */,
 				EB2BB0472BDAF66000C3DA78 /* MainWatchViewModel.swift in Sources */,
 				EB2BB04C2BDB0DDD00C3DA78 /* OnboardingView.swift in Sources */,
-				EB2BB0572BDB1B5900C3DA78 /* WatchExerciseTabItem.swift in Sources */,
 				EB2BB04E2BDB1A0D00C3DA78 /* HomeView.swift in Sources */,
 				EB1FDC512BD9A0DB00253855 /* EntryType.swift in Sources */,
-				EB2BB0552BDB1B1100C3DA78 /* WatchTabItemType.swift in Sources */,
 				EB2BB0742BDDB26200C3DA78 /* SpeedometerGaugeStyle.swift in Sources */,
+				EBF9DD692BDF0139009EA21A /* TabItemType.swift in Sources */,
+				EBF9DD6A2BDF0139009EA21A /* ExerciseTabItem.swift in Sources */,
+				EBF9DD6B2BDF0139009EA21A /* WaterTabItem.swift in Sources */,
+				EBF9DD6C2BDF0139009EA21A /* EnergyTabItem.swift in Sources */,
+				EBF9DD6D2BDF0139009EA21A /* SettingsTabITem.swift in Sources */,
+				EBF9DD6E2BDF0139009EA21A /* ITabItem.swift in Sources */,
 				EB2BB06A2BDB26C700C3DA78 /* WatchEnergyView.swift in Sources */,
-				EB2BB05F2BDB1D6E00C3DA78 /* WatchEnergyTabItem.swift in Sources */,
 				EB2BB0722BDD822C00C3DA78 /* GaugeView.swift in Sources */,
-				EB2BB05B2BDB1BFD00C3DA78 /* IWatchTabItem.swift in Sources */,
-				EB2BB05D2BDB1D4800C3DA78 /* WatchWaterTabItem.swift in Sources */,
 				EB2BB06E2BDB4C9D00C3DA78 /* CrownRotationAdditionView.swift in Sources */,
+				EBF9DD702BDF0454009EA21A /* WatchTrackerView.swift in Sources */,
 				EB2BB0442BDADDA000C3DA78 /* PhoneConnector.swift in Sources */,
 				EB2BB0682BDB263E00C3DA78 /* WatchWaterView.swift in Sources */,
 				EB1FDC232BD7053000253855 /* ReadySetWatchApp.swift in Sources */,

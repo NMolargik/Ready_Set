@@ -29,11 +29,9 @@ struct MainWatchView: View {
             }
         }
         .onChange(of: scenePhase) {
-            if scenePhase == .active {
-                phoneConnector.requestInitialsFromPhone { initialPackage in
-                    withAnimation {
-                        mainWatchViewModel.processPhoneUpdate(update: initialPackage)
-                    }
+            phoneConnector.requestInitialsFromPhone { initialPackage in
+                withAnimation {
+                    mainWatchViewModel.processPhoneUpdate(update: initialPackage)
                 }
             }
         }

@@ -23,7 +23,7 @@ struct WatchWaterView: View {
     var body: some View {
         ZStack {
             VStack (spacing: 0) {
-                GaugeView(max: $waterGoal, level: $waterBalance, isUpdating: $isUpdating, color: WatchWaterTabItem().color, unit: useMetric ? "mL" : "oz")
+                GaugeView(max: $waterGoal, level: $waterBalance, isUpdating: $isUpdating, color: WaterTabItem().color, unit: useMetric ? "mL" : "oz")
                     .frame(height: 120)
                 
                 Button(action: {
@@ -58,7 +58,7 @@ struct WatchWaterView: View {
             .transition(.blurReplace())
 
             if (isAdding) {
-                CrownRotationAdditionView(amount: $amountToAdd, min: 8, max: waterGoal, step: 1, unitOfMeasurement: useMetric ? "mL" : "oz", gradient: WatchWaterTabItem().gradient, onAdd: { amount in
+                CrownRotationAdditionView(amount: $amountToAdd, min: 8, max: waterGoal, step: 1, unitOfMeasurement: useMetric ? "mL" : "oz", gradient: WaterTabItem().gradient, onAdd: { amount in
                     
                     withAnimation {
                         isAdding = false
@@ -73,6 +73,11 @@ struct WatchWaterView: View {
                                 amountToAdd = 0
                                 isUpdating = false
                             }
+                        }
+                    } else {
+                        withAnimation {
+                            amountToAdd = 0
+                            isUpdating = false
                         }
                     }
                     

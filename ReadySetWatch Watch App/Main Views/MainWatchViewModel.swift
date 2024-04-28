@@ -30,6 +30,22 @@ class MainWatchViewModel: ObservableObject {
         }
     }
     
+    private func updateValuesOnUnitChange() {
+        withAnimation {
+            if self.useMetric {
+                self.waterGoal = Double(Float(self.waterGoal) * 29.5735).rounded()
+                self.energyGoal = Double(Float(self.energyGoal) * 4.184).rounded()
+                self.waterBalance = Int(Float(self.waterBalance) * 29.5735)
+                self.energyBalance = Int(Float(self.energyBalance) * 4.184)
+            } else {
+                self.waterGoal = Double(Float(self.waterGoal) / 29.5735).rounded()
+                self.energyGoal = Double(Float(self.energyGoal) / 4.184).rounded()
+                self.waterBalance = Int(Float(self.waterGoal) / 29.5735)
+                self.energyBalance = Int(Float(self.energyGoal) / 4.184)
+            }
+        }
+    }
+    
     func processPhoneUpdate(update: [String : Any]) {
         DispatchQueue.main.async {
             if let appState = update["appState"] as? String {
@@ -40,6 +56,7 @@ class MainWatchViewModel: ObservableObject {
             
             if let useMetric = update["useMetric"] as? Bool {
                 self.useMetric = useMetric
+                self.updateValuesOnUnitChange()
             }
             
             if let stepGoal = update["stepGoal"] as? Double {

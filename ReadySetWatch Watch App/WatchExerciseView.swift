@@ -14,7 +14,7 @@ struct WatchExerciseView: View {
 
     var body: some View {
         VStack {
-            GaugeView(max: $stepGoal, level: $stepsTaken, isUpdating: .constant(false), color: WatchExerciseTabItem().color, unit: " steps")
+            GaugeView(max: $stepGoal, level: $stepsTaken, isUpdating: .constant(false), color: ExerciseTabItem().color, unit: " steps")
                 .frame(height: 120)
             
             if (stepsTaken == 0 || stepGoal == 1000) {

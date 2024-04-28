@@ -13,7 +13,6 @@
 		0E7DCA5E2BC6FF7400B9403C /* ExerciseSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7DCA5D2BC6FF7400B9403C /* ExerciseSet.swift */; };
 		0E940A6B2BC6FE0200144477 /* ReadySetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E940A6A2BC6FE0200144477 /* ReadySetApp.swift */; };
 		0E940A6D2BC6FE0200144477 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E940A6C2BC6FE0200144477 /* MainView.swift */; };
-		0E940A6F2BC6FE0400144477 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E940A6E2BC6FE0400144477 /* Assets.xcassets */; };
 		0E940A722BC6FE0400144477 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E940A712BC6FE0400144477 /* Preview Assets.xcassets */; };
 		0E98616A2BCE971F00488D9E /* WaterChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9861692BCE971F00488D9E /* WaterChartView.swift */; };
 		0EBC76F02BD1CE9A00880FFB /* ExerciseSetEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBC76EF2BD1CE9A00880FFB /* ExerciseSetEditor.swift */; };
@@ -96,8 +95,6 @@
 		EBF9DD3A2BDEE724009EA21A /* ReadySetWaterWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF9DD392BDEE724009EA21A /* ReadySetWaterWidget.swift */; };
 		EBF9DD3C2BDEE726009EA21A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBF9DD3B2BDEE726009EA21A /* Assets.xcassets */; };
 		EBF9DD412BDEE726009EA21A /* ReadySetWidgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = EBF9DD312BDEE724009EA21A /* ReadySetWidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		EBF9DD462BDEE892009EA21A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E940A6E2BC6FE0400144477 /* Assets.xcassets */; };
-		EBF9DD472BDEE893009EA21A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E940A6E2BC6FE0400144477 /* Assets.xcassets */; };
 		EBF9DD482BDEE8C7009EA21A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB1FDC432BD74A7B00253855 /* Assets.xcassets */; };
 		EBF9DD4A2BDEEA84009EA21A /* WaterWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF9DD492BDEEA84009EA21A /* WaterWidgetProvider.swift */; };
 		EBF9DD4C2BDEEA9D009EA21A /* SimpleEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF9DD4B2BDEEA9D009EA21A /* SimpleEntry.swift */; };
@@ -120,6 +117,13 @@
 		EBF9DD6D2BDF0139009EA21A /* SettingsTabITem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB34B2BC71214008B6F22 /* SettingsTabITem.swift */; };
 		EBF9DD6E2BDF0139009EA21A /* ITabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3AB3432BC711A8008B6F22 /* ITabItem.swift */; };
 		EBF9DD702BDF0454009EA21A /* WatchTrackerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF9DD6F2BDF0454009EA21A /* WatchTrackerView.swift */; };
+		EBF9DD712BDF16EB009EA21A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E940A6E2BC6FE0400144477 /* Assets.xcassets */; };
+		EBF9DD722BDF178E009EA21A /* CodeSigning.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = EB4D9C532BCC83C80071BA99 /* CodeSigning.xcconfig */; };
+		EBF9DD732BDF178E009EA21A /* CodeSigning.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = EB4D9C532BCC83C80071BA99 /* CodeSigning.xcconfig */; };
+		EBF9DD742BDF178E009EA21A /* CodeSigning.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = EB4D9C532BCC83C80071BA99 /* CodeSigning.xcconfig */; };
+		EBF9DD752BDF1791009EA21A /* Build.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 0E4A5E252BCC80E0003678C2 /* Build.xcconfig */; };
+		EBF9DD762BDF1791009EA21A /* Build.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 0E4A5E252BCC80E0003678C2 /* Build.xcconfig */; };
+		EBF9DD772BDF1792009EA21A /* Build.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 0E4A5E252BCC80E0003678C2 /* Build.xcconfig */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -175,9 +179,6 @@
 		0E940A6C2BC6FE0200144477 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		0E940A6E2BC6FE0400144477 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E940A712BC6FE0400144477 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		0E940A802BC6FE0400144477 /* ReadySetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadySetTests.swift; sourceTree = "<group>"; };
-		0E940A8A2BC6FE0400144477 /* ReadySetUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadySetUITests.swift; sourceTree = "<group>"; };
-		0E940A8C2BC6FE0400144477 /* ReadySetUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadySetUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		0E9861692BCE971F00488D9E /* WaterChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterChartView.swift; sourceTree = "<group>"; };
 		0EBC76EF2BD1CE9A00880FFB /* ExerciseSetEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSetEditor.swift; sourceTree = "<group>"; };
 		EB1FDC1A2BD6FCBE00253855 /* ExerciseSetRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSetRecordView.swift; sourceTree = "<group>"; };
@@ -337,8 +338,6 @@
 			children = (
 				0E442FE72BC7020A004F1467 /* Config */,
 				0E940A692BC6FE0200144477 /* ReadySet */,
-				0E940A7F2BC6FE0400144477 /* ReadySetTests */,
-				0E940A892BC6FE0400144477 /* ReadySetUITests */,
 				EB1FDC212BD7053000253855 /* ReadySetWatch Watch App */,
 				EBF9DD362BDEE724009EA21A /* ReadySetWidgets */,
 				0E940A682BC6FE0200144477 /* Products */,
@@ -386,23 +385,6 @@
 				0E940A712BC6FE0400144477 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		0E940A7F2BC6FE0400144477 /* ReadySetTests */ = {
-			isa = PBXGroup;
-			children = (
-				0E940A802BC6FE0400144477 /* ReadySetTests.swift */,
-			);
-			path = ReadySetTests;
-			sourceTree = "<group>";
-		};
-		0E940A892BC6FE0400144477 /* ReadySetUITests */ = {
-			isa = PBXGroup;
-			children = (
-				0E940A8A2BC6FE0400144477 /* ReadySetUITests.swift */,
-				0E940A8C2BC6FE0400144477 /* ReadySetUITestsLaunchTests.swift */,
-			);
-			path = ReadySetUITests;
 			sourceTree = "<group>";
 		};
 		EB1FDC212BD7053000253855 /* ReadySetWatch Watch App */ = {
@@ -747,8 +729,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB4D9C7F2BCF2B6D0071BA99 /* Launch Screen.storyboard in Resources */,
+				EBF9DD722BDF178E009EA21A /* CodeSigning.xcconfig in Resources */,
+				EBF9DD712BDF16EB009EA21A /* Assets.xcassets in Resources */,
 				0E940A722BC6FE0400144477 /* Preview Assets.xcassets in Resources */,
-				0E940A6F2BC6FE0400144477 /* Assets.xcassets in Resources */,
+				EBF9DD752BDF1791009EA21A /* Build.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -757,8 +741,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB1FDC2A2BD7053200253855 /* Preview Assets.xcassets in Resources */,
+				EBF9DD762BDF1791009EA21A /* Build.xcconfig in Resources */,
+				EBF9DD732BDF178E009EA21A /* CodeSigning.xcconfig in Resources */,
 				EBF9DD482BDEE8C7009EA21A /* Assets.xcassets in Resources */,
-				EBF9DD462BDEE892009EA21A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -766,8 +751,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EBF9DD472BDEE893009EA21A /* Assets.xcassets in Resources */,
 				EBF9DD3C2BDEE726009EA21A /* Assets.xcassets in Resources */,
+				EBF9DD772BDF1792009EA21A /* Build.xcconfig in Resources */,
+				EBF9DD742BDF178E009EA21A /* CodeSigning.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -964,12 +950,14 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Debug;
 		};
@@ -1022,11 +1010,13 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Release;
 		};
@@ -1183,13 +1173,14 @@
 				CODE_SIGN_ENTITLEMENTS = ReadySetWidgets/ReadySetWidgets.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
+				DEVELOPMENT_TEAM = R8Q8DM58C6;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ReadySetWidgets/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = ReadySetWidgets;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1200,7 +1191,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 14.4;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = nickmolargik.ReadySet.ReadySetWidgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1226,8 +1217,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ReadySetWidgets/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = ReadySetWidgets;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1238,7 +1230,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 14.4;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = nickmolargik.ReadySet.ReadySetWidgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";

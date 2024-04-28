@@ -22,6 +22,7 @@ struct ExerciseBottomContentView: View {
         ZStack {
             TabView(selection: $selectedDay) {
                 ForEach(weekDays.indices, id: \.self) { index in
+                    @State var exercises = exercises.filter ({$0.weekday == selectedDay})
                     
                     VStack (spacing: 0) {
                         HStack {
@@ -35,13 +36,8 @@ struct ExerciseBottomContentView: View {
                         .padding(.leading, 15)
                         .padding(.top, 10)
                         
-                        ExercisePlanDayView(exercises: $filteredExercises, isEditing: $exerciseViewModel.editingSets, isExpanded: $exerciseViewModel.expandedSets, selectedDay: selectedDay)
+                        ExercisePlanDayView(exercises: $exercises, isEditing: $exerciseViewModel.editingSets, isExpanded: $exerciseViewModel.expandedSets, selectedDay: selectedDay)
                             .tag(index)
-                            .onChange(of: selectedDay) {
-                                withAnimation(.easeInOut(duration: 0.4)){
-                                    filteredExercises = exercises.filter({$0.weekday == selectedDay})
-                                }
-                            }
                     }
                 }
             }

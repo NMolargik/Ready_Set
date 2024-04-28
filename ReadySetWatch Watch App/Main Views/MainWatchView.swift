@@ -37,6 +37,7 @@ struct MainWatchView: View {
         }
     }
     
+    
     private func setupConnectorClosures() {
         phoneConnector.respondToPhoneUpdate = mainWatchViewModel.processPhoneUpdate(update:)
     }

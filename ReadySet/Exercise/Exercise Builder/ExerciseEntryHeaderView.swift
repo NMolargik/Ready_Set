@@ -27,7 +27,7 @@ struct ExerciseEntryHeaderView: View {
                     }
                 }, label: {
                     Image(systemName: "minus.circle.fill")
-                        .foregroundStyle(LinearGradient(colors: [.orangeStart, .orangeEnd], startPoint: .topLeading, endPoint: .bottomTrailing))
+                        .foregroundStyle(.white, LinearGradient(colors: [.red, .pink], startPoint: .topLeading, endPoint: .bottomTrailing))
                         .frame(width: 15, height: 15)
                 })
                 .buttonStyle(.plain)
@@ -54,7 +54,7 @@ struct ExerciseEntryHeaderView: View {
                     .lineLimit(1)
                     .padding(.horizontal, 5)
                     .fontWeight(.semibold)
-                    .foregroundStyle(.baseInvert)
+                    .foregroundStyle(.fontGray)
                     .truncationMode(.tail)
             }
             
@@ -93,23 +93,24 @@ struct ExerciseEntryHeaderView: View {
                         selectedSet = newSet.id.uuidString
                     }
                 }, label: {
-                    HStack (spacing: 0) {
-                        Text("Set")
-                            .bold()
-                            .foregroundStyle(.baseInvert)
-                            
-                            .padding(.vertical, 2)
-                            .shadow(radius: 5)
-                        
-                        Image(systemName: "plus.circle.fill")
-                            .foregroundStyle(LinearGradient(colors: [.greenStart, .greenEnd], startPoint: .leading, endPoint: .trailing))
-                            .frame(height: 15)
-                            .padding(.horizontal, 2)
-                    }
+                    Text("Add Set")
+                        .bold()
+                        .foregroundStyle(.white)
+                        .padding(.horizontal, 5)
+                        .padding(.vertical, 2)
+                        .shadow(radius: 5)
                 })
                 .buttonStyle(.plain)
+                .background {
+                    Rectangle()
+                        .cornerRadius(5)
+                        .foregroundStyle(EnergyTabItem().gradient)
+                        .shadow(radius: 5)
+                }
+                .padding(.trailing, 5)
             }
         }
         .transition(.move(edge: .leading))
+        .padding(.leading, 5)
     }
 }

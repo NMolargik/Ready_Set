@@ -21,15 +21,19 @@ struct CustomStepperView: View {
             
             Text("\(value)")
                 .bold()
-                .foregroundStyle(.baseInvert)
+                .foregroundStyle(.base)
                 .frame(width: 50)
             
             Stepper(value: customBinding, step: step, label: {EmptyView()})
                 .labelsHidden()
-                .colorMultiply(colors[1])
+                .accentColor(.base)
         }
         .onChange(of: value) {
             UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+        }
+        .onAppear {
+            UIStepper.appearance().setDecrementImage(UIImage(systemName: "minus"), for: .normal)
+            UIStepper.appearance().setIncrementImage(UIImage(systemName: "plus"), for: .normal)
         }
     }
     

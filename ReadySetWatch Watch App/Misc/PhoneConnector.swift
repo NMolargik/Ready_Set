@@ -10,8 +10,9 @@ import WatchConnectivity
 import SwiftUI
 
 class PhoneConnector: NSObject, WCSessionDelegate, ObservableObject {
-    var session: WCSession
+    @Published var isConnected = false
     
+    var session: WCSession
     var respondToPhoneUpdate: (([String : Any]) -> Void)
     
     init(session: WCSession = .default) {
@@ -23,11 +24,33 @@ class PhoneConnector: NSObject, WCSessionDelegate, ObservableObject {
         session.activate()
     }
     
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        DispatchQueue.main.async {
+            switch activationState {
+            case .activated:
+                self.isConnected = true
+                print("WCSession is activated and the phone is connected.")
+            case .inactive, .notActivated:
+                self.isConnected = false
+                if let error = error {
+                    print("WCSession activation failed with error: \(error.localizedDescription)")
+                }
+            @unknown default:
+                print("Unknown activation state.")
+            }
+        }
+    }
+    
     func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
         let update = self.buildResponseOutput(response: message)
         self.respondToPhoneUpdate(update)
     }
     
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
+        print("Here now")
+    }
+
+
     func requestInitialsFromPhone(completion: @escaping ([String : Any]) -> Void) {
         if session.isReachable {
             let payload: [String : Any] = [
@@ -42,6 +65,9 @@ class PhoneConnector: NSObject, WCSessionDelegate, ObservableObject {
             
             session.sendMessage(payload) { response in
                 let output = self.buildResponseOutput(response: response)
+                DispatchQueue.main.async {
+                    self.isConnected = true
+                }
                 completion(output)
             }
         }
@@ -70,12 +96,10 @@ class PhoneConnector: NSObject, WCSessionDelegate, ObservableObject {
             let payload: [String : Any] = [(entryType == .water ? "newWaterIntake" : "newEnergyIntake") : intake]
             
             session.sendMessage(payload, replyHandler: { response in
-                DispatchQueue.main.async {
-                    if let success = response["complete"] as? Bool {
-                        completion(success)
-                    } else {
-                        completion(false)
-                    }
+                if let success = response["complete"] as? Bool {
+                    completion(true)
+                } else {
+                    completion(false)
                 }
             }, errorHandler: { error in
                 DispatchQueue.main.async {
@@ -124,12 +148,4 @@ class PhoneConnector: NSObject, WCSessionDelegate, ObservableObject {
         
         return output
     }
-    
-    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: (any Error)?) {
-        
-        if (activationState == .activated) {
-            print("Phone Connected")
-        }
-    }
 }
-

@@ -12,6 +12,7 @@ struct BottomView: View {
     @ObservedObject var waterViewModel: WaterViewModel
     @ObservedObject var energyViewModel: EnergyViewModel
     @Binding var selectedTab: any ITabItem
+    @Binding var selectedDay: Int
     
     var body: some View {
         ZStack {
@@ -25,7 +26,7 @@ struct BottomView: View {
                 Group {
                     switch (selectedTab.type) {
                     case .exercise:
-                        ExerciseBottomContentView(exerciseViewModel: exerciseViewModel)
+                        ExerciseBottomContentView(exerciseViewModel: exerciseViewModel, selectedDay: $selectedDay)
                     case .water:
                         WaterBottomContentView(waterViewModel: waterViewModel)
                     case .energy:
@@ -47,5 +48,5 @@ struct BottomView: View {
 }
 
 #Preview {
-    BottomView(exerciseViewModel: ExerciseViewModel(), waterViewModel: WaterViewModel(), energyViewModel: EnergyViewModel(), selectedTab: .constant(ExerciseTabItem()))
+    BottomView(exerciseViewModel: ExerciseViewModel(), waterViewModel: WaterViewModel(), energyViewModel: EnergyViewModel(), selectedTab: .constant(ExerciseTabItem()), selectedDay: .constant(0))
 }

@@ -42,31 +42,27 @@ struct GoalSetView: View {
                         .cornerRadius(35)
                         .foregroundStyle(.ultraThinMaterial)
                         .shadow(radius: 1)
+                    
                     VStack {
-                        HStack(spacing: 6) {
-                            ForEach(weekDays.indices, id: \.self) { index in
-                                Text(selectedDay == index ? weekDays[index] : String(weekDays[index].prefix(1)))
-                                    .font(.system(size: selectedDay == index ? 15 : 10))
-                                    .bold()
-                                    .foregroundStyle(selectedDay == index ? LinearGradient(colors: [.greenEnd, .green, .greenEnd], startPoint: .leading, endPoint: .trailing) : LinearGradient(colors: [.secondary], startPoint: .leading, endPoint: .trailing))
-                                    .padding(.horizontal, 8)
-                                    .onTapGesture {
-                                        UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
-                                        withAnimation(.easeInOut) {
-                                            selectedDay = index
-                                        }
-                                    }
-                                    .animation(.bouncy, value: selectedDay)
-                                    .zIndex(selectedDay == index ? 2 : 1)
-                                    .transition(.opacity)
-                            }
-                        }
                         TabView(selection: $selectedDay) {
                             ForEach(weekDays.indices, id: \.self) { index in
                                 @State var exercises = exercises.filter({$0.weekday == index})
                                 
-                                ExercisePlanDayView(exercises: $exercises, isEditing: .constant(true), isExpanded: .constant(false), selectedDay: selectedDay)
-                                    .tag(index)
+                                VStack (spacing: 0) {
+                                    HStack {
+                                        Text(weekDays[selectedDay])
+                                            .bold()
+                                            .font(.largeTitle)
+                                            .foregroundStyle(.baseInvert)
+                                        
+                                        Spacer()
+                                    }
+                                    .padding(.leading, 15)
+                                    .padding(.top, 10)
+                                    
+                                    ExercisePlanDayView(exercises: $exercises, isEditing: .constant(true), isExpanded: .constant(false), selectedDay: selectedDay)
+                                        .tag(index)
+                                }
                             }
                         }
                         .tabViewStyle(.page(indexDisplayMode: .never))

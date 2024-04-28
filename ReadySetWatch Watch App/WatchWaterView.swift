@@ -12,87 +12,77 @@ struct WatchWaterView: View {
     @Binding var waterGoal: Double
     @Binding var useMetric: Bool
     
-    @State private var isTurning = false
+    @State private var isAdding = false
     @State private var isUpdating = false
-    @State var rotation : Double = 0
-    @State var orientation: WKInterfaceDeviceCrownOrientation = .right
+    @State private var amountToAdd: Double = 0
+    @State private var showAlert = false
     
     var addWaterIntake: ((Int, @escaping (Bool) -> Void) -> Void)
     var requestWaterBalanceUpdate: () -> Void
     
     var body: some View {
         ZStack {
-            Color.black
-                .ignoresSafeArea()
-                .padding(.top, 1)
-            
-            VStack {
-                if (orientation == .right) {
-                    Spacer()
-                }
+            VStack (spacing: 0) {
+                GaugeView(max: $waterGoal, level: $waterBalance, isUpdating: $isUpdating, color: WatchWaterTabItem().color, unit: useMetric ? "mL" : "oz")
+                    .frame(height: 120)
                 
-                
-                if isUpdating {
-                    ProgressView()
-                        .scaleEffect(2)
-                        .tint(.blue)
-                } else {
-                    Text(waterBalance.description)
-                        .font(.system(size: 45))
-                        .foregroundStyle(WatchWaterTabItem().gradient)
-                        .animation(.easeInOut, value: waterBalance)
-                        .transition(.blurReplace())
-                }
-                
-                Text("of \(Int(waterGoal).description)")
-                    .font(.system(size: 20))
-                    .foregroundStyle(.fontGray)
-                    
-                Text("\(useMetric ? "mL" : "oz") today")
-                    .foregroundStyle(.fontGray)
-                
-                if (orientation == .left) {
-                    Spacer()
-                } 
+                Button(action: {
+                    withAnimation {
+                        isAdding = true
+                    }
+                }, label: {
+                    ZStack {
+                        Circle()
+                            .foregroundStyle(.base)
+                        
+                        Image("Droplet")
+                            .resizable()
+                            .scaledToFill()
+                            .padding(5)
+                        
+                        Image(systemName: "plus")
+                            .foregroundStyle(.base)
+                            .offset(y: 3)
+                        
+                    }
+                })
+                .buttonStyle(.plain)
+                .frame(width: 40)
+                .padding(.top, -20)
             }
-            .blur(radius: isTurning ? 20 : 0)
-            .animation(.easeInOut, value: isTurning)
+            .blur(radius: isAdding ? 20 : 0)
+            .animation(.easeInOut, value: amountToAdd)
             .bold()
             .font(.system(size: 20))
             .animation(.easeInOut, value: waterGoal)
             .transition(.blurReplace())
 
-            CrownRotationAdditionView(isTurning: $isTurning, rotation: $rotation, min: 8, max: 128, step: 2, unitOfMeasurement: useMetric ? "mL" : "oz", addColor: .blueEnd, gradient: WatchWaterTabItem().gradient, onAdd: { water in
-                isUpdating = true
-                isTurning = false
-                rotation = 0.0
-                addWaterIntake(water) { success in
-                    DispatchQueue.main.async {
+            if (isAdding) {
+                CrownRotationAdditionView(amount: $amountToAdd, min: 8, max: waterGoal, step: 1, unitOfMeasurement: useMetric ? "mL" : "oz", gradient: WatchWaterTabItem().gradient, onAdd: { amount in
+                    
+                    withAnimation {
+                        isAdding = false
+                        isUpdating = true
+                    }
+                    
+                    addWaterIntake(Int(amount)) { success in
+                        WKInterfaceDevice.current().play(success ? .success : .failure)
+                        
+                        if (!success) {
+                            showAlert = true
+                        }
+                        
                         withAnimation {
-                            requestWaterBalanceUpdate()
-                            //TODO: Add alert if failed
+                            amountToAdd = 0
+                            isUpdating = false
                         }
                     }
-                }
-            },
-            onCancel: {
-                withAnimation {
-                    isTurning = false
-                    rotation = 0.0
-                }
-            })
-        }
-        .onAppear {
-            orientation = WKInterfaceDevice.current().crownOrientation
-        }
-        .onChange(of: rotation) {
-            print(rotation)
-            withAnimation {
-                if rotation != 0.0 {
-                    isTurning = true
-                } else {
-                    isTurning = false
-                }
+                }, onCancel: {
+                    withAnimation {
+                        amountToAdd = 0
+                        isAdding = false
+                    }
+                })
             }
         }
         .onChange(of: waterBalance) {
@@ -100,6 +90,15 @@ struct WatchWaterView: View {
                 isUpdating = false
             }
         }
+        .alert("There was an issue communicating with Ready, Set", isPresented: $showAlert, actions: {
+            Button(action: {
+                withAnimation {
+                    showAlert = false
+                }
+            }, label: {
+                Text("Okay")
+            })
+        })
     }
 }
 

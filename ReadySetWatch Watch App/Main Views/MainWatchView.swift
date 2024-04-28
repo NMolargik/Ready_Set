@@ -13,21 +13,15 @@ struct MainWatchView: View {
     @StateObject var mainWatchViewModel = MainWatchViewModel()
     @StateObject var phoneConnector = PhoneConnector()
     
-    //TODO: check every ten seconds for appState from the phone during onboarding
-    
     var body: some View {
         VStack {
-            if (mainWatchViewModel.appState != "running") {
-                OnboardingView(appState: $mainWatchViewModel.appState)
-                    .transition(.move(edge: .top))
-            } else {
-                HomeView(mainWatchViewModel: mainWatchViewModel, phoneConnector: phoneConnector)
-                    .transition(.move(edge: .top))
-                    .ignoresSafeArea()
-            }
+            HomeView(mainWatchViewModel: mainWatchViewModel, phoneConnector: phoneConnector)
+                .transition(.move(edge: .bottom))
+                .ignoresSafeArea()
         }
         .animation(.easeInOut, value: mainWatchViewModel.appState)
         .onAppear {
+            setupConnectorClosures()
             phoneConnector.requestInitialsFromPhone { initialPackage in
                 withAnimation {
                     mainWatchViewModel.respondToPhoneUpdate(update: initialPackage)
@@ -35,9 +29,11 @@ struct MainWatchView: View {
             }
         }
         .onChange(of: scenePhase) {
-            phoneConnector.requestInitialsFromPhone { initialPackage in
-                withAnimation {
-                    mainWatchViewModel.respondToPhoneUpdate(update: initialPackage)
+            if scenePhase == .active {
+                phoneConnector.requestInitialsFromPhone { initialPackage in
+                    withAnimation {
+                        mainWatchViewModel.respondToPhoneUpdate(update: initialPackage)
+                    }
                 }
             }
         }

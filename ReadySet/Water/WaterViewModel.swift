@@ -18,6 +18,7 @@ class WaterViewModel: ObservableObject, HKHelper {
     @Published var waterConsumedToday: Int = 0
     @Published var waterConsumedWeek: [Date: Int] = [:]
     @Published var healthStore: HKHealthStore?
+    @Published var watchConnector: WatchConnector?
     
     init() {
         self.proposedWaterGoal = Int(self.waterGoal)
@@ -46,6 +47,7 @@ class WaterViewModel: ObservableObject, HKHelper {
         hkQuery(type: waterConsumed, unit: unit, failed: "Failed to read water gallons today") { amount in
             DispatchQueue.main.async {
                 self.waterConsumedToday = amount
+                self.watchConnector?.sendUpdateToWatch(update: ["waterBalance" : amount])
             }
         }
     }
@@ -85,5 +87,6 @@ class WaterViewModel: ObservableObject, HKHelper {
     func saveWaterGoal() {
         self.waterGoal = Double(self.proposedWaterGoal)
         self.editingWaterGoal = false
+        self.watchConnector?.sendUpdateToWatch(update: ["waterGoal" : waterGoal])
     }
 }

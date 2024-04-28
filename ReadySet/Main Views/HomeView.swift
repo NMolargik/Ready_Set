@@ -11,17 +11,19 @@ import HealthKit
 struct HomeView: View {
     @Environment(\.scenePhase) var scenePhase
     @AppStorage("useMetric") var useMetric: Bool = false
+    @AppStorage("appState") var appState: String = "background"
 
     @StateObject var homeViewModel = HomeViewModel()
     @StateObject var exerciseViewModel = ExerciseViewModel()
     @StateObject var waterViewModel = WaterViewModel()
     @StateObject var energyViewModel = EnergyViewModel()
     
-    @StateObject var watchConnector: WatchConnector = 
-        WatchConnector()
+    @StateObject var watchConnector: WatchConnector = WatchConnector()
     
     @State private var navigationDragHeight = 0.0
     @State var healthStore: HKHealthStore
+    @State private var selectedDay: Int = 1
+    
 
     var body: some View {
         VStack {
@@ -42,7 +44,7 @@ struct HomeView: View {
             }
                 
             BottomView(exerciseViewModel: exerciseViewModel, waterViewModel: waterViewModel, energyViewModel: energyViewModel,
-                       selectedTab: $homeViewModel.selectedTab)
+                       selectedTab: $homeViewModel.selectedTab, selectedDay: $selectedDay)
                 .blur(radius: effectiveBlurRadius)
                 .padding(.top, (exerciseViewModel.expandedSets || exerciseViewModel.editingSets) ? 0 : 8)
                 .padding(.bottom, 30)
@@ -61,6 +63,11 @@ struct HomeView: View {
         }
         .onChange(of: useMetric) {
             setGoalsAfterUnitChange()
+        }
+        .onChange(of: selectedDay) {
+            withAnimation {
+                navigationDragHeight = 0.0
+            }
         }
     }
 
@@ -117,6 +124,10 @@ struct HomeView: View {
             waterViewModel.readInitial()
             energyViewModel.readInitial()
         }
+        
+        exerciseViewModel.watchConnector = watchConnector
+        waterViewModel.watchConnector = watchConnector
+        energyViewModel.watchConnector = watchConnector
     }
     
     private func setupConnectorClosures() {
@@ -139,6 +150,8 @@ struct HomeView: View {
                 }
             }
         }
+        
+        watchConnector.sendUpdateToWatch(update: ["appState" : "running"])
     }
     
     private func setGoalsAfterUnitChange() {
@@ -156,11 +169,14 @@ struct HomeView: View {
     private func handleScenePhase(newPhase: ScenePhase) {
         navigationDragHeight = 0
         if newPhase == .active {
+            appState = "running"
             withAnimation {
                 exerciseViewModel.readInitial()
                 waterViewModel.readInitial()
                 energyViewModel.readInitial()
             }
+        } else {
+            appState = "background"
         }
         
         withAnimation {

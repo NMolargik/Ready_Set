@@ -20,6 +20,8 @@ class EnergyViewModel: ObservableObject, HKHelper {
     @Published var energyBurnedWeek: [Date : Int] = [:]
     @Published var healthStore: HKHealthStore?
     
+    @Published var watchConnector: WatchConnector?
+    
     init() {
         self.proposedEnergyGoal = Int(self.energyGoal)
         self.readInitial()
@@ -50,6 +52,7 @@ class EnergyViewModel: ObservableObject, HKHelper {
         hkQuery(type: energyConsumed, unit: unit, failed: "Failed to read energy consumed today") { amount in
             DispatchQueue.main.async {
                 self.energyConsumedToday = amount
+                self.watchConnector?.sendUpdateToWatch(update: ["energyBalance" : amount])
             }
         }
     }
@@ -109,5 +112,6 @@ class EnergyViewModel: ObservableObject, HKHelper {
     func saveEnergyGoal() {
         self.energyGoal = Double(self.proposedEnergyGoal)
         self.editingEnergyGoal = false
+        self.watchConnector?.sendUpdateToWatch(update: ["energyGoal" : energyGoal])
     }
 }

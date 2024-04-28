@@ -28,11 +28,11 @@ struct ExerciseSetEditor: View {
                         .background {
                             Rectangle()
                                 .cornerRadius(5)
-                                .foregroundStyle(exerciseSet.goalType == .weight ? .blueEnd : .baseAccent)
+                                .foregroundStyle(exerciseSet.goalType == .weight ? .greenEnd : .baseAccent)
                         }
                 })
                 .buttonStyle(.plain)
-                     
+                
                 Button(action: {
                     UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
                     withAnimation {
@@ -70,15 +70,13 @@ struct ExerciseSetEditor: View {
             .transition(.opacity)
         }
         .compositingGroup()
+        .compositingGroup()
         .padding(3)
         .background {
-            ZStack {
-                Rectangle()
-                    .cornerRadius(5)
-                    .foregroundStyle(.baseAccent)
-                    .shadow(radius: 5)
-            }
-            .compositingGroup()
+            Rectangle()
+                .foregroundStyle(.baseInvert)
+                .cornerRadius(5)
+                .shadow(radius: 5, x: 3, y: 3)
         }
     }
 }

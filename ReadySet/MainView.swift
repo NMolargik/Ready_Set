@@ -28,7 +28,7 @@ struct MainView: View {
         .transition(.opacity)
         .ignoresSafeArea()
         .onAppear {
-            if appState != "running" {
+            if appState != "running" && appState != "background" {
                 withAnimation {
                     onboardingProgress = 0.25
                     onboardingGradient = LinearGradient(colors: [.greenStart, .greenEnd], startPoint: .leading, endPoint: .trailing)
@@ -63,7 +63,7 @@ struct MainView: View {
     
     @ViewBuilder
     private func onboardingOverlay() -> some View {
-        if appState != "running" {
+        if appState != "running" && appState != "background" {
             VStack {
                 GeometryReader { geometry in
                     VStack(alignment: .leading, spacing: 0) {

@@ -14,53 +14,49 @@ struct HomeView: View {
     var body: some View {
         ZStack {
             VStack {
-                HeaderView(progress: $mainWatchViewModel.progress, selectedTab: $mainWatchViewModel.selectedTab)
-                
-                Spacer()
-            }
-            
-            TabView(selection: $mainWatchViewModel.selectedTab) {
-                WatchExerciseView(stepsTaken: $mainWatchViewModel.stepsTakenToday, stepGoal: $mainWatchViewModel.stepGoal)
-                    .tag(0)
-                    .tabItem {
-                        tabImage(selectedTab: mainWatchViewModel.selectedTab, tabItem: WatchExerciseTabItem())
+                TabView(selection: $mainWatchViewModel.selectedTab) {
+                    if (mainWatchViewModel.appState != "running") {
+                        OnboardingView(appState: $mainWatchViewModel.appState)
+                            .containerBackground(LinearGradient(colors: [.purpleStart, .purpleEnd], startPoint: .leading, endPoint: .trailing), for: .tabView)
+                            .transition(.opacity)
+                            .tag(0)
+                    } else {
+                        WatchExerciseView(stepsTaken: $mainWatchViewModel.stepsTakenToday, stepGoal: $mainWatchViewModel.stepGoal)
+                            .tag(0)
+                            .containerBackground(WatchExerciseTabItem().gradient, for: .tabView)
                         
+                        WatchWaterView(waterBalance: $mainWatchViewModel.waterBalance, waterGoal: $mainWatchViewModel.waterGoal, useMetric: $mainWatchViewModel.useMetric, addWaterIntake: { water, completion in
+                            phoneConnector.sendNewIntakeToPhone(intake: water, entryType: .water) { success in
+                                completion(success)
+                            }
+                        }, requestWaterBalanceUpdate: {
+                            withAnimation {
+                                phoneConnector.requestValuesFromPhone(values: ["giveWaterBalance"]) { response in
+                                    mainWatchViewModel.respondToPhoneUpdate(update: response)
+                                }
+                            }
+                        })
+                        .tag(1)
+                        .containerBackground(WatchWaterTabItem().gradient, for: .tabView)
+                        
+                        WatchEnergyView(energyBalance: $mainWatchViewModel.energyBalance, energyGoal: $mainWatchViewModel.energyGoal, useMetric: $mainWatchViewModel.useMetric, addEnergyIntake: { energy, completion in
+                            phoneConnector.sendNewIntakeToPhone(intake: energy, entryType: .energy) { success in
+                                completion(success)
+                            }
+                        }, requestEnergyBalanceUpdate: {
+                            withAnimation {
+                                phoneConnector.requestValuesFromPhone(values: ["giveEnergyBalance"]) { response in
+                                    mainWatchViewModel.respondToPhoneUpdate(update: response)
+                                }
+                            }
+                        })
+                        .tag(2)
+                        .containerBackground(WatchEnergyTabItem().gradient, for: .tabView)
                     }
-                
-                
-                WatchWaterView(waterBalance: $mainWatchViewModel.waterBalance, waterGoal: $mainWatchViewModel.waterGoal, useMetric: $mainWatchViewModel.useMetric, addWaterIntake: { water, completion in
-                    phoneConnector.sendNewIntakeToPhone(intake: water, entryType: .water) { success in
-                        completion(success)
-                    }
-                }, requestWaterBalanceUpdate: {
-                    withAnimation {
-                        phoneConnector.requestValuesFromPhone(values: ["giveWaterBalance"]) { response in
-                            mainWatchViewModel.respondToPhoneUpdate(update: response)
-                        }
-                    }
-                })
-                .tag(1)
-                .tabItem {
-                    tabImage(selectedTab: mainWatchViewModel.selectedTab, tabItem: WatchWaterTabItem())
                 }
-                
-                WatchEnergyView(energyBalance: $mainWatchViewModel.energyBalance, energyGoal: $mainWatchViewModel.energyGoal, useMetric: $mainWatchViewModel.useMetric, addEnergyIntake: { energy, completion in
-                    phoneConnector.sendNewIntakeToPhone(intake: energy, entryType: .energy) { success in
-                        completion(success)
-                    }
-                }, requestEnergyBalanceUpdate: {
-                    withAnimation {
-                        phoneConnector.requestValuesFromPhone(values: ["giveEnergyBalance"]) { response in
-                            mainWatchViewModel.respondToPhoneUpdate(update: response)
-                        }
-                    }
-                })
-                .tag(2)
-                .tabItem {
-                    tabImage(selectedTab: mainWatchViewModel.selectedTab, tabItem: WatchEnergyTabItem())
-                }
+                .tabViewStyle(.verticalPage(transitionStyle: .blur))
+                .zIndex(2)
             }
-            .tabViewStyle(.page(indexDisplayMode: .always))
             
         }
         .onAppear {
@@ -69,16 +65,6 @@ struct HomeView: View {
                 mainWatchViewModel.getInitialValues(connector: phoneConnector)
             }
         }
-    }
-    
-    private func tabImage(selectedTab: Int, tabItem: any IWatchTabItem) -> some View {
-        Image(tabItem.icon)
-            .resizable()
-            .renderingMode(selectedTab == WatchTabItemType.allItems.firstIndex(where: {$0.type == tabItem.type}) ? .original : .template)
-            .frame(width: selectedTab == WatchTabItemType.allItems.firstIndex(where: {$0.type == tabItem.type}) ? 30 : 20, height: selectedTab == WatchTabItemType.allItems.firstIndex(where: {$0.type == tabItem.type}) ? 30 : 20)
-            .foregroundStyle(tabItem.color)
-            .colorMultiply(.white)
-            .transition(.opacity)
     }
 }
 

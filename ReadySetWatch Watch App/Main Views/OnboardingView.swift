@@ -12,7 +12,6 @@ struct OnboardingView: View {
     @AppStorage("watchOnboardingComplete") var watchOnboardingComplete = false
     
     @Binding var appState: String
-    //@Binding var healthController: HealthBaseController
     
     @State private var showText = false
     @State private var swiped = false
@@ -24,27 +23,27 @@ struct OnboardingView: View {
                 Text("Hello")
                     .bold()
                     .font(.largeTitle)
-                    .foregroundStyle(.fontGray)
+                    .foregroundStyle(.white)
                     .id("SplashText")
                 
                 if (showText) {
                     HStack {
                         Image(systemName: "iphone.gen3")
                             .font(.largeTitle)
-                            .foregroundStyle(LinearGradient(colors: [.greenStart, .greenEnd], startPoint: .leading, endPoint: .trailing))
                         
                         Text("Searching for Ready, Set...")
                             .font(.body)
                             .multilineTextAlignment(.center)
-                            .foregroundStyle(.fontGray)
                             .id("InstructionText")
                             .lineLimit(4)
                             .animation(.easeInOut, value: showText)
                             .frame(height: 100)
                     }
+                    .foregroundStyle(.white)
                     
                     ProgressView()
-                        .tint(.greenEnd)
+                        .tint(.white)
+                        .controlSize(.large)
                 }
             }
         }
@@ -52,8 +51,6 @@ struct OnboardingView: View {
         .gesture(dragGesture)
         .onAppear {
             animateTextAppearance()
-            //TODO
-            //healthController.requestAuthorization()
         }
     }
     

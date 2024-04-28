@@ -8,112 +8,86 @@
 import SwiftUI
 
 struct CrownRotationAdditionView: View {
-    @Binding var isTurning: Bool
-    @Binding var rotation: Double
-    
+    @Binding var amount: Double
     var min: Double
     var max: Double
     var step: Double
     var unitOfMeasurement: String
-    var addColor: Color
     var gradient: LinearGradient
-    var onAdd: (Int) -> Void
+    var onAdd: (Double) -> Void
     var onCancel: () -> Void
-    
-    var orientation = WKInterfaceDevice.current().crownOrientation
     
     var body: some View {
         VStack {
-            if orientation == .left && !isTurning {
-                Spacer()
-            }
+            Text("+ \(Int(amount)) \(unitOfMeasurement)")
+                .bold()
+                .foregroundStyle(gradient)
+                .font(.title)
+                .digitalCrownRotation($amount)
             
-            HStack {
-                if orientation == .right && !isTurning {
-                    Spacer()
+            Stepper(value: $amount, step: step, label: {
+            })
+            .colorMultiply(.baseInvert)
+            .padding(.horizontal, 20)
+            .onChange(of: amount) {
+                if amount < 0 {
+                    amount = 0
+                } else if amount > max {
+                    amount = max
                 }
+            }
+
+            HStack {
+                Button(action: {
+                    onAdd(amount)
+                }, label: {
+                    ZStack {
+                        Rectangle()
+                            .cornerRadius(10)
+                            .foregroundStyle(.blue)
+
+                        Text("Add")
+                            .bold()
+                            .font(.system(size: 15))
+                            .foregroundStyle(.white)
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 10)
+                            
+                    }
+                })
+                .frame(width: 70, height: 25)
+                .buttonStyle(.plain)
                 
-                VStack(spacing: 5) {
-                    if (!isTurning) {
-                        Image(systemName: "digitalcrown.arrow.clockwise")
-                            .padding(.bottom, 4)
+                Button(action: {
+                    onCancel()
+                }, label: {
+                    ZStack {
+                        Rectangle()
+                            .cornerRadius(10)
+                            .foregroundStyle(.red)
+
+                        Text("Cancel")
+                            .bold()
+                            .font(.system(size: 15))
+                            .foregroundStyle(.white)
+                            .padding(.horizontal, 3)
+                            .padding(.vertical, 10)
                     }
                     
-                    Text("+ \(Int(abs(rotation)))\(unitOfMeasurement)")
-                        .focusable(true)
-                        .digitalCrownRotation($rotation, from: min, through: max, by: step)
-                        .opacity(rotation == 0.0 ? 0 : 100)
-                        .bold()
-                        .shadow(color: .black, radius: 1, x: 1, y: 1)
-                        .font(.system(size: 30))
-                        .foregroundStyle(gradient)
-                        .animation(.easeInOut, value: rotation)
-                        .frame(width: isTurning ? 120 : 0, height: isTurning ? 40 : 0)
-                        .padding(.bottom, isTurning ? 8 : 0)
-
-                    HStack(spacing: isTurning ? 8 : 0) {
-                        Button(action: {
-                            onAdd(Int(rotation))
-                        }, label: {
-                            ZStack {
-                                if isTurning {
-                                    Rectangle()
-                                        .cornerRadius(10)
-                                        .foregroundStyle(addColor)
-                                }
-
-                                Text("Add")
-                                    .bold()
-                                    .font(.system(size: isTurning ? 15 : 10))
-                                    .foregroundStyle(.white)
-                                    .padding(.horizontal, isTurning ? 12 : 0)
-                                    .padding(.vertical, isTurning ? 10 : 0)
-                                    
-                            }
-                        })
-                        .frame(width: isTurning ? 70 : 20, height: isTurning ? 25 : 0)
-                        .disabled(!isTurning)
-                        .buttonStyle(.plain)
-                        
-                        Button(action: onCancel, label: {
-                            ZStack {
-                                if isTurning {
-                                    Rectangle()
-                                        .cornerRadius(10)
-                                        .foregroundStyle(.red)
-                                }
-                                
-                                Text("Cancel")
-                                    .bold()
-                                    .font(.system(size: isTurning ? 15 : 0))
-                                    .foregroundStyle(.white)
-                                    .padding(.horizontal, isTurning ? 3 : 0)
-                                    .padding(.vertical, isTurning ? 10 : 0)
-                            }
-                            
-                        })
-                        .frame(width: isTurning ? 70 : 0, height: isTurning ? 25 : 0)
-                        .disabled(!isTurning)
-                        .buttonStyle(.plain)
-                    }
-                }
-                .padding(.top, 4)
-                .frame(width: isTurning ? 160 : 30, height: isTurning ? 110 : 30)
-                .background {
-                    RoundedRectangle(cornerRadius: 20.0)
-                        .foregroundStyle(isTurning ? .white : .clear)
-                }
-                
-                if orientation == .left && !isTurning {
-                    Spacer()
-                }
+                })
+                .frame(width: 70, height: 25)
+                .buttonStyle(.plain)
             }
-            
-            if orientation == .right && !isTurning {
-                Spacer()
-            }
+            .padding()
         }
-        .animation(.easeInOut, value: isTurning)
-        .transition(.opacity)
+        .frame(width: 155, height: 155)
+        .background {
+            RoundedRectangle(cornerRadius: 20.0)
+                .foregroundStyle(.base)
+        }
     }
+}
+
+#Preview {
+    CrownRotationAdditionView(amount: .constant(100), min: 8, max: 128, step: 8, unitOfMeasurement: "oz", gradient: WatchWaterTabItem().gradient, onAdd: { _ in }, onCancel: {})
 }

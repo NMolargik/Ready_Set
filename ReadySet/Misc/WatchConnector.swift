@@ -22,14 +22,17 @@ class WatchConnector: NSObject, WCSessionDelegate, ObservableObject {
     var session: WCSession
     
     init(session: WCSession = .default) {
-        self.session = session
         self.requestWaterConsumptionBalance = { 0 }
         self.requestEnergyConsumptionBalance = { 0 }
         self.addConsumption = { _, _ in }
-        
+        self.session = session
         super.init()
-        session.delegate = self
-        session.activate()
+        if WCSession.isSupported() {
+            session.delegate = self
+            session.activate()
+        } else {
+            print("WCSession not supported on this device")
+        }
     }
     
     func session(_ session: WCSession, didReceiveMessage message: [String: Any], replyHandler: @escaping ([String: Any]) -> Void) {
@@ -63,14 +66,16 @@ class WatchConnector: NSObject, WCSessionDelegate, ObservableObject {
         if let waterIntake = message["newWaterIntake"] as? Int {
             receiveNewWaterIntakeFromWatch(intake: waterIntake)
             
-            let newBalance = self.requestWaterConsumptionBalance
+            //let newBalance = self.requestWaterConsumptionBalance
+            let newBalance = 2
             response["waterBalance"] = newBalance
         }
         
         if let energyIntake = message["newEnergyIntake"] as? Int {
             receiveNewEnergyIntakeFromWatch(intake: energyIntake)
             
-            let newBalance = self.requestEnergyConsumptionBalance
+            //let newBalance = self.requestEnergyConsumptionBalance
+            let newBalance = 2
             response["energyBalance"] = newBalance
         }
         
@@ -81,9 +86,12 @@ class WatchConnector: NSObject, WCSessionDelegate, ObservableObject {
         if session.isReachable {
             var formattedUpdate = update
             formattedUpdate["appState"] = "running"
-            session.sendMessage(formattedUpdate) { _ in }
+            session.sendMessage(formattedUpdate, replyHandler: nil, errorHandler: { error in
+                print("Error sending message: \(error.localizedDescription)")
+            })
+            print("Message sent to watch.")
         } else {
-            print("Session is not reachable for watch update")
+            print("Session is not reachable for watch update. Ensure the watch app is in the foreground.")
         }
     }
     
@@ -100,8 +108,19 @@ class WatchConnector: NSObject, WCSessionDelegate, ObservableObject {
     }
 
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: (any Error)?) {
-        if (activationState == .activated) {
-            print("Connected to a watch")
+        if let error = error {
+            print("WCSession activation error: \(error.localizedDescription)")
+        }
+
+        switch activationState {
+        case .activated:
+            print("WCSession activated and ready for communication with the watch.")
+        case .inactive:
+            print("WCSession is inactive.")
+        case .notActivated:
+            print("WCSession not activated.")
+        @unknown default:
+            print("Unknown WCSession activation state.")
         }
     }
     

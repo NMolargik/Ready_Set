@@ -30,19 +30,6 @@ struct ExercisePlanDayView: View {
     var body: some View {
         ScrollView {
             LazyVStack {
-                if (exercises.count == 0 && !isEditing) {
-                    Spacer()
-                    
-                    Text("Tap The Pencil To Add Exercises")
-                        .bold()
-                        .font(.title3)
-                        .foregroundStyle(.baseInvert)
-                        .animation(.easeInOut, value: exercises)
-                        .transition(.opacity)
-                    
-                    Spacer()
-                }
-                
                 ForEach(exercises, id: \.self) { exercise in
                     ExerciseEntryView(exercise: exercise, isEditing: $isEditing, selectedExercise: $selectedExercise, selectedSet: $selectedSet, keyboardShown: $keyboardShown)
                         .id(exercise.id)
@@ -53,24 +40,26 @@ struct ExercisePlanDayView: View {
                         Button(action: {
                             UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                             withAnimation {
-                                addExercise(currentLength: exercises.count, weekday: selectedDay)
+                                let exercise = Exercise(weekday: selectedDay, orderIndex: exercises.count + 1)
+                                modelContext.insert(exercise)
+                                selectedExercise = exercise
                             }
                         }, label: {
-                            HStack (spacing: 0) {
-                                Text("Exercise")
-                                    .bold()
-                                    .foregroundStyle(.baseInvert)
-                                    .padding(.horizontal, 2)
-                                    .padding(.vertical, 2)
-                                    .shadow(radius: 5)
-                                
-                                Image(systemName: "plus.circle.fill")
-                                    .foregroundStyle(LinearGradient(colors: [.greenStart, .greenEnd], startPoint: .leading, endPoint: .trailing))
-                                    .frame(height: 15)
-                                
-                            }
+                            Text("Add Exercise")
+                                .bold()
+                                .foregroundStyle(.white)
+                                .padding(.horizontal, 5)
+                                .padding(.vertical, 2)
+                                .shadow(radius: 5)
                         })
                         .buttonStyle(.plain)
+                        .background {
+                            Rectangle()
+                                .cornerRadius(5)
+                                .foregroundStyle(ExerciseTabItem().gradient)
+                                .shadow(radius: 5)
+                        }
+                        .padding(.leading, 5)
                         
                         Spacer()
                     }
@@ -84,7 +73,7 @@ struct ExercisePlanDayView: View {
                 }
             }
             .padding(.horizontal, 5)
-            .padding(.vertical, 30)
+            .padding(.bottom, 30)
         }
         .scrollDisabled(!isEditing && !isExpanded)
         .onChange(of: isEditing) {
@@ -93,11 +82,5 @@ struct ExercisePlanDayView: View {
                 selectedSet = ""
             }
         }
-    }
-    
-    private func addExercise(currentLength: Int, weekday: Int) {
-        let exercise = Exercise(weekday: weekday, orderIndex: currentLength + 1)
-        modelContext.insert(exercise)
-        selectedExercise = exercise
     }
 }

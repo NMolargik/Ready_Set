@@ -20,6 +20,7 @@ class ExerciseViewModel: ObservableObject, HKHelper {
     @Published var currentDay: Int = 1
     @Published var stepCountWeek: [Date : Int] = [:]
     @Published var healthStore: HKHealthStore?
+    @Published var watchConnector: WatchConnector?
 
     init() {
         self.getCurrentWeekday()
@@ -39,6 +40,7 @@ class ExerciseViewModel: ObservableObject, HKHelper {
     func saveStepGoal() {
         self.stepGoal = Double(self.proposedStepGoal)
         self.editingStepGoal = false
+        watchConnector?.sendUpdateToWatch(update: ["stepGoal" : stepGoal])
     }
     
     private func readStepCountToday() {

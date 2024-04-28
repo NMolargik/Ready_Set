@@ -41,9 +41,11 @@ struct SettingsBottomContentView: View {
             
             Spacer()
             
-            Divider()
+            Rectangle()
                 .padding(.horizontal)
-                .scaleEffect(y: 3)
+                .frame(height: 3)
+                .cornerRadius(4)
+                .colorMultiply(.purpleStart)
                 .shadow(radius: 5)
             
             HStack {

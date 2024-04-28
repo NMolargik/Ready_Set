@@ -21,6 +21,7 @@ struct ExerciseEntryView: View {
     var body: some View {
         VStack (spacing: 5) {
             ExerciseEntryHeaderView(exercise: exercise, isEditing: $isEditing, selectedExercise: $selectedExercise, selectedSet: $selectedSet, keyboardShown: keyboardShown)
+                .animation(.easeInOut, value: selectedExercise)
             
             VStack (spacing: 0) {
                 if (exercise.exerciseSets.count == 0 ) {
@@ -44,12 +45,12 @@ struct ExerciseEntryView: View {
                             Button(action: {
                                 UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                                 withAnimation {
-                                    exercise.exerciseSets.remove(at: exercise.exerciseSets.firstIndex(of: set) ?? 0)
                                     modelContext.delete(set)
+                                    exercise.exerciseSets.remove(at: exercise.exerciseSets.firstIndex(of: set) ?? 0)
                                 }
                             }, label: {
                                 Image(systemName: "minus.circle.fill")
-                                    .foregroundStyle(LinearGradient(colors: [.orangeStart, .orangeEnd], startPoint: .topLeading, endPoint: .bottomTrailing))
+                                    .foregroundStyle(.white, LinearGradient(colors: [.red, .pink], startPoint: .topLeading, endPoint: .bottomTrailing))
                                     .frame(width: 15, height: 15)
                             })
                             .buttonStyle(.plain)

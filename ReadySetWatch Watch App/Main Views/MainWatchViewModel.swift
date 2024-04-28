@@ -13,7 +13,7 @@ class MainWatchViewModel: ObservableObject, HKHelper {
     @AppStorage("watchOnboardingComplete") var watchOnboardingComplete = false
     
     @Published var selectedTab: Int = 0
-    @Published var appState: String = "running" //TODO, replace this with 'inoperable'
+    @Published var appState: String = "inoperable"
     @Published var useMetric: Bool = false
     @Published var stepGoal: Double = 1000
     @Published var waterGoal: Double = 64
@@ -27,9 +27,11 @@ class MainWatchViewModel: ObservableObject, HKHelper {
     
     func getInitialValues(connector: PhoneConnector) {
         connector.requestInitialsFromPhone { response in
-            self.processPhoneUpdate(update: response)
-            print("Initial values retrieved and stored!")
-            self.updateProgress()
+            DispatchQueue.main.async {
+                self.processPhoneUpdate(update: response)
+                print("Initial values retrieved and stored!")
+                self.updateProgress()
+            }
         }
     }
     
@@ -55,9 +57,11 @@ class MainWatchViewModel: ObservableObject, HKHelper {
     }
     
     func respondToPhoneUpdate(update: [String : Any]) {
-        self.processPhoneUpdate(update: update)
-        print("Responded to a phone update")
-        self.updateProgress()
+        DispatchQueue.main.async {
+            self.processPhoneUpdate(update: update)
+            print("Responded to a phone update")
+            self.updateProgress()
+        }
     }
     
     private func processPhoneUpdate(update: [String : Any]) {
@@ -71,15 +75,15 @@ class MainWatchViewModel: ObservableObject, HKHelper {
             self.useMetric = useMetric
         }
         
-        if let stepGoal = update["stepGoal"] as? Int {
+        if let stepGoal = update["stepGoal"] as? Double {
             self.stepGoal = Double(stepGoal)
         }
         
-        if let waterGoal = update["waterGoal"] as? Int {
+        if let waterGoal = update["waterGoal"] as? Double {
             self.waterGoal = Double(waterGoal)
         }
         
-        if let energyGoal = update["energyGoal"] as? Int {
+        if let energyGoal = update["energyGoal"] as? Double {
             self.energyGoal = Double(energyGoal)
         }
         

@@ -12,85 +12,76 @@ struct WatchEnergyView: View {
     @Binding var energyGoal: Double
     @Binding var useMetric: Bool
     
-    @State private var isTurning = false
+    @State private var isAdding = false
     @State private var isUpdating = false
-    @State var rotation : Double = 0
-    @State var orientation: WKInterfaceDeviceCrownOrientation = .right
+    @State private var amountToAdd: Double = 0
+    @State private var showAlert = false
     
     var addEnergyIntake: ((Int, @escaping (Bool) -> Void) -> Void)
     var requestEnergyBalanceUpdate: () -> Void
     
     var body: some View {
         ZStack {
-            Color.black
-                .ignoresSafeArea()
-                .padding(.top, 1)
-            
             VStack {
+                GaugeView(max: $energyGoal, level: $energyBalance, isUpdating: $isUpdating, color: WatchEnergyTabItem().color, unit: useMetric ? "kJ" : "cal")
+                    .frame(height: 120)
                 
-                if (orientation == .right) {
-                    Spacer()
-                }
-                
-                if isUpdating {
-                    ProgressView()
-                        .scaleEffect(2)
-                        .tint(.orange)
-                } else {
-                    Text(energyBalance.description)
-                        .font(.system(size: 45))
-                        .foregroundStyle(WatchEnergyTabItem().gradient)
-                        .animation(.easeInOut, value: energyBalance)
-                        .transition(.blurReplace())
-                }
-                
-                Text("of \(Int(energyGoal).description)")
-                    .font(.system(size: 20))
-                    .foregroundStyle(.fontGray)
-                    
-                Text("\(useMetric ? "kJ" : "cal") today")
-                    .foregroundStyle(.fontGray)
-                
-                if (orientation == .left) {
-                    Spacer()
-                }
+                Button(action: {
+                    withAnimation {
+                        isAdding = true
+                    }
+                }, label: {
+                    ZStack {
+                        Circle()
+                            .foregroundStyle(.base)
+                        
+                        Image("Flame")
+                            .resizable()
+                            .scaledToFill()
+                            .padding(5)
+                        
+                        Image(systemName: "plus")
+                            .font(.caption)
+                            .foregroundStyle(.base)
+                            .offset(y: 4)
+                    }
+                })
+                .buttonStyle(.plain)
+                .frame(width: 40)
+                .padding(.top, -20)
             }
-            .blur(radius: isTurning ? 20 : 0)
-            .animation(.easeInOut, value: isTurning)
+            .blur(radius: isAdding ? 20 : 0)
+            .animation(.easeInOut, value: isAdding)
             .bold()
             .font(.system(size: 20))
             .animation(.easeInOut, value: energyGoal)
             .transition(.blurReplace())
             
-            CrownRotationAdditionView(isTurning: $isTurning, rotation: $rotation, min: 80 , max: 1000, step: 20, unitOfMeasurement: useMetric ? "kJ" : "cal", addColor: .orangeStart, gradient: WatchEnergyTabItem().gradient, onAdd: { energy in
-                isUpdating = true
-                isTurning = false
-                rotation = 0.0
-                addEnergyIntake(energy) { success in
-                    DispatchQueue.main.async {
+            if (isAdding) {
+                CrownRotationAdditionView(amount: $amountToAdd, min: 8, max: energyGoal, step: 20, unitOfMeasurement: useMetric ? "kJ" : "cal", gradient: WatchEnergyTabItem().gradient, onAdd: { amount in
+                    withAnimation {
+                        isUpdating = true
+                        isAdding = false
+                    }
+                    
+                    addEnergyIntake(Int(amount)) { success in
+                        WKInterfaceDevice.current().play(success ? .success : .failure)
+                        
+                        if (!success) {
+                            showAlert = true
+                        }
+                        
                         withAnimation {
-                            requestEnergyBalanceUpdate()
-                            //TODO: Add alert if failed
+                            amountToAdd = 0
+                            isUpdating = false
                         }
                     }
-                }
-            },
-            onCancel: {
-                withAnimation {
-                    isTurning = false
-                    rotation = 0.0
-                }
-            })
-        }
-        
-        .onChange(of: rotation) {
-            print(rotation)
-            withAnimation {
-                if rotation != 0.0 {
-                    isTurning = true
-                } else {
-                    isTurning = false
-                }
+                }, onCancel: {
+                    withAnimation {
+                        amountToAdd = 0
+                        isAdding = false
+                    }
+                })
             }
         }
         .onChange(of: energyBalance) {
@@ -98,6 +89,15 @@ struct WatchEnergyView: View {
                 isUpdating = false
             }
         }
+        .alert("There was an issue communicating with Ready, Set", isPresented: $showAlert, actions: {
+            Button(action: {
+                withAnimation {
+                    showAlert = false
+                }
+            }, label: {
+                Text("Okay")
+            })
+        })
     }
 }
 

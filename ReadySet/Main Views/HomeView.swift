@@ -69,6 +69,12 @@ struct HomeView: View {
                 navigationDragHeight = 0.0
             }
         }
+        .onOpenURL(perform: { url in
+            let summonedTab = url.host
+            
+            homeViewModel.selectedTab = TabItemType.allItems.first(where: { $0.text == summonedTab }) ?? WaterTabItem()
+            
+        })
     }
 
     private var progressForSelectedTab: Binding<Double> {

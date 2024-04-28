@@ -24,8 +24,9 @@ struct MainView: View {
                 .transition(.opacity)
             
             onboardingOverlay()
+                .animation(.easeInOut, value: appState)
+                .transition(.opacity)
         }
-        .transition(.opacity)
         .ignoresSafeArea()
         .onAppear {
             if appState != "running" && appState != "background" {

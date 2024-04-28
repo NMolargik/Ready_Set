@@ -44,6 +44,7 @@ struct OnboardingView: View {
                     ProgressView()
                         .tint(.white)
                         .controlSize(.large)
+                        .padding(.bottom)
                 }
             }
         }

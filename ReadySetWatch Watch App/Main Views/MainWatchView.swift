@@ -13,6 +13,8 @@ struct MainWatchView: View {
     @StateObject var mainWatchViewModel = MainWatchViewModel()
     @StateObject var phoneConnector = PhoneConnector()
     
+    var healthBaseController = HealthBaseController()
+    
     var body: some View {
         VStack {
             HomeView(mainWatchViewModel: mainWatchViewModel, phoneConnector: phoneConnector)
@@ -27,6 +29,8 @@ struct MainWatchView: View {
                     mainWatchViewModel.respondToPhoneUpdate(update: initialPackage)
                 }
             }
+            healthBaseController.requestAuthorization()
+            mainWatchViewModel.healthStore = healthBaseController.healthStore
         }
         .onChange(of: scenePhase) {
             if scenePhase == .active {

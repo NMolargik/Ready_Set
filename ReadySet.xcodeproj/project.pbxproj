@@ -981,6 +981,8 @@
 				DEVELOPMENT_TEAM = R8Q8DM58C6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "\"Ready, Set, Wrist uses your health information to read step count\"";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "\"Ready, Set, Wrist uses your health information to read step count\"";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = nickmolargik.ReadySet;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1011,6 +1013,8 @@
 				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "\"Ready, Set, Wrist uses your health information to read step count\"";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "\"Ready, Set, Wrist uses your health information to read step count\"";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = nickmolargik.ReadySet;
 				LD_RUNPATH_SEARCH_PATHS = (

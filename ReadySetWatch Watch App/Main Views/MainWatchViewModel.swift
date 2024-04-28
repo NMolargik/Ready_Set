@@ -23,7 +23,7 @@ class MainWatchViewModel: ObservableObject, HKHelper {
     @Published var energyBalance = 0
     @Published var progress : Double =  0
     
-    @State var healthStore: HKHealthStore? = HealthBaseController().healthStore
+    @State var healthStore: HKHealthStore?
     
     func getInitialValues(connector: PhoneConnector) {
         connector.requestInitialsFromPhone { response in

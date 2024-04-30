@@ -5,10 +5,18 @@
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
 
-#include "CodeSigning.xcconfig"
 
 PRODUCT_NAME = ReadySet
+
+PROD_BUNDLE_IDENTIFIER = nickmolargik.ReadySet
+
+WKC_BUNDLE_IDENTIFIER = $(PROD_BUNDLE_IDENTIFIER).watch
+
+WIDGET_BUNDLE_IDENTIFIER = $(PROD_BUNDLE_IDENTIFIER).widgets
 
 MARKETING_VERSION = 1.2
 
 CURRENT_PROJECT_VERSION = 0
+
+#include? "CodeSigning.xcconfig"
+

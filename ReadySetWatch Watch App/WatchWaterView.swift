@@ -37,7 +37,7 @@ struct WatchWaterView: View {
                         
                         Image("Droplet")
                             .resizable()
-                            .scaledToFill()
+                            .scaledToFit()
                             .padding(5)
                         
                         Image(systemName: "plus")
@@ -47,13 +47,13 @@ struct WatchWaterView: View {
                     }
                 })
                 .buttonStyle(.plain)
-                .frame(width: 40)
+                .frame(width: 30)
                 .padding(.top, -20)
             }
             .blur(radius: isAdding ? 20 : 0)
             .animation(.easeInOut, value: amountToAdd)
             .bold()
-            .font(.system(size: 20))
+            .font(.system(size: 10))
             .animation(.easeInOut, value: waterGoal)
             .transition(.blurReplace())
 

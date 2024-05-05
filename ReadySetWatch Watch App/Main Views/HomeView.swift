@@ -110,7 +110,9 @@ struct HomeView: View {
         }
         .onAppear {
             withAnimation {
-                mainWatchViewModel.getInitialValues(connector: phoneConnector)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
+                    mainWatchViewModel.getInitialValues(connector: phoneConnector)
+                }
             }
         }
     }

@@ -20,6 +20,7 @@ struct GaugeView: View {
         }
         .gaugeStyle(SpeedometerGaugeStyle(isUpdating: $isUpdating, level: level, max: max, unit: unit, color: color))
         .frame(width: 100)
+        .animation(.easeInOut, value: level)
     }
 }
 

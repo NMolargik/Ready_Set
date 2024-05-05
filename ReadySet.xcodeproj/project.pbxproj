@@ -602,8 +602,8 @@
 			isa = PBXGroup;
 			children = (
 				EBF9DD492BDEEA84009EA21A /* WaterWidgetProvider.swift */,
-				EBF9DD392BDEE724009EA21A /* ReadySetWaterWidget.swift */,
 				EBF9DD4D2BDEEABF009EA21A /* ReadySetWaterWidgetView.swift */,
+				EBF9DD392BDEE724009EA21A /* ReadySetWaterWidget.swift */,
 			);
 			path = ReadySetWaterWidget;
 			sourceTree = "<group>";
@@ -612,8 +612,8 @@
 			isa = PBXGroup;
 			children = (
 				EBF9DD672BDEFAA8009EA21A /* EnergyWidgetProvider.swift */,
-				EBF9DD632BDEF96B009EA21A /* ReadySetEnergyWidget.swift */,
 				EBF9DD652BDEF973009EA21A /* ReadySetEnergyWidgetView.swift */,
+				EBF9DD632BDEF96B009EA21A /* ReadySetEnergyWidget.swift */,
 			);
 			path = ReadySetEnergyWidget;
 			sourceTree = "<group>";

@@ -10,7 +10,7 @@ import SwiftData
 
 struct ExercisePlanDayView: View {
     @Environment(\.modelContext) private var modelContext
-    @AppStorage("useMetric") var useMetric: Bool = false
+    @AppStorage("useMetric", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var useMetric: Bool = false
     @FocusState private var keyboardShown: Bool
 
     @Binding var exercises: [Exercise]

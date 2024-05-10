@@ -7,19 +7,31 @@
 
 import SwiftUI
 import HealthKit
+import WidgetKit
 
 class EnergyViewModel: ObservableObject, HKHelper {
-    @AppStorage("useMetric") var useMetric: Bool = false
-    @AppStorage("energyGoal") var energyGoal: Double = 2000
+    static let shared = EnergyViewModel()
+    
+    @AppStorage("useMetric", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var useMetric: Bool = false
+    
+    @AppStorage("energyGoal", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var energyGoal: Double = 2000 {
+        didSet {
+            WidgetCenter.shared.reloadTimelines(ofKind: "ReadySetEnergyWidget")
+        }
+    }
+    
+    @AppStorage("energyConsumedToday", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var energyConsumedToday: Int = 0 {
+        didSet {
+            WidgetCenter.shared.reloadTimelines(ofKind: "ReadySetEnergyWidget")
+        }
+    }
 
     @Published var proposedEnergyGoal = 0
     @Published var editingEnergyGoal = false
-    @Published var energyConsumedToday: Int = 0
     @Published var energyConsumedWeek: [Date : Int] = [:]
     @Published var energyBurnedToday: Int = 0
     @Published var energyBurnedWeek: [Date : Int] = [:]
     @Published var healthStore: HKHealthStore?
-    
     @Published var watchConnector: WatchConnector?
     
     init() {
@@ -46,6 +58,10 @@ class EnergyViewModel: ObservableObject, HKHelper {
             }
         }
     }
+    
+    func consumeSomeEnergy() {
+        self.addEnergy(energy: useMetric ? 800 : 200)
+    }
 
     private func readEnergyConsumedToday() {
         let unit = self.useMetric ? HKUnit.jouleUnit(with: .kilo) : HKUnit.kilocalorie()
@@ -55,6 +71,7 @@ class EnergyViewModel: ObservableObject, HKHelper {
                 self.watchConnector?.sendUpdateToWatch(update: ["energyBalance" : amount])
             }
         }
+        WidgetCenter.shared.reloadTimelines(ofKind: "ReadySetEnergyWidget")
     }
 
     private func readEnergyConsumedWeek() {

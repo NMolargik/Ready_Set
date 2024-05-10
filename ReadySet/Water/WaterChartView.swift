@@ -9,7 +9,7 @@ import SwiftUI
 import Charts
 
 struct WaterChartView: View {
-    @AppStorage("useMetric") var useMetric: Bool = false
+    @AppStorage("useMetric", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var useMetric: Bool = false
     
     @ObservedObject var waterViewModel: WaterViewModel
 

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SettingsBottomContentView: View {
-    @AppStorage("useMetric") var useMetric: Bool = false
+    @AppStorage("useMetric", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var useMetric: Bool = false
     @AppStorage("decreaseHaptics") var decreaseHaptics: Bool = false
     @AppStorage("disableWave") var disableWave: Bool = false
     

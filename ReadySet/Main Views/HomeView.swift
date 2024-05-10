@@ -10,13 +10,13 @@ import HealthKit
 
 struct HomeView: View {
     @Environment(\.scenePhase) var scenePhase
-    @AppStorage("useMetric") var useMetric: Bool = false
-    @AppStorage("appState") var appState: String = "background"
+    @AppStorage("useMetric", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var useMetric: Bool = false
+    @AppStorage("appState", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var appState: String = "background"
 
     @StateObject var homeViewModel = HomeViewModel()
-    @StateObject var exerciseViewModel = ExerciseViewModel()
-    @StateObject var waterViewModel = WaterViewModel()
-    @StateObject var energyViewModel = EnergyViewModel()
+    @StateObject var exerciseViewModel = ExerciseViewModel.shared
+    @StateObject var waterViewModel = WaterViewModel.shared
+    @StateObject var energyViewModel = EnergyViewModel.shared
     
     @StateObject var watchConnector: WatchConnector = WatchConnector()
     

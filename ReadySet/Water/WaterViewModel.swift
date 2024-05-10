@@ -8,14 +8,27 @@
 import SwiftUI
 import HealthKit
 import Foundation
+import WidgetKit
 
 class WaterViewModel: ObservableObject, HKHelper {
-    @AppStorage("useMetric") var useMetric: Bool = false
-    @AppStorage("waterGoal") var waterGoal: Double = 64
+    static let shared = WaterViewModel()
+    
+    @AppStorage("useMetric", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var useMetric: Bool = false
+    
+    @AppStorage("waterGoal", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var waterGoal: Double = 64 {
+        didSet {
+            WidgetCenter.shared.reloadTimelines(ofKind: "ReadySetWaterWidget")
+        }
+    }
+    
+    @AppStorage("waterConsumedToday", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var waterConsumedToday: Int = 0 {
+        didSet {
+            WidgetCenter.shared.reloadTimelines(ofKind: "ReadySetWaterWidget")
+        }
+    }
     
     @Published var proposedWaterGoal = 64
     @Published var editingWaterGoal = false
-    @Published var waterConsumedToday: Int = 0
     @Published var waterConsumedWeek: [Date: Int] = [:]
     @Published var healthStore: HKHealthStore?
     @Published var watchConnector: WatchConnector?
@@ -30,16 +43,19 @@ class WaterViewModel: ObservableObject, HKHelper {
         self.readWaterConsumedWeek()
     }
     
-    func addWater(waterToAdd: Double){
+    func addWater(waterToAdd: Double) {
         DispatchQueue.main.async {
             self.addWaterConsumed(waterAmount: waterToAdd) {
                 withAnimation (.easeInOut) {
                     self.readWaterConsumedToday()
                     self.readWaterConsumedWeek()
-                    print(self.waterConsumedWeek.description)
                 }
             }
         }
+    }
+    
+    func addSomeWater() {
+        self.addWater(waterToAdd: useMetric ? 240 : 8)
     }
     
     private func readWaterConsumedToday() {

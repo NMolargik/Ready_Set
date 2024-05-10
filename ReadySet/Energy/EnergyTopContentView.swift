@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EnergyTopContentView: View {
-    @AppStorage("useMetric") var useMetric: Bool = false
+    @AppStorage("useMetric", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var useMetric: Bool = false
     @AppStorage("decreaseHaptics") var decreaseHaptics: Bool = false
     
     @ObservedObject var energyViewModel: EnergyViewModel

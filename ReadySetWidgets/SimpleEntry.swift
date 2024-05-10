@@ -10,6 +10,6 @@ import WidgetKit
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
-    let consumption: Double
+    let consumption: Int
     let goal: Double
 }

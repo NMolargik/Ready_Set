@@ -9,7 +9,7 @@ import WidgetKit
 import SwiftUI
 
 struct ReadySetWaterWidget: Widget {
-    let kind: String = "ReadySetWater"
+    let kind: String = "ReadySetWaterWidget"
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: WaterWidgetProvider()) { entry in
@@ -19,7 +19,7 @@ struct ReadySetWaterWidget: Widget {
         }
         .supportedFamilies([.systemSmall])
         .configurationDisplayName("Ready, Set, Water")
-        .description("Add water consumption to Ready, Set")
+        .description("Quickly add new water consumption to Ready, Set")
     }
 }
 

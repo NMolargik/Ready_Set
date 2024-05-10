@@ -9,14 +9,18 @@ import SwiftUI
 import HealthKit
 
 class ExerciseViewModel: ObservableObject, HKHelper {
-    @AppStorage("stepGoal") var stepGoal: Double = 1000
+    static let shared = ExerciseViewModel()
+    
+    @AppStorage("stepGoal", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var stepGoal: Double = 1000
+    
+    @AppStorage("stepsToday", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var stepsToday: Int = 0
     
     @Published var expandedSets = false
     @Published var editingSets = false
     @Published var editingStepGoal = false
     @Published var formComplete: Bool = false
     @Published var proposedStepGoal = 1000
-    @Published var stepsToday = 0
+    
     @Published var currentDay: Int = 1
     @Published var stepCountWeek: [Date : Int] = [:]
     @Published var healthStore: HKHealthStore?

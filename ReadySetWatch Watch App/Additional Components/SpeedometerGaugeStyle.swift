@@ -45,7 +45,8 @@ struct SpeedometerGaugeStyle: GaugeStyle {
                 
                 Text(unit)
                     .font(.caption)
-                    .foregroundStyle(.baseInvert)
+                    .foregroundStyle(.base)
+                    .bold()
                     .font(.body)
             }
             .frame(height: 90)

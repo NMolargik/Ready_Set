@@ -16,6 +16,10 @@
 		0E940A722BC6FE0400144477 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E940A712BC6FE0400144477 /* Preview Assets.xcassets */; };
 		0E98616A2BCE971F00488D9E /* WaterChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9861692BCE971F00488D9E /* WaterChartView.swift */; };
 		0EBC76F02BD1CE9A00880FFB /* ExerciseSetEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBC76EF2BD1CE9A00880FFB /* ExerciseSetEditor.swift */; };
+		EB05155E2BED9EC1005FE6F0 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB05155D2BED9EC1005FE6F0 /* DataService.swift */; };
+		EB0515682BEDAAB8005FE6F0 /* Intents.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0515672BEDAAB8005FE6F0 /* Intents.swift */; };
+		EB05156A2BEDB07C005FE6F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0515692BEDB07C005FE6F0 /* AppDelegate.swift */; };
+		EB0515712BEDC5EF005FE6F0 /* EntryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1FDC4F2BD9A0C900253855 /* EntryType.swift */; };
 		EB1FDC1B2BD6FCBE00253855 /* ExerciseSetRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1FDC1A2BD6FCBE00253855 /* ExerciseSetRecordView.swift */; };
 		EB1FDC232BD7053000253855 /* ReadySetWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1FDC222BD7053000253855 /* ReadySetWatchApp.swift */; };
 		EB1FDC252BD7053000253855 /* MainWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1FDC242BD7053000253855 /* MainWatchView.swift */; };
@@ -181,6 +185,9 @@
 		0E940A712BC6FE0400144477 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0E9861692BCE971F00488D9E /* WaterChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterChartView.swift; sourceTree = "<group>"; };
 		0EBC76EF2BD1CE9A00880FFB /* ExerciseSetEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSetEditor.swift; sourceTree = "<group>"; };
+		EB05155D2BED9EC1005FE6F0 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		EB0515672BEDAAB8005FE6F0 /* Intents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intents.swift; sourceTree = "<group>"; };
+		EB0515692BEDB07C005FE6F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB1FDC1A2BD6FCBE00253855 /* ExerciseSetRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSetRecordView.swift; sourceTree = "<group>"; };
 		EB1FDC202BD7053000253855 /* Ready, Set, Wrist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ready, Set, Wrist.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB1FDC222BD7053000253855 /* ReadySetWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadySetWatchApp.swift; sourceTree = "<group>"; };
@@ -363,6 +370,7 @@
 				EB3AB36D2BC7957D008B6F22 /* ReadySet.entitlements */,
 				0E940A6A2BC6FE0200144477 /* ReadySetApp.swift */,
 				0E940A6C2BC6FE0200144477 /* MainView.swift */,
+				EB0515692BEDB07C005FE6F0 /* AppDelegate.swift */,
 				0E1A3E8E2BD4CEFE005CD025 /* Misc */,
 				0E7DCA5A2BC6FE8000B9403C /* Models */,
 				EB3AB3422BC71191008B6F22 /* TabItems */,
@@ -589,6 +597,8 @@
 			children = (
 				EBF9DD372BDEE724009EA21A /* ReadySetWidgetsBundle.swift */,
 				EBF9DD4B2BDEEA9D009EA21A /* SimpleEntry.swift */,
+				EB05155D2BED9EC1005FE6F0 /* DataService.swift */,
+				EB0515672BEDAAB8005FE6F0 /* Intents.swift */,
 				EBF9DD522BDEF26E009EA21A /* ReadySetWaterWidget */,
 				EBF9DD542BDEF32C009EA21A /* ReadySetEnergyWidget */,
 				EBF9DD3B2BDEE726009EA21A /* Assets.xcassets */,
@@ -602,8 +612,8 @@
 			isa = PBXGroup;
 			children = (
 				EBF9DD492BDEEA84009EA21A /* WaterWidgetProvider.swift */,
-				EBF9DD4D2BDEEABF009EA21A /* ReadySetWaterWidgetView.swift */,
 				EBF9DD392BDEE724009EA21A /* ReadySetWaterWidget.swift */,
+				EBF9DD4D2BDEEABF009EA21A /* ReadySetWaterWidgetView.swift */,
 			);
 			path = ReadySetWaterWidget;
 			sourceTree = "<group>";
@@ -612,8 +622,8 @@
 			isa = PBXGroup;
 			children = (
 				EBF9DD672BDEFAA8009EA21A /* EnergyWidgetProvider.swift */,
-				EBF9DD652BDEF973009EA21A /* ReadySetEnergyWidgetView.swift */,
 				EBF9DD632BDEF96B009EA21A /* ReadySetEnergyWidget.swift */,
+				EBF9DD652BDEF973009EA21A /* ReadySetEnergyWidgetView.swift */,
 			);
 			path = ReadySetEnergyWidget;
 			sourceTree = "<group>";
@@ -711,6 +721,7 @@
 			mainGroup = 0E940A5E2BC6FE0200144477;
 			packageReferences = (
 				EB1FDC152BD6B99300253855 /* XCRemoteSwiftPackageReference "SwiftUI-Flow" */,
+				EB05155F2BEDA922005FE6F0 /* XCRemoteSwiftPackageReference "SwiftLint" */,
 			);
 			productRefGroup = 0E940A682BC6FE0200144477 /* Products */;
 			projectDirPath = "";
@@ -803,6 +814,7 @@
 				EB3AB3602BC76FE5008B6F22 /* WaterBottomContentView.swift in Sources */,
 				EB4D9C652BCDBDF60071BA99 /* SplashView.swift in Sources */,
 				EB4742BA2BD324C5009A23E4 /* ExerciseEntryView.swift in Sources */,
+				EB05156A2BEDB07C005FE6F0 /* AppDelegate.swift in Sources */,
 				EB3AB3442BC711A8008B6F22 /* ITabItem.swift in Sources */,
 				EB3AB35E2BC76FDC008B6F22 /* SettingsBottomContentView.swift in Sources */,
 				EB3AB35A2BC76F8C008B6F22 /* BottomView.swift in Sources */,
@@ -870,13 +882,16 @@
 				EBF9DD5D2BDEF4D1009EA21A /* SettingsTabITem.swift in Sources */,
 				EBF9DD5E2BDEF4D1009EA21A /* WaterTabItem.swift in Sources */,
 				EBF9DD5F2BDEF4D1009EA21A /* EnergyTabItem.swift in Sources */,
+				EB0515712BEDC5EF005FE6F0 /* EntryType.swift in Sources */,
 				EBF9DD602BDEF4D1009EA21A /* TabItemType.swift in Sources */,
 				EBF9DD612BDEF4D1009EA21A /* ITabItem.swift in Sources */,
 				EBF9DD642BDEF96B009EA21A /* ReadySetEnergyWidget.swift in Sources */,
 				EBF9DD622BDEF4D1009EA21A /* ExerciseTabItem.swift in Sources */,
 				EBF9DD5C2BDEF4B9009EA21A /* GaugeView.swift in Sources */,
 				EBF9DD682BDEFAA8009EA21A /* EnergyWidgetProvider.swift in Sources */,
+				EB0515682BEDAAB8005FE6F0 /* Intents.swift in Sources */,
 				EBF9DD4E2BDEEABF009EA21A /* ReadySetWaterWidgetView.swift in Sources */,
+				EB05155E2BED9EC1005FE6F0 /* DataService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1285,6 +1300,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		EB05155F2BEDA922005FE6F0 /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/SwiftLint.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.54.0;
+			};
+		};
 		EB1FDC152BD6B99300253855 /* XCRemoteSwiftPackageReference "SwiftUI-Flow" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/tevelee/SwiftUI-Flow.git";

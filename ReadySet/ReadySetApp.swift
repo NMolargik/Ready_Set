@@ -18,7 +18,6 @@ struct ReadySetApp: App {
     }
 }
 
-
 extension Bundle {
     var bundleVersion: String {
         return self.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String

@@ -9,7 +9,7 @@ import WidgetKit
 import SwiftUI
 
 struct ReadySetEnergyWidget: Widget {
-    let kind: String = "ReadySetEnergy"
+    let kind: String = "ReadySetEnergyWidget"
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: EnergyWidgetProvider()) { entry in
@@ -19,7 +19,7 @@ struct ReadySetEnergyWidget: Widget {
         }
         .supportedFamilies([.systemSmall])
         .configurationDisplayName("Ready, Set, Energy")
-        .description("Add energy consumption to Ready, Set")
+        .description("Quickly add new energy consumption to Ready, Set")
     }
 }
 

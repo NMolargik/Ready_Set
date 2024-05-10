@@ -9,7 +9,7 @@ import SwiftUI
 import Foundation
 
 struct MainView: View {
-    @AppStorage("appState") var appState: String = "splash"
+    @AppStorage("appState", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var appState: String = "splash"
     
     @State private var color: Color = .clear
     @State private var onboardingProgress : Float = 0.0

@@ -9,12 +9,14 @@ import Foundation
 import WidgetKit
 
 struct WaterWidgetProvider: TimelineProvider {
+    let data = DataService.shared
+    
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), consumption: 100, goal: 128)
+        SimpleEntry(date: Date(), consumption: data.waterConsumedToday, goal: data.waterGoal)
     }
 
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), consumption: 100, goal: 128)
+        let entry = SimpleEntry(date: Date(), consumption: data.waterConsumedToday, goal: data.waterGoal)
         completion(entry)
     }
 
@@ -22,10 +24,9 @@ struct WaterWidgetProvider: TimelineProvider {
         var entries: [SimpleEntry] = []
 
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-        let currentDate = Date()
         for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: Date(), consumption: 100, goal: 128)
+            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: Date())!
+            let entry = SimpleEntry(date: entryDate, consumption: data.waterConsumedToday, goal: data.waterGoal)
             entries.append(entry)
         }
 

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SplashView: View {
-    @AppStorage("appState") var appState: String = "splash"
+    @AppStorage("appState", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var appState: String = "splash"
     @Binding var onboardingProgress: Float
     @Binding var onboardingGradient: LinearGradient
     

@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct WaterTopContentView: View {
-    @AppStorage("useMetric") var useMetric: Bool = false
-    @AppStorage("disableWave") var disableWave: Bool = false
+    @AppStorage("useMetric", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var useMetric: Bool = false
+    @AppStorage("disableWave", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var disableWave: Bool = false
     @AppStorage("decreaseHaptics") var decreaseHaptics: Bool = false
     
     @ObservedObject var waterViewModel: WaterViewModel

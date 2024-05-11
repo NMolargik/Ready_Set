@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct InitialExerciseBuilderView: View {
-    @AppStorage("appState", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var appState: String = "initialExerciseBuilder"
+    @AppStorage("appState", store: UserDefaults(suiteName: Bundle.main.groupID)) var appState: String = "initialExerciseBuilder"
     
     @Query(sort: [SortDescriptor(\Exercise.orderIndex)]) var exercises: [Exercise]
     

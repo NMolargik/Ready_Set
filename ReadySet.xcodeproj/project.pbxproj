@@ -11,6 +11,9 @@
 		0E1A3E922BD4DA45005CD025 /* HKHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1A3E912BD4DA45005CD025 /* HKHelper.swift */; };
 		0E4A5E2A2BCC9D59003678C2 /* EnergyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4A5E292BCC9D59003678C2 /* EnergyViewModel.swift */; };
 		0E7DCA5E2BC6FF7400B9403C /* ExerciseSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7DCA5D2BC6FF7400B9403C /* ExerciseSet.swift */; };
+		0E931E352BEF5B6F0091AA03 /* RS+Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E931E342BEF5B6F0091AA03 /* RS+Bundle.swift */; };
+		0E931E362BEF5BB70091AA03 /* RS+Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E931E342BEF5B6F0091AA03 /* RS+Bundle.swift */; };
+		0E931E372BEF5BB80091AA03 /* RS+Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E931E342BEF5B6F0091AA03 /* RS+Bundle.swift */; };
 		0E940A6B2BC6FE0200144477 /* ReadySetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E940A6A2BC6FE0200144477 /* ReadySetApp.swift */; };
 		0E940A6D2BC6FE0200144477 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E940A6C2BC6FE0200144477 /* MainView.swift */; };
 		0E940A722BC6FE0400144477 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E940A712BC6FE0400144477 /* Preview Assets.xcassets */; };
@@ -98,7 +101,7 @@
 		EBF9DD382BDEE724009EA21A /* ReadySetWidgetsBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF9DD372BDEE724009EA21A /* ReadySetWidgetsBundle.swift */; };
 		EBF9DD3A2BDEE724009EA21A /* ReadySetWaterWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF9DD392BDEE724009EA21A /* ReadySetWaterWidget.swift */; };
 		EBF9DD3C2BDEE726009EA21A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBF9DD3B2BDEE726009EA21A /* Assets.xcassets */; };
-		EBF9DD412BDEE726009EA21A /* ReadySetWidgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = EBF9DD312BDEE724009EA21A /* ReadySetWidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		EBF9DD412BDEE726009EA21A /* ReadySetWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = EBF9DD312BDEE724009EA21A /* ReadySetWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		EBF9DD482BDEE8C7009EA21A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB1FDC432BD74A7B00253855 /* Assets.xcassets */; };
 		EBF9DD4A2BDEEA84009EA21A /* WaterWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF9DD492BDEEA84009EA21A /* WaterWidgetProvider.swift */; };
 		EBF9DD4C2BDEEA9D009EA21A /* SimpleEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF9DD4B2BDEEA9D009EA21A /* SimpleEntry.swift */; };
@@ -165,7 +168,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				EBF9DD412BDEE726009EA21A /* ReadySetWidgetsExtension.appex in Embed Foundation Extensions */,
+				EBF9DD412BDEE726009EA21A /* ReadySetWidgets.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -178,6 +181,8 @@
 		0E4A5E252BCC80E0003678C2 /* Build.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Build.xcconfig; sourceTree = "<group>"; };
 		0E4A5E292BCC9D59003678C2 /* EnergyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnergyViewModel.swift; sourceTree = "<group>"; };
 		0E7DCA5D2BC6FF7400B9403C /* ExerciseSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSet.swift; sourceTree = "<group>"; };
+		0E931E322BEF5A020091AA03 /* ReadySetWatch-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "ReadySetWatch-Watch-App-Info.plist"; sourceTree = SOURCE_ROOT; };
+		0E931E342BEF5B6F0091AA03 /* RS+Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RS+Bundle.swift"; sourceTree = "<group>"; };
 		0E940A672BC6FE0200144477 /* ReadySet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReadySet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E940A6A2BC6FE0200144477 /* ReadySetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadySetApp.swift; sourceTree = "<group>"; };
 		0E940A6C2BC6FE0200144477 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -263,7 +268,7 @@
 		EBEEC77A2BD0251F0058BDFD /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		EBEEC7A62BD184160058BDFD /* GoalType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalType.swift; sourceTree = "<group>"; };
 		EBF9DD2B2BDEAB7D009EA21A /* GoalSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalSetView.swift; sourceTree = "<group>"; };
-		EBF9DD312BDEE724009EA21A /* ReadySetWidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ReadySetWidgetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		EBF9DD312BDEE724009EA21A /* ReadySetWidgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ReadySetWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBF9DD322BDEE724009EA21A /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = /System/Library/Frameworks/WidgetKit.framework; sourceTree = "<absolute>"; };
 		EBF9DD342BDEE724009EA21A /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = /System/Library/Frameworks/SwiftUI.framework; sourceTree = "<absolute>"; };
 		EBF9DD372BDEE724009EA21A /* ReadySetWidgetsBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadySetWidgetsBundle.swift; sourceTree = "<group>"; };
@@ -340,6 +345,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		0E931E332BEF5B5D0091AA03 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				0E931E342BEF5B6F0091AA03 /* RS+Bundle.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
 		0E940A5E2BC6FE0200144477 = {
 			isa = PBXGroup;
 			children = (
@@ -347,6 +360,7 @@
 				0E940A692BC6FE0200144477 /* ReadySet */,
 				EB1FDC212BD7053000253855 /* ReadySetWatch Watch App */,
 				EBF9DD362BDEE724009EA21A /* ReadySetWidgets */,
+				0E931E332BEF5B5D0091AA03 /* Shared */,
 				0E940A682BC6FE0200144477 /* Products */,
 				EB2BB03F2BDADD5300C3DA78 /* Frameworks */,
 			);
@@ -357,7 +371,7 @@
 			children = (
 				0E940A672BC6FE0200144477 /* ReadySet.app */,
 				EB1FDC202BD7053000253855 /* Ready, Set, Wrist.app */,
-				EBF9DD312BDEE724009EA21A /* ReadySetWidgetsExtension.appex */,
+				EBF9DD312BDEE724009EA21A /* ReadySetWidgets.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -398,6 +412,7 @@
 		EB1FDC212BD7053000253855 /* ReadySetWatch Watch App */ = {
 			isa = PBXGroup;
 			children = (
+				0E931E322BEF5A020091AA03 /* ReadySetWatch-Watch-App-Info.plist */,
 				EB2BB06B2BDB311800C3DA78 /* ReadySetWatch Watch App.entitlements */,
 				EB1FDC222BD7053000253855 /* ReadySetWatchApp.swift */,
 				EB2BB04A2BDB0DC000C3DA78 /* Misc */,
@@ -686,7 +701,7 @@
 			);
 			name = ReadySetWidgetsExtension;
 			productName = ReadySetWidgetsExtension;
-			productReference = EBF9DD312BDEE724009EA21A /* ReadySetWidgetsExtension.appex */;
+			productReference = EBF9DD312BDEE724009EA21A /* ReadySetWidgets.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -795,6 +810,7 @@
 				EB3AB3412BC71105008B6F22 /* TabItemType.swift in Sources */,
 				EB3AB3572BC76F07008B6F22 /* TopDetailView.swift in Sources */,
 				0E1A3E922BD4DA45005CD025 /* HKHelper.swift in Sources */,
+				0E931E352BEF5B6F0091AA03 /* RS+Bundle.swift in Sources */,
 				EB2BB03E2BDADD3800C3DA78 /* WatchConnector.swift in Sources */,
 				EB4D9C712BCDF7970071BA99 /* RoundedTriangleShape.swift in Sources */,
 				EB4D9C6F2BCDE8310071BA99 /* HealthBaseController.swift in Sources */,
@@ -863,6 +879,7 @@
 				EB2BB06E2BDB4C9D00C3DA78 /* CrownRotationAdditionView.swift in Sources */,
 				EBF9DD702BDF0454009EA21A /* WatchTrackerView.swift in Sources */,
 				EB2BB0442BDADDA000C3DA78 /* PhoneConnector.swift in Sources */,
+				0E931E362BEF5BB70091AA03 /* RS+Bundle.swift in Sources */,
 				EB2BB0682BDB263E00C3DA78 /* WatchWaterView.swift in Sources */,
 				EB1FDC232BD7053000253855 /* ReadySetWatchApp.swift in Sources */,
 				EB1FDC422BD7495100253855 /* Date+Extension.swift in Sources */,
@@ -873,6 +890,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E931E372BEF5BB80091AA03 /* RS+Bundle.swift in Sources */,
 				EBF9DD4C2BDEEA9D009EA21A /* SimpleEntry.swift in Sources */,
 				EBF9DD3A2BDEE724009EA21A /* ReadySetWaterWidget.swift in Sources */,
 				EBF9DD662BDEF973009EA21A /* ReadySetEnergyWidgetView.swift in Sources */,
@@ -978,7 +996,6 @@
 		};
 		0E940A8F2BC6FE0400144477 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0E4A5E252BCC80E0003678C2 /* Build.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -1044,7 +1061,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ReadySet/ReadySet.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
 				DEVELOPMENT_ASSET_PATHS = "\"ReadySet/Preview Content\"";
 				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
 				ENABLE_PREVIEWS = YES;
@@ -1065,7 +1082,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = "$(MARKETING_VERSION)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(PRODUCT_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = "$(PRODUCT_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1080,13 +1097,14 @@
 		};
 		0E940A922BC6FE0400144477 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0E4A5E252BCC80E0003678C2 /* Build.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ReadySet/ReadySet.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
 				DEVELOPMENT_ASSET_PATHS = "\"ReadySet/Preview Content\"";
 				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
 				ENABLE_PREVIEWS = YES;
@@ -1107,7 +1125,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = "$(MARKETING_VERSION)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(PRODUCT_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = "$(PRODUCT_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1122,25 +1140,28 @@
 		};
 		EB1FDC2F2BD7053200253855 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0E4A5E252BCC80E0003678C2 /* Build.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "ReadySetWatch Watch App/ReadySetWatch Watch App.entitlements";
+				CODE_SIGN_IDENTITY = "$(CODE_SIGN_IDENTITY_IOS)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
 				DEVELOPMENT_ASSET_PATHS = "\"ReadySetWatch Watch App/Preview Content\"";
-				DEVELOPMENT_TEAM = R8Q8DM58C6;
+				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "ReadySetWatch-Watch-App-Info.plist";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = nickmolargik.ReadySet;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "$(PROD_BUNDLE_IDENTIFIER)";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
-				PRODUCT_BUNDLE_IDENTIFIER = nickmolargik.ReadySet.watchkitapp;
-				PRODUCT_NAME = "Ready, Set, Wrist";
+				MARKETING_VERSION = "$(MARKETING_VERSION)";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(PRODUCT_BUNDLE_IDENTIFIER_WATCH)";
+				PRODUCT_NAME = "$(WATCH_PRODUCT_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1152,25 +1173,28 @@
 		};
 		EB1FDC302BD7053200253855 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0E4A5E252BCC80E0003678C2 /* Build.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "ReadySetWatch Watch App/ReadySetWatch Watch App.entitlements";
+				CODE_SIGN_IDENTITY = "$(CODE_SIGN_IDENTITY_IOS)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
 				DEVELOPMENT_ASSET_PATHS = "\"ReadySetWatch Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "ReadySetWatch-Watch-App-Info.plist";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = nickmolargik.ReadySet;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "$(PROD_BUNDLE_IDENTIFIER)";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
-				PRODUCT_BUNDLE_IDENTIFIER = nickmolargik.ReadySet.watchkitapp;
-				PRODUCT_NAME = "Ready, Set, Wrist";
+				MARKETING_VERSION = "$(MARKETING_VERSION)";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(PRODUCT_BUNDLE_IDENTIFIER_WATCH)";
+				PRODUCT_NAME = "$(WATCH_PRODUCT_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1182,17 +1206,19 @@
 		};
 		EBF9DD432BDEE726009EA21A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0E4A5E252BCC80E0003678C2 /* Build.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = ReadySetWidgets/ReadySetWidgets.entitlements;
+				CODE_SIGN_IDENTITY = "$(CODE_SIGN_IDENTITY_IOS)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = R8Q8DM58C6;
+				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ReadySetWidgets/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = ReadySetWidgets;
+				INFOPLIST_KEY_CFBundleDisplayName = "$(WIDGET_PRODUCT_NAME)";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -1208,8 +1234,8 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = nickmolargik.ReadySet.ReadySetWidgets;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(PRODUCT_BUNDLE_IDENTIFIER_WIDGETS)";
+				PRODUCT_NAME = "$(WIDGET_PRODUCT_NAME)";
 				SDKROOT = auto;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
@@ -1221,17 +1247,19 @@
 		};
 		EBF9DD442BDEE726009EA21A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0E4A5E252BCC80E0003678C2 /* Build.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = ReadySetWidgets/ReadySetWidgets.entitlements;
+				CODE_SIGN_IDENTITY = "$(CODE_SIGN_IDENTITY_IOS)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ReadySetWidgets/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = ReadySetWidgets;
+				INFOPLIST_KEY_CFBundleDisplayName = "$(WIDGET_PRODUCT_NAME)";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -1247,8 +1275,8 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = nickmolargik.ReadySet.ReadySetWidgets;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(PRODUCT_BUNDLE_IDENTIFIER_WIDGETS)";
+				PRODUCT_NAME = "$(WIDGET_PRODUCT_NAME)";
 				SDKROOT = auto;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";

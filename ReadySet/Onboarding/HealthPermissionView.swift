@@ -9,7 +9,7 @@ import SwiftUI
 import HealthKit
 
 struct HealthPermissionView: View {
-    @AppStorage("appState", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var appState: String = "splash"
+    @AppStorage("appState", store: UserDefaults(suiteName: Bundle.main.groupID)) var appState: String = "splash"
     @Binding var onboardingProgress: Float
     @Binding var onboardingGradient: LinearGradient
     @Binding var healthController: HealthBaseController

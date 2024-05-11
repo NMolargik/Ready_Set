@@ -10,11 +10,11 @@ import WatchConnectivity
 import SwiftUI
 
 class WatchConnector: NSObject, WCSessionDelegate, ObservableObject {
-    @AppStorage("appState", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var appState: String = "background"
-    @AppStorage("useMetric", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var useMetric: Bool = false
-    @AppStorage("stepGoal", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var stepGoal: Double = 1000
-    @AppStorage("waterGoal", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var waterGoal: Double = 64
-    @AppStorage("energyGoal", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var energyGoal: Double = 2000
+    @AppStorage("appState", store: UserDefaults(suiteName: Bundle.main.groupID)) var appState: String = "background"
+    @AppStorage("useMetric", store: UserDefaults(suiteName: Bundle.main.groupID)) var useMetric: Bool = false
+    @AppStorage("stepGoal", store: UserDefaults(suiteName: Bundle.main.groupID)) var stepGoal: Double = 1000
+    @AppStorage("waterGoal", store: UserDefaults(suiteName: Bundle.main.groupID)) var waterGoal: Double = 64
+    @AppStorage("energyGoal", store: UserDefaults(suiteName: Bundle.main.groupID)) var energyGoal: Double = 2000
     
     var requestStepBalance: (() -> Int)
     var requestWaterConsumptionBalance: (() -> Int)

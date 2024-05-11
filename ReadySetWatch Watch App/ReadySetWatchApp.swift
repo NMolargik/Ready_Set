@@ -12,6 +12,9 @@ struct ReadySetWatch_Watch_AppApp: App {
     var body: some Scene {
         WindowGroup {
             MainWatchView()
+                .onAppear {
+                    print(Bundle.main.object(forInfoDictionaryKey: "GroupID") as! String)
+                }
         }
     }
 }

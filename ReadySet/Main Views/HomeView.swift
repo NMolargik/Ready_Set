@@ -10,8 +10,8 @@ import HealthKit
 
 struct HomeView: View {
     @Environment(\.scenePhase) var scenePhase
-    @AppStorage("useMetric", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var useMetric: Bool = false
-    @AppStorage("appState", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var appState: String = "background"
+    @AppStorage("useMetric", store: UserDefaults(suiteName: Bundle.main.groupID)) var useMetric: Bool = false
+    @AppStorage("appState", store: UserDefaults(suiteName: Bundle.main.groupID)) var appState: String = "background"
 
     @StateObject var homeViewModel = HomeViewModel()
     @StateObject var exerciseViewModel = ExerciseViewModel.shared

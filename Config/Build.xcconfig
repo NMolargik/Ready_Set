@@ -5,10 +5,26 @@
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
 
-#include "CodeSigning.xcconfig"
-
-PRODUCT_NAME = ReadySet
+DEVELOPMENT_TEAM = R8Q8DM58C6
 
 MARKETING_VERSION = 1.2
 
-CURRENT_PROJECT_VERSION = 0
+CURRENT_PROJECT_VERSION = 1
+
+PRODUCT_NAME = ReadySet
+
+WIDGET_PRODUCT_NAME = ReadySetWidgets
+
+WATCH_PRODUCT_NAME = Ready, Set, Wrist
+
+GROUP_BUNDLE_IDENTIFIER = nickmolargik.ReadySet
+
+PROD_BUNDLE_IDENTIFIER = nickmolargik.ReadySet
+
+PRODUCT_BUNDLE_IDENTIFIER = nickmolargik.ReadySet
+
+PRODUCT_BUNDLE_IDENTIFIER_WATCH = nickmolargik.ReadySet.watchkitapp
+
+PRODUCT_BUNDLE_IDENTIFIER_WIDGETS = nickmolargik.ReadySet.ReadySetWidgets
+
+#include "CodeSigning.xcconfig"

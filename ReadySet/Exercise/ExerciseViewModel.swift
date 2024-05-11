@@ -11,9 +11,9 @@ import HealthKit
 class ExerciseViewModel: ObservableObject, HKHelper {
     static let shared = ExerciseViewModel()
     
-    @AppStorage("stepGoal", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var stepGoal: Double = 1000
-    
-    @AppStorage("stepsToday", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var stepsToday: Int = 0
+    @AppStorage("stepGoal", store: UserDefaults(suiteName: Bundle.main.groupID)) var stepGoal: Double = 1000
+
+    @AppStorage("stepsToday", store: UserDefaults(suiteName: Bundle.main.groupID)) var stepsToday: Int = 0
     
     @Published var expandedSets = false
     @Published var editingSets = false

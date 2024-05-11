@@ -10,8 +10,8 @@ import SwiftUI
 import HealthKit
 
 class MainWatchViewModel: ObservableObject {
-    @AppStorage("watchOnboardingComplete", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var watchOnboardingComplete = false
-    
+    @AppStorage("watchOnboardingComplete", store: UserDefaults(suiteName: Bundle.main.groupID)) var watchOnboardingComplete = false
+
     @Published var selectedTab: Int = 0
     @Published var appState: String = "inoperable"
     @Published var useMetric: Bool = false

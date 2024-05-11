@@ -9,8 +9,8 @@ import SwiftUI
 import Foundation
 
 struct MainView: View {
-    @AppStorage("appState", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var appState: String = "splash"
-    
+    @AppStorage("appState", store: UserDefaults(suiteName: Bundle.main.groupID)) var appState: String = "splash"
+
     @State private var color: Color = .clear
     @State private var onboardingProgress : Float = 0.0
     @State private var onboardingGradient = LinearGradient(colors: [.clear, .clear], startPoint: .leading, endPoint: .trailing)

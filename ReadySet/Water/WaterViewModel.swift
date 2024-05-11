@@ -13,15 +13,15 @@ import WidgetKit
 class WaterViewModel: ObservableObject, HKHelper {
     static let shared = WaterViewModel()
     
-    @AppStorage("useMetric", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var useMetric: Bool = false
-    
-    @AppStorage("waterGoal", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var waterGoal: Double = 64 {
+    @AppStorage("useMetric", store: UserDefaults(suiteName: Bundle.main.groupID)) var useMetric: Bool = false
+
+    @AppStorage("waterGoal", store: UserDefaults(suiteName: Bundle.main.groupID)) var waterGoal: Double = 64 {
         didSet {
             WidgetCenter.shared.reloadTimelines(ofKind: "ReadySetWaterWidget")
         }
     }
     
-    @AppStorage("waterConsumedToday", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var waterConsumedToday: Int = 0 {
+    @AppStorage("waterConsumedToday", store: UserDefaults(suiteName: Bundle.main.groupID)) var waterConsumedToday: Int = 0 {
         didSet {
             WidgetCenter.shared.reloadTimelines(ofKind: "ReadySetWaterWidget")
         }

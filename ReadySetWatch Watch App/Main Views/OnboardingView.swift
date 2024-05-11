@@ -9,7 +9,7 @@ import SwiftUI
 import HealthKit
 
 struct OnboardingView: View {
-    @AppStorage("watchOnboardingComplete", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var watchOnboardingComplete = false
+    @AppStorage("watchOnboardingComplete", store: UserDefaults(suiteName: Bundle.main.groupID)) var watchOnboardingComplete = false
     
     @Binding var appState: String
     

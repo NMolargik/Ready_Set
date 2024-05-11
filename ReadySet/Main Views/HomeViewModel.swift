@@ -8,7 +8,7 @@
 import SwiftUI
 
 class HomeViewModel: ObservableObject {
-    @AppStorage("lastUseDate", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var lastUseDate: String = "2024-04-19"
+    @AppStorage("lastUseDate", store: UserDefaults(suiteName: Bundle.main.groupID)) var lastUseDate: String = "2024-04-19"
 
     @Published var selectedTab: any ITabItem = ExerciseTabItem()
     @Published var tabItems = TabItemType.allItems

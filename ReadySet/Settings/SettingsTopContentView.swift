@@ -9,7 +9,7 @@ import SwiftUI
 import UIKit
 
 struct SettingsTopContentView: View {
-    @AppStorage("appState", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var appState: String = "splash"
+    @AppStorage("appState", store: UserDefaults(suiteName: Bundle.main.groupID)) var appState: String = "splash"
     @Environment(\.colorScheme) var colorScheme
     
     @ObservedObject var exerciseViewModel: ExerciseViewModel

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct NavigationTutorialView: View {
-    @AppStorage("appState", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var appState: String = "navigationTutorial"
+    @AppStorage("appState", store: UserDefaults(suiteName: Bundle.main.groupID)) var appState: String = "navigationTutorial"
     @Binding var onboardingProgress: Float
     @Binding var onboardingGradient: LinearGradient
     

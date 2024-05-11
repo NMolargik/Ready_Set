@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EnergyAdditionWidgetView: View {
-    @AppStorage("useMetric", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var useMetric: Bool = false
+    @AppStorage("useMetric", store: UserDefaults(suiteName: Bundle.main.groupID)) var useMetric: Bool = false
     @AppStorage("decreaseHaptics") var decreaseHaptics: Bool = false
     
     var addEnergy: (Double) -> Void

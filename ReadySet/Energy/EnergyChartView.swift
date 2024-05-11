@@ -9,7 +9,7 @@ import SwiftUI
 import Charts
 
 struct EnergyChartView: View {
-    @AppStorage("useMetric", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var useMetric: Bool = false
+    @AppStorage("useMetric", store: UserDefaults(suiteName: Bundle.main.groupID)) var useMetric: Bool = false
     @ObservedObject var energyViewModel: EnergyViewModel
 
     var averageEnergyConsumed: Double {

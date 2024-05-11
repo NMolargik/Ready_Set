@@ -12,15 +12,15 @@ import WidgetKit
 class EnergyViewModel: ObservableObject, HKHelper {
     static let shared = EnergyViewModel()
     
-    @AppStorage("useMetric", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var useMetric: Bool = false
-    
-    @AppStorage("energyGoal", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var energyGoal: Double = 2000 {
+    @AppStorage("useMetric", store: UserDefaults(suiteName: Bundle.main.groupID)) var useMetric: Bool = false
+
+    @AppStorage("energyGoal", store: UserDefaults(suiteName: Bundle.main.groupID)) var energyGoal: Double = 2000 {
         didSet {
             WidgetCenter.shared.reloadTimelines(ofKind: "ReadySetEnergyWidget")
         }
     }
     
-    @AppStorage("energyConsumedToday", store: UserDefaults(suiteName: "group.nickmolargik.ReadySet")) var energyConsumedToday: Int = 0 {
+    @AppStorage("energyConsumedToday", store: UserDefaults(suiteName: Bundle.main.groupID)) var energyConsumedToday: Int = 0 {
         didSet {
             WidgetCenter.shared.reloadTimelines(ofKind: "ReadySetEnergyWidget")
         }

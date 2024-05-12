@@ -23,6 +23,8 @@
 		EB0515682BEDAAB8005FE6F0 /* Intents.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0515672BEDAAB8005FE6F0 /* Intents.swift */; };
 		EB05156A2BEDB07C005FE6F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0515692BEDB07C005FE6F0 /* AppDelegate.swift */; };
 		EB0515712BEDC5EF005FE6F0 /* EntryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1FDC4F2BD9A0C900253855 /* EntryType.swift */; };
+		EB05157A2BF158F0005FE6F0 /* ReadySetWatch-Watch-App-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB0515792BF158F0005FE6F0 /* ReadySetWatch-Watch-App-Info.plist */; };
+		EB05157B2BF158F4005FE6F0 /* ReadySetWatch-Watch-App-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB0515792BF158F0005FE6F0 /* ReadySetWatch-Watch-App-Info.plist */; };
 		EB1FDC1B2BD6FCBE00253855 /* ExerciseSetRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1FDC1A2BD6FCBE00253855 /* ExerciseSetRecordView.swift */; };
 		EB1FDC232BD7053000253855 /* ReadySetWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1FDC222BD7053000253855 /* ReadySetWatchApp.swift */; };
 		EB1FDC252BD7053000253855 /* MainWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1FDC242BD7053000253855 /* MainWatchView.swift */; };
@@ -181,7 +183,6 @@
 		0E4A5E252BCC80E0003678C2 /* Build.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Build.xcconfig; sourceTree = "<group>"; };
 		0E4A5E292BCC9D59003678C2 /* EnergyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnergyViewModel.swift; sourceTree = "<group>"; };
 		0E7DCA5D2BC6FF7400B9403C /* ExerciseSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSet.swift; sourceTree = "<group>"; };
-		0E931E322BEF5A020091AA03 /* ReadySetWatch-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "ReadySetWatch-Watch-App-Info.plist"; sourceTree = SOURCE_ROOT; };
 		0E931E342BEF5B6F0091AA03 /* RS+Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RS+Bundle.swift"; sourceTree = "<group>"; };
 		0E940A672BC6FE0200144477 /* ReadySet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReadySet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E940A6A2BC6FE0200144477 /* ReadySetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadySetApp.swift; sourceTree = "<group>"; };
@@ -193,6 +194,7 @@
 		EB05155D2BED9EC1005FE6F0 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		EB0515672BEDAAB8005FE6F0 /* Intents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intents.swift; sourceTree = "<group>"; };
 		EB0515692BEDB07C005FE6F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		EB0515792BF158F0005FE6F0 /* ReadySetWatch-Watch-App-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ReadySetWatch-Watch-App-Info.plist"; sourceTree = "<group>"; };
 		EB1FDC1A2BD6FCBE00253855 /* ExerciseSetRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSetRecordView.swift; sourceTree = "<group>"; };
 		EB1FDC202BD7053000253855 /* Ready, Set, Wrist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ready, Set, Wrist.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB1FDC222BD7053000253855 /* ReadySetWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadySetWatchApp.swift; sourceTree = "<group>"; };
@@ -412,7 +414,7 @@
 		EB1FDC212BD7053000253855 /* ReadySetWatch Watch App */ = {
 			isa = PBXGroup;
 			children = (
-				0E931E322BEF5A020091AA03 /* ReadySetWatch-Watch-App-Info.plist */,
+				EB0515792BF158F0005FE6F0 /* ReadySetWatch-Watch-App-Info.plist */,
 				EB2BB06B2BDB311800C3DA78 /* ReadySetWatch Watch App.entitlements */,
 				EB1FDC222BD7053000253855 /* ReadySetWatchApp.swift */,
 				EB2BB04A2BDB0DC000C3DA78 /* Misc */,
@@ -757,6 +759,7 @@
 				EB4D9C7F2BCF2B6D0071BA99 /* Launch Screen.storyboard in Resources */,
 				EBF9DD722BDF178E009EA21A /* CodeSigning.xcconfig in Resources */,
 				EBF9DD712BDF16EB009EA21A /* Assets.xcassets in Resources */,
+				EB05157A2BF158F0005FE6F0 /* ReadySetWatch-Watch-App-Info.plist in Resources */,
 				0E940A722BC6FE0400144477 /* Preview Assets.xcassets in Resources */,
 				EBF9DD752BDF1791009EA21A /* Build.xcconfig in Resources */,
 			);
@@ -770,6 +773,7 @@
 				EBF9DD762BDF1791009EA21A /* Build.xcconfig in Resources */,
 				EBF9DD732BDF178E009EA21A /* CodeSigning.xcconfig in Resources */,
 				EBF9DD482BDEE8C7009EA21A /* Assets.xcassets in Resources */,
+				EB05157B2BF158F4005FE6F0 /* ReadySetWatch-Watch-App-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1152,7 +1156,7 @@
 				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "ReadySetWatch-Watch-App-Info.plist";
+				INFOPLIST_FILE = "ReadySetWatch Watch App/ReadySetWatch-Watch-App-Info.plist";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "$(PROD_BUNDLE_IDENTIFIER)";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1185,7 +1189,7 @@
 				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "ReadySetWatch-Watch-App-Info.plist";
+				INFOPLIST_FILE = "ReadySetWatch Watch App/ReadySetWatch-Watch-App-Info.plist";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "$(PROD_BUNDLE_IDENTIFIER)";
 				LD_RUNPATH_SEARCH_PATHS = (

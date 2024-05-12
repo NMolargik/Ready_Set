@@ -738,7 +738,6 @@
 			mainGroup = 0E940A5E2BC6FE0200144477;
 			packageReferences = (
 				EB1FDC152BD6B99300253855 /* XCRemoteSwiftPackageReference "SwiftUI-Flow" */,
-				EB05155F2BEDA922005FE6F0 /* XCRemoteSwiftPackageReference "SwiftLint" */,
 			);
 			productRefGroup = 0E940A682BC6FE0200144477 /* Products */;
 			projectDirPath = "";
@@ -1332,14 +1331,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		EB05155F2BEDA922005FE6F0 /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/SwiftLint.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.54.0;
-			};
-		};
 		EB1FDC152BD6B99300253855 /* XCRemoteSwiftPackageReference "SwiftUI-Flow" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/tevelee/SwiftUI-Flow.git";

@@ -13,7 +13,7 @@ struct BottomView: View {
     @ObservedObject var energyViewModel: EnergyViewModel
     @Binding var selectedTab: any ITabItem
     @Binding var selectedDay: Int
-    
+
     var body: some View {
         ZStack {
             ZStack {
@@ -22,9 +22,9 @@ struct BottomView: View {
                     .foregroundStyle(.ultraThinMaterial)
                     .shadow(radius: 1)
                     .animation(.easeInOut(duration: 0.5), value: selectedTab.type)
-                
+
                 Group {
-                    switch (selectedTab.type) {
+                    switch selectedTab.type {
                     case .exercise:
                         ExerciseBottomContentView(exerciseViewModel: exerciseViewModel, selectedDay: $selectedDay)
                     case .water:

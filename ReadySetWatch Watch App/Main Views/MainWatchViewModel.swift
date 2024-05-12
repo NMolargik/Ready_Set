@@ -21,7 +21,7 @@ class MainWatchViewModel: ObservableObject {
     @Published var stepBalance: Int = 0
     @Published var waterBalance: Int = 0
     @Published var energyBalance: Int = 0
-    
+
     func getInitialValues(connector: PhoneConnector) {
         connector.requestInitialsFromPhone { response in
             DispatchQueue.main.async {
@@ -29,7 +29,7 @@ class MainWatchViewModel: ObservableObject {
             }
         }
     }
-    
+
     private func updateValuesOnUnitChange() {
         withAnimation {
             if self.useMetric {
@@ -45,42 +45,42 @@ class MainWatchViewModel: ObservableObject {
             }
         }
     }
-    
-    func processPhoneUpdate(update: [String : Any]) {
+
+    func processPhoneUpdate(update: [String: Any]) {
         DispatchQueue.main.async {
             if let appState = update["appState"] as? String {
                 self.appState = appState
             } else {
                 self.appState = "background"
             }
-            
+
             if let useMetric = update["useMetric"] as? Bool {
                 self.useMetric = useMetric
                 self.updateValuesOnUnitChange()
             }
-            
+
             if let stepGoal = update["stepGoal"] as? Double {
                 self.stepGoal = Double(stepGoal)
             }
-            
+
             if let waterGoal = update["waterGoal"] as? Double {
                 self.waterGoal = Double(waterGoal)
             }
-            
+
             if let energyGoal = update["energyGoal"] as? Double {
                 self.energyGoal = Double(energyGoal)
             }
-            
+
             if let stepBalance = update["stepBalance"] as? Int {
                 print(stepBalance)
                 self.stepBalance = stepBalance
             }
-            
+
             if let waterBalance = update["waterBalance"] as? Int {
                 print(waterBalance)
                 self.waterBalance = waterBalance
             }
-            
+
             if let energyBalance = update["energyBalance"] as? Int {
                 print(energyBalance)
                 self.energyBalance = energyBalance
@@ -88,5 +88,3 @@ class MainWatchViewModel: ObservableObject {
         }
     }
 }
-
-

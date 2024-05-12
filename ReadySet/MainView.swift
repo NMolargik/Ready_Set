@@ -12,17 +12,17 @@ struct MainView: View {
     @AppStorage("appState", store: UserDefaults(suiteName: Bundle.main.groupID)) var appState: String = "splash"
 
     @State private var color: Color = .clear
-    @State private var onboardingProgress : Float = 0.0
+    @State private var onboardingProgress: Float = 0.0
     @State private var onboardingGradient = LinearGradient(colors: [.clear, .clear], startPoint: .leading, endPoint: .trailing)
-    
+
     @State var healthController = HealthBaseController()
-    
+
     var body: some View {
         ZStack {
             contentView(for: appState)
                 .animation(.easeInOut, value: appState)
                 .transition(.opacity)
-            
+
             onboardingOverlay()
                 .animation(.easeInOut, value: appState)
                 .transition(.opacity)
@@ -38,7 +38,7 @@ struct MainView: View {
             }
         }
     }
-    
+
     @ViewBuilder
     private func contentView(for appState: String) -> some View {
         switch appState {
@@ -51,11 +51,11 @@ struct MainView: View {
         case "initialExerciseBuilder":
             InitialExerciseBuilderView(onboardingProgress: $onboardingProgress, onboardingGradient: $onboardingGradient)
                 .transition(.opacity)
-            
+
         case "goalSetView":
             GoalSetView(onboardingProgress: $onboardingProgress, onboardingGradient: $onboardingGradient)
                 .transition(.opacity)
-                 
+
         case "navigationTutorial":
             NavigationTutorialView(onboardingProgress: $onboardingProgress, onboardingGradient: $onboardingGradient)
                 .animation(.easeInOut, value: appState)
@@ -66,7 +66,7 @@ struct MainView: View {
                 .transition(.opacity)
         }
     }
-    
+
     @ViewBuilder
     private func onboardingOverlay() -> some View {
         if appState != "running" && appState != "background" {
@@ -78,7 +78,7 @@ struct MainView: View {
                                 .frame(height: 60)
                                 .foregroundStyle(.baseAccent)
                                 .shadow(color: .black, radius: 10)
-                            
+
                             Rectangle()
                                 .frame(width: min(geometry.size.width * CGFloat(min(onboardingProgress, 1)), geometry.size.width), height: 60)
                                 .foregroundStyle(onboardingGradient)
@@ -87,7 +87,7 @@ struct MainView: View {
                     }
                 }
                 .frame(height: 60)
-                
+
                 Spacer()
             }
         }

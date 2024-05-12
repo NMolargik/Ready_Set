@@ -11,14 +11,14 @@ struct SplashView: View {
     @AppStorage("appState", store: UserDefaults(suiteName: Bundle.main.groupID)) var appState: String = "splash"
     @Binding var onboardingProgress: Float
     @Binding var onboardingGradient: LinearGradient
-    
+
     @State private var showText = false
     @State private var navigationDragHeight = 0.0
-    
+
     var body: some View {
         ZStack {
             Color.base
-            
+
             splashContent
         }
         .gesture(splashDragGesture)
@@ -31,7 +31,7 @@ struct SplashView: View {
             }
         }
     }
-    
+
     private var splashContent: some View {
         VStack {
             Spacer()
@@ -45,7 +45,7 @@ struct SplashView: View {
         .transition(.opacity)
         .onAppear(perform: animateTextAppearance)
     }
-    
+
     private var splashTextView: some View {
         VStack(spacing: 0) {
             Spacer()
@@ -54,18 +54,18 @@ struct SplashView: View {
                 .font(.system(size: 80))
                 .foregroundStyle(.fontGray)
                 .id("SplashText")
-            
+
             Spacer()
-            
+
             instructionText
         }
     }
-    
+
     private var instructionText: some View {
         VStack {
             BouncingChevronView()
                 .padding(.bottom, 5)
-            
+
             Text("Swipe Upwards On The Canvas To Continue")
                 .font(.body)
                 .multilineTextAlignment(.center)
@@ -74,7 +74,7 @@ struct SplashView: View {
                 .zIndex(1)
         }
     }
-    
+
     private func animateTextAppearance() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             withAnimation(.easeInOut(duration: 2)) {
@@ -82,22 +82,22 @@ struct SplashView: View {
             }
         }
     }
-    
+
     private func effectiveBlurRadius() -> CGFloat {
         abs(navigationDragHeight) > 20.0 ? abs(navigationDragHeight * 0.03) : 0
     }
-    
+
     private var splashDragGesture: some Gesture {
         DragGesture(minimumDistance: 20, coordinateSpace: .global)
             .onChanged { value in navigationDragHeight = value.translation.height }
-            .onEnded { value in
+            .onEnded { _ in
                 withAnimation(.easeInOut) {
                     handleDragEnd(navigationDragHeight: navigationDragHeight)
                     navigationDragHeight = 0.0
                 }
             }
     }
-    
+
     private func handleDragEnd(navigationDragHeight: CGFloat) {
         if navigationDragHeight < 50 {
             withAnimation(.easeInOut) {

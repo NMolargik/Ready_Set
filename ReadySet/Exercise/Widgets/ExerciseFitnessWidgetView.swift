@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ExerciseFitnessWidgetView: View {
     @State private var showAlert = false
-    
+
     var body: some View {
         Button(action: openFitnessApp) {
             ZStack {
@@ -18,7 +18,7 @@ struct ExerciseFitnessWidgetView: View {
                     .cornerRadius(10)
                     .foregroundStyle(.thinMaterial)
                     .shadow(radius: 1)
-                
+
                 HStack {
                     Image("rings")
                         .resizable()
@@ -39,9 +39,9 @@ struct ExerciseFitnessWidgetView: View {
     private func openFitnessApp() {
         let impactMed = UIImpactFeedbackGenerator(style: .medium)
         impactMed.impactOccurred()
-        
+
         guard let url = URL(string: "fitnessapp://") else { return }
-        
+
         if UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.open(url)
         } else {

@@ -14,7 +14,7 @@ enum TabItemType {
     static var allItems: [any ITabItem] {
         [ExerciseTabItem(), WaterTabItem(), EnergyTabItem(), SettingsTabItem()]
     }
-    
+
     static func shiftItems(forward: Bool) -> [any ITabItem] {
         var shiftedItems = allItems
         if forward {
@@ -24,7 +24,7 @@ enum TabItemType {
             let lastItem = shiftedItems.removeLast()
             shiftedItems.insert(lastItem, at: 0)
         }
-        
+
         return shiftedItems
     }
 }

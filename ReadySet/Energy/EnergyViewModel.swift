@@ -11,7 +11,7 @@ import WidgetKit
 
 class EnergyViewModel: ObservableObject, HKHelper {
     static let shared = EnergyViewModel()
-    
+
     @AppStorage("useMetric", store: UserDefaults(suiteName: Bundle.main.groupID)) var useMetric: Bool = false
 
     @AppStorage("energyGoal", store: UserDefaults(suiteName: Bundle.main.groupID)) var energyGoal: Double = 2000 {
@@ -19,7 +19,7 @@ class EnergyViewModel: ObservableObject, HKHelper {
             WidgetCenter.shared.reloadTimelines(ofKind: "ReadySetEnergyWidget")
         }
     }
-    
+
     @AppStorage("energyConsumedToday", store: UserDefaults(suiteName: Bundle.main.groupID)) var energyConsumedToday: Int = 0 {
         didSet {
             WidgetCenter.shared.reloadTimelines(ofKind: "ReadySetEnergyWidget")
@@ -28,17 +28,17 @@ class EnergyViewModel: ObservableObject, HKHelper {
 
     @Published var proposedEnergyGoal = 0
     @Published var editingEnergyGoal = false
-    @Published var energyConsumedWeek: [Date : Int] = [:]
+    @Published var energyConsumedWeek: [Date: Int] = [:]
     @Published var energyBurnedToday: Int = 0
-    @Published var energyBurnedWeek: [Date : Int] = [:]
+    @Published var energyBurnedWeek: [Date: Int] = [:]
     @Published var healthStore: HKHealthStore?
     @Published var watchConnector: WatchConnector?
-    
+
     init() {
         self.proposedEnergyGoal = Int(self.energyGoal)
         self.readInitial()
     }
-    
+
     func readInitial() {
         self.readEnergyConsumedToday()
         self.readEnergyBurnedToday()
@@ -49,7 +49,7 @@ class EnergyViewModel: ObservableObject, HKHelper {
     func addEnergy(energy: Double) {
         DispatchQueue.main.async {
             self.addEnergyConsumed(energy: energy) {
-                withAnimation (.easeInOut) {
+                withAnimation(.easeInOut) {
                     self.readEnergyConsumedToday()
                     self.readEnergyConsumedWeek()
                     self.readEnergyBurnedWeek()
@@ -58,7 +58,7 @@ class EnergyViewModel: ObservableObject, HKHelper {
             }
         }
     }
-    
+
     func consumeSomeEnergy() {
         self.addEnergy(energy: useMetric ? 800 : 200)
     }
@@ -68,7 +68,7 @@ class EnergyViewModel: ObservableObject, HKHelper {
         hkQuery(type: energyConsumed, unit: unit, failed: "Failed to read energy consumed today") { amount in
             DispatchQueue.main.async {
                 self.energyConsumedToday = amount
-                self.watchConnector?.sendUpdateToWatch(update: ["energyBalance" : amount])
+                self.watchConnector?.sendUpdateToWatch(update: ["energyBalance": amount])
             }
         }
         WidgetCenter.shared.reloadTimelines(ofKind: "ReadySetEnergyWidget")
@@ -104,7 +104,7 @@ class EnergyViewModel: ObservableObject, HKHelper {
             }
         }
     }
-    
+
     private func addEnergyConsumed(energy: Double, completion: @escaping () -> Void) {
         let energysample = HKQuantitySample(type: energyConsumed, quantity: HKQuantity(unit: self.useMetric ? HKUnit.jouleUnit(with: .kilo) : HKUnit.kilocalorie(), doubleValue: energy), start: Date(), end: Date())
         self.healthStore?.save(energysample, withCompletion: { (success, error) -> Void in
@@ -115,11 +115,10 @@ class EnergyViewModel: ObservableObject, HKHelper {
             if success {
                 print("HealthKit - Success - Energy successfully saved in HealthKit")
 
-
             } else {
                 print("HealthKit - Error - Energy consumed unhandled case!")
             }
-            
+
             self.readEnergyConsumedToday()
             completion()
 
@@ -129,6 +128,6 @@ class EnergyViewModel: ObservableObject, HKHelper {
     func saveEnergyGoal() {
         self.energyGoal = Double(self.proposedEnergyGoal)
         self.editingEnergyGoal = false
-        self.watchConnector?.sendUpdateToWatch(update: ["energyGoal" : energyGoal])
+        self.watchConnector?.sendUpdateToWatch(update: ["energyGoal": energyGoal])
     }
 }

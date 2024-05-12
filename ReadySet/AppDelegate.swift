@@ -9,18 +9,18 @@ import Foundation
 import UIKit
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         observeWaterAddNotification()
         observeEnergyConsumeNotification()
         return true
     }
-    
+
     func observeWaterAddNotification() {
         let notificationName = "com.nickmolargik.addWaterNotification"
         print("Registering observer for \(notificationName)")
         if let center = CFNotificationCenterGetDarwinNotifyCenter() {
-            CFNotificationCenterAddObserver(center, nil, { (center, observer, name, object, userInfo) in
+            CFNotificationCenterAddObserver(center, nil, { (_, _, _, _, _) in
                 DispatchQueue.main.async {
                     print("Notification received for water")
                     WaterViewModel.shared.addSomeWater()
@@ -28,11 +28,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }, notificationName as CFString, nil, .deliverImmediately)
         }
     }
-    
+
     func observeEnergyConsumeNotification() {
         let notificationName = "com.nickmolargik.consumeEnergyNotification"
         if let center = CFNotificationCenterGetDarwinNotifyCenter() {
-            CFNotificationCenterAddObserver(center, nil, { (center, observer, name, object, userInfo) in
+            CFNotificationCenterAddObserver(center, nil, { (_, _, _, _, _) in
                 DispatchQueue.main.async {
                     print("Notification received for energy")
                     EnergyViewModel.shared.consumeSomeEnergy()
@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }, notificationName as CFString, nil, .deliverImmediately)
         }
     }
-    
+
     func applicationWillTerminate(_ application: UIApplication) {
         let waterNotificationName = "com.nickmolargik.addWaterNotification"
         let energyNotificationName = "com.nickmolargik.consumeEnergyNotification"

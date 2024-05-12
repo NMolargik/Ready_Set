@@ -30,7 +30,6 @@ struct OutlinedTextFieldStyle: TextFieldStyle {
                 .stroke(.purpleStart, lineWidth: 2)
                 .shadow(radius: 2)
                 .opacity(0.9)
-            
 
         )
         .focused($isFocused)
@@ -41,4 +40,3 @@ struct OutlinedTextFieldStyle: TextFieldStyle {
         .padding(.bottom, 3)
     }
 }
-

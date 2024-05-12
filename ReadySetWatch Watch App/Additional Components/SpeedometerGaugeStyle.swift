@@ -19,19 +19,19 @@ struct SpeedometerGaugeStyle: GaugeStyle {
                 .trim(from: 0, to: 0.75)
                 .stroke(.thickMaterial, lineWidth: 20)
                 .rotationEffect(.degrees(135))
-            
+
             Circle()
                 .trim(from: 0, to: 0.75 * configuration.value)
                 .stroke(color, lineWidth: 20)
                 .rotationEffect(.degrees(135))
- 
-            VStack (spacing: 0) {
-                if (isUpdating) {
+
+            VStack(spacing: 0) {
+                if isUpdating {
                     ProgressView()
                         .tint(.white)
                         .controlSize(.extraLarge)
                         .frame(height: 40)
-                    
+
                 } else {
                     Text(level.description)
                         .font(.system(size: 30))
@@ -42,7 +42,7 @@ struct SpeedometerGaugeStyle: GaugeStyle {
                         .transition(.blurReplace())
                         .frame(height: 40)
                 }
-                
+
                 Text(unit)
                     .font(.caption)
                     .foregroundStyle(.base)

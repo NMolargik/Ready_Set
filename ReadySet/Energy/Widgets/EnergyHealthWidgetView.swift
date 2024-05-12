@@ -19,7 +19,7 @@ struct EnergyHealthWidgetView: View {
                     .cornerRadius(10)
                     .foregroundStyle(.thinMaterial)
                     .shadow(radius: 1)
-                
+
                 Image(systemName: "heart.fill")
                     .foregroundStyle(.pink)
             }

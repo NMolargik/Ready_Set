@@ -12,9 +12,9 @@ struct EnergyBottomContentView: View {
     var body: some View {
         VStack {
             EnergyChartView(energyViewModel: energyViewModel)
-            
+
             Spacer()
-            
+
             EnergyAdditionWidgetView(
                 addEnergy: { energy in
                     energyViewModel.addEnergy(energy: energy)

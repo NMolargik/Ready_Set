@@ -11,11 +11,11 @@ struct NavigationTutorialView: View {
     @AppStorage("appState", store: UserDefaults(suiteName: Bundle.main.groupID)) var appState: String = "navigationTutorial"
     @Binding var onboardingProgress: Float
     @Binding var onboardingGradient: LinearGradient
-    
+
     @State private var showText = false
     @State private var showMoreText = false
     @State private var navigationDragHeight = 0.0
-    
+
     let tabItems = TabItemType.allItems
 
     var body: some View {
@@ -29,16 +29,15 @@ struct NavigationTutorialView: View {
                         iconStack
                         navText
                     }     .transition(.opacity)
-                    
+
                 }
-                
+
                 Spacer()
-           
-                
+
                 if showMoreText {
-                    
+
                     Spacer()
-                    
+
                     instructionText
                 }
             }
@@ -48,7 +47,7 @@ struct NavigationTutorialView: View {
         }
         .gesture(dragGesture)
     }
-    
+
     private var iconStack: some View {
         VStack(alignment: .leading) {
             ForEach(tabItems, id: \.type) { tabItem in
@@ -62,7 +61,7 @@ struct NavigationTutorialView: View {
         .frame(height: 120)
         .padding(.leading, 5)
     }
-    
+
     private var navText: some View {
         Text("You can navigate Ready, Set by swiping vertically, just as you have been...\n\nOr by tapping any of these icons wherever they appear.")
             .multilineTextAlignment(.leading)
@@ -75,7 +74,7 @@ struct NavigationTutorialView: View {
         VStack {
             BouncingChevronView()
                 .padding(.bottom, 5)
-            
+
             Text("Swipe Upwards On The Canvas When Ready")
                 .font(.body)
                 .multilineTextAlignment(.center)
@@ -85,7 +84,7 @@ struct NavigationTutorialView: View {
         }
         .padding(.bottom, 15)
     }
-    
+
     private var finalSwipeInstruction: some View {
         Text("Swipe Upwards To Enter Ready, Set")
             .font(.body)
@@ -94,7 +93,7 @@ struct NavigationTutorialView: View {
             .id("FinalInstruction")
             .zIndex(1)
     }
-    
+
     private func animateText() {
         withAnimation(.easeInOut(duration: 2)) {
             showText = true
@@ -105,7 +104,7 @@ struct NavigationTutorialView: View {
             }
         }
     }
-    
+
     private var dragGesture: some Gesture {
         DragGesture(minimumDistance: 20, coordinateSpace: .global)
             .onChanged { value in navigationDragHeight = value.translation.height }
@@ -114,21 +113,21 @@ struct NavigationTutorialView: View {
                 navigationDragHeight = 0.0
             }
     }
-    
+
     private func handleDrag(value: DragGesture.Value) {
         if showMoreText && value.translation.height < 50 {
             handleDragEnd(navigationDragHeight: value.translation.height)
         }
-        
-        withAnimation (.easeInOut) {
+
+        withAnimation(.easeInOut) {
             navigationDragHeight = 0.0
         }
     }
-    
+
     private func blurRadiusForDrag() -> CGFloat {
         abs(navigationDragHeight) > 20 ? abs(navigationDragHeight * 0.03) : 0
     }
-    
+
     private func handleDragEnd(navigationDragHeight: CGFloat) {
         withAnimation(.easeInOut(duration: 2)) {
             appState = "running"

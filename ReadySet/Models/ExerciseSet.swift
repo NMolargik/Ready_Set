@@ -26,4 +26,3 @@ class ExerciseSet: Identifiable {
         self.timestamp = timestamp
     }
 }
-

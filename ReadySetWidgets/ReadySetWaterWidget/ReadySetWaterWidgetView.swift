@@ -8,9 +8,9 @@
 import SwiftUI
 import WidgetKit
 
-struct ReadySetWaterWidgetView : View {
+struct ReadySetWaterWidgetView: View {
     @Environment(\.widgetFamily) var widgetFamily
-    
+
     let data = DataService()
     var entry: WaterWidgetProvider.Entry
 
@@ -20,16 +20,16 @@ struct ReadySetWaterWidgetView : View {
                 GaugeView(max: .constant(entry.goal), level: .constant(entry.consumption), isUpdating: .constant(false), color: WaterTabItem().color, unit: data.useMetric ? "mL" : "oz")
                     .frame(width: 150, height: 120)
             }
-            
+
             VStack {
                 Spacer()
-                
+
                 Button(intent: WaterIntent()) {
                     ZStack {
                         Rectangle()
                             .cornerRadius(20)
                             .foregroundStyle(.white)
-                        
+
                         Text("+\(data.useMetric ? 240 : 8)")
                             .bold()
                             .foregroundStyle(.black)

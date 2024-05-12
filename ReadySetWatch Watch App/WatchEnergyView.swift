@@ -11,21 +11,21 @@ struct WatchEnergyView: View {
     @Binding var energyBalance: Int
     @Binding var energyGoal: Double
     @Binding var useMetric: Bool
-    
+
     @State private var isAdding = false
     @State private var isUpdating = false
     @State private var amountToAdd: Double = 0
     @State private var showAlert = false
-    
+
     var addEnergyIntake: ((Int, @escaping (Bool) -> Void) -> Void)
     var requestEnergyBalanceUpdate: () -> Void
-    
+
     var body: some View {
         ZStack {
             VStack {
                 GaugeView(max: $energyGoal, level: $energyBalance, isUpdating: $isUpdating, color: EnergyTabItem().color, unit: useMetric ? "kJ" : "cal")
                     .frame(height: 120)
-                
+
                 Button(action: {
                     withAnimation {
                         isAdding = true
@@ -34,12 +34,12 @@ struct WatchEnergyView: View {
                     ZStack {
                         Circle()
                             .foregroundStyle(.base)
-                        
+
                         Image("Flame")
                             .resizable()
                             .scaledToFit()
                             .padding(5)
-                        
+
                         Image(systemName: "plus")
                             .foregroundStyle(.base)
                             .offset(y: 4)
@@ -55,18 +55,18 @@ struct WatchEnergyView: View {
             .font(.system(size: 10))
             .animation(.easeInOut, value: energyGoal)
             .transition(.blurReplace())
-            
-            if (isAdding) {
+
+            if isAdding {
                 CrownRotationAdditionView(amount: $amountToAdd, min: 8, max: energyGoal, step: 20, unitOfMeasurement: useMetric ? "kJ" : "cal", gradient: EnergyTabItem().gradient, onAdd: { amount in
                     withAnimation {
                         isUpdating = true
                         isAdding = false
                     }
-                    
-                    if (amount > 0) {
-                        addEnergyIntake(Int(amount)) { success in
+
+                    if amount > 0 {
+                        addEnergyIntake(Int(amount)) { _ in
                             WKInterfaceDevice.current().play(.success)
-                            
+
                             withAnimation {
                                 amountToAdd = 0
                                 isUpdating = false
@@ -99,7 +99,7 @@ struct WatchEnergyView: View {
         energyBalance: .constant(5000),
         energyGoal: .constant(2300),
         useMetric: .constant(true),
-        addEnergyIntake: { _,_ in
+        addEnergyIntake: { _, _ in
             return
         },
         requestEnergyBalanceUpdate: { return }

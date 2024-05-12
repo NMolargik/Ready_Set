@@ -9,10 +9,10 @@ import SwiftUI
 
 struct MainWatchView: View {
     @Environment(\.scenePhase) var scenePhase
-    
+
     @StateObject var mainWatchViewModel = MainWatchViewModel()
     @StateObject var phoneConnector = PhoneConnector()
-    
+
     var body: some View {
         VStack {
             HomeView(mainWatchViewModel: mainWatchViewModel, phoneConnector: phoneConnector)
@@ -36,8 +36,7 @@ struct MainWatchView: View {
             }
         }
     }
-    
-    
+
     private func setupConnectorClosures() {
         phoneConnector.respondToPhoneUpdate = mainWatchViewModel.processPhoneUpdate(update:)
     }

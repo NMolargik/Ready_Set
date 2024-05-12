@@ -14,34 +14,33 @@ struct ExerciseEntryView: View {
     @Binding var isEditing: Bool
     @Binding var selectedExercise: Exercise
     @Binding var selectedSet: String
-    
+
     var keyboardShown: FocusState<Bool>.Binding
-    
 
     var body: some View {
-        VStack (spacing: 5) {
+        VStack(spacing: 5) {
             ExerciseEntryHeaderView(exercise: exercise, isEditing: $isEditing, selectedExercise: $selectedExercise, selectedSet: $selectedSet, keyboardShown: keyboardShown)
                 .animation(.easeInOut, value: selectedExercise)
-            
-            VStack (spacing: 0) {
-                if (exercise.exerciseSets.count == 0 ) {
+
+            VStack(spacing: 0) {
+                if exercise.exerciseSets.count == 0 {
                     HStack {
                         Text("No sets added yet")
                             .font(.caption)
                             .foregroundStyle(.baseInvert)
                             .transition(.opacity)
-                        
+
                         Spacer()
                     }
                     .padding(.leading)
                 }
-                
-                if (isEditing) {
+
+                if isEditing {
                     ForEach($exercise.exerciseSets.sorted(by: { $0.wrappedValue.timestamp < $1.wrappedValue.timestamp }), id: \.id) { $set in
                         HStack {
                             ExerciseSetEditor(exerciseSet: $set)
                                 .padding(.bottom, 4)
-                            
+
                             Button(action: {
                                 UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                                 withAnimation {
@@ -65,7 +64,7 @@ struct ExerciseEntryView: View {
             }
             .padding(.bottom, 5)
             .onChange(of: isEditing) {
-                if (!isEditing) {
+                if !isEditing {
                     selectedSet = ""
                 }
             }

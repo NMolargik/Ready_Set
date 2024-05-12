@@ -12,26 +12,26 @@ class HomeViewModel: ObservableObject {
 
     @Published var selectedTab: any ITabItem = ExerciseTabItem()
     @Published var tabItems = TabItemType.allItems
-    
+
     func handleDragEnd(navigationDragHeight: CGFloat) {
         if navigationDragHeight < -100 {
             self.selectedTab = self.selectedTab.bumpTab(up: false)
             self.tabItems = self.selectedTab.reorderTabs()
         }
-        
+
         if navigationDragHeight > 50 {
             self.selectedTab = self.selectedTab.bumpTab(up: true)
             self.tabItems = self.selectedTab.reorderTabs()
         }
     }
-    
+
     func needRefreshFromDate() -> Bool {
         let currentDate = Date()
         let calendar = Calendar.current
         let dateComponents = calendar.dateComponents([.year, .month, .day], from: currentDate)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        
+
         if let dateOnly = calendar.date(from: dateComponents) {
             let formattedDate = dateFormatter.string(from: dateOnly)
             print("Last Date: \(lastUseDate) | Current Date: \(formattedDate)")
@@ -45,7 +45,3 @@ class HomeViewModel: ObservableObject {
         return false
     }
 }
-
-
-
-

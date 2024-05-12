@@ -16,20 +16,20 @@ struct WatchExerciseView: View {
         VStack {
             GaugeView(max: $stepGoal, level: $stepsTaken, isUpdating: .constant(false), color: ExerciseTabItem().color, unit: " steps")
                 .frame(height: 120)
-            
-            if (stepsTaken == 0 || stepGoal == 1000) {
-                HStack (alignment: .center) {
+
+            if stepsTaken == 0 || stepGoal == 1000 {
+                HStack(alignment: .center) {
                     Text("You may need\nto open Ready, Set")
                         .font(.system(size: 10))
-                    
+
                     Image(systemName: "applewatch.radiowaves.left.and.right")
-                        
+
                 }
                 .frame(height: 30)
                 .multilineTextAlignment(.trailing)
                 .foregroundStyle(.white)
                 .animation(.easeInOut, value: stepsTaken)
-                    
+
             }
         }
         .bold()

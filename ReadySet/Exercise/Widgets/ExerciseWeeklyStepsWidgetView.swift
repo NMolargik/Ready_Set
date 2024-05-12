@@ -9,14 +9,14 @@ import SwiftUI
 
 struct ExerciseWeeklyStepsWidgetView: View {
     @ObservedObject var exerciseViewModel: ExerciseViewModel
-    
+
     var body: some View {
         ZStack {
             Rectangle()
                 .cornerRadius(10)
                 .foregroundStyle(.thinMaterial)
                 .shadow(radius: 1)
-        
+
             Text("Weekly Steps: \(exerciseViewModel.stepCountWeek.values.reduce(0, +))")
                 .font(.caption)
                 .foregroundStyle(.fontGray)

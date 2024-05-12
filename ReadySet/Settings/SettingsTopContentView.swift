@@ -11,10 +11,10 @@ import UIKit
 struct SettingsTopContentView: View {
     @AppStorage("appState", store: UserDefaults(suiteName: Bundle.main.groupID)) var appState: String = "splash"
     @Environment(\.colorScheme) var colorScheme
-    
+
     @ObservedObject var exerciseViewModel: ExerciseViewModel
     @State private var showingDeleteAlert = false
-    
+
     var body: some View {
         HStack(spacing: 10) {
             settingButton(action: returnToGuide,
@@ -41,19 +41,19 @@ struct SettingsTopContentView: View {
                     .shadow(radius: 1)
                 HStack {
                     Spacer()
-                    
+
                     Text(labelText)
                         .bold()
                         .multilineTextAlignment(.center)
                         .foregroundStyle(.fontGray)
-                    
+
                     Spacer()
-                    
+
                     Image(systemName: imageName)
                         .symbolRenderingMode(.hierarchical)
                         .font(.title)
                         .foregroundStyle(LinearGradient(colors: [imageColors[0], imageColors[1]], startPoint: .leading, endPoint: .trailing))
-                    
+
                     Spacer()
                 }
             }

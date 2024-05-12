@@ -45,8 +45,8 @@ extension HKHelper {
             options: .strictStartDate
         )
     }
-    
-    func hkColQuery(type: HKQuantityType, start: Date, end: Date, unit: HKUnit, failed: String, with block: @escaping (Date, Int) -> Void){
+
+    func hkColQuery(type: HKQuantityType, start: Date, end: Date, unit: HKUnit, failed: String, with block: @escaping (Date, Int) -> Void) {
         let query = HKStatisticsCollectionQuery(quantityType: type, quantitySamplePredicate: weekPredicate, anchorDate: start, intervalComponents: DateComponents(day: 1))
         query.initialResultsHandler = { _, result, error in
             guard let result = result else {
@@ -72,7 +72,7 @@ extension HKHelper {
         }
         healthStore?.execute(query)
     }
-    
+
     func hkQuery(type: HKQuantityType, unit: HKUnit, failed: String, with block: @escaping (Int) -> Void) {
         let query = HKStatisticsQuery(quantityType: type, quantitySamplePredicate: todayPredicate) { _, result, error in
             guard let result = result, let sum = result.sumQuantity() else {

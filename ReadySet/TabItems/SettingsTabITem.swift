@@ -14,11 +14,11 @@ struct SettingsTabItem: ITabItem {
     var color = Color.purpleStart
     var secondaryColor = Color.purpleEnd
     var gradient = LinearGradient(colors: [.purpleStart, .purpleEnd], startPoint: .topLeading, endPoint: .bottomTrailing)
-    
+
     func bumpTab(up: Bool) -> any ITabItem {
         return up ? EnergyTabItem() : ExerciseTabItem()
     }
-    
+
     func reorderTabs() -> [any ITabItem] {
         #if os(iOS)
         UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
@@ -26,4 +26,3 @@ struct SettingsTabItem: ITabItem {
         return [SettingsTabItem(), ExerciseTabItem(), WaterTabItem(), EnergyTabItem()]
     }
 }
-

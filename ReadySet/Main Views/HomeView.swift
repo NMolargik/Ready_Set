@@ -17,13 +17,12 @@ struct HomeView: View {
     @StateObject var exerciseViewModel = ExerciseViewModel.shared
     @StateObject var waterViewModel = WaterViewModel.shared
     @StateObject var energyViewModel = EnergyViewModel.shared
-    
+
     @StateObject var watchConnector: WatchConnector = WatchConnector()
-    
+
     @State private var navigationDragHeight = 0.0
     @State var healthStore: HKHealthStore
     @State private var selectedDay: Int = 1
-    
 
     var body: some View {
         VStack {
@@ -33,8 +32,8 @@ struct HomeView: View {
             )
             .padding(.bottom, 15)
             .zIndex(2)
-            
-            if ((!exerciseViewModel.editingSets && !exerciseViewModel.expandedSets) || homeViewModel.selectedTab.type != .exercise) {
+
+            if (!exerciseViewModel.editingSets && !exerciseViewModel.expandedSets) || homeViewModel.selectedTab.type != .exercise {
                 NavColumnView(exerciseViewModel: exerciseViewModel,
                               waterViewModel: waterViewModel, energyViewModel: energyViewModel,
                               tabItems: $homeViewModel.tabItems, selectedTab: $homeViewModel.selectedTab,
@@ -42,7 +41,7 @@ struct HomeView: View {
                 .transition(.opacity)
                 .zIndex(1)
             }
-                
+
             BottomView(exerciseViewModel: exerciseViewModel, waterViewModel: waterViewModel, energyViewModel: energyViewModel,
                        selectedTab: $homeViewModel.selectedTab, selectedDay: $selectedDay)
                 .blur(radius: effectiveBlurRadius)
@@ -50,7 +49,7 @@ struct HomeView: View {
                 .padding(.bottom, 30)
                 .padding(.horizontal, 8)
                 .zIndex(3)
-                
+
         }
         .background(backgroundGradient)
         .gesture(dragGesture)
@@ -62,7 +61,7 @@ struct HomeView: View {
             handleScenePhase(newPhase: scenePhase)
         }
         .onChange(of: useMetric) {
-            watchConnector.sendUpdateToWatch(update: ["useMetric" : useMetric])
+            watchConnector.sendUpdateToWatch(update: ["useMetric": useMetric])
             setGoalsAfterUnitChange()
         }
         .onChange(of: selectedDay) {
@@ -72,9 +71,9 @@ struct HomeView: View {
         }
         .onOpenURL(perform: { url in
             let summonedTab = url.host
-            
+
             homeViewModel.selectedTab = TabItemType.allItems.first(where: { $0.text == summonedTab }) ?? WaterTabItem()
-            
+
         })
     }
 
@@ -103,14 +102,14 @@ struct HomeView: View {
     private var dragGesture: some Gesture {
         DragGesture(minimumDistance: 20, coordinateSpace: .global)
             .onChanged { value in
-                if ((!exerciseViewModel.editingSets && !exerciseViewModel.expandedSets) || homeViewModel.selectedTab.type != .exercise) {
+                if (!exerciseViewModel.editingSets && !exerciseViewModel.expandedSets) || homeViewModel.selectedTab.type != .exercise {
                     navigationDragHeight = value.translation.height
                 } else {
                     navigationDragHeight = 0.0
                 }
             }
-            .onEnded { value in
-                if ((!exerciseViewModel.editingSets && !exerciseViewModel.expandedSets) || homeViewModel.selectedTab.type != .exercise) {
+            .onEnded { _ in
+                if (!exerciseViewModel.editingSets && !exerciseViewModel.expandedSets) || homeViewModel.selectedTab.type != .exercise {
                     withAnimation(.smooth) {
                         homeViewModel.handleDragEnd(navigationDragHeight: navigationDragHeight)
                         navigationDragHeight = 0.0
@@ -125,7 +124,7 @@ struct HomeView: View {
         exerciseViewModel.healthStore = healthStore
         waterViewModel.healthStore = healthStore
         energyViewModel.healthStore = healthStore
-        
+
         exerciseViewModel.watchConnector = watchConnector
         waterViewModel.watchConnector = watchConnector
         energyViewModel.watchConnector = watchConnector
@@ -134,26 +133,26 @@ struct HomeView: View {
             exerciseViewModel.readInitial()
             waterViewModel.readInitial()
             energyViewModel.readInitial()
-            
-            watchConnector.sendUpdateToWatch(update: ["stepBalance" : exerciseViewModel.stepsToday, "waterBalance" : waterViewModel.waterConsumedToday, "energyBalance" : energyViewModel.energyConsumedToday])
+
+            watchConnector.sendUpdateToWatch(update: ["stepBalance": exerciseViewModel.stepsToday, "waterBalance": waterViewModel.waterConsumedToday, "energyBalance": energyViewModel.energyConsumedToday])
         }
     }
-    
+
     private func setupConnectorClosures() {
         watchConnector.requestStepBalance = {
             return exerciseViewModel.stepsToday
         }
-        
+
         watchConnector.requestWaterConsumptionBalance = {
             return waterViewModel.waterConsumedToday
         }
-        
+
         watchConnector.requestEnergyConsumptionBalance = {
             return energyViewModel.energyConsumedToday
         }
-        
+
         watchConnector.addConsumption = { entryType, consumption in
-            if (entryType == .water) {
+            if entryType == .water {
                 withAnimation {
                     waterViewModel.addWater(waterToAdd: Double(consumption))
                 }
@@ -163,10 +162,10 @@ struct HomeView: View {
                 }
             }
         }
-        
-        watchConnector.sendUpdateToWatch(update: ["appState" : "background"])
+
+        watchConnector.sendUpdateToWatch(update: ["appState": "background"])
     }
-    
+
     private func setGoalsAfterUnitChange() {
         withAnimation {
             if useMetric {
@@ -191,15 +190,15 @@ struct HomeView: View {
         } else {
             appState = "background"
         }
-        
+
         withAnimation {
             exerciseViewModel.readInitial()
             waterViewModel.readInitial()
-            energyViewModel.readInitial() 
+            energyViewModel.readInitial()
         }
-        
+
         print(appState)
-        watchConnector.sendUpdateToWatch(update: ["appState" : appState])
+        watchConnector.sendUpdateToWatch(update: ["appState": appState])
     }
 }
 

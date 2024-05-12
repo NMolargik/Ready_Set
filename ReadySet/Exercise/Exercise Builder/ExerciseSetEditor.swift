@@ -32,7 +32,7 @@ struct ExerciseSetEditor: View {
                         }
                 })
                 .buttonStyle(.plain)
-                
+
                 Button(action: {
                     UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
                     withAnimation {
@@ -54,14 +54,14 @@ struct ExerciseSetEditor: View {
                 .frame(width: 80)
                 .buttonStyle(.plain)
             }
-            
+
             VStack(spacing: 2) {
                 if exerciseSet.goalType == .duration {
                     CustomStepperView(value: $exerciseSet.durationToDo, step: 5, iconName: "stopwatch.fill", colors: [.purpleStart, .purpleEnd])
-                    
+
                 } else {
                     CustomStepperView(value: $exerciseSet.weightToLift, step: 5, iconName: "dumbbell.fill", colors: [.greenStart, .greenEnd])
-                    
+
                     CustomStepperView(value: $exerciseSet.repetitionsToDo, step: 1, iconName: "repeat", colors: [.orangeStart, .orangeEnd])
                 }
             }

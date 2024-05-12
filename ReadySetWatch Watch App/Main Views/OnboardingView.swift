@@ -10,13 +10,13 @@ import HealthKit
 
 struct OnboardingView: View {
     @AppStorage("watchOnboardingComplete", store: UserDefaults(suiteName: Bundle.main.groupID)) var watchOnboardingComplete = false
-    
+
     @Binding var appState: String
-    
+
     @State private var showText = false
     @State private var swiped = false
     @State private var navigationDragHeight = 0.0
-    
+
     var body: some View {
         ZStack {
             VStack {
@@ -25,12 +25,12 @@ struct OnboardingView: View {
                     .font(.largeTitle)
                     .foregroundStyle(.white)
                     .id("SplashText")
-                
-                if (showText) {
+
+                if showText {
                     HStack {
                         Image(systemName: "iphone.gen3")
                             .font(.largeTitle)
-                        
+
                         Text("Searching for Ready, Set...")
                             .font(.body)
                             .multilineTextAlignment(.center)
@@ -40,7 +40,7 @@ struct OnboardingView: View {
                             .frame(height: 100)
                     }
                     .foregroundStyle(.white)
-                    
+
                     ProgressView()
                         .tint(.white)
                         .controlSize(.large)
@@ -54,7 +54,7 @@ struct OnboardingView: View {
             animateTextAppearance()
         }
     }
-    
+
     private func animateTextAppearance() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             withAnimation(.easeInOut(duration: 1.2)) {
@@ -62,11 +62,11 @@ struct OnboardingView: View {
             }
         }
     }
-    
+
     private func effectiveBlurRadius() -> CGFloat {
         abs(navigationDragHeight) > 20.0 ? abs(navigationDragHeight * 0.03) : 0
     }
-    
+
     private var dragGesture: some Gesture {
         DragGesture(minimumDistance: 20, coordinateSpace: .global)
             .onChanged { value in
@@ -79,7 +79,7 @@ struct OnboardingView: View {
                 }
             }
     }
-    
+
     private func handleDragEnd(navigationDragHeight: CGFloat) {
         if navigationDragHeight < 50 {
             withAnimation(.easeInOut) {

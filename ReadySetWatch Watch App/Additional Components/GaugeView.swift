@@ -13,7 +13,7 @@ struct GaugeView: View {
     @Binding var isUpdating: Bool
     var color: Color
     var unit: String
-    
+
     var body: some View {
         Gauge(value: Double(level), in: 0...Double(max)) {
             Text(Int(level).description)

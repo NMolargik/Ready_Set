@@ -13,31 +13,31 @@ class WatchConnectivityHandler: NSObject, WCSessionDelegate, ObservableObject {
     @AppStorage("useMetric") var useMetric: Bool = false
     @AppStorage("waterGoal") var waterGoal: Double = 64
     @AppStorage("energyGoal") var energyGoal: Double = 2000
-    
+
     @Published var waterConsumed: Double = 0
     @Published var energyConsumed: Double = 0
-    
+
     static let shared = WatchConnectivityHandler()
     var session: WCSession
-    
+
     override init() {
         self.session = WCSession.default  // Initialize the session first
         super.init()  // Now call super.init()
-        
+
         if WCSession.isSupported() {
             session.delegate = self
             session.activate()
         }
     }
-    
+
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         // Handle activation completion
         if activationState == .activated {
             self.requestCurrentIntake()
         }
     }
-    
-    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
+
+    func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
         DispatchQueue.main.async {
             if let waterGoal = message["waterGoal"] as? Double {
                 print(waterGoal)
@@ -55,7 +55,7 @@ class WatchConnectivityHandler: NSObject, WCSessionDelegate, ObservableObject {
             }
         }
     }
-    
+
     /// Function to request current consumption values from iOS
     func requestCurrentIntake() {
         if WCSession.default.isReachable {

@@ -22,7 +22,7 @@ struct WatchTrackerView: View {
     var useMetric: Bool
     var addIntake: ((Int, @escaping (Bool) -> Void) -> Void)
     var requestBalanceUpdate: () -> Void
-    
+
     @State private var isAdding: Bool = false
     @State private var isUpdating: Bool = false
     @State private var amountToAdd: Double = 0.0
@@ -32,8 +32,8 @@ struct WatchTrackerView: View {
             VStack(spacing: 0) {
                 GaugeView(max: $goal, level: $currentBalance, isUpdating: $isUpdating, color: color, unit: unit)
                     .frame(height: 120)
-                
-                if (title != "Exercise") {
+
+                if title != "Exercise" {
                     Button(action: {
                         withAnimation {
                             isAdding = true
@@ -42,12 +42,12 @@ struct WatchTrackerView: View {
                         ZStack {
                             Circle()
                                 .foregroundStyle(.base)
-                            
+
                             Image(iconName)
                                 .resizable()
                                 .scaledToFill()
                                 .padding(5)
-                            
+
                             Image(systemName: systemIconName)
                                 .foregroundStyle(.base)
                                 .offset(y: 3)
@@ -71,11 +71,11 @@ struct WatchTrackerView: View {
                         isAdding = false
                         isUpdating = true
                     }
-                    
+
                     if amount > 0 {
-                        addIntake(Int(amount)) { success in
+                        addIntake(Int(amount)) { _ in
                             WKInterfaceDevice.current().play(.success)
-                            
+
                             withAnimation {
                                 amountToAdd = 0
                                 isUpdating = false

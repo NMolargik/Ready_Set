@@ -15,7 +15,7 @@ struct NavColumnView: View {
     @Binding var tabItems: [any ITabItem]
     @Binding var selectedTab: any ITabItem
     @Binding var navigationDragHeight: Double
-    
+
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
@@ -28,7 +28,7 @@ struct NavColumnView: View {
                     .padding(.leading, 5)
                     .buttonStyle(.plain)
                 }
-                
+
                 dividerView
             }
             .frame(height: 120)
@@ -46,7 +46,7 @@ struct NavColumnView: View {
             tabItems = selectedTab.reorderTabs()
         }
     }
-    
+
     private func tabImage(_ tabItem: any ITabItem) -> some View {
         Image(tabItem.icon)
             .resizable()
@@ -75,10 +75,10 @@ struct NavColumnView: View {
                     .shadow(radius: 2)
                     .foregroundStyle(selectedTab.gradient)
                     .transition(.opacity)
-                
+
                 Spacer()
             }
-            
+
             TopDetailView(exerciseViewModel: exerciseViewModel, waterViewModel: waterViewModel, energyViewModel: energyViewModel, selectedTab: $selectedTab)
                 .blur(radius: abs(navigationDragHeight) > 20.0 ? abs(navigationDragHeight * 0.03) : 0)
         }
@@ -90,4 +90,3 @@ struct NavColumnView: View {
     NavColumnView(exerciseViewModel: ExerciseViewModel(), waterViewModel: WaterViewModel(), energyViewModel: EnergyViewModel(), tabItems: .constant(TabItemType.allItems), selectedTab: .constant(ExerciseTabItem()), navigationDragHeight: .constant(0))
         .ignoresSafeArea()
 }
-

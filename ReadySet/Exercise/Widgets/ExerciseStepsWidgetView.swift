@@ -10,7 +10,7 @@ import HealthKit
 
 struct ExerciseStepsWidgetView: View {
     @ObservedObject var exerciseViewModel: ExerciseViewModel
-    
+
     var body: some View {
         ZStack {
             Rectangle()
@@ -18,13 +18,12 @@ struct ExerciseStepsWidgetView: View {
                 .cornerRadius(10)
                 .foregroundStyle(.thinMaterial)
                 .shadow(radius: 1)
-            
+
             HStack {
                 Image(systemName: "shoeprints.fill")
                     .foregroundStyle(.green)
                     .shadow(radius: 1)
-                
-                
+
                 Text("\(Int(exerciseViewModel.stepsToday)) / \(Int(exerciseViewModel.stepGoal))")
                     .font(.caption)
                     .bold()

@@ -9,13 +9,13 @@ import SwiftUI
 
 struct VerticalToggleStyle: ToggleStyle {
     var height: CGFloat
-    
+
     func makeBody(configuration: Configuration) -> some View {
         return VStack(alignment: .leading) {
             configuration.label
                 .font(.system(size: 18, weight: .semibold))
                 .lineLimit(2)
-            
+
             HStack {
                 if configuration.isOn {
                     Text("On")

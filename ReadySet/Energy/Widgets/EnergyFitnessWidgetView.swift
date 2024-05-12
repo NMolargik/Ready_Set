@@ -9,12 +9,12 @@ import SwiftUI
 
 struct EnergyFitnessWidgetView: View {
     @State private var showAlert = false
-    
+
     var body: some View {
         Button(action: {
             UIImpactFeedbackGenerator(style: .medium).impactOccurred()
             guard let url = URL(string: "fitnessapp://") else { return }
-            
+
             if UIApplication.shared.canOpenURL(url) {
                 UIApplication.shared.open(url)
             } else {
@@ -27,7 +27,7 @@ struct EnergyFitnessWidgetView: View {
                     .cornerRadius(10)
                     .foregroundStyle(.thinMaterial)
                     .shadow(radius: 1)
-                
+
                 Image("rings")
                     .resizable()
                     .aspectRatio(contentMode: .fit)

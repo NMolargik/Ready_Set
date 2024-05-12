@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ReadySetEnergyWidgetView: View {
     @Environment(\.widgetFamily) var widgetFamily
-    
+
     let data = DataService()
     var entry: EnergyWidgetProvider.Entry
 
@@ -19,16 +19,16 @@ struct ReadySetEnergyWidgetView: View {
                 GaugeView(max: .constant(entry.goal), level: .constant(entry.consumption), isUpdating: .constant(false), color: EnergyTabItem().color, unit: data.useMetric ? "kJ" : "cal")
                     .frame(width: 150, height: 120)
             }
-                
+
             VStack {
                 Spacer()
-                
+
                 Button(intent: EnergyIntent()) {
                     ZStack {
                         Rectangle()
                             .cornerRadius(20)
                             .foregroundStyle(.white)
-                        
+
                         Text("+\(data.useMetric ? 800 : 200)")
                             .bold()
                             .foregroundStyle(.black)

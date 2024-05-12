@@ -11,8 +11,8 @@ import Foundation
 class DataController: ObservableObject {
     let container = NSPersistentContainer(name: "ReadySet")
 
-    init(){
-        container.loadPersistentStores { description, error in
+    init() {
+        container.loadPersistentStores { _, error in
             if let error = error {
                 print("CoreData failed to load: \(error.localizedDescription)")
             }

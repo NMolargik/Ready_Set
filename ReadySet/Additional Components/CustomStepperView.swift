@@ -12,18 +12,18 @@ struct CustomStepperView: View {
     var step: Int
     var iconName: String
     var colors: [Color]
-    
+
     var body: some View {
         HStack(alignment: .center, spacing: 5) {
             Image(systemName: iconName)
                 .foregroundStyle(LinearGradient(colors: colors, startPoint: .leading, endPoint: .trailing))
                 .frame(width: 20)
-            
+
             Text("\(value)")
                 .bold()
                 .foregroundStyle(.base)
                 .frame(width: 50)
-            
+
             Stepper(value: customBinding, step: step, label: {EmptyView()})
                 .labelsHidden()
                 .accentColor(.base)
@@ -36,7 +36,7 @@ struct CustomStepperView: View {
             UIStepper.appearance().setIncrementImage(UIImage(systemName: "plus"), for: .normal)
         }
     }
-    
+
     private var customBinding: Binding<Int> {
         Binding(
             get: { self.value },

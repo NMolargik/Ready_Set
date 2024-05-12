@@ -24,9 +24,9 @@ struct ExercisePlanDayView: View {
     let columns = [
         GridItem(.flexible(minimum: 50, maximum: 100))
     ]
-    
+
     let weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-    
+
     var body: some View {
         ScrollView {
             LazyVStack {
@@ -34,8 +34,8 @@ struct ExercisePlanDayView: View {
                     ExerciseEntryView(exercise: exercise, isEditing: $isEditing, selectedExercise: $selectedExercise, selectedSet: $selectedSet, keyboardShown: $keyboardShown)
                         .id(exercise.id)
                 }
-                
-                if (isEditing) {
+
+                if isEditing {
                     HStack {
                         Button(action: {
                             UIImpactFeedbackGenerator(style: .medium).impactOccurred()
@@ -60,15 +60,15 @@ struct ExercisePlanDayView: View {
                                 .shadow(radius: 5)
                         }
                         .padding(.leading, 5)
-                        
+
                         Spacer()
                     }
                     .animation(.easeInOut, value: exercises.count)
                     .transition(.move(edge: .leading))
-                    
+
                 }
-                
-                if (isEditing) {
+
+                if isEditing {
                     Spacer(minLength: 400)
                 }
             }
@@ -77,7 +77,7 @@ struct ExercisePlanDayView: View {
         }
         .scrollDisabled(!isEditing && !isExpanded)
         .onChange(of: isEditing) {
-            if (!isEditing) {
+            if !isEditing {
                 selectedExercise = Exercise()
                 selectedSet = ""
             }

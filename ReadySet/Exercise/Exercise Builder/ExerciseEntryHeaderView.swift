@@ -9,17 +9,17 @@ import SwiftUI
 
 struct ExerciseEntryHeaderView: View {
     @Environment(\.modelContext) var modelContext
-    
+
     @State var exercise: Exercise
     @Binding var isEditing: Bool
     @Binding var selectedExercise: Exercise
     @Binding var selectedSet: String
     @FocusState private var focusTextField
     var keyboardShown: FocusState<Bool>.Binding
-    
+
     var body: some View {
-        HStack (spacing: 0) {
-            if (isEditing) {
+        HStack(spacing: 0) {
+            if isEditing {
                 Button(action: {
                     UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                     withAnimation {
@@ -33,8 +33,8 @@ struct ExerciseEntryHeaderView: View {
                 .buttonStyle(.plain)
                 .shadow(radius: 5)
             }
-            
-            if (exercise.id == selectedExercise.id && isEditing) {
+
+            if exercise.id == selectedExercise.id && isEditing {
                 TextField("Exercise Name", text: $selectedExercise.name)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .onChange(of: selectedExercise.name) {
@@ -48,7 +48,7 @@ struct ExerciseEntryHeaderView: View {
                     .onAppear {
                         focusTextField = true
                     }
-                
+
             } else {
                 Text(exercise.name)
                     .lineLimit(1)
@@ -57,12 +57,12 @@ struct ExerciseEntryHeaderView: View {
                     .foregroundStyle(.fontGray)
                     .truncationMode(.tail)
             }
-            
-            if (isEditing) {
+
+            if isEditing {
                 Button(action: {
                     UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                     withAnimation {
-                        if (selectedExercise.id == exercise.id) {
+                        if selectedExercise.id == exercise.id {
                             exercise.name = selectedExercise.name == "" ? "Unnamed Exercise" : selectedExercise.name
                             selectedExercise = Exercise()
                         } else {
@@ -80,10 +80,10 @@ struct ExerciseEntryHeaderView: View {
                 .buttonStyle(.plain)
                 .id(exercise.id.uuidString)
             }
-            
+
             Spacer()
-            
-            if (isEditing) {
+
+            if isEditing {
                 Button(action: {
                     UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                     withAnimation {

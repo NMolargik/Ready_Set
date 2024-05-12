@@ -33,7 +33,7 @@ struct HomeView: View {
                             goal: $mainWatchViewModel.stepGoal,
                             step: 0,
                             useMetric: false,
-                            addIntake: { steps, completion in
+                            addIntake: { _, _ in
                                 return
                             },
                             requestBalanceUpdate: {

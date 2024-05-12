@@ -12,7 +12,7 @@ import SwiftUI
 struct ReadySetWidgetsBundle: WidgetBundle {
     var body: some Widget {
         ReadySetWaterWidget()
-        
+
         ReadySetEnergyWidget()
     }
 }

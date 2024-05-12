@@ -10,13 +10,13 @@ import Charts
 
 struct WaterBottomContentView: View {
     @ObservedObject var waterViewModel: WaterViewModel
-    
+
     var body: some View {
         VStack {
             WaterChartView(waterViewModel: waterViewModel)
-            
+
             Spacer()
-            
+
             WaterAdditionWidgetView(
                 addWater: { water in
                     waterViewModel.addWater(waterToAdd: water)

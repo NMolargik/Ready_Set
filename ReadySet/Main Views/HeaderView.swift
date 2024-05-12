@@ -10,7 +10,7 @@ import SwiftUI
 struct HeaderView: View {
     @Binding var progress: Double
     @Binding var selectedTab: any ITabItem
-    
+
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .leading, spacing: 0) {
@@ -19,7 +19,7 @@ struct HeaderView: View {
                         .frame(height: 60)
                         .foregroundStyle(.baseAccent)
                         .shadow(color: .black, radius: 10)
-                    
+
                     Rectangle()
                         .frame(width: max(0.05 * geometry.size.width, min(geometry.size.width * min(progress, 1), geometry.size.width)), height: 60)
                         .foregroundStyle(selectedTab.gradient)
@@ -35,4 +35,3 @@ struct HeaderView: View {
 #Preview {
     HeaderView(progress: .constant(0.1), selectedTab: .constant(ExerciseTabItem()))
 }
-

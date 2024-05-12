@@ -18,7 +18,7 @@ struct ChartView: View {
     @Binding var data: [Date: Int]
     @Binding var average: Double
     @Binding var goal: Double
-    
+
     var body: some View {
         Group {
             Text(title)
@@ -27,7 +27,7 @@ struct ChartView: View {
                 .foregroundStyle(color)
                 .shadow(radius: 1, x: 2, y: 2)
                 .opacity(0.8)
-            
+
             Chart {
                 ForEach(Array(data).sorted(by: { $0.key < $1.key }), id: \.key) { (date, value) in
                     LineMark(x: .value("Date", date), y: .value(title, value))
@@ -35,14 +35,14 @@ struct ChartView: View {
                 .interpolationMethod(.cardinal)
                 .foregroundStyle(color)
                 .symbol(.circle)
-                
+
                 ForEach(Array(data).sorted(by: { $0.key < $1.key }), id: \.key) { (date, value) in
                     AreaMark(x: .value("Date", date), y: .value(title, value))
                 }
                 .interpolationMethod(.cardinal)
                 .foregroundStyle(LinearGradient(colors: [color, .clear], startPoint: .top, endPoint: .bottom))
                 .foregroundStyle(color)
-                
+
                 RuleMark(y: .value("Average \(title)", average))
                 .foregroundStyle(LinearGradient(colors: [color, .base], startPoint: .leading, endPoint: .trailing))
                 .annotation(position: .top, alignment: .leading) {
@@ -53,8 +53,8 @@ struct ChartView: View {
                         .opacity(0.7)
                         .padding(.leading, 4)
                 }
-                
-                if (showGoal) {
+
+                if showGoal {
                     RuleMark(y: .value("Goal \(title)", goal))
                     .foregroundStyle(LinearGradient(colors: [color, .base], startPoint: .leading, endPoint: .trailing))
                     .annotation(position: .top, alignment: .leading) {

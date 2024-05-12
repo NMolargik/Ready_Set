@@ -9,15 +9,15 @@ import HealthKit
 
 struct HealthBaseController {
     var healthStore = HKHealthStore()
-    
+
     func requestAuthorization() {
         let toReads = Set([
             HKObjectType.quantityType(forIdentifier: .stepCount)!,
             HKObjectType.quantityType(forIdentifier: .dietaryWater)!,
             HKObjectType.quantityType(forIdentifier: .dietaryEnergyConsumed)!,
-            HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!,
+            HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!
         ])
-    
+
         let toShares = Set([
             HKObjectType.quantityType(forIdentifier: .dietaryWater)!,
             HKObjectType.quantityType(forIdentifier: .dietaryEnergyConsumed)!,

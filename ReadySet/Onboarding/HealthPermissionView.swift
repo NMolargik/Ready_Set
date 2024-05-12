@@ -13,20 +13,20 @@ struct HealthPermissionView: View {
     @Binding var onboardingProgress: Float
     @Binding var onboardingGradient: LinearGradient
     @Binding var healthController: HealthBaseController
-    
+
     @State private var permitted = false
     @State private var showText = false
     @State private var showProgress = false
     @State private var showMoreText = false
     @State private var navigationDragHeight = 0.0
-    
+
     var body: some View {
         ZStack {
             Color.base
-            
+
             VStack {
                 Spacer()
-                
+
                 if showText {
                     Text("Welcome To Ready, Set")
                         .bold()
@@ -36,7 +36,7 @@ struct HealthPermissionView: View {
                         .id("WelcomeText")
                         .padding(.bottom, permitted ? 0 : 30)
                 }
-                
+
                 if showMoreText {
                     Text("Aside from other features, we use Apple Health to store and track your trends in water and energy consumption. Please hit the button below, and select 'Turn On All' on the following prompt")
                         .multilineTextAlignment(.center)
@@ -44,13 +44,13 @@ struct HealthPermissionView: View {
                         .font(.title3)
                         .foregroundStyle(.fontGray)
                 }
-                
+
                 if showProgress {
                     ProgressView()
                         .tint(.blue)
                         .frame(height: 50)
                         .padding()
-                    
+
                 } else if permitted {
                     Image(systemName: "checkmark.circle.fill")
                         .font(.title)
@@ -58,13 +58,13 @@ struct HealthPermissionView: View {
                         .onAppear {
                             UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
                         }
-                    
+
                 } else if showMoreText {
                     Button(action: {
                         UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
                         showProgress = true
                         healthController.requestAuthorization()
-                        
+
                         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                             withAnimation {
                                 showProgress = false
@@ -79,25 +79,25 @@ struct HealthPermissionView: View {
                                 .frame(width: 250, height: 50)
                                 .padding()
                                 .shadow(radius: 10)
-                            
+
                             HStack {
                                 Text("Authorize Health")
                                     .foregroundStyle(.white)
-                                
+
                                 Image(systemName: "heart.fill")
                                     .foregroundStyle(.pink)
                             }
                             .font(.title2)
                             .bold()
                             .padding()
-                            
+
                         }
                     })
                 }
-                
+
                 Spacer()
-                    
-                if (permitted) {
+
+                if permitted {
                     Text("Swipe Upwards On The Canvas To Continue")
                         .font(.body)
                         .multilineTextAlignment(.center)
@@ -107,7 +107,7 @@ struct HealthPermissionView: View {
                 }
             }
             .onAppear(perform: animateTextAppearance)
-            
+
             .blur(radius: effectiveBlurRadius())
             .transition(.opacity)
             .padding(.bottom, 30)
@@ -115,23 +115,23 @@ struct HealthPermissionView: View {
         .gesture(dragGesture)
 
     }
-    
+
     private func animateTextAppearance() {
         withAnimation(.easeInOut(duration: 1.2)) {
             showText = true
         }
-        
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             withAnimation(.easeInOut(duration: 1.2)) {
                 showMoreText = true
             }
         }
     }
-    
+
     private func effectiveBlurRadius() -> CGFloat {
         abs(navigationDragHeight) > 20.0 ? abs(navigationDragHeight * 0.03) : 0
     }
-    
+
     private var dragGesture: some Gesture {
         DragGesture(minimumDistance: 20, coordinateSpace: .global)
             .onChanged { value in
@@ -146,7 +146,7 @@ struct HealthPermissionView: View {
                 }
             }
     }
-    
+
     private func handleDragEnd(navigationDragHeight: CGFloat) {
         healthController.requestAuthorization()
         if navigationDragHeight < 50 {
@@ -159,7 +159,6 @@ struct HealthPermissionView: View {
         }
     }
 }
-
 
 #Preview {
     HealthPermissionView(onboardingProgress: .constant(0.5), onboardingGradient: .constant(LinearGradient(colors: [.greenStart, .blueEnd], startPoint: .leading, endPoint: .trailing)), healthController: .constant(HealthBaseController()))

@@ -13,24 +13,24 @@ struct GoalSetView: View {
     @AppStorage("waterGoal", store: UserDefaults(suiteName: Bundle.main.groupID)) var waterGoal: Double = 64
     @AppStorage("energyGoal", store: UserDefaults(suiteName: Bundle.main.groupID)) var energyGoal: Double = 2000
     @AppStorage("useMetric", store: UserDefaults(suiteName: Bundle.main.groupID)) var useMetric: Bool = false
-    
+
     @Binding var onboardingProgress: Float
     @Binding var onboardingGradient: LinearGradient
-    
+
     @State private var showText = false
     @State private var showMoreText = false
     @State private var navigationDragHeight = 0.0
     @State private var stepSliderValue: Double = 0
     @State private var waterSliderValue: Double = 0
     @State private var energySliderValue: Double = 0
-    
+
     var body: some View {
         ZStack {
             Color.base
-            
+
             VStack {
                 Spacer()
-                
+
                 if showText {
                     Text("Let's Set Your Goals")
                         .bold()
@@ -47,7 +47,7 @@ struct GoalSetView: View {
                     })
                     .padding(.horizontal)
                     .foregroundStyle(.fontGray)
-                    
+
                     SliderView(range: 1000...15000, gradient: ExerciseTabItem().gradient, step: 1000, label: "daily steps", sliderValue: $stepSliderValue)
                         .onChange(of: stepSliderValue) {
                             UIImpactFeedbackGenerator(style: .soft).impactOccurred()
@@ -56,7 +56,7 @@ struct GoalSetView: View {
                             stepSliderValue = stepGoal
                         }
                         .frame(height: 90)
-                    
+
                     SliderView(range: (useMetric ? 150 : 8)...(useMetric ? 4000 : 168), gradient: WaterTabItem().gradient, step: useMetric ? 50 : 8, label: useMetric ? "daily mL" : "daily ounces", sliderValue: $waterSliderValue)
                         .onAppear {
                             waterSliderValue = waterGoal
@@ -65,7 +65,7 @@ struct GoalSetView: View {
                             UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                         }
                         .frame(height: 90)
-                    
+
                     SliderView(range: (useMetric ? 4184 : 1000)...(useMetric ? 20920 : 5000), gradient: EnergyTabItem().gradient, step: 100, label: useMetric ? "daily kJ" : "daily calories", sliderValue: $energySliderValue)
                         .onAppear {
                             energySliderValue = energyGoal
@@ -80,7 +80,7 @@ struct GoalSetView: View {
                     }
 
                     Spacer()
-                        
+
                     Text("Swipe Upwards On The Canvas When Finished")
                         .font(.body)
                         .multilineTextAlignment(.center)
@@ -96,19 +96,19 @@ struct GoalSetView: View {
         .gesture(dragGesture)
 
     }
-    
+
     private func animateTextAppearance() {
         withAnimation(.easeInOut(duration: 1.2)) {
             showText = true
         }
-        
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             withAnimation(.easeInOut(duration: 1.2)) {
                 showMoreText = true
             }
         }
     }
-    
+
     private func setGoalsAfterUnitChange() {
         withAnimation {
             if useMetric {
@@ -124,11 +124,11 @@ struct GoalSetView: View {
             }
         }
     }
-    
+
     private func effectiveBlurRadius() -> CGFloat {
         abs(navigationDragHeight) > 20.0 ? abs(navigationDragHeight * 0.03) : 0
     }
-    
+
     private var dragGesture: some Gesture {
         DragGesture(minimumDistance: 20, coordinateSpace: .global)
             .onChanged { value in
@@ -143,7 +143,7 @@ struct GoalSetView: View {
                 }
             }
     }
-    
+
     private func handleDragEnd(navigationDragHeight: CGFloat) {
         if navigationDragHeight < 50 {
             withAnimation(.easeInOut) {
@@ -158,7 +158,6 @@ struct GoalSetView: View {
         }
     }
 }
-
 
 #Preview {
     GoalSetView(onboardingProgress: .constant(0.75), onboardingGradient: .constant(LinearGradient(colors: [.greenStart, .blueEnd, .orangeStart], startPoint: .leading, endPoint: .trailing)))

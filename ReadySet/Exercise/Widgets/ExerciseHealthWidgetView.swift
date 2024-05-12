@@ -9,10 +9,10 @@ import SwiftUI
 
 struct ExerciseHealthWidgetView: View {
     var body: some View {
-        
+
         Button(action: {
             UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-            
+
             UIApplication.shared.open(URL(string: "x-apple-health://")!)
         }, label: {
             ZStack {
@@ -21,7 +21,7 @@ struct ExerciseHealthWidgetView: View {
                     .cornerRadius(10)
                     .foregroundStyle(.thinMaterial)
                     .shadow(radius: 1)
-                
+
                 HStack {
                     Image(systemName: "heart.fill")
 

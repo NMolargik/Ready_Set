@@ -10,8 +10,8 @@ import SwiftUI
 
 struct SmallWaterWidgetView: View {
     var entry: SimpleEntry
-    
+
     var body: some View {
-        
+
     }
 }

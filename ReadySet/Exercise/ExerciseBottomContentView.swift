@@ -10,42 +10,42 @@ import SwiftData
 
 struct ExerciseBottomContentView: View {
     @Query(sort: [SortDescriptor(\Exercise.orderIndex)]) var exercises: [Exercise]
-    
+
     @ObservedObject var exerciseViewModel: ExerciseViewModel
     @Binding var selectedDay: Int
     @State private var sortOrder = SortDescriptor(\Exercise.orderIndex)
     @State var filteredExercises: [Exercise] = []
 
     private let weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-    
+
     var body: some View {
         ZStack {
             TabView(selection: $selectedDay) {
                 ForEach(weekDays.indices, id: \.self) { index in
-                    @State var exercises = exercises.filter ({$0.weekday == selectedDay})
-                    
-                    VStack (spacing: 0) {
+                    @State var exercises = exercises.filter({$0.weekday == selectedDay})
+
+                    VStack(spacing: 0) {
                         HStack {
                             Text(weekDays[selectedDay])
                                 .bold()
                                 .font(.largeTitle)
                                 .foregroundStyle(.baseInvert)
-                            
+
                             Spacer()
                         }
                         .padding(.leading, 15)
                         .padding(.top, 10)
-                        
+
                         ExercisePlanDayView(exercises: $exercises, isEditing: $exerciseViewModel.editingSets, isExpanded: $exerciseViewModel.expandedSets, selectedDay: selectedDay)
                             .tag(index)
                     }
                 }
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
-            
+
             VStack {
                 Spacer()
-                
+
                 HStack(spacing: 2) {
                     ForEach(weekDays.indices, id: \.self) { index in
                         Circle()
@@ -56,14 +56,14 @@ struct ExerciseBottomContentView: View {
                             .zIndex(selectedDay == index ? 2 : 1)
                             .transition(.opacity)
                     }
-                    
+
                     Spacer()
-                    
-                    if (!exerciseViewModel.editingSets) {
+
+                    if !exerciseViewModel.editingSets {
                         expandButton
                             .transition(.opacity)
                     }
-                    
+
                     editButton
                         .transition(.opacity)
                 }
@@ -85,7 +85,7 @@ struct ExerciseBottomContentView: View {
         }
         .geometryGroup()
     }
-    
+
     private var expandButton: some View {
         Button(action: {
             UIImpactFeedbackGenerator(style: .rigid).impactOccurred()

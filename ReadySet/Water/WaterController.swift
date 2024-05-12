@@ -8,7 +8,6 @@
 import HealthKit
 import Foundation
 
-
 class WaterController {
     private let hkc = HKController()
 

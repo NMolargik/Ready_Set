@@ -10,10 +10,10 @@ import SwiftUI
 struct EnergyTopContentView: View {
     @AppStorage("useMetric", store: UserDefaults(suiteName: Bundle.main.groupID)) var useMetric: Bool = false
     @AppStorage("decreaseHaptics") var decreaseHaptics: Bool = false
-    
+
     @ObservedObject var energyViewModel: EnergyViewModel
     @State private var energysliderValue: Double = 0
-    
+
     var body: some View {
         HStack(spacing: 5) {
             ZStack {
@@ -23,16 +23,16 @@ struct EnergyTopContentView: View {
                             energysliderValue = energyViewModel.energyGoal
                         }
                         .onChange(of: energysliderValue) {
-                            if (!decreaseHaptics) {
+                            if !decreaseHaptics {
                                 UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                             }
                             energyViewModel.proposedEnergyGoal = Int(energysliderValue)
                         }
-                        
+
                 } else {
                     EnergyDisplay
                 }
-                
+
                 editGoalButton
             }
         }
@@ -47,7 +47,7 @@ struct EnergyTopContentView: View {
             }
             .tint(EnergyTabItem().gradient)
             .animation(.easeInOut, value: energyViewModel.energyConsumedToday)
-            
+
             EnergyConsumptionDetails
             Spacer()
         }
@@ -61,7 +61,7 @@ struct EnergyTopContentView: View {
                 Text("~\(Int(energyViewModel.energyConsumedToday)) \(useMetric ? "kJ" : "cal") Consumed")
                     .bold()
                     .foregroundStyle(.fontGray)
-                
+
                 Text("~\(Int(energyViewModel.energyBurnedToday)) Burned")
                     .bold()
                     .foregroundStyle(.fontGray)
@@ -75,10 +75,10 @@ struct EnergyTopContentView: View {
     private var editGoalButton: some View {
         HStack {
             Spacer()
-            
+
             Button(action: {
                 withAnimation {
-                    if (energyViewModel.editingEnergyGoal) {
+                    if energyViewModel.editingEnergyGoal {
                         energyViewModel.saveEnergyGoal()
                     } else {
                         energyViewModel.editingEnergyGoal = true

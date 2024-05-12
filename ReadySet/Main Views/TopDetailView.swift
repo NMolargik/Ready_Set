@@ -15,7 +15,7 @@ struct TopDetailView: View {
     @Binding var selectedTab: any ITabItem
     var body: some View {
         Group {
-            switch (selectedTab.type) {
+            switch selectedTab.type {
             case .exercise:
                 ExerciseTopContentView(exerciseViewModel: exerciseViewModel)
                     .transition(.opacity)
@@ -33,7 +33,7 @@ struct TopDetailView: View {
         .frame(height: 85)
     }
 }
-    
+
 #Preview {
     TopDetailView(exerciseViewModel: ExerciseViewModel(), waterViewModel: WaterViewModel(), energyViewModel: EnergyViewModel(), selectedTab: .constant(ExerciseTabItem()))
 }

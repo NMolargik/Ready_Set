@@ -16,7 +16,7 @@ struct CrownRotationAdditionView: View {
     var gradient: LinearGradient
     var onAdd: (Double) -> Void
     var onCancel: () -> Void
-    
+
     var body: some View {
         VStack {
             Text("+ \(Int(amount)) \(unitOfMeasurement)")
@@ -24,7 +24,7 @@ struct CrownRotationAdditionView: View {
                 .foregroundStyle(gradient)
                 .font(.title2)
                 .digitalCrownRotation($amount)
-            
+
             Stepper(value: $amount, step: step, label: {
             })
             .colorMultiply(.baseInvert)
@@ -52,12 +52,12 @@ struct CrownRotationAdditionView: View {
                             .foregroundStyle(.white)
                             .padding(.horizontal, 12)
                             .padding(.vertical, 10)
-                            
+
                     }
                 })
                 .frame(width: 70, height: 25)
                 .buttonStyle(.plain)
-                
+
                 Button(action: {
                     onCancel()
                 }, label: {
@@ -73,7 +73,7 @@ struct CrownRotationAdditionView: View {
                             .padding(.horizontal, 3)
                             .padding(.vertical, 10)
                     }
-                    
+
                 })
                 .frame(width: 70, height: 25)
                 .buttonStyle(.plain)

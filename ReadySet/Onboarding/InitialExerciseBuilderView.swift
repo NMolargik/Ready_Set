@@ -10,25 +10,25 @@ import SwiftData
 
 struct InitialExerciseBuilderView: View {
     @AppStorage("appState", store: UserDefaults(suiteName: Bundle.main.groupID)) var appState: String = "initialExerciseBuilder"
-    
+
     @Query(sort: [SortDescriptor(\Exercise.orderIndex)]) var exercises: [Exercise]
-    
+
     @Binding var onboardingProgress: Float
     @Binding var onboardingGradient: LinearGradient
-    
+
     @State private var showText = false
     @State private var showMoreText = false
     @State private var selectedDay = 1
-    
+
     let weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-    
+
     var body: some View {
         ZStack {
             Color.base
             VStack {
                 if showText {
                     Spacer()
-                    
+
                     Text("Swipe between days to enter exercises and their sets, or skip until later")
                         .multilineTextAlignment(.center)
                         .font(.body)
@@ -36,30 +36,30 @@ struct InitialExerciseBuilderView: View {
                         .padding(7)
                         .transition(.push(from: .top))
                 }
-                
+
                 ZStack {
                     Rectangle()
                         .cornerRadius(35)
                         .foregroundStyle(.ultraThinMaterial)
                         .shadow(radius: 1)
-                    
+
                     VStack {
                         TabView(selection: $selectedDay) {
                             ForEach(weekDays.indices, id: \.self) { index in
                                 @State var exercises = exercises.filter({$0.weekday == index})
-                                
-                                VStack (spacing: 0) {
+
+                                VStack(spacing: 0) {
                                     HStack {
                                         Text(weekDays[selectedDay])
                                             .bold()
                                             .font(.largeTitle)
                                             .foregroundStyle(.baseInvert)
-                                        
+
                                         Spacer()
                                     }
                                     .padding(.leading, 15)
                                     .padding(.top, 10)
-                                    
+
                                     ExercisePlanDayView(exercises: $exercises, isEditing: .constant(true), isExpanded: .constant(false), selectedDay: selectedDay)
                                         .tag(index)
                                 }
@@ -74,9 +74,9 @@ struct InitialExerciseBuilderView: View {
                     }
                 }
                 .padding(.horizontal, 8)
-                
+
                 Spacer()
-                
+
                 Button(action: {
                     UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                     withAnimation(.easeInOut) {
@@ -107,12 +107,12 @@ struct InitialExerciseBuilderView: View {
         }
         .onAppear {
             getCurrentWeekday()
-            
+
             animateText()
         }
-        
+
     }
-    
+
     private func getCurrentWeekday() {
         let currentDate = Date()
         let calendar = Calendar.current

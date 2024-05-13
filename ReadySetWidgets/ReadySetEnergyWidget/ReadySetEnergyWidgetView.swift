@@ -9,14 +9,14 @@ import SwiftUI
 
 struct ReadySetEnergyWidgetView: View {
     @Environment(\.widgetFamily) var widgetFamily
+    @ObservedObject var energy: EnergyViewModel = .shared
 
-    let data = DataService()
     var entry: EnergyWidgetProvider.Entry
 
     var body: some View {
         ZStack {
             Link(destination: URL(string: "readySet://Energy")!) {
-                GaugeView(max: .constant(entry.goal), level: .constant(entry.consumption), isUpdating: .constant(false), color: EnergyTabItem().color, unit: data.useMetric ? "kJ" : "cal")
+                GaugeView(max: energy.$energyGoal, level: energy.$energyConsumedToday, isUpdating: .constant(false), color: EnergyTabItem().color, unit: energy.useMetric ? "kJ" : "cal")
                     .frame(width: 150, height: 120)
             }
 
@@ -29,7 +29,7 @@ struct ReadySetEnergyWidgetView: View {
                             .cornerRadius(20)
                             .foregroundStyle(.white)
 
-                        Text("+\(data.useMetric ? 800 : 200)")
+                        Text("+\(energy.useMetric ? 800 : 200)")
                             .bold()
                             .foregroundStyle(.black)
                     }

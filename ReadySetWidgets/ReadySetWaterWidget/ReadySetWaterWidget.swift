@@ -10,9 +10,10 @@ import SwiftUI
 
 struct ReadySetWaterWidget: Widget {
     let kind: String = "ReadySetWaterWidget"
+    @State var waterWidgetProvider: WaterWidgetProvider = WaterWidgetProvider()
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: WaterWidgetProvider()) { entry in
+        StaticConfiguration(kind: kind, provider: waterWidgetProvider) { entry in
             ReadySetWaterWidgetView(entry: entry)
                 .containerBackground(WaterTabItem().gradient, for: .widget)
 

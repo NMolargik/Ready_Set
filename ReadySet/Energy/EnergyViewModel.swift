@@ -31,8 +31,8 @@ class EnergyViewModel: ObservableObject, HKHelper {
     @Published var energyConsumedWeek: [Date: Int] = [:]
     @Published var energyBurnedToday: Int = 0
     @Published var energyBurnedWeek: [Date: Int] = [:]
-    @Published var healthStore: HKHealthStore?
-    @Published var watchConnector: WatchConnector?
+    @Published var healthStore: HKHealthStore = HealthBaseController.shared.healthStore
+    var watchConnector: WatchConnector = .shared
 
     init() {
         self.proposedEnergyGoal = Int(self.energyGoal)
@@ -47,6 +47,7 @@ class EnergyViewModel: ObservableObject, HKHelper {
     }
 
     func addEnergy(energy: Double) {
+        print("Value: energy=\(energy)\n\(#file):\(#line)")
         DispatchQueue.main.async {
             self.addEnergyConsumed(energy: energy) {
                 withAnimation(.easeInOut) {
@@ -68,7 +69,7 @@ class EnergyViewModel: ObservableObject, HKHelper {
         hkQuery(type: energyConsumed, unit: unit, failed: "Failed to read energy consumed today") { amount in
             DispatchQueue.main.async {
                 self.energyConsumedToday = amount
-                self.watchConnector?.sendUpdateToWatch(update: ["energyBalance": amount])
+                self.watchConnector.sendUpdateToWatch(update: ["energyBalance": amount])
             }
         }
         WidgetCenter.shared.reloadTimelines(ofKind: "ReadySetEnergyWidget")
@@ -106,8 +107,10 @@ class EnergyViewModel: ObservableObject, HKHelper {
     }
 
     private func addEnergyConsumed(energy: Double, completion: @escaping () -> Void) {
+        print("Value: healthStore=\(self.healthStore.debugDescription)\nValue: energy=\(energy)\n\(#file):\(#line)")
         let energysample = HKQuantitySample(type: energyConsumed, quantity: HKQuantity(unit: self.useMetric ? HKUnit.jouleUnit(with: .kilo) : HKUnit.kilocalorie(), doubleValue: energy), start: Date(), end: Date())
-        self.healthStore?.save(energysample, withCompletion: { (success, error) -> Void in
+        self.healthStore.save(energysample, withCompletion: { (success, error) -> Void in
+            print("Value: energy=\(energy)\n\(#file):\(#line)")
             if error != nil {
                 print("HealthKit - Error - \(String(describing: error))")
             }
@@ -128,6 +131,6 @@ class EnergyViewModel: ObservableObject, HKHelper {
     func saveEnergyGoal() {
         self.energyGoal = Double(self.proposedEnergyGoal)
         self.editingEnergyGoal = false
-        self.watchConnector?.sendUpdateToWatch(update: ["energyGoal": energyGoal])
+        self.watchConnector.sendUpdateToWatch(update: ["energyGoal": energyGoal])
     }
 }

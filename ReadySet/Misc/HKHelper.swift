@@ -9,7 +9,7 @@ import Foundation
 import HealthKit
 
 protocol HKHelper {
-    var healthStore: HKHealthStore? { get set }
+    var healthStore: HKHealthStore { get set }
 
 }
 
@@ -70,7 +70,7 @@ extension HKHelper {
                 }
             }
         }
-        healthStore?.execute(query)
+        healthStore.execute(query)
     }
 
     func hkQuery(type: HKQuantityType, unit: HKUnit, failed: String, with block: @escaping (Int) -> Void) {
@@ -83,6 +83,6 @@ extension HKHelper {
             let amount = Int(sum.doubleValue(for: unit))
             block(amount)
         }
-        healthStore?.execute(query)
+        healthStore.execute(query)
     }
 }

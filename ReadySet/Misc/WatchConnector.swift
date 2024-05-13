@@ -10,6 +10,7 @@ import WatchConnectivity
 import SwiftUI
 
 class WatchConnector: NSObject, WCSessionDelegate, ObservableObject {
+    static var shared = WatchConnector()
     @AppStorage("appState", store: UserDefaults(suiteName: Bundle.main.groupID)) var appState: String = "background"
     @AppStorage("useMetric", store: UserDefaults(suiteName: Bundle.main.groupID)) var useMetric: Bool = false
     @AppStorage("stepGoal", store: UserDefaults(suiteName: Bundle.main.groupID)) var stepGoal: Double = 1000

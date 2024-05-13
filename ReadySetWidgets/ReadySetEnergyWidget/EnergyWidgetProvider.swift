@@ -9,14 +9,14 @@ import Foundation
 import WidgetKit
 
 struct EnergyWidgetProvider: TimelineProvider {
-    let data = DataService.shared
+    var energy: EnergyViewModel = .shared
 
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), consumption: data.energyConsumedToday, goal: data.energyGoal)
+        SimpleEntry(date: Date(), consumption: energy.energyConsumedToday, goal: energy.energyGoal)
     }
 
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> Void) {
-        let entry = SimpleEntry(date: Date(), consumption: data.energyConsumedToday, goal: data.energyGoal)
+        let entry = SimpleEntry(date: Date(), consumption: energy.energyConsumedToday, goal: energy.energyGoal)
         completion(entry)
     }
 
@@ -26,7 +26,7 @@ struct EnergyWidgetProvider: TimelineProvider {
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
         for hourOffset in 0 ..< 5 {
             let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: Date())!
-            let entry = SimpleEntry(date: entryDate, consumption: data.energyConsumedToday, goal: data.energyGoal)
+            let entry = SimpleEntry(date: entryDate, consumption: energy.energyConsumedToday, goal: energy.energyGoal)
             entries.append(entry)
         }
 

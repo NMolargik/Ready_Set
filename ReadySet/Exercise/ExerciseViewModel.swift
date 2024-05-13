@@ -23,8 +23,8 @@ class ExerciseViewModel: ObservableObject, HKHelper {
 
     @Published var currentDay: Int = 1
     @Published var stepCountWeek: [Date: Int] = [:]
-    @Published var healthStore: HKHealthStore?
-    @Published var watchConnector: WatchConnector?
+    @Published var healthStore = HKHealthStore()
+    var watchConnector: WatchConnector = .shared
 
     init() {
         self.getCurrentWeekday()
@@ -44,14 +44,14 @@ class ExerciseViewModel: ObservableObject, HKHelper {
     func saveStepGoal() {
         self.stepGoal = Double(self.proposedStepGoal)
         self.editingStepGoal = false
-        watchConnector?.sendUpdateToWatch(update: ["stepGoal": stepGoal])
+        watchConnector.sendUpdateToWatch(update: ["stepGoal": stepGoal])
     }
 
     private func readStepCountToday() {
         hkQuery(type: stepCount, unit: HKUnit.count(), failed: "Failed to read step count") { amount in
             DispatchQueue.main.async {
                 self.stepsToday = amount
-                self.watchConnector?.sendUpdateToWatch(update: ["stepBalance": self.stepsToday])
+                self.watchConnector.sendUpdateToWatch(update: ["stepBalance": self.stepsToday])
             }
         }
     }

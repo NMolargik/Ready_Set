@@ -30,8 +30,8 @@ class WaterViewModel: ObservableObject, HKHelper {
     @Published var proposedWaterGoal = 64
     @Published var editingWaterGoal = false
     @Published var waterConsumedWeek: [Date: Int] = [:]
-    @Published var healthStore: HKHealthStore?
-    @Published var watchConnector: WatchConnector?
+    @Published var healthStore: HKHealthStore = HealthBaseController.shared.healthStore
+    var watchConnector: WatchConnector = .shared
 
     init() {
         self.proposedWaterGoal = Int(self.waterGoal)
@@ -63,7 +63,7 @@ class WaterViewModel: ObservableObject, HKHelper {
         hkQuery(type: waterConsumed, unit: unit, failed: "Failed to read water gallons today") { amount in
             DispatchQueue.main.async {
                 self.waterConsumedToday = amount
-                self.watchConnector?.sendUpdateToWatch(update: ["waterBalance": amount])
+                self.watchConnector.sendUpdateToWatch(update: ["waterBalance": amount])
             }
         }
     }
@@ -82,7 +82,7 @@ class WaterViewModel: ObservableObject, HKHelper {
     private func addWaterConsumed(waterAmount: Double, completion: @escaping () -> Void) {
         let waterSample = HKQuantitySample(type: waterConsumed, quantity: HKQuantity(unit: self.useMetric ? HKUnit.literUnit(with: .milli) : HKUnit.fluidOunceUS(), doubleValue: waterAmount), start: Date(), end: Date())
 
-        healthStore?.save(waterSample, withCompletion: { (success, error) -> Void in
+        healthStore.save(waterSample, withCompletion: { (success, error) -> Void in
 
             if error != nil {
                 print("HealthKit - Error - \(String(describing: error))")
@@ -103,6 +103,6 @@ class WaterViewModel: ObservableObject, HKHelper {
     func saveWaterGoal() {
         self.waterGoal = Double(self.proposedWaterGoal)
         self.editingWaterGoal = false
-        self.watchConnector?.sendUpdateToWatch(update: ["waterGoal": waterGoal])
+        self.watchConnector.sendUpdateToWatch(update: ["waterGoal": waterGoal])
     }
 }

@@ -13,11 +13,13 @@ struct WaterIntent: AppIntent {
 
     static var description = IntentDescription("Logs 8oz or 240mL, depending on your chosen units, of water to Ready, Set")
 
-    func perform() async throws -> some IntentResult & ReturnsValue {
-        let data = DataService.shared
-        data.addSomeWater()
+    func perform() async throws -> some IntentResult & ReturnsValue<Int> {
+        let water: WaterViewModel = .shared
+        let value = water.useMetric ? 240 : 8
+        water.addWater(waterToAdd: Double(value) as Double)
 
-        return .result(value: data.waterConsumedToday)
+
+        return .result(value: water.waterConsumedToday)
     }
 }
 
@@ -26,10 +28,12 @@ struct EnergyIntent: AppIntent {
 
     static var description = IntentDescription("Logs 200cal or 800kJ, depending on your chosen units, of energy to Ready, Set")
 
-    func perform() async throws -> some IntentResult & ReturnsValue {
-        let data = DataService.shared
-        data.addSomeEnergy()
+    func perform() async throws -> some IntentResult & ReturnsValue<Int> {
+        let energy: EnergyViewModel = .shared
 
-        return .result(value: data.energyConsumedToday)
+        let value = energy.useMetric ? 800 : 200
+        energy.addEnergy(energy: Double(value))
+
+        return .result(value: energy.energyConsumedToday)
     }
 }

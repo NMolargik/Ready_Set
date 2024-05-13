@@ -22,7 +22,7 @@ struct WatchTrackerView: View {
     var useMetric: Bool
     var addIntake: ((Int, @escaping (Bool) -> Void) -> Void)
     var requestBalanceUpdate: () -> Void
-
+    
     @State private var isAdding: Bool = false
     @State private var isUpdating: Bool = false
     @State private var amountToAdd: Double = 0.0

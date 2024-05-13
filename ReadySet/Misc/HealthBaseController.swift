@@ -8,6 +8,7 @@
 import HealthKit
 
 struct HealthBaseController {
+    static var shared = HealthBaseController()
     var healthStore = HKHealthStore()
 
     func requestAuthorization() {

@@ -25,6 +25,7 @@
 		EB0515712BEDC5EF005FE6F0 /* EntryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1FDC4F2BD9A0C900253855 /* EntryType.swift */; };
 		EB05157A2BF158F0005FE6F0 /* ReadySetWatch-Watch-App-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB0515792BF158F0005FE6F0 /* ReadySetWatch-Watch-App-Info.plist */; };
 		EB05157B2BF158F4005FE6F0 /* ReadySetWatch-Watch-App-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB0515792BF158F0005FE6F0 /* ReadySetWatch-Watch-App-Info.plist */; };
+		EB05157D2BF15C65005FE6F0 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB05157C2BF15C65005FE6F0 /* Bundle+Extension.swift */; };
 		EB1FDC1B2BD6FCBE00253855 /* ExerciseSetRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1FDC1A2BD6FCBE00253855 /* ExerciseSetRecordView.swift */; };
 		EB1FDC232BD7053000253855 /* ReadySetWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1FDC222BD7053000253855 /* ReadySetWatchApp.swift */; };
 		EB1FDC252BD7053000253855 /* MainWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1FDC242BD7053000253855 /* MainWatchView.swift */; };
@@ -195,6 +196,7 @@
 		EB0515672BEDAAB8005FE6F0 /* Intents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intents.swift; sourceTree = "<group>"; };
 		EB0515692BEDB07C005FE6F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB0515792BF158F0005FE6F0 /* ReadySetWatch-Watch-App-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ReadySetWatch-Watch-App-Info.plist"; sourceTree = "<group>"; };
+		EB05157C2BF15C65005FE6F0 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
 		EB1FDC1A2BD6FCBE00253855 /* ExerciseSetRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSetRecordView.swift; sourceTree = "<group>"; };
 		EB1FDC202BD7053000253855 /* Ready, Set, Wrist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ready, Set, Wrist.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB1FDC222BD7053000253855 /* ReadySetWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadySetWatchApp.swift; sourceTree = "<group>"; };
@@ -322,6 +324,7 @@
 				EB4D9C6E2BCDE8310071BA99 /* HealthBaseController.swift */,
 				EB2BB03D2BDADD3800C3DA78 /* WatchConnector.swift */,
 				0E1A3E912BD4DA45005CD025 /* HKHelper.swift */,
+				EB05157C2BF15C65005FE6F0 /* Bundle+Extension.swift */,
 				0E1A3E8F2BD4CF0C005CD025 /* Date+Extension.swift */,
 			);
 			path = Misc;
@@ -809,6 +812,7 @@
 				EB4742C02BD3251C009A23E4 /* CustomStepperView.swift in Sources */,
 				EB4D9C5D2BCDA9D40071BA99 /* ExerciseFitnessWidgetView.swift in Sources */,
 				EB3AB3462BC711FA008B6F22 /* ExerciseTabItem.swift in Sources */,
+				EB05157D2BF15C65005FE6F0 /* Bundle+Extension.swift in Sources */,
 				EB4D9C6B2BCDCB1B0071BA99 /* BouncingChevronView.swift in Sources */,
 				EB3AB3412BC71105008B6F22 /* TabItemType.swift in Sources */,
 				EB3AB3572BC76F07008B6F22 /* TopDetailView.swift in Sources */,

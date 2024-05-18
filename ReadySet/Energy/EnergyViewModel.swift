@@ -27,9 +27,16 @@ import WidgetKit
             WidgetCenter.shared.reloadTimelines(ofKind: "ReadySetEnergyWidget")
         }
     }
+    
+    @ObservationIgnored @AppStorage("energyIncrementValue", store: UserDefaults(suiteName: Bundle.main.groupID)) var energyIncrementValue: Double = 1000 {
+        didSet {
+            energyIncrementValueObserved = energyIncrementValue
+        }
+    }
 
     var energyConsumedTodayObserved = 0
     var energyGoalObserved: Double = 0
+    var energyIncrementValueObserved: Double = 1000
     var proposedEnergyGoal = 0
     var editingEnergyGoal = false
     var energyConsumedWeek: [Date: Int] = [:]
@@ -75,7 +82,7 @@ import WidgetKit
     }
 
     func consumeSomeEnergy() {
-        self.addEnergy(energy: useMetric ? 800 : 200)
+        self.addEnergy(energy: energyIncrementValueObserved)
     }
 
     private func readEnergyConsumedToday() {

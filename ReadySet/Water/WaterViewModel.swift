@@ -29,9 +29,16 @@ import WidgetKit
             WidgetCenter.shared.reloadTimelines(ofKind: "ReadySetWaterWidget")
         }
     }
+    
+    @ObservationIgnored @AppStorage("waterIncrementValue", store: UserDefaults(suiteName: Bundle.main.groupID)) var waterIncrementValue: Double = 8 {
+        didSet {
+            waterIncrementValueObserved = waterIncrementValue
+        }
+    }
 
     var waterConsumedTodayObserved = 0
     var waterGoalObserved: Double = 0
+    var waterIncrementValueObserved: Double = 8
     var proposedWaterGoal = 64
     var editingWaterGoal = false
     var waterConsumedWeek: [Date: Int] = [:]
@@ -70,7 +77,7 @@ import WidgetKit
     }
 
     func addSomeWater() {
-        self.addWater(waterToAdd: useMetric ? 240 : 8)
+        self.addWater(waterToAdd: waterIncrementValueObserved)
     }
 
     private func readWaterConsumedToday() {

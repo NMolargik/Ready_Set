@@ -142,10 +142,14 @@ import HealthKit
         withAnimation {
             if self.useMetric {
                 waterViewModel.waterGoal = Double(Float(waterViewModel.waterGoal) * 29.5735).rounded()
+                waterViewModel.waterIncrementValue = Double(Float(waterViewModel.waterIncrementValue) * 29.5735).rounded()
                 energyViewModel.energyGoal = Double(Float(energyViewModel.energyGoal) * 4.184).rounded()
+                energyViewModel.energyIncrementValue = Double(Float(energyViewModel.energyIncrementValue) * 4.184).rounded()
             } else {
                 waterViewModel.waterGoal = Double(Float(waterViewModel.waterGoal) / 29.5735).rounded()
+                waterViewModel.waterIncrementValue = Double(Float(waterViewModel.waterIncrementValue) / 29.5735).rounded()
                 energyViewModel.energyGoal = Double(Float(energyViewModel.energyGoal) / 4.184).rounded()
+                energyViewModel.energyIncrementValue = Double(Float(energyViewModel.energyIncrementValue) / 4.184).rounded()
             }
         }
     }

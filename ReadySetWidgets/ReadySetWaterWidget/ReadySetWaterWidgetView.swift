@@ -10,15 +10,14 @@ import WidgetKit
 
 struct ReadySetWaterWidgetView: View {
     @Environment(\.widgetFamily) var widgetFamily
-    @State var water: WaterViewModel = .shared
-
+    @State var waterViewModel: WaterViewModel = .shared
+    @State var dataService: DataService = .shared
     var entry: WaterWidgetProvider.Entry
-    let incrementValueManager = IncrementValueManager.shared
-
+    
     var body: some View {
         ZStack {
             Link(destination: URL(string: "readySet://Water")!) {
-                GaugeView(max: water.$waterGoal, level: water.$waterConsumedToday, isUpdating: .constant(false), color: WaterTabItem().color, unit: water.useMetric ? "mL" : "oz")
+                GaugeView(max: waterViewModel.$waterGoal, level: waterViewModel.$waterConsumedToday, isUpdating: .constant(false), color: WaterTabItem().color, unit: waterViewModel.useMetric ? "mL" : "oz")
                     .frame(width: 150, height: 120)
             }
 
@@ -31,7 +30,7 @@ struct ReadySetWaterWidgetView: View {
                             .cornerRadius(20)
                             .foregroundStyle(.white)
 
-                        Text("+\(Int(incrementValueManager.getWaterIncrement(useMetric: water.useMetric)))")
+                        Text("+\(Int(dataService.waterIncrementValue))")
                             .bold()
                             .foregroundStyle(.black)
                     }

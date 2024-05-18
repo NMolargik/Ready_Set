@@ -11,8 +11,6 @@ import WidgetKit
 
 struct DataService {
     static let shared = DataService()
-    let incrementValueManager = IncrementValueManager.shared
-
     @State var energy: EnergyViewModel = .shared
     @State var water: WaterViewModel = .shared
 
@@ -29,6 +27,8 @@ struct DataService {
             WidgetCenter.shared.reloadTimelines(ofKind: "ReadySetWaterWidget")
         }
     }
+    
+    @AppStorage("waterIncrementValue", store: UserDefaults(suiteName: Bundle.main.groupID)) var waterIncrementValue: Double = 0
 
     @AppStorage("energyGoal", store: UserDefaults(suiteName: Bundle.main.groupID)) var energyGoal: Double = 2000 {
         didSet {
@@ -41,19 +41,6 @@ struct DataService {
             WidgetCenter.shared.reloadTimelines(ofKind: "ReadySetEnergyWidget")
         }
     }
-
-    func addSomeWater() {
-        DispatchQueue.main.async {
-            let value = incrementValueManager.getWaterIncrement(useMetric: useMetric)
-            water.addWater(waterToAdd: Double(value) as Double)
-        }
-    }
-
-    func addSomeEnergy() {
-        DispatchQueue.main.async {
-            let value = incrementValueManager.getEnergyIncrement(useMetric: useMetric)
-            energy.addEnergy(energy: Double(value))
-        }
-    }
-
+    
+    @AppStorage("energyIncrementValue", store: UserDefaults(suiteName: Bundle.main.groupID)) var energyIncrementValue: Double = 1000
 }

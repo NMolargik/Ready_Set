@@ -13,12 +13,10 @@ struct EnergyIntent: AppIntent {
     static var description = IntentDescription("Logs your selected increment value of energy to Ready, Set")
 
     func perform() async throws -> some IntentResult & ReturnsValue<Int> {
-        let energy: EnergyViewModel = .shared
-        let incrementManager = IncrementValueManager.shared
-        let value = incrementManager.getEnergyIncrement(useMetric: energy.useMetric)
-        energy.addEnergy(energy: value)
+        let energyViewModel: EnergyViewModel = .shared
+        energyViewModel.consumeSomeEnergy()
 
-        return .result(value: energy.energyConsumedToday)
+        return .result(value: energyViewModel.energyConsumedTodayObserved)
     }
 }
 
@@ -30,14 +28,15 @@ struct SelectEnergyIncrementIntent: WidgetConfigurationIntent {
     var energyIncrementValue: Double
     
     func perform() async throws -> some IntentResult & ReturnsValue<Bool> {
-        let energy: EnergyViewModel = .shared
-        IncrementValueManager.shared.setEnergyIncrement(value: energyIncrementValue, useMetric: energy.useMetric)
+        let dataService: DataService = .shared
+        dataService.energyIncrementValue = energyIncrementValue
         return .result(value: true)
     }
-
-    init(currentIncrementValue: Double) {
-        self.energyIncrementValue = currentIncrementValue
-    }
     
-    init() {}
+    init() {
+        let energyViewModel: EnergyViewModel = .shared
+        let dataService: DataService = .shared
+        dataService.energyIncrementValue = energyViewModel.energyIncrementValueObserved
+        self.energyIncrementValue = dataService.energyIncrementValue
+    }
 }

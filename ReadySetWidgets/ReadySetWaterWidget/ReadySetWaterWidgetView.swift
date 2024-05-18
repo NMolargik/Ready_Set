@@ -13,6 +13,7 @@ struct ReadySetWaterWidgetView: View {
     @State var water: WaterViewModel = .shared
 
     var entry: WaterWidgetProvider.Entry
+    let incrementValueManager = IncrementValueManager.shared
 
     var body: some View {
         ZStack {
@@ -30,7 +31,7 @@ struct ReadySetWaterWidgetView: View {
                             .cornerRadius(20)
                             .foregroundStyle(.white)
 
-                        Text("+\(water.useMetric ? 240 : 8)")
+                        Text("+\(Int(incrementValueManager.getWaterIncrement(useMetric: water.useMetric)))")
                             .bold()
                             .foregroundStyle(.black)
                     }

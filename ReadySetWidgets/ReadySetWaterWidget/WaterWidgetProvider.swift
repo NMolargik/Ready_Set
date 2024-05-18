@@ -5,28 +5,31 @@
 //  Created by Nick Molargik on 4/28/24.
 //
 
-import Foundation
 import WidgetKit
+import SwiftUI
+import Intents
 
-struct WaterWidgetProvider: TimelineProvider {
+struct WaterWidgetProvider: AppIntentTimelineProvider {
+    typealias Entry = SimpleEntry
+    typealias Intent = SelectWaterIncrementIntent
+
     var water: WaterViewModel = .shared
 
     func placeholder(in context: Context) -> SimpleEntry {
         SimpleEntry(date: Date(), consumption: water.waterConsumedToday, goal: water.waterGoal)
     }
 
-    func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> Void) {
-        let entry = SimpleEntry(date: Date(), consumption: water.waterConsumedToday, goal: water.waterGoal)
-        completion(entry)
+    func snapshot(for configuration: SelectWaterIncrementIntent, in context: Context) async -> SimpleEntry {
+        SimpleEntry(date: Date(), consumption: water.waterConsumedToday, goal: water.waterGoal)
     }
 
-    func getTimeline(in context: Context, completion: @escaping (Timeline<SimpleEntry>) -> ()) {
+    func timeline(for configuration: SelectWaterIncrementIntent, in context: Context) async -> Timeline<SimpleEntry> {
         let currentDate = Date()
         let startOfDay = Calendar.current.startOfDay(for: currentDate)
         let endOfDay = Calendar.current.date(byAdding: .day, value: 1, to: startOfDay)!
-        
-        let entry = SimpleEntry(date: startOfDay, consumption: 0, goal: water.waterGoal)
+
+        let entry = SimpleEntry(date: startOfDay, consumption: water.waterConsumedToday, goal: water.waterGoal)
         let timeline = Timeline(entries: [entry], policy: .after(endOfDay))
-        completion(timeline)
+        return timeline
     }
 }

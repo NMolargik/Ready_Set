@@ -13,9 +13,13 @@ struct ReadySetEnergyWidget: Widget {
     @State var energyWidgetProvider = EnergyWidgetProvider()
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: energyWidgetProvider) { entry in
+        AppIntentConfiguration(
+            kind: kind,
+            intent: SelectEnergyIncrementIntent.self,
+            provider: energyWidgetProvider) { entry in
             ReadySetEnergyWidgetView(entry: entry)
                 .containerBackground(EnergyTabItem().gradient, for: .widget)
+            
         }
         .supportedFamilies([.systemSmall])
         .configurationDisplayName("Ready, Set, Energy")

@@ -13,10 +13,13 @@ struct ReadySetWaterWidget: Widget {
     @State var waterWidgetProvider: WaterWidgetProvider = WaterWidgetProvider()
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: waterWidgetProvider) { entry in
+        AppIntentConfiguration(
+            kind: kind,
+            intent: SelectWaterIncrementIntent.self,
+            provider: waterWidgetProvider) { entry in
             ReadySetWaterWidgetView(entry: entry)
                 .containerBackground(WaterTabItem().gradient, for: .widget)
-
+            
         }
         .supportedFamilies([.systemSmall])
         .configurationDisplayName("Ready, Set, Water")

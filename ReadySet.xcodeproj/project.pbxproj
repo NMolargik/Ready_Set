@@ -26,7 +26,7 @@
 		0E98616A2BCE971F00488D9E /* WaterChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9861692BCE971F00488D9E /* WaterChartView.swift */; };
 		0EBC76F02BD1CE9A00880FFB /* ExerciseSetEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBC76EF2BD1CE9A00880FFB /* ExerciseSetEditor.swift */; };
 		EB05155E2BED9EC1005FE6F0 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB05155D2BED9EC1005FE6F0 /* DataService.swift */; };
-		EB0515682BEDAAB8005FE6F0 /* Intents.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0515672BEDAAB8005FE6F0 /* Intents.swift */; };
+		EB0515682BEDAAB8005FE6F0 /* IncrementValueManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0515672BEDAAB8005FE6F0 /* IncrementValueManager.swift */; };
 		EB05156A2BEDB07C005FE6F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0515692BEDB07C005FE6F0 /* AppDelegate.swift */; };
 		EB0515712BEDC5EF005FE6F0 /* EntryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1FDC4F2BD9A0C900253855 /* EntryType.swift */; };
 		EB05157A2BF158F0005FE6F0 /* ReadySetWatch-Watch-App-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB0515792BF158F0005FE6F0 /* ReadySetWatch-Watch-App-Info.plist */; };
@@ -40,6 +40,8 @@
 		EB1FDC422BD7495100253855 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1A3E8F2BD4CF0C005CD025 /* Date+Extension.swift */; };
 		EB1FDC502BD9A0C900253855 /* EntryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1FDC4F2BD9A0C900253855 /* EntryType.swift */; };
 		EB1FDC512BD9A0DB00253855 /* EntryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1FDC4F2BD9A0C900253855 /* EntryType.swift */; };
+		EB2AC0E22BF8DA7700E0F3EC /* WaterIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2AC0E12BF8DA7700E0F3EC /* WaterIntents.swift */; };
+		EB2AC0E42BF8DA9300E0F3EC /* EnergyIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2AC0E32BF8DA9300E0F3EC /* EnergyIntents.swift */; };
 		EB2BB03E2BDADD3800C3DA78 /* WatchConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BB03D2BDADD3800C3DA78 /* WatchConnector.swift */; };
 		EB2BB0442BDADDA000C3DA78 /* PhoneConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BB0432BDADDA000C3DA78 /* PhoneConnector.swift */; };
 		EB2BB0452BDAE00F00C3DA78 /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB2BB0402BDADD5400C3DA78 /* WatchConnectivity.framework */; };
@@ -199,7 +201,7 @@
 		0E9861692BCE971F00488D9E /* WaterChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterChartView.swift; sourceTree = "<group>"; };
 		0EBC76EF2BD1CE9A00880FFB /* ExerciseSetEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSetEditor.swift; sourceTree = "<group>"; };
 		EB05155D2BED9EC1005FE6F0 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
-		EB0515672BEDAAB8005FE6F0 /* Intents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intents.swift; sourceTree = "<group>"; };
+		EB0515672BEDAAB8005FE6F0 /* IncrementValueManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncrementValueManager.swift; sourceTree = "<group>"; };
 		EB0515692BEDB07C005FE6F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB0515792BF158F0005FE6F0 /* ReadySetWatch-Watch-App-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ReadySetWatch-Watch-App-Info.plist"; sourceTree = "<group>"; };
 		EB05157C2BF15C65005FE6F0 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
@@ -210,6 +212,8 @@
 		EB1FDC292BD7053200253855 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		EB1FDC432BD74A7B00253855 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EB1FDC4F2BD9A0C900253855 /* EntryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryType.swift; sourceTree = "<group>"; };
+		EB2AC0E12BF8DA7700E0F3EC /* WaterIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterIntents.swift; sourceTree = "<group>"; };
+		EB2AC0E32BF8DA9300E0F3EC /* EnergyIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnergyIntents.swift; sourceTree = "<group>"; };
 		EB2BB03D2BDADD3800C3DA78 /* WatchConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnector.swift; sourceTree = "<group>"; };
 		EB2BB0402BDADD5400C3DA78 /* WatchConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchConnectivity.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS10.4.sdk/System/Library/Frameworks/WatchConnectivity.framework; sourceTree = DEVELOPER_DIR; };
 		EB2BB0432BDADDA000C3DA78 /* PhoneConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneConnector.swift; sourceTree = "<group>"; };
@@ -624,7 +628,7 @@
 				EBF9DD372BDEE724009EA21A /* ReadySetWidgetsBundle.swift */,
 				EBF9DD4B2BDEEA9D009EA21A /* SimpleEntry.swift */,
 				EB05155D2BED9EC1005FE6F0 /* DataService.swift */,
-				EB0515672BEDAAB8005FE6F0 /* Intents.swift */,
+				EB0515672BEDAAB8005FE6F0 /* IncrementValueManager.swift */,
 				EBF9DD522BDEF26E009EA21A /* ReadySetWaterWidget */,
 				EBF9DD542BDEF32C009EA21A /* ReadySetEnergyWidget */,
 				EBF9DD3B2BDEE726009EA21A /* Assets.xcassets */,
@@ -637,6 +641,7 @@
 		EBF9DD522BDEF26E009EA21A /* ReadySetWaterWidget */ = {
 			isa = PBXGroup;
 			children = (
+				EB2AC0E12BF8DA7700E0F3EC /* WaterIntents.swift */,
 				EBF9DD492BDEEA84009EA21A /* WaterWidgetProvider.swift */,
 				EBF9DD392BDEE724009EA21A /* ReadySetWaterWidget.swift */,
 				EBF9DD4D2BDEEABF009EA21A /* ReadySetWaterWidgetView.swift */,
@@ -647,6 +652,7 @@
 		EBF9DD542BDEF32C009EA21A /* ReadySetEnergyWidget */ = {
 			isa = PBXGroup;
 			children = (
+				EB2AC0E32BF8DA9300E0F3EC /* EnergyIntents.swift */,
 				EBF9DD672BDEFAA8009EA21A /* EnergyWidgetProvider.swift */,
 				EBF9DD632BDEF96B009EA21A /* ReadySetEnergyWidget.swift */,
 				EBF9DD652BDEF973009EA21A /* ReadySetEnergyWidgetView.swift */,
@@ -903,6 +909,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB2AC0E22BF8DA7700E0F3EC /* WaterIntents.swift in Sources */,
 				0E931E372BEF5BB80091AA03 /* RS+Bundle.swift in Sources */,
 				EBF9DD4C2BDEEA9D009EA21A /* SimpleEntry.swift in Sources */,
 				EBF9DD3A2BDEE724009EA21A /* ReadySetWaterWidget.swift in Sources */,
@@ -911,6 +918,7 @@
 				0E8407042BF24C8C0021787F /* Date+Extension.swift in Sources */,
 				EBF9DD382BDEE724009EA21A /* ReadySetWidgetsBundle.swift in Sources */,
 				EBF9DD5B2BDEF4B9009EA21A /* SpeedometerGaugeStyle.swift in Sources */,
+				EB2AC0E42BF8DA9300E0F3EC /* EnergyIntents.swift in Sources */,
 				EBF9DD5D2BDEF4D1009EA21A /* SettingsTabITem.swift in Sources */,
 				EBF9DD5E2BDEF4D1009EA21A /* WaterTabItem.swift in Sources */,
 				EBF9DD5F2BDEF4D1009EA21A /* EnergyTabItem.swift in Sources */,
@@ -923,7 +931,7 @@
 				0E8407052BF24C9B0021787F /* WatchConnector.swift in Sources */,
 				EBF9DD5C2BDEF4B9009EA21A /* GaugeView.swift in Sources */,
 				EBF9DD682BDEFAA8009EA21A /* EnergyWidgetProvider.swift in Sources */,
-				EB0515682BEDAAB8005FE6F0 /* Intents.swift in Sources */,
+				EB0515682BEDAAB8005FE6F0 /* IncrementValueManager.swift in Sources */,
 				EBF9DD4E2BDEEABF009EA21A /* ReadySetWaterWidgetView.swift in Sources */,
 				0E8407032BF24C7E0021787F /* HKHelper.swift in Sources */,
 				EB05155E2BED9EC1005FE6F0 /* DataService.swift in Sources */,

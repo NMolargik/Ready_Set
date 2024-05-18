@@ -11,6 +11,7 @@ import WidgetKit
 
 struct DataService {
     static let shared = DataService()
+    let incrementValueManager = IncrementValueManager.shared
 
     @State var energy: EnergyViewModel = .shared
     @State var water: WaterViewModel = .shared
@@ -42,17 +43,15 @@ struct DataService {
     }
 
     func addSomeWater() {
-        // TODO: this is problematic. this is never reflected on healthkit, and as such the main app never reflects it either
         DispatchQueue.main.async {
-            let value = useMetric ? 240 : 8
+            let value = incrementValueManager.getWaterIncrement(useMetric: useMetric)
             water.addWater(waterToAdd: Double(value) as Double)
         }
     }
 
     func addSomeEnergy() {
-        // TODO: this is problematic. this is never reflected on healthkit, and as such the main app never reflects it either
         DispatchQueue.main.async {
-            let value = useMetric ? 800 : 200
+            let value = incrementValueManager.getEnergyIncrement(useMetric: useMetric)
             energy.addEnergy(energy: Double(value))
         }
     }

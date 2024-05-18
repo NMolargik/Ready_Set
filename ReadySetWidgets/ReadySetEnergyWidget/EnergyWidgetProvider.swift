@@ -21,16 +21,12 @@ struct EnergyWidgetProvider: TimelineProvider {
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
-        var entries: [SimpleEntry] = []
-
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: Date())!
-            let entry = SimpleEntry(date: entryDate, consumption: energy.energyConsumedToday, goal: energy.energyGoal)
-            entries.append(entry)
-        }
-
-        let timeline = Timeline(entries: entries, policy: .atEnd)
+        let currentDate = Date()
+        let startOfDay = Calendar.current.startOfDay(for: currentDate)
+        let endOfDay = Calendar.current.date(byAdding: .day, value: 1, to: startOfDay)!
+        
+        let entry = SimpleEntry(date: startOfDay, consumption: 0, goal: energy.energyGoal)
+        let timeline = Timeline(entries: [entry], policy: .after(endOfDay))
         completion(timeline)
     }
 }

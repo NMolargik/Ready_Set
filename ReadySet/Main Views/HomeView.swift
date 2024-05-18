@@ -15,7 +15,7 @@ struct HomeView: View {
     @State var exerciseViewModel = ExerciseViewModel.shared
     @State var waterViewModel = WaterViewModel.shared
     @State var energyViewModel = EnergyViewModel.shared
-    @State var watchConnector: WatchConnector = .shared
+    @ObservedObject var watchConnector: WatchConnector = .shared
 
     @State var healthStore: HKHealthStore
 

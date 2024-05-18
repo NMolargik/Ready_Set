@@ -9,8 +9,8 @@ import SwiftUI
 import SwiftData
 
 struct ExerciseBottomContentView: View {
-    @Query(sort: [SortDescriptor(\Exercise.orderIndex)]) var exercises: [Exercise]
     @Environment(\.modelContext) var modelContext
+    @Query(sort: [SortDescriptor(\Exercise.orderIndex)]) var exercises: [Exercise]    
     @State var exerciseViewModel: ExerciseViewModel
     @Binding var selectedDay: Int
 

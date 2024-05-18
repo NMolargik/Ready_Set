@@ -118,18 +118,6 @@ import HealthKit
     }
 
     func setupConnectorClosures(watchConnector: WatchConnector, exerciseViewModel: ExerciseViewModel, waterViewModel: WaterViewModel, energyViewModel: EnergyViewModel) {
-        watchConnector.requestStepBalance = {
-            return exerciseViewModel.stepsToday
-        }
-
-        watchConnector.requestWaterConsumptionBalance = {
-            return waterViewModel.waterConsumedTodayObserved
-        }
-
-        watchConnector.requestEnergyConsumptionBalance = {
-            return energyViewModel.energyConsumedToday
-        }
-
         watchConnector.addConsumption = { entryType, consumption in
             if entryType == .water {
                 withAnimation {

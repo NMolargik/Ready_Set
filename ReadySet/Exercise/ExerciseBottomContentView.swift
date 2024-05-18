@@ -35,7 +35,7 @@ struct ExerciseBottomContentView: View {
                                 }
                             }
                         }, label: {
-                            Text("Clear All")
+                            Text("Delete All")
                                 .foregroundStyle(.red)
                                 .font(.body)
                                 .padding(.vertical, 2)

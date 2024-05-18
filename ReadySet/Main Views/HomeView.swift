@@ -10,195 +10,61 @@ import HealthKit
 
 struct HomeView: View {
     @Environment(\.scenePhase) var scenePhase
-    @AppStorage("useMetric", store: UserDefaults(suiteName: Bundle.main.groupID)) var useMetric: Bool = false
-    @AppStorage("appState", store: UserDefaults(suiteName: Bundle.main.groupID)) var appState: String = "background"
 
-    @StateObject var homeViewModel = HomeViewModel()
-    @StateObject var exerciseViewModel = ExerciseViewModel.shared
-    @StateObject var waterViewModel = WaterViewModel.shared
-    @StateObject var energyViewModel = EnergyViewModel.shared
+    @State private var homeViewModel = HomeViewModel()
+    @State var exerciseViewModel = ExerciseViewModel.shared
+    @State var waterViewModel = WaterViewModel.shared
+    @State var energyViewModel = EnergyViewModel.shared
+    @State var watchConnector: WatchConnector = .shared
 
-    @StateObject var watchConnector: WatchConnector = .shared
-
-    @State private var navigationDragHeight = 0.0
     @State var healthStore: HKHealthStore
-    @State private var selectedDay: Int = 1
 
     var body: some View {
         VStack {
             HeaderView(
-                progress: progressForSelectedTab,
+                progress: homeViewModel.progressForSelectedTab(exerciseViewModel: exerciseViewModel, waterViewModel: waterViewModel, energyViewModel: energyViewModel),
                 selectedTab: $homeViewModel.selectedTab
             )
             .padding(.bottom, 15)
             .zIndex(2)
 
-            if (!exerciseViewModel.editingSets && !exerciseViewModel.expandedSets) || homeViewModel.selectedTab.type != .exercise {
+            if showNavColumn() {
                 NavColumnView(exerciseViewModel: exerciseViewModel,
                               waterViewModel: waterViewModel, energyViewModel: energyViewModel,
                               tabItems: $homeViewModel.tabItems, selectedTab: $homeViewModel.selectedTab,
-                              navigationDragHeight: $navigationDragHeight)
+                              navigationDragHeight: $homeViewModel.navigationDragHeight)
                 .transition(.opacity)
                 .zIndex(1)
             }
 
             BottomView(exerciseViewModel: exerciseViewModel, waterViewModel: waterViewModel, energyViewModel: energyViewModel,
-                       selectedTab: $homeViewModel.selectedTab, selectedDay: $selectedDay)
-                .blur(radius: effectiveBlurRadius)
+                       selectedTab: $homeViewModel.selectedTab, selectedDay: $homeViewModel.selectedDay)
+                .blur(radius: homeViewModel.effectiveBlurRadius)
                 .padding(.top, (exerciseViewModel.expandedSets || exerciseViewModel.editingSets) ? 0 : 8)
                 .padding(.bottom, 30)
                 .padding(.horizontal, 8)
                 .zIndex(3)
 
         }
-        .background(backgroundGradient)
-        .gesture(dragGesture)
+        .background(homeViewModel.backgroundGradient)
+        .gesture(homeViewModel.dragGesture(exerciseViewModel: exerciseViewModel))
         .onAppear {
-            setupViewModels()
-            setupConnectorClosures()
+            homeViewModel.setupViewModels(healthStore: healthStore, exerciseViewModel: exerciseViewModel, waterViewModel: waterViewModel, energyViewModel: energyViewModel, watchConnector: watchConnector)
+            homeViewModel.setupConnectorClosures(watchConnector: watchConnector, exerciseViewModel: exerciseViewModel, waterViewModel: waterViewModel, energyViewModel: energyViewModel)
         }
         .onChange(of: scenePhase) {
-            handleScenePhase(newPhase: scenePhase)
+            homeViewModel.handleScenePhase(newPhase: scenePhase, exerciseViewModel: exerciseViewModel, waterViewModel: waterViewModel, energyViewModel: energyViewModel, watchConnector: watchConnector)
         }
-        .onChange(of: useMetric) {
-            watchConnector.sendUpdateToWatch(update: ["useMetric": useMetric])
-            setGoalsAfterUnitChange()
+        .onChange(of: homeViewModel.useMetric) {
+            homeViewModel.handleMetricChange(watchConnector: watchConnector, waterViewModel: waterViewModel, energyViewModel: energyViewModel)
         }
-        .onChange(of: selectedDay) {
-            withAnimation {
-                navigationDragHeight = 0.0
-            }
-        }
-        .onOpenURL(perform: { url in
-            let summonedTab = url.host
-
-            homeViewModel.selectedTab = TabItemType.allItems.first(where: { $0.text == summonedTab }) ?? WaterTabItem()
-
-        })
-    }
-
-    private var progressForSelectedTab: Binding<Double> {
-        switch homeViewModel.selectedTab.type {
-        case .exercise:
-            return .constant(Double(exerciseViewModel.stepsToday) / exerciseViewModel.stepGoal)
-        case .water:
-            return .constant(Double(waterViewModel.waterConsumedToday) / waterViewModel.waterGoal)
-        case .energy:
-            return .constant(Double(energyViewModel.energyConsumedToday) / energyViewModel.energyGoal)
-        case .settings:
-            return .constant(1.0)
+        .onOpenURL { url in
+            homeViewModel.handleOpenURL(url: url)
         }
     }
 
-    private var backgroundGradient: LinearGradient {
-        LinearGradient(colors: [.base, .base, homeViewModel.selectedTab.color],
-                       startPoint: .top, endPoint: .bottom)
-    }
-
-    private var effectiveBlurRadius: CGFloat {
-        abs(navigationDragHeight) > 20.0 ? abs(navigationDragHeight * 0.03) : 0
-    }
-
-    private var dragGesture: some Gesture {
-        DragGesture(minimumDistance: 20, coordinateSpace: .global)
-            .onChanged { value in
-                if (!exerciseViewModel.editingSets && !exerciseViewModel.expandedSets) || homeViewModel.selectedTab.type != .exercise {
-                    navigationDragHeight = value.translation.height
-                } else {
-                    navigationDragHeight = 0.0
-                }
-            }
-            .onEnded { _ in
-                if (!exerciseViewModel.editingSets && !exerciseViewModel.expandedSets) || homeViewModel.selectedTab.type != .exercise {
-                    withAnimation(.smooth) {
-                        homeViewModel.handleDragEnd(navigationDragHeight: navigationDragHeight)
-                        navigationDragHeight = 0.0
-                    }
-                } else {
-                    navigationDragHeight = 0.0
-                }
-            }
-    }
-
-    private func setupViewModels() {
-        exerciseViewModel.healthStore = healthStore
-        waterViewModel.healthStore = healthStore
-        energyViewModel.healthStore = healthStore
-
-        exerciseViewModel.watchConnector = watchConnector
-        waterViewModel.watchConnector = watchConnector
-        energyViewModel.watchConnector = watchConnector
-
-        if homeViewModel.needRefreshFromDate() {
-            exerciseViewModel.readInitial()
-            waterViewModel.readInitial()
-            energyViewModel.readInitial()
-
-            watchConnector.sendUpdateToWatch(update: ["stepBalance": exerciseViewModel.stepsToday, "waterBalance": waterViewModel.waterConsumedToday, "energyBalance": energyViewModel.energyConsumedToday])
-        }
-    }
-
-    private func setupConnectorClosures() {
-        watchConnector.requestStepBalance = {
-            return exerciseViewModel.stepsToday
-        }
-
-        watchConnector.requestWaterConsumptionBalance = {
-            return waterViewModel.waterConsumedToday
-        }
-
-        watchConnector.requestEnergyConsumptionBalance = {
-            return energyViewModel.energyConsumedToday
-        }
-
-        watchConnector.addConsumption = { entryType, consumption in
-            if entryType == .water {
-                withAnimation {
-                    waterViewModel.addWater(waterToAdd: Double(consumption))
-                }
-            } else {
-                withAnimation {
-                    energyViewModel.addEnergy(energy: Double(consumption))
-                }
-            }
-        }
-
-        watchConnector.sendUpdateToWatch(update: ["appState": "background"])
-    }
-
-    private func setGoalsAfterUnitChange() {
-        withAnimation {
-            if useMetric {
-                waterViewModel.waterGoal = Double(Float(waterViewModel.waterGoal) * 29.5735).rounded()
-                energyViewModel.energyGoal = Double(Float(energyViewModel.energyGoal) * 4.184).rounded()
-            } else {
-                waterViewModel.waterGoal = Double(Float(waterViewModel.waterGoal) / 29.5735).rounded()
-                energyViewModel.energyGoal = Double(Float(energyViewModel.energyGoal) / 4.184).rounded()
-            }
-        }
-    }
-
-    private func handleScenePhase(newPhase: ScenePhase) {
-        navigationDragHeight = 0
-        if newPhase == .active {
-            appState = "running"
-            withAnimation {
-                exerciseViewModel.readInitial()
-                waterViewModel.readInitial()
-                energyViewModel.readInitial()
-            }
-        } else {
-            appState = "background"
-        }
-
-        withAnimation {
-            exerciseViewModel.readInitial()
-            waterViewModel.readInitial()
-            energyViewModel.readInitial()
-        }
-
-        print(appState)
-        watchConnector.sendUpdateToWatch(update: ["appState": appState])
+    func showNavColumn() -> Bool {
+        return !exerciseViewModel.editingSets && !exerciseViewModel.expandedSets || homeViewModel.selectedTab.type != .exercise
     }
 }
 

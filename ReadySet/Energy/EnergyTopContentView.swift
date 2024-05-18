@@ -8,27 +8,16 @@
 import SwiftUI
 
 struct EnergyTopContentView: View {
-    @AppStorage("useMetric", store: UserDefaults(suiteName: Bundle.main.groupID)) var useMetric: Bool = false
-    @AppStorage("decreaseHaptics") var decreaseHaptics: Bool = false
-
-    @ObservedObject var energyViewModel: EnergyViewModel
-    @State private var energysliderValue: Double = 0
+    @State var energyViewModel: EnergyViewModel
 
     var body: some View {
         HStack(spacing: 5) {
             ZStack {
                 if energyViewModel.editingEnergyGoal {
-                    SliderView(range: (useMetric ? 4184 : 1000)...(useMetric ? 20920 : 5000), gradient: EnergyTabItem().gradient, step: 100, label: useMetric ? "kJ" : "cal", sliderValue: $energysliderValue)
+                    SliderView(range: (energyViewModel.useMetric ? 4184 : 1000)...(energyViewModel.useMetric ? 20920 : 5000), gradient: EnergyTabItem().gradient, step: 100, label: energyViewModel.useMetric ? "kJ" : "cal", sliderValue: $energyViewModel.energysliderValue)
                         .onAppear {
-                            energysliderValue = energyViewModel.energyGoal
+                            energyViewModel.energysliderValue = energyViewModel.energyGoal
                         }
-                        .onChange(of: energysliderValue) {
-                            if !decreaseHaptics {
-                                UIImpactFeedbackGenerator(style: .soft).impactOccurred()
-                            }
-                            energyViewModel.proposedEnergyGoal = Int(energysliderValue)
-                        }
-
                 } else {
                     EnergyDisplay
                 }
@@ -42,11 +31,11 @@ struct EnergyTopContentView: View {
 
     private var EnergyDisplay: some View {
         VStack {
-            Gauge(value: min(energyViewModel.energyGoal, Double(energyViewModel.energyConsumedToday)), in: 0...energyViewModel.energyGoal) {
+            Gauge(value: min(energyViewModel.energyGoalObserved, Double(energyViewModel.energyConsumedTodayObserved)), in: 0...energyViewModel.energyGoalObserved) {
                 EmptyView()
             }
             .tint(EnergyTabItem().gradient)
-            .animation(.easeInOut, value: energyViewModel.energyConsumedToday)
+            .animation(.easeInOut, value: energyViewModel.energyConsumedTodayObserved)
 
             EnergyConsumptionDetails
             Spacer()
@@ -58,7 +47,7 @@ struct EnergyTopContentView: View {
     private var EnergyConsumptionDetails: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text("~\(Int(energyViewModel.energyConsumedToday)) \(useMetric ? "kJ" : "cal") Consumed")
+                Text("~\(Int(energyViewModel.energyConsumedTodayObserved)) \(energyViewModel.useMetric ? "kJ" : "cal") Consumed")
                     .bold()
                     .foregroundStyle(.fontGray)
 

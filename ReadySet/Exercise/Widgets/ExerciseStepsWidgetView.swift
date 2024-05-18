@@ -9,7 +9,7 @@ import SwiftUI
 import HealthKit
 
 struct ExerciseStepsWidgetView: View {
-    @ObservedObject var exerciseViewModel: ExerciseViewModel
+    @State var exerciseViewModel: ExerciseViewModel
 
     var body: some View {
         ZStack {

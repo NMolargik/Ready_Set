@@ -8,22 +8,45 @@
 import SwiftUI
 import HealthKit
 
-class ExerciseViewModel: ObservableObject, HKHelper {
+@Observable class ExerciseViewModel: HKHelper {
     static let shared = ExerciseViewModel()
 
-    @AppStorage("stepGoal", store: UserDefaults(suiteName: Bundle.main.groupID)) var stepGoal: Double = 1000
+    @ObservationIgnored @AppStorage("stepGoal", store: UserDefaults(suiteName: Bundle.main.groupID)) var stepGoal: Double = 1000
+    @ObservationIgnored @AppStorage("decreaseHaptics") var decreaseHaptics: Bool = false
+    @ObservationIgnored @AppStorage("stepsToday", store: UserDefaults(suiteName: Bundle.main.groupID)) var stepsToday: Int = 0
+    @ObservationIgnored @AppStorage("useMetric", store: UserDefaults(suiteName: Bundle.main.groupID)) var useMetric: Bool = false
 
-    @AppStorage("stepsToday", store: UserDefaults(suiteName: Bundle.main.groupID)) var stepsToday: Int = 0
+    var expandedSets = false
+    var editingStepGoal = false
+    var formComplete: Bool = false
+    var proposedStepGoal = 1000
+    var currentDay: Int = 1
+    var stepCountWeek: [Date: Int] = [:]
+    var healthStore = HKHealthStore()
+    var sortOrder = SortDescriptor(\Exercise.orderIndex)
+    var filteredExercises: [Exercise] = []
+    var selectedExercise: Exercise = Exercise()
+    var selectedSet: String = ""
 
-    @Published var expandedSets = false
-    @Published var editingSets = false
-    @Published var editingStepGoal = false
-    @Published var formComplete: Bool = false
-    @Published var proposedStepGoal = 1000
+    var stepSliderValue: Double = 0 {
+        didSet {
+            if !decreaseHaptics {
+                UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+            }
+            self.proposedStepGoal = Int(stepSliderValue)
+        }
+    }
 
-    @Published var currentDay: Int = 1
-    @Published var stepCountWeek: [Date: Int] = [:]
-    @Published var healthStore = HKHealthStore()
+    var editingSets = false {
+        didSet {
+            if !self.editingSets {
+                self.selectedExercise = Exercise()
+                self.selectedSet = ""
+            }
+        }
+    }
+
+    let weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     var watchConnector: WatchConnector = .shared
 
     init() {
@@ -45,6 +68,10 @@ class ExerciseViewModel: ObservableObject, HKHelper {
         self.stepGoal = Double(self.proposedStepGoal)
         self.editingStepGoal = false
         watchConnector.sendUpdateToWatch(update: ["stepGoal": stepGoal])
+    }
+
+    func disableScroll() -> Bool {
+        return !editingSets && !expandedSets
     }
 
     private func readStepCountToday() {

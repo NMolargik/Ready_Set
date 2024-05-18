@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ReadySetEnergyWidgetView: View {
     @Environment(\.widgetFamily) var widgetFamily
-    @ObservedObject var energy: EnergyViewModel = .shared
+    @State var energy: EnergyViewModel = .shared
 
     var entry: EnergyWidgetProvider.Entry
 

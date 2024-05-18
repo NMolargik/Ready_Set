@@ -10,7 +10,7 @@ import WidgetKit
 
 struct ReadySetWaterWidgetView: View {
     @Environment(\.widgetFamily) var widgetFamily
-    @ObservedObject var water: WaterViewModel = .shared
+    @State var water: WaterViewModel = .shared
 
     var entry: WaterWidgetProvider.Entry
 

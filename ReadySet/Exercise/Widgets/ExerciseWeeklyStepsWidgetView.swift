@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ExerciseWeeklyStepsWidgetView: View {
-    @ObservedObject var exerciseViewModel: ExerciseViewModel
+    @State var exerciseViewModel: ExerciseViewModel
 
     var body: some View {
         ZStack {

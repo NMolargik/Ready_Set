@@ -9,34 +9,48 @@ import SwiftUI
 import HealthKit
 import WidgetKit
 
-class EnergyViewModel: ObservableObject, HKHelper {
+@Observable class EnergyViewModel: HKHelper {
     static let shared = EnergyViewModel()
 
-    @AppStorage("useMetric", store: UserDefaults(suiteName: Bundle.main.groupID)) var useMetric: Bool = false
-
-    @AppStorage("energyGoal", store: UserDefaults(suiteName: Bundle.main.groupID)) var energyGoal: Double = 2000 {
+    @ObservationIgnored @AppStorage("useMetric", store: UserDefaults(suiteName: Bundle.main.groupID)) var useMetric: Bool = false
+    @ObservationIgnored @AppStorage("decreaseHaptics") var decreaseHaptics: Bool = false
+    @ObservationIgnored @AppStorage("energyGoal", store: UserDefaults(suiteName: Bundle.main.groupID)) var energyGoal: Double = 2000 {
         didSet {
+            self.energyGoalObserved = energyGoal
             WidgetCenter.shared.reloadTimelines(ofKind: "ReadySetEnergyWidget")
         }
     }
 
-    @AppStorage("energyConsumedToday", store: UserDefaults(suiteName: Bundle.main.groupID)) var energyConsumedToday: Int = 0 {
+    @ObservationIgnored @AppStorage("energyConsumedToday", store: UserDefaults(suiteName: Bundle.main.groupID)) var energyConsumedToday: Int = 0 {
         didSet {
+            self.energyConsumedTodayObserved = energyConsumedToday
             WidgetCenter.shared.reloadTimelines(ofKind: "ReadySetEnergyWidget")
         }
     }
 
-    @Published var proposedEnergyGoal = 0
-    @Published var editingEnergyGoal = false
-    @Published var energyConsumedWeek: [Date: Int] = [:]
-    @Published var energyBurnedToday: Int = 0
-    @Published var energyBurnedWeek: [Date: Int] = [:]
-    @Published var healthStore: HKHealthStore = HealthBaseController.shared.healthStore
+    var energyConsumedTodayObserved = 0
+    var energyGoalObserved: Double = 0
+    var proposedEnergyGoal = 0
+    var editingEnergyGoal = false
+    var energyConsumedWeek: [Date: Int] = [:]
+    var energyBurnedToday: Int = 0
+    var energyBurnedWeek: [Date: Int] = [:]
+    var healthStore: HKHealthStore = HealthBaseController.shared.healthStore
+    var energysliderValue: Double = 0 {
+        didSet {
+            if !decreaseHaptics {
+                UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+            }
+            self.proposedEnergyGoal = Int(energysliderValue)
+        }
+    }
+
     var watchConnector: WatchConnector = .shared
 
     init() {
         self.proposedEnergyGoal = Int(self.energyGoal)
         self.readInitial()
+        self.energyGoalObserved = energyGoal
     }
 
     func readInitial() {

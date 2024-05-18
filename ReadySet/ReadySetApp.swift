@@ -17,4 +17,3 @@ struct ReadySetApp: App {
         .modelContainer(for: Exercise.self)
     }
 }
-

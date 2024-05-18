@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct BottomView: View {
-    @ObservedObject var exerciseViewModel: ExerciseViewModel
-    @ObservedObject var waterViewModel: WaterViewModel
-    @ObservedObject var energyViewModel: EnergyViewModel
+    @State var exerciseViewModel: ExerciseViewModel
+    @State var waterViewModel: WaterViewModel
+    @State var energyViewModel: EnergyViewModel
     @Binding var selectedTab: any ITabItem
     @Binding var selectedDay: Int
 

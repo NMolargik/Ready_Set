@@ -9,7 +9,7 @@ import SwiftUI
 import Charts
 
 struct WaterBottomContentView: View {
-    @ObservedObject var waterViewModel: WaterViewModel
+    @State var waterViewModel: WaterViewModel
 
     var body: some View {
         VStack {

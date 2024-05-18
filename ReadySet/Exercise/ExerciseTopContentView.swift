@@ -8,10 +8,7 @@
 import SwiftUI
 
 struct ExerciseTopContentView: View {
-    @AppStorage("decreaseHaptics") var decreaseHaptics: Bool = false
-
-    @ObservedObject var exerciseViewModel: ExerciseViewModel
-    @State private var stepSliderValue: Double = 0
+    @State var exerciseViewModel: ExerciseViewModel
 
     var body: some View {
         ZStack {
@@ -38,15 +35,9 @@ struct ExerciseTopContentView: View {
     }
 
     private var stepGoalEditor: some View {
-        SliderView(range: 1000...15000, gradient: ExerciseTabItem().gradient, step: 1000, label: "steps", sliderValue: $stepSliderValue)
-            .onChange(of: stepSliderValue) {
-                if !decreaseHaptics {
-                    UIImpactFeedbackGenerator(style: .soft).impactOccurred()
-                }
-                exerciseViewModel.proposedStepGoal = Int(stepSliderValue)
-            }
+        SliderView(range: 1000...15000, gradient: ExerciseTabItem().gradient, step: 1000, label: "steps", sliderValue: $exerciseViewModel.stepSliderValue)
             .onAppear {
-                stepSliderValue = exerciseViewModel.stepGoal
+                exerciseViewModel.stepSliderValue = exerciseViewModel.stepGoal
             }
     }
 

@@ -9,9 +9,7 @@ import SwiftUI
 import Charts
 
 struct WaterChartView: View {
-    @AppStorage("useMetric", store: UserDefaults(suiteName: Bundle.main.groupID)) var useMetric: Bool = false
-
-    @ObservedObject var waterViewModel: WaterViewModel
+    @State var waterViewModel: WaterViewModel
 
     var averageWaterConsumed: Double {
         let totalWater = waterViewModel.waterConsumedWeek.values.reduce(0, +)
@@ -20,7 +18,7 @@ struct WaterChartView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            ChartView(title: "Water Consumed", yLabel: useMetric ? "Milliliters" : "Ounces", unitLabel: useMetric ? "ml" : "oz", color: .blueEnd, showGoal: true, data: $waterViewModel.waterConsumedWeek, average: .constant(averageWaterConsumed), goal: $waterViewModel.waterGoal)
+            ChartView(title: "Water Consumed", yLabel: waterViewModel.useMetric ? "Milliliters" : "Ounces", unitLabel: waterViewModel.useMetric ? "ml" : "oz", color: .blueEnd, showGoal: true, data: $waterViewModel.waterConsumedWeek, average: .constant(averageWaterConsumed), goal: $waterViewModel.waterGoalObserved)
         }
     }
 }

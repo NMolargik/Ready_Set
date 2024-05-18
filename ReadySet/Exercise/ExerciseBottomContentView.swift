@@ -10,51 +10,102 @@ import SwiftData
 
 struct ExerciseBottomContentView: View {
     @Query(sort: [SortDescriptor(\Exercise.orderIndex)]) var exercises: [Exercise]
-
-    @ObservedObject var exerciseViewModel: ExerciseViewModel
+    @Environment(\.modelContext) var modelContext
+    @State var exerciseViewModel: ExerciseViewModel
     @Binding var selectedDay: Int
-    @State private var sortOrder = SortDescriptor(\Exercise.orderIndex)
-    @State var filteredExercises: [Exercise] = []
-
-    private let weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 
     var body: some View {
         ZStack {
-            TabView(selection: $selectedDay) {
-                ForEach(weekDays.indices, id: \.self) { index in
-                    @State var exercises = exercises.filter({$0.weekday == selectedDay})
+            @State var exercises = exercises.filter({$0.weekday == selectedDay})
 
-                    VStack(spacing: 0) {
-                        HStack {
-                            Text(weekDays[selectedDay])
-                                .bold()
-                                .font(.largeTitle)
-                                .foregroundStyle(.baseInvert)
+            VStack(spacing: 0) {
+                HStack {
+                    Text(exerciseViewModel.weekDays[selectedDay])
+                        .bold()
+                        .font(.largeTitle)
+                        .foregroundStyle(.baseInvert)
 
-                            Spacer()
-                        }
-                        .padding(.leading, 15)
-                        .padding(.top, 10)
+                    Spacer()
 
-                        ExercisePlanDayView(exercises: $exercises, isEditing: $exerciseViewModel.editingSets, isExpanded: $exerciseViewModel.expandedSets, selectedDay: selectedDay)
-                            .tag(index)
+                    if exerciseViewModel.editingSets && exercises.count > 0 {
+                        Button(action: {
+                            withAnimation {
+                                for exercise in exercises.filter({$0.weekday == selectedDay}) {
+                                    modelContext.delete(exercise: exercise)
+                                }
+                            }
+                        }, label: {
+                            Text("Clear All")
+                                .foregroundStyle(.red)
+                                .font(.body)
+                                .padding(.vertical, 2)
+                                .padding(.horizontal, 5)
+                                .background {
+                                    Rectangle()
+                                        .cornerRadius(10)
+                                        .foregroundStyle(.baseAccent)
+                                        .shadow(radius: 3)
+                                }
+                        })
                     }
                 }
+                .padding(.horizontal, 15)
+                .padding(.top, 10)
+
+                ExercisePlanDayView(exerciseViewModel: exerciseViewModel, exercises: $exercises, selectedDay: selectedDay)
             }
-            .tabViewStyle(.page(indexDisplayMode: .never))
 
             VStack {
                 Spacer()
 
-                HStack(spacing: 2) {
-                    ForEach(weekDays.indices, id: \.self) { index in
-                        Circle()
-                            .frame(width: selectedDay == index ? 15 : 8)
-                            .foregroundStyle(selectedDay == index ? .green : .fontGray)
-                            .padding(.horizontal, 1)
-                            .animation(.bouncy, value: selectedDay)
-                            .zIndex(selectedDay == index ? 2 : 1)
-                            .transition(.opacity)
+                HStack(spacing: 8) {
+                    Button(action: {
+                        UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
+                        withAnimation {
+                            selectedDay -= 1
+                        }
+                    }, label: {
+                        Image(systemName: "chevron.left")
+                            .bold()
+                            .foregroundStyle(.fontGray)
+                    })
+                    .buttonStyle(.plain)
+                    .disabled(selectedDay == 0)
+                    .padding(.vertical, 2)
+                    .padding(.horizontal, 10)
+                    .background {
+                        Rectangle()
+                            .cornerRadius(10)
+                            .foregroundStyle(.base)
+                            .shadow(radius: 3)
+                    }
+                    .padding(.leading, 10)
+
+                    Text(exerciseViewModel.weekDays[selectedDay].prefix(3))
+                        .bold()
+                        .font(.footnote)
+                        .foregroundStyle(.fontGray)
+                        .frame(width: 30)
+
+                    Button(action: {
+                        UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
+                        withAnimation {
+                            selectedDay += 1
+                        }
+                    }, label: {
+                        Image(systemName: "chevron.right")
+                            .bold()
+                            .foregroundStyle(.fontGray)
+                    })
+                    .buttonStyle(.plain)
+                    .disabled(selectedDay == 6)
+                    .padding(.vertical, 2)
+                    .padding(.horizontal, 10)
+                    .background {
+                        Rectangle()
+                            .cornerRadius(10)
+                            .foregroundStyle(.base)
+                            .shadow(radius: 3)
                     }
 
                     Spacer()

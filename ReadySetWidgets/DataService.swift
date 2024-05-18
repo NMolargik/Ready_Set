@@ -12,8 +12,8 @@ import WidgetKit
 struct DataService {
     static let shared = DataService()
 
-    @ObservedObject var energy: EnergyViewModel = .shared
-    @ObservedObject var water: WaterViewModel = .shared
+    @State var energy: EnergyViewModel = .shared
+    @State var water: WaterViewModel = .shared
 
     @AppStorage("useMetric", store: UserDefaults(suiteName: Bundle.main.groupID)) var useMetric: Bool = false
 

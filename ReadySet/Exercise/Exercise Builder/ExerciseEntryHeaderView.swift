@@ -9,17 +9,13 @@ import SwiftUI
 
 struct ExerciseEntryHeaderView: View {
     @Environment(\.modelContext) var modelContext
-
+    @State var exerciseViewModel: ExerciseViewModel
     @State var exercise: Exercise
-    @Binding var isEditing: Bool
-    @Binding var selectedExercise: Exercise
-    @Binding var selectedSet: String
     @FocusState private var focusTextField
-    var keyboardShown: FocusState<Bool>.Binding
 
     var body: some View {
         HStack(spacing: 0) {
-            if isEditing {
+            if exerciseViewModel.editingSets {
                 Button(action: {
                     UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                     withAnimation {
@@ -34,12 +30,12 @@ struct ExerciseEntryHeaderView: View {
                 .shadow(radius: 5)
             }
 
-            if exercise.id == selectedExercise.id && isEditing {
-                TextField("Exercise Name", text: $selectedExercise.name)
+            if editingExerciseName() {
+                TextField("Exercise Name", text: $exerciseViewModel.selectedExercise.name)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .onChange(of: selectedExercise.name) {
+                    .onChange(of: exerciseViewModel.selectedExercise.name) {
                         withAnimation {
-                            exercise.name = selectedExercise.name
+                            exercise.name = exerciseViewModel.selectedExercise.name
                         }
                     }
                     .frame(maxWidth: 200, alignment: .leading)
@@ -58,20 +54,20 @@ struct ExerciseEntryHeaderView: View {
                     .truncationMode(.tail)
             }
 
-            if isEditing {
+            if exerciseViewModel.editingSets {
                 Button(action: {
                     UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                     withAnimation {
-                        if selectedExercise.id == exercise.id {
-                            exercise.name = selectedExercise.name == "" ? "Unnamed Exercise" : selectedExercise.name
-                            selectedExercise = Exercise()
+                        if exerciseViewModel.selectedExercise.id == exercise.id {
+                            exercise.name = exerciseViewModel.selectedExercise.name == "" ? "Unnamed Exercise" : exerciseViewModel.selectedExercise.name
+                            exerciseViewModel.selectedExercise = Exercise()
                         } else {
-                            selectedExercise = exercise
+                            exerciseViewModel.selectedExercise = exercise
                             exercise.name = ""
                         }
                     }
                 }, label: {
-                    Image(systemName: selectedExercise.id == exercise.id ? "checkmark.circle.fill" : "ellipsis.rectangle")
+                    Image(systemName: exerciseViewModel.selectedExercise.id == exercise.id ? "checkmark.circle.fill" : "ellipsis.rectangle")
                         .foregroundStyle(.baseInvert)
                         .frame(width: 15, height: 15)
                 })
@@ -83,14 +79,14 @@ struct ExerciseEntryHeaderView: View {
 
             Spacer()
 
-            if isEditing {
+            if exerciseViewModel.editingSets {
                 Button(action: {
                     UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                     withAnimation {
                         let newSet = ExerciseSet(goalType: .weight, repetitionsToDo: 5, durationToDo: 10, weightToLift: 100)
                         exercise.exerciseSets.append(newSet)
                         modelContext.insert(newSet)
-                        selectedSet = newSet.id.uuidString
+                        exerciseViewModel.selectedSet = newSet.id.uuidString
                     }
                 }, label: {
                     Text("Add Set")
@@ -104,7 +100,7 @@ struct ExerciseEntryHeaderView: View {
                 .background {
                     Rectangle()
                         .cornerRadius(5)
-                        .foregroundStyle(EnergyTabItem().gradient)
+                        .foregroundStyle(.orangeStart)
                         .shadow(radius: 5)
                 }
                 .padding(.trailing, 5)
@@ -112,5 +108,9 @@ struct ExerciseEntryHeaderView: View {
         }
         .transition(.move(edge: .leading))
         .padding(.leading, 5)
+    }
+
+    func editingExerciseName() -> Bool {
+        return (exercise.id == exerciseViewModel.selectedExercise.id && exerciseViewModel.editingSets)
     }
 }

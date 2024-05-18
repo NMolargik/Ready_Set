@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EnergyBottomContentView: View {
-    @ObservedObject var energyViewModel: EnergyViewModel
+    @State var energyViewModel: EnergyViewModel
     var body: some View {
         VStack {
             EnergyChartView(energyViewModel: energyViewModel)

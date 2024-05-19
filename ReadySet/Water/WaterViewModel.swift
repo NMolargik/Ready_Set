@@ -52,13 +52,14 @@ class WaterViewModel: ObservableObject, HKHelper {
                 }
             }
         }
+        WidgetCenter.shared.reloadAllTimelines()
     }
 
     func addSomeWater() {
         self.addWater(waterToAdd: useMetric ? 240 : 8)
     }
 
-    private func readWaterConsumedToday() {
+    func readWaterConsumedToday() {
         let unit = self.useMetric ? HKUnit.literUnit(with: .milli) : HKUnit.fluidOunceUS()
         hkQuery(type: waterConsumed, unit: unit, failed: "Failed to read water gallons today") { amount in
             DispatchQueue.main.async {
@@ -98,6 +99,7 @@ class WaterViewModel: ObservableObject, HKHelper {
             self.readWaterConsumedToday()
             completion()
         })
+        WidgetCenter.shared.reloadAllTimelines()
     }
 
     func saveWaterGoal() {

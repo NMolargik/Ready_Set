@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct EnergyAdditionWidgetView: View {
     @AppStorage("useMetric", store: UserDefaults(suiteName: Bundle.main.groupID)) var useMetric: Bool = false
@@ -95,6 +96,7 @@ struct EnergyAdditionWidgetView: View {
                                         withAnimation {
                                             let energyValue = Double(mapSliderValue(value: energyToAdd))
                                             addEnergy(energyValue)
+                                            WidgetCenter.shared.reloadAllTimelines()
                                         }
                                     }
                                     withAnimation(.bouncy) {

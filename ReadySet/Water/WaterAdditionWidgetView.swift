@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct WaterAdditionWidgetView: View {
     @AppStorage("useMetric", store: UserDefaults(suiteName: Bundle.main.groupID)) var useMetric: Bool = false
@@ -91,6 +92,7 @@ struct WaterAdditionWidgetView: View {
                                         withAnimation {
                                             let waterValue = Double(mapSliderValue(value: value))
                                             addWater(waterValue)
+                                            WidgetCenter.shared.reloadAllTimelines()
                                         }
                                     }
 

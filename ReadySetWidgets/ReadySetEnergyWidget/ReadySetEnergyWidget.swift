@@ -16,6 +16,9 @@ struct ReadySetEnergyWidget: Widget {
         StaticConfiguration(kind: kind, provider: energyWidgetProvider) { entry in
             ReadySetEnergyWidgetView(entry: entry)
                 .containerBackground(EnergyTabItem().gradient, for: .widget)
+                .onAppear {
+                    energyWidgetProvider.energy.readEnergyConsumedToday()
+                }
         }
         .supportedFamilies([.systemSmall])
         .configurationDisplayName("Ready, Set, Energy")

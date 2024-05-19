@@ -16,7 +16,9 @@ struct ReadySetWaterWidget: Widget {
         StaticConfiguration(kind: kind, provider: waterWidgetProvider) { entry in
             ReadySetWaterWidgetView(entry: entry)
                 .containerBackground(WaterTabItem().gradient, for: .widget)
-
+                .onAppear {
+                    waterWidgetProvider.water.readWaterConsumedToday()
+                }
         }
         .supportedFamilies([.systemSmall])
         .configurationDisplayName("Ready, Set, Water")

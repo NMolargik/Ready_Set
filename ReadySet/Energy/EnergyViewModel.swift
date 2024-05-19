@@ -58,13 +58,15 @@ class EnergyViewModel: ObservableObject, HKHelper {
                 }
             }
         }
+        WidgetCenter.shared.reloadAllTimelines()
     }
 
     func consumeSomeEnergy() {
         self.addEnergy(energy: useMetric ? 800 : 200)
+        WidgetCenter.shared.reloadAllTimelines()
     }
 
-    private func readEnergyConsumedToday() {
+    func readEnergyConsumedToday() {
         let unit = self.useMetric ? HKUnit.jouleUnit(with: .kilo) : HKUnit.kilocalorie()
         hkQuery(type: energyConsumed, unit: unit, failed: "Failed to read energy consumed today") { amount in
             DispatchQueue.main.async {
@@ -72,7 +74,6 @@ class EnergyViewModel: ObservableObject, HKHelper {
                 self.watchConnector.sendUpdateToWatch(update: ["energyBalance": amount])
             }
         }
-        WidgetCenter.shared.reloadTimelines(ofKind: "ReadySetEnergyWidget")
     }
 
     private func readEnergyConsumedWeek() {

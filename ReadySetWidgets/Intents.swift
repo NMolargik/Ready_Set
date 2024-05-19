@@ -18,6 +18,7 @@ struct WaterIntent: AppIntent {
         let value = water.useMetric ? 240 : 8
         water.addWater(waterToAdd: Double(value) as Double)
 
+        water.readWaterConsumedToday()
 
         return .result(value: water.waterConsumedToday)
     }
@@ -33,6 +34,8 @@ struct EnergyIntent: AppIntent {
 
         let value = energy.useMetric ? 800 : 200
         energy.addEnergy(energy: Double(value))
+        
+        energy.readEnergyConsumedToday()
 
         return .result(value: energy.energyConsumedToday)
     }

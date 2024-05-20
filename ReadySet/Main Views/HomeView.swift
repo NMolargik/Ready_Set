@@ -11,7 +11,7 @@ import HealthKit
 struct HomeView: View {
     @Environment(\.scenePhase) var scenePhase
 
-    @StateObject private var homeViewModel = HomeViewModel()
+    @StateObject var homeViewModel: HomeViewModel = .shared
     @StateObject var exerciseViewModel: ExerciseViewModel = .shared
     @StateObject var waterViewModel: WaterViewModel = .shared
     @StateObject var energyViewModel: EnergyViewModel = .shared

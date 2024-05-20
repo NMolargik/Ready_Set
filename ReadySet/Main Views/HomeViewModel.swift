@@ -9,6 +9,8 @@ import SwiftUI
 import HealthKit
 
 class HomeViewModel: ObservableObject {
+    static let shared = HomeViewModel()
+    
     @AppStorage("lastUseDate", store: UserDefaults(suiteName: Bundle.main.groupID)) var lastUseDate: String = "2024-04-19"
     @AppStorage("appState", store: UserDefaults(suiteName: Bundle.main.groupID)) var appState: String = "background"
     @AppStorage("useMetric", store: UserDefaults(suiteName: Bundle.main.groupID)) var useMetric: Bool = false
@@ -179,7 +181,33 @@ class HomeViewModel: ObservableObject {
     }
 
     func handleOpenURL(url: URL) {
-        let summonedTab = url.host
-        selectedTab = TabItemType.allItems.first(where: { $0.text == summonedTab }) ?? WaterTabItem()
+        print("Handling URL: \(url.absoluteString)")
+        switch url.host {
+        case "exercise":
+            print("Navigating to Exercise tab")
+            selectedTab = ExerciseTabItem()
+        case "water":
+            print("Navigating to Water tab")
+            selectedTab = WaterTabItem()
+        case "energy":
+            print("Navigating to Energy tab")
+            selectedTab = EnergyTabItem()
+        default:
+            print("Unknown URL: \(url.absoluteString)")
+            break
+        }
     }
+    
+    func handleShortcutItem(_ shortcutItem: UIApplicationShortcutItem) {
+            switch shortcutItem.type {
+            case "nickmolargik.ReadySet.exercise":
+                selectedTab = ExerciseTabItem()
+            case "nickmolargik.ReadySet.water":
+                selectedTab = WaterTabItem()
+            case "nickmolargik.ReadySet.energy":
+                selectedTab = EnergyTabItem()
+            default:
+                selectedTab = ExerciseTabItem()
+            }
+        }
 }

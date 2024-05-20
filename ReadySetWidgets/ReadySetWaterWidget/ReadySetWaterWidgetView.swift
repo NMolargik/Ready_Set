@@ -16,7 +16,7 @@ struct ReadySetWaterWidgetView: View {
 
     var body: some View {
         ZStack {
-            Link(destination: URL(string: "readySet://Water")!) {
+            Link(destination: URL(string: "readySet://water")!) {
                 GaugeView(max: waterViewModel.$waterGoal, level: waterViewModel.$waterConsumedToday, isUpdating: .constant(false), color: WaterTabItem().color, unit: waterViewModel.useMetric ? "mL" : "oz")
                     .frame(width: 150, height: 120)
             }
@@ -41,6 +41,6 @@ struct ReadySetWaterWidgetView: View {
                 .padding(.bottom, -5)
             }
         }
-        .widgetURL(URL(string: "readySet://Water"))
+        .widgetURL(URL(string: "readySet://water"))
     }
 }

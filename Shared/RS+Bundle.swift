@@ -8,7 +8,7 @@
 import Foundation
 
 extension Bundle {
-    var groupID: String {
-        return Bundle.main.object(forInfoDictionaryKey: "GroupID") as! String
+    var groupID: String? {
+        return Bundle.main.object(forInfoDictionaryKey: "GroupID") as? String
     }
 }

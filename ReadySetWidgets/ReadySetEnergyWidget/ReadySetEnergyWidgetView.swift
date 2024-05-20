@@ -15,7 +15,7 @@ struct ReadySetEnergyWidgetView: View {
 
     var body: some View {
         ZStack {
-            Link(destination: URL(string: "readySet://Energy")!) {
+            Link(destination: URL(string: "readySet://energy")!) {
                 GaugeView(max: energyViewModel.$energyGoal, level: energyViewModel.$energyConsumedToday, isUpdating: .constant(false), color: EnergyTabItem().color, unit: energyViewModel.useMetric ? "kJ" : "cal")
                     .frame(width: 150, height: 120)
             }
@@ -40,6 +40,6 @@ struct ReadySetEnergyWidgetView: View {
                 .padding(.bottom, -5)
             }
         }
-        .widgetURL(URL(string: "readySet://Energy"))
+        .widgetURL(URL(string: "readySet://energy"))
     }
 }

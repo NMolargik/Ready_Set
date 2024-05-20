@@ -14,19 +14,16 @@ class WatchConnector: NSObject, WCSessionDelegate, ObservableObject {
     @AppStorage("appState", store: UserDefaults(suiteName: Bundle.main.groupID)) var appState: String = "background"
     @AppStorage("useMetric", store: UserDefaults(suiteName: Bundle.main.groupID)) var useMetric: Bool = false
     @AppStorage("stepGoal", store: UserDefaults(suiteName: Bundle.main.groupID)) var stepGoal: Double = 1000
+    @AppStorage("stepsToday", store: UserDefaults(suiteName: Bundle.main.groupID)) var stepsToday: Int = 0
     @AppStorage("waterGoal", store: UserDefaults(suiteName: Bundle.main.groupID)) var waterGoal: Double = 64
+    @AppStorage("waterConsumedToday", store: UserDefaults(suiteName: Bundle.main.groupID)) var waterConsumedToday: Int = 0
     @AppStorage("energyGoal", store: UserDefaults(suiteName: Bundle.main.groupID)) var energyGoal: Double = 2000
+    @AppStorage("energyConsumedToday", store: UserDefaults(suiteName: Bundle.main.groupID)) var energyConsumedToday: Int = 0
 
-    var requestStepBalance: (() -> Int)
-    var requestWaterConsumptionBalance: (() -> Int)
-    var requestEnergyConsumptionBalance: (() -> Int)
     var addConsumption: ((EntryType, Int) -> Void)
     var session: WCSession
 
     init(session: WCSession = .default) {
-        self.requestStepBalance = { 0 }
-        self.requestWaterConsumptionBalance = { 0 }
-        self.requestEnergyConsumptionBalance = { 0 }
         self.addConsumption = { _, _ in }
         self.session = session
         super.init()
@@ -59,28 +56,26 @@ class WatchConnector: NSObject, WCSessionDelegate, ObservableObject {
         }
 
         if let _ = message["giveStepBalance"] as? Bool {
-            response["stepBalance"] = self.requestStepBalance()
+            response["stepBalance"] = self.stepsToday
         }
 
         if let _ = message["giveWaterBalance"] as? Bool {
-            response["waterBalance"] = self.requestWaterConsumptionBalance()
+            response["waterBalance"] = self.waterConsumedToday
         }
 
         if let _ = message["giveEnergyBalance"] as? Bool {
-            response["energyBalance"] = self.requestEnergyConsumptionBalance()
+            response["energyBalance"] = self.energyConsumedToday
         }
 
         if let waterIntake = message["newWaterIntake"] as? Int {
+            let newBalance = self.waterConsumedToday + waterIntake
             receiveNewWaterIntakeFromWatch(intake: waterIntake)
-
-            let newBalance = self.requestWaterConsumptionBalance
             response["waterBalance"] = newBalance
         }
 
         if let energyIntake = message["newEnergyIntake"] as? Int {
+            let newBalance = self.energyConsumedToday + energyIntake
             receiveNewEnergyIntakeFromWatch(intake: energyIntake)
-
-            let newBalance = self.requestEnergyConsumptionBalance
             response["energyBalance"] = newBalance
         }
 

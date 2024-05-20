@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ExerciseHealthWidgetView: View {
     var body: some View {
-
         Button(action: {
             UIImpactFeedbackGenerator(style: .medium).impactOccurred()
 

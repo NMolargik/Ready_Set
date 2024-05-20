@@ -10,8 +10,9 @@ import SwiftData
 
 struct InitialExerciseBuilderView: View {
     @AppStorage("appState", store: UserDefaults(suiteName: Bundle.main.groupID)) var appState: String = "initialExerciseBuilder"
-
     @Query(sort: [SortDescriptor(\Exercise.orderIndex)]) var exercises: [Exercise]
+    @Environment(\.modelContext) var modelContext
+    @ObservedObject var exerciseViewModel: ExerciseViewModel = .shared
 
     @Binding var onboardingProgress: Float
     @Binding var onboardingGradient: LinearGradient
@@ -20,7 +21,9 @@ struct InitialExerciseBuilderView: View {
     @State private var showMoreText = false
     @State private var selectedDay = 1
 
-    let weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    var filteredExercises: [Exercise] {
+            exercises.filter {$0.weekday == selectedDay}
+        }
 
     var body: some View {
         ZStack {
@@ -29,7 +32,7 @@ struct InitialExerciseBuilderView: View {
                 if showText {
                     Spacer()
 
-                    Text("Swipe between days to enter exercises and their sets, or skip until later")
+                    Text("Now add exercises and sets to each day. Ready, Set helps you track your weekly weight, repetition, and duration on sets.")
                         .multilineTextAlignment(.center)
                         .font(.body)
                         .foregroundStyle(.fontGray)
@@ -40,42 +43,126 @@ struct InitialExerciseBuilderView: View {
                 ZStack {
                     Rectangle()
                         .cornerRadius(35)
-                        .foregroundStyle(.ultraThinMaterial)
+                        .foregroundStyle(.thickMaterial)
                         .shadow(radius: 1)
 
                     VStack {
-                        TabView(selection: $selectedDay) {
-                            ForEach(weekDays.indices, id: \.self) { index in
-                                @State var exercises = exercises.filter({$0.weekday == index})
+                        VStack(spacing: 0) {
+                            HStack {
+                                Text(exerciseViewModel.weekDays[selectedDay])
+                                    .bold()
+                                    .font(.largeTitle)
+                                    .foregroundStyle(.baseInvert)
 
-                                VStack(spacing: 0) {
-                                    HStack {
-                                        Text(weekDays[selectedDay])
-                                            .bold()
-                                            .font(.largeTitle)
-                                            .foregroundStyle(.baseInvert)
+                                Spacer()
 
-                                        Spacer()
-                                    }
-                                    .padding(.leading, 15)
-                                    .padding(.top, 10)
-
-                                    ExercisePlanDayView(exercises: $exercises, isEditing: .constant(true), isExpanded: .constant(false), selectedDay: selectedDay)
-                                        .tag(index)
+                                if exerciseViewModel.editingSets && exercises.count > 0 {
+                                    Button(action: {
+                                        withAnimation {
+                                            for exercise in filteredExercises {
+                                                modelContext.delete(exercise: exercise)
+                                            }
+                                        }
+                                    }, label: {
+                                        Text("Delete All")
+                                            .foregroundStyle(.red)
+                                            .font(.body)
+                                            .padding(.vertical, 2)
+                                            .padding(.horizontal, 5)
+                                            .background {
+                                                Rectangle()
+                                                    .cornerRadius(10)
+                                                    .foregroundStyle(.baseAccent)
+                                                    .shadow(radius: 3)
+                                            }
+                                    })
                                 }
                             }
+                            .padding(.horizontal, 15)
+                            .padding(.top, 10)
+
+                            ExercisePlanDayView(exerciseViewModel: exerciseViewModel, exercises: .constant(filteredExercises), selectedDay: selectedDay, hideNudge: true)
                         }
-                        .tabViewStyle(.page(indexDisplayMode: .never))
-                        .padding(.horizontal)
-                        .mask {
+                    }
+
+                    VStack {
+                        Spacer()
+
+                        HStack(spacing: 8) {
+                            Spacer()
+
+                            Button(action: {
+                                UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
+                                withAnimation {
+                                    selectedDay -= 1
+                                }
+                            }, label: {
+                                Image(systemName: "chevron.left")
+                                    .bold()
+                                    .foregroundStyle(.fontGray)
+                            })
+                            .buttonStyle(.plain)
+                            .disabled(selectedDay == 0)
+                            .padding(.vertical, 4)
+                            .padding(.horizontal, 10)
+                            .background {
+                                Rectangle()
+                                    .cornerRadius(10)
+                                    .foregroundStyle(.base)
+                                    .shadow(radius: 3)
+                            }
+
+                            Text(exerciseViewModel.weekDays[selectedDay].prefix(3))
+                                .bold()
+                                .font(.footnote)
+                                .foregroundStyle(.fontGray)
+                                .frame(width: 30)
+
+                            Button(action: {
+                                UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
+                                withAnimation {
+                                    selectedDay += 1
+                                }
+                            }, label: {
+                                Image(systemName: "chevron.right")
+                                    .bold()
+                                    .foregroundStyle(.fontGray)
+                            })
+                            .buttonStyle(.plain)
+                            .disabled(selectedDay == 6)
+                            .padding(.vertical, 4)
+                            .padding(.horizontal, 10)
+                            .background {
+                                Rectangle()
+                                    .cornerRadius(10)
+                                    .foregroundStyle(.base)
+                                    .shadow(radius: 3)
+                            }
+
+                            Spacer()
+                        }
+                        .padding(.vertical, 2)
+                        .drawingGroup()
+                        .padding(.horizontal, 30)
+                        .onAppear {
+                            withAnimation {
+                                exerciseViewModel.getCurrentWeekday()
+                                selectedDay = exerciseViewModel.currentDay - 1
+                            }
+                        }
+                        .background {
                             Rectangle()
-                                .cornerRadius(35)
+                                .foregroundStyle(.baseAccent)
+                                .shadow(radius: 5, x: 0, y: -10)
                         }
                     }
                 }
-                .padding(.horizontal, 8)
-
-                Spacer()
+                .geometryGroup()
+                .mask {
+                    Rectangle()
+                        .cornerRadius(35)
+                }
+                .padding(.horizontal, 15)
 
                 Button(action: {
                     UIImpactFeedbackGenerator(style: .medium).impactOccurred()
@@ -100,17 +187,22 @@ struct InitialExerciseBuilderView: View {
                         .foregroundStyle(.blue)
                         .shadow(radius: 5)
                 }
-                .padding(.vertical, 30)
+                .padding(.bottom, 30)
+                .padding(.top, 20)
                 .buttonStyle(.plain)
             }
             .padding(.top, 60)
         }
         .onAppear {
-            getCurrentWeekday()
-
-            animateText()
+            withAnimation {
+                getCurrentWeekday()
+                exerciseViewModel.editingSets = true
+                animateText()
+            }
         }
-
+        .onDisappear {
+            exerciseViewModel.editingSets = false
+        }
     }
 
     private func getCurrentWeekday() {
@@ -136,5 +228,12 @@ struct InitialExerciseBuilderView: View {
 }
 
 #Preview {
-    InitialExerciseBuilderView(onboardingProgress: .constant(0.75), onboardingGradient: .constant(LinearGradient(colors: [.greenStart, .blueEnd, .orangeStart], startPoint: .leading, endPoint: .trailing)))
+    let config = ModelConfiguration(isStoredInMemoryOnly: true)
+    let container = try! ModelContainer(for: Exercise.self, configurations: config)
+    let mockExercise = Exercise(weekday: 1, orderIndex: 1, name: "Sample Exercise")
+    container.mainContext.insert(mockExercise)
+
+    return InitialExerciseBuilderView(onboardingProgress: .constant(50), onboardingGradient: .constant(LinearGradient(colors: [.blue, .red], startPoint: .leading, endPoint: .trailing)))
+        .environment(\.modelContext, container.mainContext)
+        .ignoresSafeArea()
 }

@@ -17,9 +17,3 @@ struct ReadySetApp: App {
         .modelContainer(for: Exercise.self)
     }
 }
-
-extension Bundle {
-    var bundleVersion: String {
-        return self.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
-    }
-}

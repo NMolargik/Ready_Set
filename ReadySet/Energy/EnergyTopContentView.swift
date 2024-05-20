@@ -8,27 +8,16 @@
 import SwiftUI
 
 struct EnergyTopContentView: View {
-    @AppStorage("useMetric", store: UserDefaults(suiteName: Bundle.main.groupID)) var useMetric: Bool = false
-    @AppStorage("decreaseHaptics") var decreaseHaptics: Bool = false
-
     @ObservedObject var energyViewModel: EnergyViewModel
-    @State private var energysliderValue: Double = 0
 
     var body: some View {
         HStack(spacing: 5) {
             ZStack {
                 if energyViewModel.editingEnergyGoal {
-                    SliderView(range: (useMetric ? 4184 : 1000)...(useMetric ? 20920 : 5000), gradient: EnergyTabItem().gradient, step: 100, label: useMetric ? "kJ" : "cal", sliderValue: $energysliderValue)
+                    SliderView(range: (energyViewModel.useMetric ? 4184 : 1000)...(energyViewModel.useMetric ? 20920 : 5000), gradient: EnergyTabItem().gradient, step: 100, label: energyViewModel.useMetric ? "kJ" : "cal", sliderValue: $energyViewModel.energySliderValue)
                         .onAppear {
-                            energysliderValue = energyViewModel.energyGoal
+                            energyViewModel.energySliderValue = energyViewModel.energyGoal
                         }
-                        .onChange(of: energysliderValue) {
-                            if !decreaseHaptics {
-                                UIImpactFeedbackGenerator(style: .soft).impactOccurred()
-                            }
-                            energyViewModel.proposedEnergyGoal = Int(energysliderValue)
-                        }
-
                 } else {
                     EnergyDisplay
                 }
@@ -58,7 +47,7 @@ struct EnergyTopContentView: View {
     private var EnergyConsumptionDetails: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text("~\(Int(energyViewModel.energyConsumedToday)) \(useMetric ? "kJ" : "cal") Consumed")
+                Text("~\(Int(energyViewModel.energyConsumedToday)) \(energyViewModel.useMetric ? "kJ" : "cal") Consumed")
                     .bold()
                     .foregroundStyle(.fontGray)
 

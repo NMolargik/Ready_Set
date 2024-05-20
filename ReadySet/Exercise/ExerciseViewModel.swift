@@ -12,18 +12,41 @@ class ExerciseViewModel: ObservableObject, HKHelper {
     static let shared = ExerciseViewModel()
 
     @AppStorage("stepGoal", store: UserDefaults(suiteName: Bundle.main.groupID)) var stepGoal: Double = 1000
-
+    @AppStorage("decreaseHaptics") var decreaseHaptics: Bool = false
     @AppStorage("stepsToday", store: UserDefaults(suiteName: Bundle.main.groupID)) var stepsToday: Int = 0
+    @AppStorage("useMetric", store: UserDefaults(suiteName: Bundle.main.groupID)) var useMetric: Bool = false
 
     @Published var expandedSets = false
-    @Published var editingSets = false
     @Published var editingStepGoal = false
     @Published var formComplete: Bool = false
     @Published var proposedStepGoal = 1000
-
     @Published var currentDay: Int = 1
     @Published var stepCountWeek: [Date: Int] = [:]
     @Published var healthStore = HKHealthStore()
+    @Published var sortOrder = SortDescriptor(\Exercise.orderIndex)
+    @Published var filteredExercises: [Exercise] = []
+    @Published var selectedExercise: Exercise = Exercise()
+    @Published var selectedSet: String = ""
+
+    @Published var stepSliderValue: Double = 0 {
+        didSet {
+            if !decreaseHaptics {
+                UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+            }
+            self.proposedStepGoal = Int(stepSliderValue)
+        }
+    }
+
+    @Published var editingSets = false {
+        didSet {
+            if !self.editingSets {
+                self.selectedExercise = Exercise()
+                self.selectedSet = ""
+            }
+        }
+    }
+
+    let weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     var watchConnector: WatchConnector = .shared
 
     init() {
@@ -45,6 +68,10 @@ class ExerciseViewModel: ObservableObject, HKHelper {
         self.stepGoal = Double(self.proposedStepGoal)
         self.editingStepGoal = false
         watchConnector.sendUpdateToWatch(update: ["stepGoal": stepGoal])
+    }
+
+    func disableScroll() -> Bool {
+        return !editingSets && !expandedSets
     }
 
     private func readStepCountToday() {

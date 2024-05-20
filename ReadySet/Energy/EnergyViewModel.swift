@@ -13,13 +13,12 @@ class EnergyViewModel: ObservableObject, HKHelper {
     static let shared = EnergyViewModel()
 
     @AppStorage("useMetric", store: UserDefaults(suiteName: Bundle.main.groupID)) var useMetric: Bool = false
-
+    @AppStorage("decreaseHaptics") var decreaseHaptics: Bool = false
     @AppStorage("energyGoal", store: UserDefaults(suiteName: Bundle.main.groupID)) var energyGoal: Double = 2000 {
         didSet {
             WidgetCenter.shared.reloadTimelines(ofKind: "ReadySetEnergyWidget")
         }
     }
-
     @AppStorage("energyConsumedToday", store: UserDefaults(suiteName: Bundle.main.groupID)) var energyConsumedToday: Int = 0 {
         didSet {
             WidgetCenter.shared.reloadTimelines(ofKind: "ReadySetEnergyWidget")
@@ -32,6 +31,15 @@ class EnergyViewModel: ObservableObject, HKHelper {
     @Published var energyBurnedToday: Int = 0
     @Published var energyBurnedWeek: [Date: Int] = [:]
     @Published var healthStore: HKHealthStore = HealthBaseController.shared.healthStore
+    @Published var energySliderValue: Double = 8 {
+        didSet {
+            if !decreaseHaptics {
+                UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+            }
+            self.proposedEnergyGoal = Int(energySliderValue)
+        }
+    }
+
     var watchConnector: WatchConnector = .shared
 
     init() {

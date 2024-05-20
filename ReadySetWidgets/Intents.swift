@@ -34,7 +34,7 @@ struct EnergyIntent: AppIntent {
 
         let value = energy.useMetric ? 800 : 200
         energy.addEnergy(energy: Double(value))
-        
+
         energy.readEnergyConsumedToday()
 
         return .result(value: energy.energyConsumedToday)

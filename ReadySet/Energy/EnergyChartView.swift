@@ -9,7 +9,6 @@ import SwiftUI
 import Charts
 
 struct EnergyChartView: View {
-    @AppStorage("useMetric", store: UserDefaults(suiteName: Bundle.main.groupID)) var useMetric: Bool = false
     @ObservedObject var energyViewModel: EnergyViewModel
 
     var averageEnergyConsumed: Double {
@@ -24,9 +23,9 @@ struct EnergyChartView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            ChartView(title: "Energy Consumed", yLabel: useMetric ? "KiloJoules" : "Calories", unitLabel: useMetric ? "kJ" : "cal", color: .orange, showGoal: true, data: $energyViewModel.energyConsumedWeek, average: .constant(averageEnergyConsumed), goal: $energyViewModel.energyGoal)
+            ChartView(title: "Energy Consumed", yLabel: energyViewModel.useMetric ? "KiloJoules" : "Calories", unitLabel: energyViewModel.useMetric ? "kJ" : "cal", color: .orange, showGoal: true, data: $energyViewModel.energyConsumedWeek, average: .constant(averageEnergyConsumed), goal: $energyViewModel.energyGoal)
 
-            ChartView(title: "Energy Burned", yLabel: useMetric ? "KiloJoules" : "Calories", unitLabel: useMetric ? "kJ" : "cal", color: .red, showGoal: false, data: $energyViewModel.energyBurnedWeek, average: .constant(averageEnergyBurned), goal: $energyViewModel.energyGoal)
+            ChartView(title: "Energy Burned", yLabel: energyViewModel.useMetric ? "KiloJoules" : "Calories", unitLabel: energyViewModel.useMetric ? "kJ" : "cal", color: .red, showGoal: false, data: $energyViewModel.energyBurnedWeek, average: .constant(averageEnergyBurned), goal: $energyViewModel.energyGoal)
         }
     }
 }

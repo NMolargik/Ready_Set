@@ -13,14 +13,14 @@ import WidgetKit
 class WaterViewModel: ObservableObject, HKHelper {
     static let shared = WaterViewModel()
 
+    @AppStorage("disableWave", store: UserDefaults(suiteName: Bundle.main.groupID)) var disableWave: Bool = false
     @AppStorage("useMetric", store: UserDefaults(suiteName: Bundle.main.groupID)) var useMetric: Bool = false
-
+    @AppStorage("decreaseHaptics") var decreaseHaptics: Bool = false
     @AppStorage("waterGoal", store: UserDefaults(suiteName: Bundle.main.groupID)) var waterGoal: Double = 64 {
         didSet {
             WidgetCenter.shared.reloadTimelines(ofKind: "ReadySetWaterWidget")
         }
     }
-
     @AppStorage("waterConsumedToday", store: UserDefaults(suiteName: Bundle.main.groupID)) var waterConsumedToday: Int = 0 {
         didSet {
             WidgetCenter.shared.reloadTimelines(ofKind: "ReadySetWaterWidget")
@@ -31,6 +31,15 @@ class WaterViewModel: ObservableObject, HKHelper {
     @Published var editingWaterGoal = false
     @Published var waterConsumedWeek: [Date: Int] = [:]
     @Published var healthStore: HKHealthStore = HealthBaseController.shared.healthStore
+    @Published var waterSliderValue: Double = 8 {
+        didSet {
+            if !decreaseHaptics {
+                UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+            }
+            self.proposedWaterGoal = Int(waterSliderValue)
+        }
+    }
+
     var watchConnector: WatchConnector = .shared
 
     init() {
@@ -53,10 +62,6 @@ class WaterViewModel: ObservableObject, HKHelper {
             }
         }
         WidgetCenter.shared.reloadAllTimelines()
-    }
-
-    func addSomeWater() {
-        self.addWater(waterToAdd: useMetric ? 240 : 8)
     }
 
     func readWaterConsumedToday() {

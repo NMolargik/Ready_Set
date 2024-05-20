@@ -12,8 +12,8 @@ import WidgetKit
 struct DataService {
     static let shared = DataService()
 
-    @ObservedObject var energy: EnergyViewModel = .shared
-    @ObservedObject var water: WaterViewModel = .shared
+    @ObservedObject var energyViewModel: EnergyViewModel = .shared
+    @ObservedObject var waterViewModel: WaterViewModel = .shared
 
     @AppStorage("useMetric", store: UserDefaults(suiteName: Bundle.main.groupID)) var useMetric: Bool = false
 
@@ -42,18 +42,16 @@ struct DataService {
     }
 
     func addSomeWater() {
-        // TODO: this is problematic. this is never reflected on healthkit, and as such the main app never reflects it either
         DispatchQueue.main.async {
             let value = useMetric ? 240 : 8
-            water.addWater(waterToAdd: Double(value) as Double)
+            waterViewModel.addWater(waterToAdd: Double(value) as Double)
         }
     }
 
     func addSomeEnergy() {
-        // TODO: this is problematic. this is never reflected on healthkit, and as such the main app never reflects it either
         DispatchQueue.main.async {
             let value = useMetric ? 800 : 200
-            energy.addEnergy(energy: Double(value))
+            energyViewModel.addEnergy(energy: Double(value))
         }
     }
 

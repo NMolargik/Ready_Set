@@ -27,7 +27,6 @@
 		0EBC76F02BD1CE9A00880FFB /* ExerciseSetEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBC76EF2BD1CE9A00880FFB /* ExerciseSetEditor.swift */; };
 		EB05155E2BED9EC1005FE6F0 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB05155D2BED9EC1005FE6F0 /* DataService.swift */; };
 		EB0515712BEDC5EF005FE6F0 /* EntryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1FDC4F2BD9A0C900253855 /* EntryType.swift */; };
-		EB05157A2BF158F0005FE6F0 /* ReadySetWatch-Watch-App-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB0515792BF158F0005FE6F0 /* ReadySetWatch-Watch-App-Info.plist */; };
 		EB05157D2BF15C65005FE6F0 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB05157C2BF15C65005FE6F0 /* Bundle+Extension.swift */; };
 		EB1FDC1B2BD6FCBE00253855 /* ExerciseSetRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1FDC1A2BD6FCBE00253855 /* ExerciseSetRecordView.swift */; };
 		EB1FDC232BD7053000253855 /* ReadySetWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1FDC222BD7053000253855 /* ReadySetWatchApp.swift */; };
@@ -38,6 +37,9 @@
 		EB1FDC502BD9A0C900253855 /* EntryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1FDC4F2BD9A0C900253855 /* EntryType.swift */; };
 		EB1FDC512BD9A0DB00253855 /* EntryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1FDC4F2BD9A0C900253855 /* EntryType.swift */; };
 		EB2AC0E62BFABC4F00E0F3EC /* Intents.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2AC0E52BFABC4F00E0F3EC /* Intents.swift */; };
+		EB2AC1222BFBEDDF00E0F3EC /* ReadySetWatch-Watch-App-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB2AC1212BFBEDDF00E0F3EC /* ReadySetWatch-Watch-App-Info.plist */; };
+		EB2AC1282BFBF7CC00E0F3EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2AC1272BFBF7CC00E0F3EC /* AppDelegate.swift */; };
+		EB2AC12A2BFBF7E400E0F3EC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2AC1292BFBF7E400E0F3EC /* SceneDelegate.swift */; };
 		EB2BB03E2BDADD3800C3DA78 /* WatchConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BB03D2BDADD3800C3DA78 /* WatchConnector.swift */; };
 		EB2BB0442BDADDA000C3DA78 /* PhoneConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BB0432BDADDA000C3DA78 /* PhoneConnector.swift */; };
 		EB2BB0452BDAE00F00C3DA78 /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB2BB0402BDADD5400C3DA78 /* WatchConnectivity.framework */; };
@@ -191,7 +193,6 @@
 		0E9861692BCE971F00488D9E /* WaterChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterChartView.swift; sourceTree = "<group>"; };
 		0EBC76EF2BD1CE9A00880FFB /* ExerciseSetEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSetEditor.swift; sourceTree = "<group>"; };
 		EB05155D2BED9EC1005FE6F0 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
-		EB0515792BF158F0005FE6F0 /* ReadySetWatch-Watch-App-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ReadySetWatch-Watch-App-Info.plist"; sourceTree = "<group>"; };
 		EB05157C2BF15C65005FE6F0 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
 		EB1FDC1A2BD6FCBE00253855 /* ExerciseSetRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSetRecordView.swift; sourceTree = "<group>"; };
 		EB1FDC202BD7053000253855 /* Ready, Set, Wrist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ready, Set, Wrist.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -201,6 +202,9 @@
 		EB1FDC432BD74A7B00253855 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EB1FDC4F2BD9A0C900253855 /* EntryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryType.swift; sourceTree = "<group>"; };
 		EB2AC0E52BFABC4F00E0F3EC /* Intents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Intents.swift; sourceTree = "<group>"; };
+		EB2AC1212BFBEDDF00E0F3EC /* ReadySetWatch-Watch-App-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ReadySetWatch-Watch-App-Info.plist"; sourceTree = "<group>"; };
+		EB2AC1272BFBF7CC00E0F3EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		EB2AC1292BFBF7E400E0F3EC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		EB2BB03D2BDADD3800C3DA78 /* WatchConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnector.swift; sourceTree = "<group>"; };
 		EB2BB0402BDADD5400C3DA78 /* WatchConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchConnectivity.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS10.4.sdk/System/Library/Frameworks/WatchConnectivity.framework; sourceTree = DEVELOPER_DIR; };
 		EB2BB0432BDADDA000C3DA78 /* PhoneConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneConnector.swift; sourceTree = "<group>"; };
@@ -385,6 +389,8 @@
 				EB4D9C7E2BCF2B6D0071BA99 /* Launch Screen.storyboard */,
 				EB3AB36D2BC7957D008B6F22 /* ReadySet.entitlements */,
 				0E940A6A2BC6FE0200144477 /* ReadySetApp.swift */,
+				EB2AC1272BFBF7CC00E0F3EC /* AppDelegate.swift */,
+				EB2AC1292BFBF7E400E0F3EC /* SceneDelegate.swift */,
 				0E940A6C2BC6FE0200144477 /* MainView.swift */,
 				0E1A3E8E2BD4CEFE005CD025 /* Misc */,
 				0E7DCA5A2BC6FE8000B9403C /* Models */,
@@ -413,7 +419,7 @@
 		EB1FDC212BD7053000253855 /* ReadySetWatch Watch App */ = {
 			isa = PBXGroup;
 			children = (
-				EB0515792BF158F0005FE6F0 /* ReadySetWatch-Watch-App-Info.plist */,
+				EB2AC1212BFBEDDF00E0F3EC /* ReadySetWatch-Watch-App-Info.plist */,
 				EB2BB06B2BDB311800C3DA78 /* ReadySetWatch Watch App.entitlements */,
 				EB1FDC222BD7053000253855 /* ReadySetWatchApp.swift */,
 				EB2BB04A2BDB0DC000C3DA78 /* Misc */,
@@ -756,7 +762,6 @@
 			files = (
 				EB4D9C7F2BCF2B6D0071BA99 /* Launch Screen.storyboard in Resources */,
 				EBF9DD712BDF16EB009EA21A /* Assets.xcassets in Resources */,
-				EB05157A2BF158F0005FE6F0 /* ReadySetWatch-Watch-App-Info.plist in Resources */,
 				0E940A722BC6FE0400144477 /* Preview Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -765,6 +770,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB2AC1222BFBEDDF00E0F3EC /* ReadySetWatch-Watch-App-Info.plist in Resources */,
 				EB1FDC2A2BD7053200253855 /* Preview Assets.xcassets in Resources */,
 				EBF9DD482BDEE8C7009EA21A /* Assets.xcassets in Resources */,
 			);
@@ -793,6 +799,7 @@
 				EB4D9C602BCDABAA0071BA99 /* EnergyFitnessWidgetView.swift in Sources */,
 				EBF9DD2C2BDEAB7D009EA21A /* GoalSetView.swift in Sources */,
 				EB3AB3552BC72A46008B6F22 /* EnergyTopContentView.swift in Sources */,
+				EB2AC1282BFBF7CC00E0F3EC /* AppDelegate.swift in Sources */,
 				EB7110F72BC84B520078F796 /* HomeViewModel.swift in Sources */,
 				EB4D9C572BCC8B6B0071BA99 /* WaterViewModel.swift in Sources */,
 				0EBC76F02BD1CE9A00880FFB /* ExerciseSetEditor.swift in Sources */,
@@ -813,6 +820,7 @@
 				EB4D9C792BCEF2390071BA99 /* ChartView.swift in Sources */,
 				EB1FDC502BD9A0C900253855 /* EntryType.swift in Sources */,
 				EB7111012BC8B3C20078F796 /* WaterAdditionWidgetView.swift in Sources */,
+				EB2AC12A2BFBF7E400E0F3EC /* SceneDelegate.swift in Sources */,
 				EB4D9C522BCC80A10071BA99 /* ExercisePlanDayView.swift in Sources */,
 				EB4742BC2BD324DF009A23E4 /* ExerciseEntryHeaderView.swift in Sources */,
 				EB4D9C7D2BCF074E0071BA99 /* VerticalToggleStyle.swift in Sources */,

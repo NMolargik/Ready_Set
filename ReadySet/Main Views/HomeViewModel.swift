@@ -10,7 +10,7 @@ import HealthKit
 
 class HomeViewModel: ObservableObject {
     static let shared = HomeViewModel()
-    
+
     @AppStorage("lastUseDate", store: UserDefaults(suiteName: Bundle.main.groupID)) var lastUseDate: String = "2024-04-19"
     @AppStorage("appState", store: UserDefaults(suiteName: Bundle.main.groupID)) var appState: String = "background"
     @AppStorage("useMetric", store: UserDefaults(suiteName: Bundle.main.groupID)) var useMetric: Bool = false
@@ -197,17 +197,18 @@ class HomeViewModel: ObservableObject {
             break
         }
     }
-    
+
     func handleShortcutItem(_ shortcutItem: UIApplicationShortcutItem) {
-            switch shortcutItem.type {
-            case "nickmolargik.ReadySet.exercise":
-                selectedTab = ExerciseTabItem()
-            case "nickmolargik.ReadySet.water":
-                selectedTab = WaterTabItem()
-            case "nickmolargik.ReadySet.energy":
-                selectedTab = EnergyTabItem()
-            default:
-                selectedTab = ExerciseTabItem()
-            }
+        print(shortcutItem.type)
+        switch shortcutItem.type {
+        case "Exercise":
+            selectedTab = ExerciseTabItem()
+        case "Water":
+            selectedTab = WaterTabItem()
+        case "Energy":
+            selectedTab = EnergyTabItem()
+        default:
+            selectedTab = ExerciseTabItem()
         }
+    }
 }

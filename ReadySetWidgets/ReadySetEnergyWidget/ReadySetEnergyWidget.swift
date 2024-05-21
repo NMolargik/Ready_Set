@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ReadySetEnergyWidget: Widget {
     let kind: String = "ReadySetEnergyWidget"
-    
+
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: EnergyWidgetProvider()) { entry in
             ReadySetEnergyWidgetView(entry: entry)

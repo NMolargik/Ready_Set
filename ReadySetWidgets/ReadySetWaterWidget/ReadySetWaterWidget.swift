@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ReadySetWaterWidget: Widget {
     let kind: String = "ReadySetWaterWidget"
-    
+
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: WaterWidgetProvider()) { entry in
             ReadySetWaterWidgetView(entry: entry)

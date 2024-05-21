@@ -67,7 +67,7 @@ class EnergyViewModel: ObservableObject, HKHelper {
             }
         }
     }
-    
+
     func readEnergyConsumedToday() {
         let unit = self.useMetric ? HKUnit.jouleUnit(with: .kilo) : HKUnit.kilocalorie()
         hkQuery(type: energyConsumed, unit: unit, failed: "Failed to read energy consumed today") { amount in

@@ -56,8 +56,8 @@ struct EnergyTopContentView: View {
                     .foregroundStyle(.fontGray)
             }
             Spacer()
-            EnergyFitnessWidgetView()
-            EnergyHealthWidgetView()
+            EnergyFitnessComponentView()
+            EnergyHealthComponentView()
         }
     }
 

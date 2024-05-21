@@ -1,5 +1,5 @@
 //
-//  ExerciseHealthWidgetView.swift
+//  ExerciseHealthComponentView.swift
 //  ReadySet
 //
 //  Created by Nick Molargik on 4/10/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ExerciseHealthWidgetView: View {
+struct ExerciseHealthComponentView: View {
     var body: some View {
         Button(action: {
             UIImpactFeedbackGenerator(style: .medium).impactOccurred()
@@ -34,5 +34,5 @@ struct ExerciseHealthWidgetView: View {
 }
 
 #Preview {
-    ExerciseHealthWidgetView()
+    ExerciseHealthComponentView()
 }

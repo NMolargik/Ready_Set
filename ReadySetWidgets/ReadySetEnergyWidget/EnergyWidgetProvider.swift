@@ -9,28 +9,20 @@ import Foundation
 import WidgetKit
 
 struct EnergyWidgetProvider: TimelineProvider {
-    var energy: EnergyViewModel = .shared
+    typealias Entry = SimpleEntry
 
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), consumption: energy.energyConsumedToday, goal: energy.energyGoal)
+        SimpleEntry(date: Date(), consumption: DataService.shared.energyConsumedToday, goal: DataService.shared.energyGoal)
     }
 
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> Void) {
-        let entry = SimpleEntry(date: Date(), consumption: energy.energyConsumedToday, goal: energy.energyGoal)
+        let entry = SimpleEntry(date: Date(), consumption: DataService.shared.energyConsumedToday, goal: DataService.shared.energyGoal)
         completion(entry)
     }
 
-    func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
-        var entries: [SimpleEntry] = []
-
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: Date())!
-            let entry = SimpleEntry(date: entryDate, consumption: energy.energyConsumedToday, goal: energy.energyGoal)
-            entries.append(entry)
+    func getTimeline(in context: Context, completion: @escaping (Timeline<SimpleEntry>) -> Void) {
+            let entry = SimpleEntry(date: Date(), consumption: DataService.shared.energyConsumedToday, goal: DataService.shared.energyGoal)
+            let timeline = Timeline(entries: [entry], policy: .atEnd)
+            completion(timeline)
         }
-
-        let timeline = Timeline(entries: entries, policy: .atEnd)
-        completion(timeline)
-    }
 }

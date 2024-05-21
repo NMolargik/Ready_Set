@@ -1,5 +1,5 @@
 //
-//  ExerciseWeeklyStepsWidgetView.swift
+//  ExerciseWeeklyStepsComponentView.swift
 //  ReadySet
 //
 //  Created by Nick Molargik on 4/10/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ExerciseWeeklyStepsWidgetView: View {
+struct ExerciseWeeklyStepsComponentView: View {
     @ObservedObject var exerciseViewModel: ExerciseViewModel
 
     var body: some View {
@@ -26,5 +26,5 @@ struct ExerciseWeeklyStepsWidgetView: View {
 }
 
 #Preview {
-    ExerciseWeeklyStepsWidgetView(exerciseViewModel: ExerciseViewModel())
+    ExerciseWeeklyStepsComponentView(exerciseViewModel: ExerciseViewModel())
 }

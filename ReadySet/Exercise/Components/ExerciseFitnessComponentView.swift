@@ -1,5 +1,5 @@
 //
-//  ExerciseFitnessWidgetView.swift
+//  ExerciseFitnessComponentView.swift
 //  ReadySet
 //
 //  Created by Nick Molargik on 4/15/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ExerciseFitnessWidgetView: View {
+struct ExerciseFitnessComponentView: View {
     @State private var showAlert = false
 
     var body: some View {
@@ -51,5 +51,5 @@ struct ExerciseFitnessWidgetView: View {
 }
 
 #Preview {
-    ExerciseFitnessWidgetView()
+    ExerciseFitnessComponentView()
 }

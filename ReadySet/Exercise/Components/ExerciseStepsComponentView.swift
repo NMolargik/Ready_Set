@@ -1,5 +1,5 @@
 //
-//  ExerciseStepsWidgetView.swift
+//  ExerciseStepsComponentView.swift
 //  ReadySet
 //
 //  Created by Nick Molargik on 4/10/24.
@@ -8,7 +8,7 @@
 import SwiftUI
 import HealthKit
 
-struct ExerciseStepsWidgetView: View {
+struct ExerciseStepsComponentView: View {
     @ObservedObject var exerciseViewModel: ExerciseViewModel
 
     var body: some View {
@@ -35,5 +35,5 @@ struct ExerciseStepsWidgetView: View {
 }
 
 #Preview {
-    ExerciseStepsWidgetView(exerciseViewModel: ExerciseViewModel())
+    ExerciseStepsComponentView(exerciseViewModel: ExerciseViewModel())
 }

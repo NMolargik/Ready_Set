@@ -1,23 +1,22 @@
 //
-//  WaterAdditionWidgetView.swift
+//  EnergyAdditionComponentView.swift
 //  ReadySet
 //
-//  Created by Nick Molargik on 4/11/24.
+//  Created by Nick Molargik on 4/15/24.
 //
 
 import SwiftUI
 import WidgetKit
 
-struct WaterAdditionWidgetView: View {
+struct EnergyAdditionComponentView: View {
     @AppStorage("useMetric", store: UserDefaults(suiteName: Bundle.main.groupID)) var useMetric: Bool = false
     @AppStorage("decreaseHaptics") var decreaseHaptics: Bool = false
 
-    var addWater: (Double) -> Void
+    var addEnergy: (Double) -> Void
 
     @State private var expanded = false
-    @State var value: Double = 0
-    @State private var waterToAdd: Double = 0
-    @State var lastCoordinateValue: CGFloat = 0.0
+    @State private var energyToAdd: Double = 0
+    @State private var lastCoordinateValue: CGFloat = 0.0
 
     var sliderRange: ClosedRange<Double> = 0...100
 
@@ -28,13 +27,14 @@ struct WaterAdditionWidgetView: View {
                 let maxValue = (geometry.size.width * 0.98) - 40
                 let scaleFactor = (maxValue - minValue) / (sliderRange.upperBound - sliderRange.lowerBound)
                 let lower = sliderRange.lowerBound
-                let sliderVal = (self.value - lower) * scaleFactor + minValue
+                let sliderVal = (self.energyToAdd - lower) * scaleFactor + minValue
 
                 ZStack {
                     Rectangle()
                         .cornerRadius(35)
-                        .foregroundStyle(value > 7 ? WaterTabItem().gradient : LinearGradient(colors: [.clear, Color.base.opacity(0.6)], startPoint: .leading, endPoint: .trailing))
-                        .animation(.easeInOut, value: value)
+                        .foregroundStyle(
+                            energyToAdd > 7 ? EnergyTabItem().gradient : LinearGradient(colors: [.clear, Color.base.opacity(0.6)], startPoint: .leading, endPoint: .trailing))
+                        .animation(.easeInOut, value: energyToAdd)
                         .frame(height: 50)
 
                     HStack {
@@ -42,16 +42,16 @@ struct WaterAdditionWidgetView: View {
                             .bold()
                             .font(.caption)
                             .foregroundStyle(.white)
-                            .opacity(value > 7 ? 0.5 : 0)
+                            .opacity(energyToAdd > 7 ? 0.5 : 0)
 
                         Spacer()
 
-                        Text("slide and release to consume water")
+                        Text("slide and release to consume \(useMetric ? "kiloJoules" : "calories")")
                             .bold()
                             .font(.caption)
                             .foregroundStyle(.base)
                             .colorInvert()
-                            .opacity(value > 7 ? 0 : 0.3)
+                            .opacity(energyToAdd > 7 ? 0 : 0.3)
                     }
                     .padding(.horizontal)
                     .frame(height: 50)
@@ -62,15 +62,17 @@ struct WaterAdditionWidgetView: View {
                         .gesture(
                             DragGesture(minimumDistance: 0)
                                 .onChanged { dragValue in
+                                    if abs(dragValue.translation.width) < 0.1 {
+                                    }
                                     if dragValue.translation.width > 0 {
                                         let nextCoordinateValue = min(maxValue, self.lastCoordinateValue + dragValue.translation.width)
-                                        self.value = ((nextCoordinateValue - minValue) / scaleFactor)  + lower
+                                        self.energyToAdd = ((nextCoordinateValue - minValue) / scaleFactor)  + lower
                                     } else {
                                         let nextCoordinateValue = max(minValue, self.lastCoordinateValue + dragValue.translation.width)
-                                        self.value = ((nextCoordinateValue - minValue) / scaleFactor) + lower
+                                        self.energyToAdd = ((nextCoordinateValue - minValue) / scaleFactor) + lower
                                     }
 
-                                    if value > 7 && !decreaseHaptics {
+                                    if energyToAdd > 7 && !decreaseHaptics {
                                         UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                                     }
                                 }
@@ -78,26 +80,26 @@ struct WaterAdditionWidgetView: View {
                                     let notificationFeedback = UINotificationFeedbackGenerator()
                                     notificationFeedback.prepare()
 
+                                    if abs(dragValue.translation.width) < 0.1 {
+                                    }
                                     if dragValue.translation.width > 0 {
                                         let nextCoordinateValue = min(maxValue, self.lastCoordinateValue + dragValue.translation.width)
-                                        self.value = ((nextCoordinateValue - minValue) / scaleFactor)  + lower
+                                        self.energyToAdd = ((nextCoordinateValue - minValue) / scaleFactor)  + lower
                                     } else {
                                         let nextCoordinateValue = max(minValue, self.lastCoordinateValue + dragValue.translation.width)
-                                        self.value = ((nextCoordinateValue - minValue) / scaleFactor) + lower
+                                        self.energyToAdd = ((nextCoordinateValue - minValue) / scaleFactor) + lower
                                     }
 
-                                    if value > 7 {
+                                    if energyToAdd > 7 {
                                         notificationFeedback.notificationOccurred(.success)
 
                                         withAnimation {
-                                            let waterValue = Double(mapSliderValue(value: value))
-                                            addWater(waterValue)
-                                            WidgetCenter.shared.reloadAllTimelines()
+                                            let energyValue = Double(mapSliderValue(value: energyToAdd))
+                                            addEnergy(energyValue)
                                         }
                                     }
-
                                     withAnimation(.bouncy) {
-                                        value = 0
+                                        energyToAdd = 0
                                     }
                                 }
                         )
@@ -105,9 +107,8 @@ struct WaterAdditionWidgetView: View {
                         Spacer()
 
                     }
-                    .frame(height: 50)
 
-                    if value > 7 {
+                    if energyToAdd > 7 {
                         ZStack {
                             Image(systemName: "bubble.middle.bottom.fill")
                                 .font(.system(size: 50))
@@ -115,9 +116,9 @@ struct WaterAdditionWidgetView: View {
                                 .scaleEffect(x: 1.5)
                                 .foregroundStyle(.ultraThinMaterial)
 
-                            Text(Int(mapSliderValue(value: value)).description)
+                            Text(Int(mapSliderValue(value: energyToAdd)).description)
                                 .bold()
-                                .foregroundStyle(.blueEnd)
+                                .foregroundStyle(.orangeEnd)
                                 .font(.title)
                                 .offset(y: -5)
                         }
@@ -125,7 +126,6 @@ struct WaterAdditionWidgetView: View {
                         .offset(x: sliderVal - maxValue / 2 - 3, y: -50)
                         .frame(height: 50)
                     }
-
                 }
             }
         }
@@ -135,8 +135,8 @@ struct WaterAdditionWidgetView: View {
 
     private var sliderHandle: some View {
         ZStack {
-            Circle()
-                .foregroundStyle(value < 7 ? WaterTabItem().gradient : LinearGradient(colors: [.fontGray, .fontGray], startPoint: .leading, endPoint: .trailing))
+           Circle()
+                .foregroundStyle(energyToAdd < 7 ? EnergyTabItem().gradient : LinearGradient(colors: [.fontGray, .fontGray], startPoint: .leading, endPoint: .trailing))
                 .shadow(radius: 4, x: 2, y: 2)
                 .frame(width: 40, height: 40)
 
@@ -144,24 +144,24 @@ struct WaterAdditionWidgetView: View {
                 .bold()
                 .foregroundStyle(.white)
                 .font(.title2)
-                .shadow(radius: value > 7 ? 0 : 2)
-                .opacity(value > 7 ? 0 : 1)
+                .shadow(radius: energyToAdd > 7 ? 0 : 2)
+                .opacity(energyToAdd > 7 ? 0 : 1)
 
-            Text(useMetric ? "ml" : "oz")
+            Text(useMetric ? "kJ" : "cal")
                 .bold()
                 .font(.caption2)
                 .foregroundStyle(.white)
-                .opacity(value < 7 ? 0 : 1)
+                .opacity(energyToAdd < 7 ? 0 : 1)
         }
     }
 
     private func mapSliderValue(value: Double) -> Int {
-        return (-2 + ((useMetric ? 1000 : 32) + 8) * (Int(value.rounded(.up))) / 100)
+        return 1000 * (Int(value.rounded(.up)) ) / (100)
     }
 }
 
 #Preview {
-    WaterAdditionWidgetView(
-        addWater: { _ in }
+    EnergyAdditionComponentView(
+        addEnergy: {_ in}
     )
 }

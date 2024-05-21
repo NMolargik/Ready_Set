@@ -10,15 +10,11 @@ import SwiftUI
 
 struct ReadySetEnergyWidget: Widget {
     let kind: String = "ReadySetEnergyWidget"
-    @State var energyWidgetProvider = EnergyWidgetProvider()
-
+    
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: energyWidgetProvider) { entry in
+        StaticConfiguration(kind: kind, provider: EnergyWidgetProvider()) { entry in
             ReadySetEnergyWidgetView(entry: entry)
                 .containerBackground(EnergyTabItem().gradient, for: .widget)
-                .onAppear {
-                    energyWidgetProvider.energy.readEnergyConsumedToday()
-                }
         }
         .supportedFamilies([.systemSmall])
         .configurationDisplayName("Ready, Set, Energy")

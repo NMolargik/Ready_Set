@@ -10,14 +10,13 @@ import WidgetKit
 
 struct ReadySetWaterWidgetView: View {
     @Environment(\.widgetFamily) var widgetFamily
-    @ObservedObject var waterViewModel: WaterViewModel = .shared
 
     var entry: WaterWidgetProvider.Entry
 
     var body: some View {
         ZStack {
             Link(destination: URL(string: "readySet://water")!) {
-                GaugeView(max: waterViewModel.$waterGoal, level: waterViewModel.$waterConsumedToday, isUpdating: .constant(false), color: WaterTabItem().color, unit: waterViewModel.useMetric ? "mL" : "oz")
+                GaugeView(max: DataService.shared.$waterGoal, level: DataService.shared.$waterConsumedToday, isUpdating: .constant(false), color: WaterTabItem().color, unit: DataService.shared.useMetric ? "mL" : "oz")
                     .frame(width: 150, height: 120)
             }
 
@@ -30,7 +29,7 @@ struct ReadySetWaterWidgetView: View {
                             .cornerRadius(20)
                             .foregroundStyle(.white)
 
-                        Text("+\(waterViewModel.useMetric ? 240 : 8)")
+                        Text("+\(DataService.shared.useMetric ? 240 : 8)")
                             .bold()
                             .foregroundStyle(.black)
                     }

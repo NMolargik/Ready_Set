@@ -44,14 +44,14 @@ struct ExerciseTopContentView: View {
     private var defaultView: some View {
         HStack {
             VStack(spacing: 10) {
-                ExerciseHealthWidgetView()
+                ExerciseHealthComponentView()
 
-                ExerciseFitnessWidgetView()
+                ExerciseFitnessComponentView()
             }
             VStack(spacing: 10) {
-                ExerciseStepsWidgetView(exerciseViewModel: exerciseViewModel)
+                ExerciseStepsComponentView(exerciseViewModel: exerciseViewModel)
 
-                ExerciseWeeklyStepsWidgetView(exerciseViewModel: exerciseViewModel)
+                ExerciseWeeklyStepsComponentView(exerciseViewModel: exerciseViewModel)
 
             }
         }

@@ -17,9 +17,8 @@ struct WaterIntent: AppIntent {
         let water: WaterViewModel = .shared
         let value = water.useMetric ? 240 : 8
         water.addWater(waterToAdd: Double(value) as Double)
-
         water.readWaterConsumedToday()
-
+        
         return .result(value: water.waterConsumedToday)
     }
 }
@@ -31,10 +30,8 @@ struct EnergyIntent: AppIntent {
 
     func perform() async throws -> some IntentResult & ReturnsValue<Int> {
         let energy: EnergyViewModel = .shared
-
         let value = energy.useMetric ? 800 : 200
         energy.addEnergy(energy: Double(value))
-
         energy.readEnergyConsumedToday()
 
         return .result(value: energy.energyConsumedToday)

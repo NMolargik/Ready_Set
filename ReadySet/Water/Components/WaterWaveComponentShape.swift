@@ -1,5 +1,5 @@
 //
-//  WaterWave.swift
+//  WaterWaveComponentShape.swift
 //  ReadySet
 //
 //  Created by Nick Molargik on 4/14/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct WaterWave: Shape {
+struct WaterWaveComponentShape: Shape {
     var progress: CGFloat
     var waveHeight: CGFloat
     var offset: CGFloat

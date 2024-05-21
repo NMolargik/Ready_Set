@@ -15,7 +15,7 @@ struct EnergyBottomContentView: View {
 
             Spacer()
 
-            EnergyAdditionWidgetView(
+            EnergyAdditionComponentView(
                 addEnergy: { energy in
                     energyViewModel.addEnergy(energy: energy)
                 }

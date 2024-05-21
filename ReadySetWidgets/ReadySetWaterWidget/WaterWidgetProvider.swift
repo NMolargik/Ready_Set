@@ -5,32 +5,24 @@
 //  Created by Nick Molargik on 4/28/24.
 //
 
-import Foundation
 import WidgetKit
+import SwiftUI
 
 struct WaterWidgetProvider: TimelineProvider {
-    var water: WaterViewModel = .shared
+    typealias Entry = SimpleEntry
 
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), consumption: water.waterConsumedToday, goal: water.waterGoal)
+        SimpleEntry(date: Date(), consumption: DataService.shared.waterConsumedToday, goal: DataService.shared.waterGoal)
     }
 
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> Void) {
-        let entry = SimpleEntry(date: Date(), consumption: water.waterConsumedToday, goal: water.waterGoal)
+        let entry = SimpleEntry(date: Date(), consumption: DataService.shared.waterConsumedToday, goal: DataService.shared.waterGoal)
         completion(entry)
     }
 
-    func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
-        var entries: [SimpleEntry] = []
-
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: Date())!
-            let entry = SimpleEntry(date: entryDate, consumption: water.waterConsumedToday, goal: water.waterGoal)
-            entries.append(entry)
-        }
-
-        let timeline = Timeline(entries: entries, policy: .atEnd)
+    func getTimeline(in context: Context, completion: @escaping (Timeline<SimpleEntry>) -> Void) {
+        let entry = SimpleEntry(date: Date(), consumption: DataService.shared.waterConsumedToday, goal: DataService.shared.waterGoal)
+        let timeline = Timeline(entries: [entry], policy: .atEnd)
         completion(timeline)
     }
 }

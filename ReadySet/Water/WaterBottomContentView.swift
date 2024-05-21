@@ -17,7 +17,7 @@ struct WaterBottomContentView: View {
 
             Spacer()
 
-            WaterAdditionWidgetView(
+            WaterAdditionComponentView(
                 addWater: { water in
                     waterViewModel.addWater(waterToAdd: water)
                 }

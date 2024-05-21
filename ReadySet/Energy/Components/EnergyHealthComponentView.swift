@@ -1,5 +1,5 @@
 //
-//  EnergyHealthWidgetView.swift
+//  EnergyHealthComponentView.swift
 //  ReadySet
 //
 //  Created by Nick Molargik on 4/15/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct EnergyHealthWidgetView: View {
+struct EnergyHealthComponentView: View {
     var body: some View {
         Button(action: {
             UIImpactFeedbackGenerator(style: .medium).impactOccurred()
@@ -29,5 +29,5 @@ struct EnergyHealthWidgetView: View {
 }
 
 #Preview {
-    EnergyHealthWidgetView()
+    EnergyHealthComponentView()
 }

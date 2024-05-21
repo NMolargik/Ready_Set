@@ -61,7 +61,6 @@ class WaterViewModel: ObservableObject, HKHelper {
                 }
             }
         }
-        WidgetCenter.shared.reloadAllTimelines()
     }
 
     func readWaterConsumedToday() {
@@ -104,7 +103,6 @@ class WaterViewModel: ObservableObject, HKHelper {
             self.readWaterConsumedToday()
             completion()
         })
-        WidgetCenter.shared.reloadAllTimelines()
     }
 
     func saveWaterGoal() {

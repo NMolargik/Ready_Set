@@ -30,7 +30,7 @@ struct WaterTopContentView: View {
                         .shadow(radius: 1)
                         .zIndex(1)
 
-                    WaterWave(progress: min(1, CGFloat(Double(waterViewModel.waterConsumedToday) / waterViewModel.waterGoal)), waveHeight: waterViewModel.disableWave ? 0.0 : 0.1, offset: startAnimation)
+                    WaterWaveComponentShape(progress: min(1, CGFloat(Double(waterViewModel.waterConsumedToday) / waterViewModel.waterGoal)), waveHeight: waterViewModel.disableWave ? 0.0 : 0.1, offset: startAnimation)
                         .fill(LinearGradient(colors: [.blueStart, .blueEnd], startPoint: .top, endPoint: .bottom))
                         .overlay(content: {
                             waterWaveOverlay

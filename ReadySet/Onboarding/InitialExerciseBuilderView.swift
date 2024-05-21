@@ -114,9 +114,9 @@ struct InitialExerciseBuilderView: View {
 
                             Text(exerciseViewModel.weekDays[selectedDay].prefix(3))
                                 .bold()
-                                .font(.footnote)
+                                .font(.body)
                                 .foregroundStyle(.fontGray)
-                                .frame(width: 30)
+                                .frame(width: 40)
 
                             Button(action: {
                                 UIImpactFeedbackGenerator(style: .rigid).impactOccurred()

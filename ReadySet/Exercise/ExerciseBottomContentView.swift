@@ -62,7 +62,7 @@ struct ExerciseBottomContentView: View {
 
                 HStack(spacing: 8) {
                     Button(action: {
-                        UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
+                        UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
                         withAnimation {
                             selectedDay -= 1
                         }
@@ -85,12 +85,12 @@ struct ExerciseBottomContentView: View {
 
                     Text(exerciseViewModel.weekDays[selectedDay].prefix(3))
                         .bold()
-                        .font(.footnote)
+                        .font(.body)
                         .foregroundStyle(.fontGray)
-                        .frame(width: 30)
+                        .frame(width: 40)
 
                     Button(action: {
-                        UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
+                        UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
                         withAnimation {
                             selectedDay += 1
                         }
@@ -172,7 +172,7 @@ struct ExerciseBottomContentView: View {
             }
         }, label: {
             Image(systemName: exerciseViewModel.editingSets ? "checkmark.circle.fill" : "pencil.circle.fill")
-                .foregroundStyle(.fontGray, .base)
+                .foregroundStyle(.green, .base)
                 .font(.system(size: 25))
                 .tag("editButton")
         })

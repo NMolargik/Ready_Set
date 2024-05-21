@@ -41,7 +41,7 @@ struct ExercisePlanDayView: View {
                     ExerciseEntryView(exerciseViewModel: exerciseViewModel, exercise: exercise)
                         .id(exercise.id)
                 }
-                .animation(.smooth, value: exercises)
+                .animation(.bouncy, value: exercises)
 
                 if exerciseViewModel.editingSets {
                     HStack {

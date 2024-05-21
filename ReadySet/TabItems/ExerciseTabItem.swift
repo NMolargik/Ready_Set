@@ -13,7 +13,7 @@ struct ExerciseTabItem: ITabItem {
     var icon = "Dumbbell"
     var color = Color.greenEnd
     var secondaryColor = Color.greenStart
-    var gradient = LinearGradient(colors: [.greenEnd, .greenStart], startPoint: .topLeading, endPoint: .bottomTrailing)
+    var gradient = LinearGradient(colors: [.greenEnd, .green], startPoint: .topLeading, endPoint: .bottomTrailing)
 
     func bumpTab(up: Bool) -> any ITabItem {
         return up ? SettingsTabItem() : WaterTabItem()

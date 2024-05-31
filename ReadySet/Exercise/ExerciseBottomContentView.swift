@@ -19,48 +19,9 @@ struct ExerciseBottomContentView: View {
     }
 
     var body: some View {
-        ZStack {
-            VStack(spacing: 0) {
-                HStack {
-                    Text(exerciseViewModel.weekDays[selectedDay])
-                        .bold()
-                        .font(.largeTitle)
-                        .foregroundStyle(.baseInvert)
-
-                    Spacer()
-
-                    if exerciseViewModel.editingSets && exercises.count > 0 {
-                        Button(action: {
-                            withAnimation {
-                                for exercise in filteredExercises {
-                                    modelContext.delete(exercise: exercise)
-                                }
-                            }
-                        }, label: {
-                            Text("Delete All")
-                                .foregroundStyle(.red)
-                                .font(.body)
-                                .padding(.vertical, 2)
-                                .padding(.horizontal, 5)
-                                .background {
-                                    Rectangle()
-                                        .cornerRadius(10)
-                                        .foregroundStyle(.baseAccent)
-                                        .shadow(radius: 3)
-                                }
-                        })
-                    }
-                }
-                .padding(.horizontal, 15)
-                .padding(.top, 10)
-
-                ExercisePlanDayView(exerciseViewModel: exerciseViewModel, exercises: .constant(filteredExercises), selectedDay: selectedDay, hideNudge: false)
-            }
-
-            VStack {
-                Spacer()
-
-                HStack(spacing: 8) {
+        VStack(alignment: .center, spacing: 0) {
+            HStack(alignment: .center) {
+                Group {
                     Button(action: {
                         UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
                         withAnimation {
@@ -69,25 +30,31 @@ struct ExerciseBottomContentView: View {
                     }, label: {
                         Image(systemName: "chevron.left")
                             .bold()
-                            .foregroundStyle(.fontGray)
+                            .foregroundStyle(.baseAccent)
+                            .padding(8)
+                            .background(
+                                Circle()
+                                    .foregroundColor(Color.fontGray)
+                                    .shadow(radius: 8, x: 3, y: 3)
+                            )
                     })
                     .buttonStyle(.plain)
                     .disabled(selectedDay == 0)
                     .padding(.vertical, 4)
                     .padding(.horizontal, 10)
-                    .background {
-                        Rectangle()
-                            .cornerRadius(10)
-                            .foregroundStyle(.base)
-                            .shadow(radius: 3)
-                    }
-                    .padding(.leading, 10)
+                    .opacity(selectedDay == 0 ? 0 : 1)
 
-                    Text(exerciseViewModel.weekDays[selectedDay].prefix(3))
-                        .bold()
-                        .font(.body)
-                        .foregroundStyle(.fontGray)
-                        .frame(width: 40)
+                    Spacer()
+
+                    Text(exerciseViewModel.weekDays[selectedDay])
+                        .fontWeight(.semibold)
+                        .font(.title)
+                        .foregroundStyle(.baseInvert.gradient)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
+                        .padding(.vertical, 5)
+
+                    Spacer()
 
                     Button(action: {
                         UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
@@ -97,89 +64,57 @@ struct ExerciseBottomContentView: View {
                     }, label: {
                         Image(systemName: "chevron.right")
                             .bold()
-                            .foregroundStyle(.fontGray)
+                            .foregroundStyle(.baseAccent)
+                            .padding(8)
+                            .background(
+                                Circle()
+                                    .foregroundColor(Color.fontGray)
+                                    .shadow(radius: 8, x: 3, y: 3)
+                            )
                     })
                     .buttonStyle(.plain)
                     .disabled(selectedDay == 6)
                     .padding(.vertical, 4)
                     .padding(.horizontal, 10)
-                    .background {
-                        Rectangle()
-                            .cornerRadius(10)
-                            .foregroundStyle(.base)
-                            .shadow(radius: 3)
-                    }
-
-                    Spacer()
-
-                    if !exerciseViewModel.editingSets {
-                        expandButton
-                            .transition(.opacity)
-                    }
-
-                    editButton
-                        .transition(.opacity)
+                    .opacity(selectedDay == 6 ? 0 : 1)
                 }
-                .padding(.vertical, 2)
-                .drawingGroup()
-                .padding(.horizontal, 30)
-                .onAppear {
+
+                Button(action: {
+                    UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
                     withAnimation {
-                        exerciseViewModel.getCurrentWeekday()
-                        selectedDay = exerciseViewModel.currentDay - 1
+                        exerciseViewModel.editingSets.toggle()
                     }
-                }
-                .background {
-                    Rectangle()
-                        .foregroundStyle(.baseAccent)
-                        .shadow(radius: exerciseViewModel.expandedSets ? 0 : 5, x: 0, y: exerciseViewModel.expandedSets ? 0 : -10)
-                }
+                }, label: {
+                    Image(systemName: exerciseViewModel.editingSets ? "checkmark.circle.filld" : "pencil")
+                        .bold()
+                        .foregroundStyle(.white)
+                        .padding(6)
+                        .background(
+                            Circle()
+                                .foregroundColor(Color.greenEnd)
+                                .shadow(radius: 8, x: 3, y: 3)
+                        )
+                })
+                .buttonStyle(.plain)
+                .disabled(selectedDay == 6)
+                .padding(.vertical, 4)
+                .padding(.horizontal, 10)
+                .opacity(selectedDay == 6 ? 0 : 1)
             }
+            .background(
+                RoundedRectangle(cornerRadius: 20)
+                    .foregroundColor(Color.baseAccent)
+                    .shadow(radius: 3)
+                    .frame(height: 50)
+            )
+            .frame(width: 300)
+
+            ExercisePlanDayView(exerciseViewModel: exerciseViewModel, exercises: .constant(filteredExercises), selectedDay: selectedDay, hideNudge: false)
+                .padding(.top, 10)
         }
+        .padding(.vertical, 10) // Adjust vertical padding
+        .edgesIgnoringSafeArea(.bottom) // Ignore safe area for bottom edge
         .geometryGroup()
-    }
-
-    private var expandButton: some View {
-        Button(action: {
-            UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
-            withAnimation(.easeInOut) {
-                exerciseViewModel.expandedSets.toggle()
-            }
-        }, label: {
-            Text(exerciseViewModel.expandedSets ? "Collapse" : "View All")
-                .foregroundStyle(.fontGray)
-                .font(.body)
-                .tag("expandButton")
-                .padding(.vertical, 3)
-                .padding(.horizontal, 5)
-                .background {
-                    Rectangle()
-                        .cornerRadius(10)
-                        .foregroundStyle(.base)
-                        .shadow(radius: 3)
-                }
-        })
-        .buttonStyle(.plain)
-        .bold()
-        .padding(.trailing, 5)
-    }
-
-    private var editButton: some View {
-        Button(action: {
-            UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
-            withAnimation(.easeInOut) {
-                exerciseViewModel.editingSets.toggle()
-            }
-        }, label: {
-            Image(systemName: exerciseViewModel.editingSets ? "checkmark.circle.fill" : "pencil.circle.fill")
-                .foregroundStyle(.green, .base)
-                .font(.system(size: 25))
-                .tag("editButton")
-        })
-
-        .shadow(radius: 3)
-        .buttonStyle(.plain)
-        .bold()
     }
 }
 
@@ -189,6 +124,6 @@ struct ExerciseBottomContentView: View {
     let mockExercise = Exercise(weekday: 1, orderIndex: 1, name: "Sample Exercise")
     container.mainContext.insert(mockExercise)
 
-    return ExerciseBottomContentView(exerciseViewModel: ExerciseViewModel(), selectedDay: .constant(0))
+    return ExerciseBottomContentView(exerciseViewModel: ExerciseViewModel(), selectedDay: .constant(1))
         .environment(\.modelContext, container.mainContext)
 }

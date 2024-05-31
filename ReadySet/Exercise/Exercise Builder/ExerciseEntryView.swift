@@ -58,7 +58,7 @@ struct ExerciseEntryView: View {
                     }
                 }
             }
-            .padding(.bottom, 5)
+            .padding(.bottom, 10)
         }
     }
 }

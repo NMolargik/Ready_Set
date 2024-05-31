@@ -16,7 +16,6 @@ class ExerciseViewModel: ObservableObject, HKHelper {
     @AppStorage("stepsToday", store: UserDefaults(suiteName: Bundle.main.groupID)) var stepsToday: Int = 0
     @AppStorage("useMetric", store: UserDefaults(suiteName: Bundle.main.groupID)) var useMetric: Bool = false
 
-    @Published var expandedSets = false
     @Published var editingStepGoal = false
     @Published var formComplete: Bool = false
     @Published var proposedStepGoal = 1000
@@ -68,10 +67,6 @@ class ExerciseViewModel: ObservableObject, HKHelper {
         self.stepGoal = Double(self.proposedStepGoal)
         self.editingStepGoal = false
         watchConnector.sendUpdateToWatch(update: ["stepGoal": stepGoal])
-    }
-
-    func disableScroll() -> Bool {
-        return !editingSets && !expandedSets
     }
 
     private func readStepCountToday() {

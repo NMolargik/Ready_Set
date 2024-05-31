@@ -29,7 +29,7 @@ struct ExercisePlanDayView: View {
                         Image(systemName: "rectangle.and.text.magnifyingglass")
                             .font(.largeTitle)
 
-                        Text("Tap the pencil icon below to add to your workout.")
+                        Text("Tap the pencil icon above to add to your workout.")
                             .bold()
                             .multilineTextAlignment(.center)
 
@@ -83,7 +83,7 @@ struct ExercisePlanDayView: View {
             .padding(.horizontal, 5)
             .padding(.bottom, 30)
         }
-        .scrollDisabled(exerciseViewModel.disableScroll())
+        .scrollIndicators(.hidden)
     }
 }
 

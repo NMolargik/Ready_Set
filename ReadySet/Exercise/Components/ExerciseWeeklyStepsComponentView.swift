@@ -13,7 +13,7 @@ struct ExerciseWeeklyStepsComponentView: View {
     var body: some View {
         ZStack {
             Rectangle()
-                .cornerRadius(10)
+                .cornerRadius(35)
                 .foregroundStyle(.thinMaterial)
                 .shadow(radius: 1)
 

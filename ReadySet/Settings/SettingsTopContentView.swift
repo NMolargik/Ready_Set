@@ -9,62 +9,69 @@ import SwiftUI
 import UIKit
 
 struct SettingsTopContentView: View {
-    @AppStorage("appState", store: UserDefaults(suiteName: Bundle.main.groupID)) var appState: String = "splash"
-    @Environment(\.colorScheme) var colorScheme
-
     @ObservedObject var exerciseViewModel: ExerciseViewModel
-    @State private var showingDeleteAlert = false
+
+    let vectorURL = "https://www.vecteezy.com/free-vector/iphone-15"
 
     var body: some View {
-        HStack(spacing: 10) {
-            settingButton(action: returnToGuide,
-                          labelText: "Return To Navigation Tutorial",
-                          imageName: "arrowshape.turn.up.backward.2.fill",
-                          imageColors: [.purpleStart, .purpleEnd])
+        ZStack {
+            Rectangle()
+                .frame(height: 80)
+                .cornerRadius(15)
+                .foregroundStyle(.thinMaterial)
+                .shadow(radius: 1)
+
+            HStack {
+                VStack(spacing: 0) {
+                    Text("Ready, Set - v\(Bundle.main.bundleVersion)")
+                        .bold()
+                        .font(.title3)
+
+                    Text("2024, Nicholas Molargik")
+                        .font(.caption)
+
+                    Text("Contributions from nythepegasus")
+                        .font(.caption)
+                        .lineLimit(2)
+                        .multilineTextAlignment(.center)
+
+                    Button(action: {
+                        UIApplication.shared.open(URL(string: vectorURL)!)
+                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                    }, label: {
+                        Text("iPhone 15 Vectors by Vecteezy")
+                            .font(.caption)
+                            .lineLimit(3)
+                            .multilineTextAlignment(.center)
+                            .foregroundStyle(.blue)
+                    })
+                    .buttonStyle(.plain)
+                }
+
+                Spacer()
+
+                ShareLink(
+                    item: URL(string: "https://apps.apple.com/app/id6484503374")!,
+                    subject: Text("Ready, Set"),
+                    message: Text("Check out Ready, Set - a new fitness trend tracking app!")
+                ) {
+                    ZStack {
+                        Rectangle()
+                            .cornerRadius(10)
+                            .foregroundStyle(.base)
+
+                        Text("Share App")
+                            .bold()
+                            .foregroundStyle(.purpleStart)
+                    }
+                }
+                .frame(width: 100)
+
+            }
+            .padding(.horizontal, 5)
+            .padding(.vertical, 8)
         }
         .padding(.leading, 8)
-        .padding(.top, 5)
-    }
-
-    private func settingButton(action: @escaping () -> Void, labelText: String, imageName: String, imageColors: [Color]) -> some View {
-        Button(action: {
-            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-            withAnimation {
-                action()
-            }
-        }, label: {
-            ZStack {
-                Rectangle()
-                    .frame(height: 80)
-                    .cornerRadius(10)
-                    .foregroundStyle(.thinMaterial)
-                    .shadow(radius: 1)
-                HStack {
-                    Spacer()
-
-                    Text(labelText)
-                        .bold()
-                        .multilineTextAlignment(.center)
-                        .foregroundStyle(.fontGray)
-
-                    Spacer()
-
-                    Image(systemName: imageName)
-                        .symbolRenderingMode(.hierarchical)
-                        .font(.title)
-                        .foregroundStyle(LinearGradient(colors: [imageColors[0], imageColors[1]], startPoint: .leading, endPoint: .trailing))
-
-                    Spacer()
-                }
-            }
-        })
-        .buttonStyle(.plain)
-    }
-
-    private func returnToGuide() {
-        withAnimation {
-            appState = "navigationTutorial"
-        }
     }
 }
 

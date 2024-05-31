@@ -83,7 +83,7 @@ struct ExerciseEntryHeaderView: View {
             if exerciseViewModel.editingSets {
                 Button(action: {
                     UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                    withAnimation {
+                    withAnimation(.snappy) {
                         let newSet = ExerciseSet(goalType: .weight, repetitionsToDo: 5, durationToDo: 10, weightToLift: 100)
                         exercise.exerciseSets.append(newSet)
                         modelContext.insert(newSet)

@@ -15,7 +15,7 @@ struct ExerciseFitnessComponentView: View {
             ZStack {
                 Rectangle()
                     .frame(height: 35)
-                    .cornerRadius(10)
+                    .cornerRadius(35)
                     .foregroundStyle(.thinMaterial)
                     .shadow(radius: 1)
 

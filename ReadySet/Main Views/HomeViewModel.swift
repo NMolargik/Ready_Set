@@ -24,10 +24,7 @@ class HomeViewModel: ObservableObject {
             }
         }
     }
-
-    init() {
-
-    }
+    @Published var effectiveBlurRadius: CGFloat = 0.0
 
     var tabItems = TabItemType.allItems
 
@@ -68,29 +65,25 @@ class HomeViewModel: ObservableObject {
                        startPoint: .top, endPoint: .bottom)
     }
 
-    var effectiveBlurRadius: CGFloat {
-        abs(navigationDragHeight) > 20.0 ? abs(navigationDragHeight * 0.03) : 0
-    }
-
-    func dragGesture(exerciseViewModel: ExerciseViewModel) -> some Gesture {
-        DragGesture(minimumDistance: 20, coordinateSpace: .global)
+    func dragGesture() -> AnyGesture<DragGesture.Value> {
+        let gesture = DragGesture(minimumDistance: 0, coordinateSpace: .global)
             .onChanged { value in
-                if (!exerciseViewModel.editingSets && !exerciseViewModel.expandedSets) || self.selectedTab.type != .exercise {
-                    self.navigationDragHeight = value.translation.height
-                } else {
-                    self.navigationDragHeight = 0.0
+                self.navigationDragHeight = value.translation.height
+                self.effectiveBlurRadius = abs(self.navigationDragHeight) > 50.0 ? abs(self.navigationDragHeight * 0.03) : 0
+                #if os(iOS)
+                if abs(self.navigationDragHeight) == 50 {
+                    UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                 }
+                #endif
             }
             .onEnded { _ in
-                if (!exerciseViewModel.editingSets && !exerciseViewModel.expandedSets) || self.selectedTab.type != .exercise {
-                    withAnimation(.smooth) {
-                        self.handleDragEnd(navigationDragHeight: self.navigationDragHeight)
-                        self.navigationDragHeight = 0.0
-                    }
-                } else {
+                withAnimation(.smooth) {
+                    self.handleDragEnd(navigationDragHeight: self.navigationDragHeight)
                     self.navigationDragHeight = 0.0
+                    self.effectiveBlurRadius = abs(self.navigationDragHeight) > 50.0 ? abs(self.navigationDragHeight * 0.03) : 0
                 }
             }
+        return AnyGesture(gesture)
     }
 
     func progressForSelectedTab(exerciseViewModel: ExerciseViewModel, waterViewModel: WaterViewModel, energyViewModel: EnergyViewModel) -> Binding<Double> {

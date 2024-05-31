@@ -26,8 +26,15 @@ struct NavigationTutorialView: View {
 
                 if showText {
                     HStack {
+                        DragAreaView(offset: .constant(0))
+                            .padding(.leading, 5)
+                        navText1
+                            .transition(.opacity)
+                    }
+
+                    HStack {
                         iconStack
-                        navText
+                        navText2
                     }     .transition(.opacity)
 
                 }
@@ -59,11 +66,20 @@ struct NavigationTutorialView: View {
             }
         }
         .frame(height: 120)
-        .padding(.leading, 5)
+        .padding(.leading, 20)
+        .padding(.trailing, 5)
     }
 
-    private var navText: some View {
-        Text("You can navigate Ready, Set by swiping vertically, just as you have been...\n\nOr by tapping any of these icons wherever they appear.")
+    private var navText1: some View {
+        Text("You can navigate Ready, Set by swiping on this handle...")
+            .multilineTextAlignment(.leading)
+            .font(.body)
+            .foregroundStyle(.fontGray)
+            .padding(.trailing)
+    }
+
+    private var navText2: some View {
+        Text("...or by tapping on these icons in the top left corner")
             .multilineTextAlignment(.leading)
             .font(.body)
             .foregroundStyle(.fontGray)
@@ -75,7 +91,7 @@ struct NavigationTutorialView: View {
             BouncingChevronView()
                 .padding(.bottom, 5)
 
-            Text("Swipe Upwards On The Canvas When Ready")
+            Text("Swipe Upwards On The Canvas\n To Enter Ready, Set")
                 .font(.body)
                 .multilineTextAlignment(.center)
                 .foregroundStyle(.fontGray)

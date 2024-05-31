@@ -11,8 +11,9 @@ struct SettingsBottomContentView: View {
     @AppStorage("useMetric", store: UserDefaults(suiteName: Bundle.main.groupID)) var useMetric: Bool = false
     @AppStorage("decreaseHaptics") var decreaseHaptics: Bool = false
     @AppStorage("disableWave") var disableWave: Bool = false
-
-    let vectorURL = "https://www.vecteezy.com/free-vector/iphone-15"
+    @AppStorage("moveNavToRight") var moveNavToRight: Bool = false
+    @AppStorage("appState", store: UserDefaults(suiteName: Bundle.main.groupID)) var appState: String = "splash"
+    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         VStack {
@@ -39,74 +40,58 @@ struct SettingsBottomContentView: View {
             .padding(.top, 10)
             .padding(.horizontal)
 
-            Spacer()
+            Toggle(isOn: $moveNavToRight, label: {
+                Text("Navigation Handle On Right")
+            })
+            .toggleStyle(VerticalToggleStyle(height: 50))
+            .padding(.top, 10)
+            .padding(.horizontal)
 
-            Rectangle()
-                .padding(.horizontal)
-                .frame(height: 3)
-                .cornerRadius(4)
-                .colorMultiply(.purpleStart)
-                .shadow(radius: 5)
-
-            HStack {
-                VStack(spacing: 0) {
-                    Text("Ready, Set")
-                        .bold()
-                        .font(.title3)
-                        .padding(.top, 5)
-
-                    Text("2024, Nicholas Molargik")
-                        .font(.caption)
-
-                    Text("Contributions from nythepegasus and Dante Maslin")
-                        .font(.caption)
-                        .lineLimit(3)
-                        .multilineTextAlignment(.center)
-
-                    Button(action: {
-                        UIApplication.shared.open(URL(string: vectorURL)!)
-                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                    }, label: {
-                        Text("iPhone 15 Vectors by Vecteezy")
-                            .font(.caption)
-                            .lineLimit(3)
-                            .multilineTextAlignment(.center)
-                            .foregroundStyle(.blue)
-                    })
-                    .buttonStyle(.plain)
-
-                    Text("Version \(Bundle.main.bundleVersion)")
-                        .font(.caption)
-                        .lineLimit(3)
-                        .multilineTextAlignment(.center)
-
-                    ShareLink(
-                        item: URL(string: "https://apps.apple.com/app/id6484503374")!,
-                        subject: Text("Ready, Set"),
-                        message: Text("Check out Ready, Set - a new fitness trend tracking app!")
-                    ) {
-                        ZStack {
-                            Capsule()
-                                .foregroundStyle(.ultraThickMaterial)
-
-                            Text("Share App")
-                                .bold()
-                        }
-                    }
-                    .frame(width: 100, height: 30)
-                    .padding(.top, 5)
+            Button(action: {
+                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                withAnimation {
+                    returnToGuide()
                 }
+            }, label: {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(Color.purpleStart, lineWidth: 2)
+                        .shadow(radius: 2)
+                        .frame(height: 80)
 
-                Image("icon")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 150)
-            }
-            .padding(.horizontal, 5)
-            .padding(.bottom, 10)
+                    HStack {
+                        Spacer()
+
+                        Text("Return To Navigation Tutorial")
+                            .font(.system(size: 18, weight: .semibold))
+                            .multilineTextAlignment(.center)
+
+                        Spacer()
+
+                        Image(systemName: "arrowshape.turn.up.backward.2.fill")
+                            .symbolRenderingMode(.hierarchical)
+                            .font(.title)
+                            .foregroundStyle(LinearGradient(colors: [.purpleStart, .purpleEnd], startPoint: .leading, endPoint: .trailing))
+
+                        Spacer()
+                    }
+                }
+            })
+            .buttonStyle(.plain)
+            .padding(.top, 10)
+            .padding(.horizontal)
+
+            Spacer()
 
         }
     }
+
+    private func returnToGuide() {
+        withAnimation {
+            appState = "navigationTutorial"
+        }
+    }
+
 }
 
 #Preview {

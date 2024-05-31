@@ -28,7 +28,7 @@ struct HomeView: View {
             .padding(.bottom, 15)
             .zIndex(2)
 
-            if showNavColumn() {
+            if !exerciseViewModel.editingSets {
                 NavColumnView(exerciseViewModel: exerciseViewModel,
                               waterViewModel: waterViewModel, energyViewModel: energyViewModel,
                               tabItems: $homeViewModel.tabItems, selectedTab: $homeViewModel.selectedTab,
@@ -37,17 +37,24 @@ struct HomeView: View {
                 .zIndex(1)
             }
 
-            BottomView(exerciseViewModel: exerciseViewModel, waterViewModel: waterViewModel, energyViewModel: energyViewModel,
-                       selectedTab: $homeViewModel.selectedTab, selectedDay: $homeViewModel.selectedDay)
-                .blur(radius: homeViewModel.effectiveBlurRadius)
-                .padding(.top, (exerciseViewModel.expandedSets || exerciseViewModel.editingSets) ? 0 : 8)
-                .padding(.bottom, 30)
-                .padding(.horizontal, 8)
-                .zIndex(3)
+            BottomView(
+                exerciseViewModel: exerciseViewModel,
+                waterViewModel: waterViewModel,
+                energyViewModel: energyViewModel,
+                selectedTab: $homeViewModel.selectedTab,
+                selectedDay: $homeViewModel.selectedDay,
+                blurRadius: $homeViewModel.effectiveBlurRadius,
+                offset: $homeViewModel.navigationDragHeight,
+                dragGesture: AnyGesture(homeViewModel.dragGesture()
+                )
+            )
+            .padding(.top, exerciseViewModel.editingSets ? 0 : 8)
+            .padding(.bottom, 30)
+            .padding(.horizontal, 8)
+            .zIndex(3)
 
         }
         .background(homeViewModel.backgroundGradient)
-        .gesture(homeViewModel.dragGesture(exerciseViewModel: exerciseViewModel))
         .onAppear {
             homeViewModel.setupViewModels(healthStore: healthStore, exerciseViewModel: exerciseViewModel, waterViewModel: waterViewModel, energyViewModel: energyViewModel, watchConnector: watchConnector)
             homeViewModel.setupConnectorClosures(watchConnector: watchConnector, exerciseViewModel: exerciseViewModel, waterViewModel: waterViewModel, energyViewModel: energyViewModel)
@@ -61,10 +68,6 @@ struct HomeView: View {
         .onOpenURL { url in
             homeViewModel.handleOpenURL(url: url)
         }
-    }
-
-    func showNavColumn() -> Bool {
-        return !exerciseViewModel.editingSets && !exerciseViewModel.expandedSets || homeViewModel.selectedTab.type != .exercise
     }
 }
 

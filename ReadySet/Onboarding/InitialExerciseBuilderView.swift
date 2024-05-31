@@ -47,114 +47,68 @@ struct InitialExerciseBuilderView: View {
                         .shadow(radius: 1)
 
                     VStack {
-                        VStack(spacing: 0) {
-                            HStack {
-                                Text(exerciseViewModel.weekDays[selectedDay])
-                                    .bold()
-                                    .font(.largeTitle)
-                                    .foregroundStyle(.baseInvert)
+                        HStack(alignment: .center) {
+                            Group {
+                                Button(action: {
+                                    UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+                                    withAnimation {
+                                        selectedDay -= 1
+                                    }
+                                }, label: {
+                                    Image(systemName: "chevron.left")
+                                        .bold()
+                                        .foregroundStyle(.baseAccent)
+                                        .padding(8)
+                                        .background(
+                                            Circle()
+                                                .foregroundColor(Color.fontGray)
+                                                .shadow(radius: 8, x: 3, y: 3)
+                                        )
+                                })
+                                .buttonStyle(.plain)
+                                .disabled(selectedDay == 0)
+                                .padding(.vertical, 4)
+                                .padding(.horizontal, 10)
+                                .opacity(selectedDay == 0 ? 0 : 1)
 
                                 Spacer()
 
-                                if exerciseViewModel.editingSets && exercises.count > 0 {
-                                    Button(action: {
-                                        withAnimation {
-                                            for exercise in filteredExercises {
-                                                modelContext.delete(exercise: exercise)
-                                            }
-                                        }
-                                    }, label: {
-                                        Text("Delete All")
-                                            .foregroundStyle(.red)
-                                            .font(.body)
-                                            .padding(.vertical, 2)
-                                            .padding(.horizontal, 5)
-                                            .background {
-                                                Rectangle()
-                                                    .cornerRadius(10)
-                                                    .foregroundStyle(.baseAccent)
-                                                    .shadow(radius: 3)
-                                            }
-                                    })
-                                }
-                            }
-                            .padding(.horizontal, 15)
-                            .padding(.top, 10)
+                                Text(exerciseViewModel.weekDays[selectedDay])
+                                    .fontWeight(.semibold)
+                                    .font(.title)
+                                    .foregroundStyle(.baseInvert.gradient)
+                                    .lineLimit(1)
+                                    .minimumScaleFactor(0.5)
+                                    .padding(.vertical, 5)
 
-                            ExercisePlanDayView(exerciseViewModel: exerciseViewModel, exercises: .constant(filteredExercises), selectedDay: selectedDay, hideNudge: true)
-                        }
-                    }
+                                Spacer()
 
-                    VStack {
-                        Spacer()
-
-                        HStack(spacing: 8) {
-                            Spacer()
-
-                            Button(action: {
-                                UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
-                                withAnimation {
-                                    selectedDay -= 1
-                                }
-                            }, label: {
-                                Image(systemName: "chevron.left")
-                                    .bold()
-                                    .foregroundStyle(.fontGray)
-                            })
-                            .buttonStyle(.plain)
-                            .disabled(selectedDay == 0)
-                            .padding(.vertical, 4)
-                            .padding(.horizontal, 10)
-                            .background {
-                                Rectangle()
-                                    .cornerRadius(10)
-                                    .foregroundStyle(.base)
-                                    .shadow(radius: 3)
-                            }
-
-                            Text(exerciseViewModel.weekDays[selectedDay].prefix(3))
-                                .bold()
-                                .font(.body)
-                                .foregroundStyle(.fontGray)
-                                .frame(width: 40)
-
-                            Button(action: {
-                                UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
-                                withAnimation {
-                                    selectedDay += 1
-                                }
-                            }, label: {
-                                Image(systemName: "chevron.right")
-                                    .bold()
-                                    .foregroundStyle(.fontGray)
-                            })
-                            .buttonStyle(.plain)
-                            .disabled(selectedDay == 6)
-                            .padding(.vertical, 4)
-                            .padding(.horizontal, 10)
-                            .background {
-                                Rectangle()
-                                    .cornerRadius(10)
-                                    .foregroundStyle(.base)
-                                    .shadow(radius: 3)
-                            }
-
-                            Spacer()
-                        }
-                        .padding(.vertical, 2)
-                        .drawingGroup()
-                        .padding(.horizontal, 30)
-                        .onAppear {
-                            withAnimation {
-                                exerciseViewModel.getCurrentWeekday()
-                                selectedDay = exerciseViewModel.currentDay - 1
+                                Button(action: {
+                                    UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+                                    withAnimation {
+                                        selectedDay += 1
+                                    }
+                                }, label: {
+                                    Image(systemName: "chevron.right")
+                                        .bold()
+                                        .foregroundStyle(.baseAccent)
+                                        .padding(8)
+                                        .background(
+                                            Circle()
+                                                .foregroundColor(Color.fontGray)
+                                                .shadow(radius: 8, x: 3, y: 3)
+                                        )
+                                })
+                                .buttonStyle(.plain)
+                                .disabled(selectedDay == 6)
+                                .padding(.vertical, 4)
+                                .padding(.horizontal, 10)
+                                .opacity(selectedDay == 6 ? 0 : 1)
                             }
                         }
-                        .background {
-                            Rectangle()
-                                .foregroundStyle(.baseAccent)
-                                .shadow(radius: 5, x: 0, y: -10)
-                        }
+                        .padding(.horizontal)
+
+                        ExercisePlanDayView(exerciseViewModel: exerciseViewModel, exercises: .constant(filteredExercises), selectedDay: selectedDay, hideNudge: true)
                     }
                 }
                 .geometryGroup()

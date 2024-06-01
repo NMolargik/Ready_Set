@@ -17,33 +17,31 @@ struct SettingsBottomContentView: View {
 
     var body: some View {
         VStack {
-            HStack(spacing: 0) {
-                Toggle(isOn: $useMetric, label: {
-                    Text("Use Metric Units")
-                })
-                .toggleStyle(VerticalToggleStyle(height: 90))
-
-                Spacer()
-
-                Toggle(isOn: $decreaseHaptics, label: {
-                    Text("Decrease Haptics")
-                })
-                .toggleStyle(VerticalToggleStyle(height: 90))
-            }
+            Toggle(isOn: $useMetric, label: {
+                Text("Use Metric Units")
+            })
+            .toggleStyle(VerticalToggleStyle(height: 45))
+            .padding(.top, 20)
             .padding(.horizontal)
-            .padding(.top, 30)
+            
+            Toggle(isOn: $decreaseHaptics, label: {
+                Text("Decrease Haptics")
+            })
+            .toggleStyle(VerticalToggleStyle(height: 45))
+            .padding(.top, 10)
+            .padding(.horizontal)
 
             Toggle(isOn: $disableWave, label: {
                 Text("Disable Water Wave Animation")
             })
-            .toggleStyle(VerticalToggleStyle(height: 50))
+            .toggleStyle(VerticalToggleStyle(height: 45))
             .padding(.top, 10)
             .padding(.horizontal)
 
             Toggle(isOn: $moveNavToRight, label: {
                 Text("Navigation Handle On Right")
             })
-            .toggleStyle(VerticalToggleStyle(height: 50))
+            .toggleStyle(VerticalToggleStyle(height: 45))
             .padding(.top, 10)
             .padding(.horizontal)
 

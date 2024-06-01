@@ -340,6 +340,7 @@
 			children = (
 				0E4A5E252BCC80E0003678C2 /* Build.xcconfig */,
 				EB4D9C532BCC83C80071BA99 /* CodeSigning.xcconfig */,
+				0E931E342BEF5B6F0091AA03 /* RS+Bundle.swift */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -355,14 +356,6 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		0E931E332BEF5B5D0091AA03 /* Shared */ = {
-			isa = PBXGroup;
-			children = (
-				0E931E342BEF5B6F0091AA03 /* RS+Bundle.swift */,
-			);
-			path = Shared;
-			sourceTree = "<group>";
-		};
 		0E940A5E2BC6FE0200144477 = {
 			isa = PBXGroup;
 			children = (
@@ -370,7 +363,6 @@
 				0E940A692BC6FE0200144477 /* ReadySet */,
 				EB1FDC212BD7053000253855 /* ReadySetWatch Watch App */,
 				EBF9DD362BDEE724009EA21A /* ReadySetWidgets */,
-				0E931E332BEF5B5D0091AA03 /* Shared */,
 				0E940A682BC6FE0200144477 /* Products */,
 				EB2BB03F2BDADD5300C3DA78 /* Frameworks */,
 			);

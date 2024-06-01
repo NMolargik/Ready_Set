@@ -19,6 +19,7 @@ struct ExerciseWeeklyStepsComponentView: View {
 
             Text("Weekly Steps: \(exerciseViewModel.stepCountWeek.values.reduce(0, +))")
                 .font(.caption)
+                .fontWeight(.bold)
                 .foregroundStyle(.fontGray)
         }
         .frame(height: 35)

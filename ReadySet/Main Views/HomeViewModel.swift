@@ -14,6 +14,7 @@ class HomeViewModel: ObservableObject {
     @AppStorage("lastUseDate", store: UserDefaults(suiteName: Bundle.main.groupID)) var lastUseDate: String = "2024-04-19"
     @AppStorage("appState", store: UserDefaults(suiteName: Bundle.main.groupID)) var appState: String = "background"
     @AppStorage("useMetric", store: UserDefaults(suiteName: Bundle.main.groupID)) var useMetric: Bool = false
+    @AppStorage("decreaseHaptics") var decreaseHaptics: Bool = false
 
     @Published var selectedTab: any ITabItem = ExerciseTabItem()
     @Published var navigationDragHeight = 0.0
@@ -27,6 +28,7 @@ class HomeViewModel: ObservableObject {
     @Published var effectiveBlurRadius: CGFloat = 0.0
 
     var tabItems = TabItemType.allItems
+    var lastHapticTriggerValue: CGFloat = 0.0
 
     func handleDragEnd(navigationDragHeight: CGFloat) {
         if navigationDragHeight < -100 {
@@ -66,25 +68,29 @@ class HomeViewModel: ObservableObject {
     }
 
     func dragGesture() -> AnyGesture<DragGesture.Value> {
-        let gesture = DragGesture(minimumDistance: 0, coordinateSpace: .global)
-            .onChanged { value in
-                self.navigationDragHeight = value.translation.height
-                self.effectiveBlurRadius = abs(self.navigationDragHeight) > 50.0 ? abs(self.navigationDragHeight * 0.03) : 0
-                #if os(iOS)
-                if abs(self.navigationDragHeight) == 50 {
-                    UIImpactFeedbackGenerator(style: .soft).impactOccurred()
-                }
-                #endif
-            }
-            .onEnded { _ in
-                withAnimation(.smooth) {
-                    self.handleDragEnd(navigationDragHeight: self.navigationDragHeight)
-                    self.navigationDragHeight = 0.0
+            let gesture = DragGesture(minimumDistance: 0, coordinateSpace: .global)
+                .onChanged { value in
+                    self.navigationDragHeight = value.translation.height
                     self.effectiveBlurRadius = abs(self.navigationDragHeight) > 50.0 ? abs(self.navigationDragHeight * 0.03) : 0
+
+                    if !self.decreaseHaptics {
+                        let difference = self.navigationDragHeight - self.lastHapticTriggerValue
+                        if abs(difference) >= 20 {
+                            UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+                            self.lastHapticTriggerValue = self.navigationDragHeight
+                        }
+                    }
                 }
-            }
-        return AnyGesture(gesture)
-    }
+                .onEnded { _ in
+                    withAnimation(.smooth) {
+                        self.handleDragEnd(navigationDragHeight: self.navigationDragHeight)
+                        self.navigationDragHeight = 0.0
+                        self.effectiveBlurRadius = 0.0
+                        self.lastHapticTriggerValue = 0.0
+                    }
+                }
+            return AnyGesture(gesture)
+        }
 
     func progressForSelectedTab(exerciseViewModel: ExerciseViewModel, waterViewModel: WaterViewModel, energyViewModel: EnergyViewModel) -> Binding<Double> {
         switch selectedTab.type {

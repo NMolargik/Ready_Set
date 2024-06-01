@@ -24,6 +24,7 @@ struct DragAreaView: View {
                 .frame(height: 100)
                 .padding(.vertical, 10)
                 .padding(.horizontal, 2.5)
+                .shadow(radius: 5, x: 2, y: max(min(offset, 10), -10))
 
             Image(systemName: "chevron.down")
                 .foregroundStyle(offset > 50 ? .white : .fontGray)

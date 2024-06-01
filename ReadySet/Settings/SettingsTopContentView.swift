@@ -25,7 +25,7 @@ struct SettingsTopContentView: View {
                 VStack(spacing: 0) {
                     Text("Ready, Set - v\(Bundle.main.bundleVersion)")
                         .bold()
-                        .font(.title3)
+                        .font(.caption)
 
                     Text("2024, Nicholas Molargik")
                         .font(.caption)

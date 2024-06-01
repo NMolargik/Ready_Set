@@ -15,7 +15,7 @@ struct ExerciseBottomContentView: View {
     @Binding var selectedDay: Int
 
     var filteredExercises: [Exercise] {
-        exercises.filter {$0.weekday == selectedDay}
+        exercises.filter { $0.weekday == selectedDay }
     }
 
     var body: some View {
@@ -25,7 +25,11 @@ struct ExerciseBottomContentView: View {
                     Button(action: {
                         UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
                         withAnimation {
-                            selectedDay -= 1
+                            if selectedDay > 0 {
+                                selectedDay -= 1
+                            } else {
+                                selectedDay = 6
+                            }
                         }
                     }, label: {
                         Image(systemName: "chevron.left")
@@ -39,10 +43,8 @@ struct ExerciseBottomContentView: View {
                             )
                     })
                     .buttonStyle(.plain)
-                    .disabled(selectedDay == 0)
                     .padding(.vertical, 4)
                     .padding(.horizontal, 10)
-                    .opacity(selectedDay == 0 ? 0 : 1)
 
                     Spacer()
 
@@ -52,14 +54,19 @@ struct ExerciseBottomContentView: View {
                         .foregroundStyle(.baseInvert.gradient)
                         .lineLimit(1)
                         .minimumScaleFactor(0.5)
-                        .padding(.vertical, 5)
+                        .transition(.scale(scale: 1.5).combined(with: .opacity))
+                        .id(selectedDay)
 
                     Spacer()
 
                     Button(action: {
                         UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
                         withAnimation {
-                            selectedDay += 1
+                            if selectedDay < 6 {
+                                selectedDay += 1
+                            } else {
+                                selectedDay = 0
+                            }
                         }
                     }, label: {
                         Image(systemName: "chevron.right")
@@ -73,10 +80,8 @@ struct ExerciseBottomContentView: View {
                             )
                     })
                     .buttonStyle(.plain)
-                    .disabled(selectedDay == 6)
                     .padding(.vertical, 4)
                     .padding(.horizontal, 10)
-                    .opacity(selectedDay == 6 ? 0 : 1)
                 }
 
                 Button(action: {
@@ -85,7 +90,7 @@ struct ExerciseBottomContentView: View {
                         exerciseViewModel.editingSets.toggle()
                     }
                 }, label: {
-                    Image(systemName: exerciseViewModel.editingSets ? "checkmark.circle.filld" : "pencil")
+                    Image(systemName: exerciseViewModel.editingSets ? "checkmark" : "pencil")
                         .bold()
                         .foregroundStyle(.white)
                         .padding(6)
@@ -96,24 +101,34 @@ struct ExerciseBottomContentView: View {
                         )
                 })
                 .buttonStyle(.plain)
-                .disabled(selectedDay == 6)
                 .padding(.vertical, 4)
                 .padding(.horizontal, 10)
-                .opacity(selectedDay == 6 ? 0 : 1)
             }
             .background(
                 RoundedRectangle(cornerRadius: 20)
-                    .foregroundColor(Color.baseAccent)
+                    .foregroundColor(Color.base)
                     .shadow(radius: 3)
                     .frame(height: 50)
             )
             .frame(width: 300)
 
-            ExercisePlanDayView(exerciseViewModel: exerciseViewModel, exercises: .constant(filteredExercises), selectedDay: selectedDay, hideNudge: false)
-                .padding(.top, 10)
+            ZStack {
+                ExercisePlanDayView(exerciseViewModel: exerciseViewModel, exercises: .constant(filteredExercises), selectedDay: selectedDay, hideNudge: false)
+                    .padding(.top, 10)
+
+                VStack {
+                    Spacer()
+                    LinearGradient(
+                        gradient: Gradient(colors: [Color.clear, Color.black.opacity(0.8)]),
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                    .frame(height: 50)
+                }
+            }
         }
-        .padding(.vertical, 10) // Adjust vertical padding
-        .edgesIgnoringSafeArea(.bottom) // Ignore safe area for bottom edge
+        .padding(.vertical, 10)
+        .edgesIgnoringSafeArea(.bottom)
         .geometryGroup()
     }
 }
